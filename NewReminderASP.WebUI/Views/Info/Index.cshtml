@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Info";
+}
+
+<h2>Countries</h2>
+
+<table>
+    <tr>
+        <th>UserID</th>
+        <th>First Name </th>
+        <th>Last Name</th>
+        <th>Middle Name</th>
+        <th>Birthdate</th>
+        <th>Gender</th>
+    </tr>
+    @foreach (var info in Model)
+    {
+        <tr>
+            <td>@info.UserID</td>
+            <td>@info.FirstName</td>
+            <td>@info.LastName</td>
+            <td>@info.MiddleName</td>
+            <td>@info.Birthdate</td>
+            <td>@info.Gender</td>
+        </tr>
+    }
+</table>

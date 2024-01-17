@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Addresses";
+}
+
+<h2>Addresses</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>CountryID</th>
+        <th>PostalCode</th>
+        <th>Description</th>
+    </tr>
+    @foreach (var address in Model)
+    {
+        <tr>
+            <td>@address.ID</td>
+            <td>@address.Street</td>
+            <td>@address.City</td>
+            <td>@address.CountryID</td>
+            <td>@address.PostalCode</td>
+            <td>@address.Description</td>
+        </tr>
+    }
+</table>

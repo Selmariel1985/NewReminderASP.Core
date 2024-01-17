@@ -1,0 +1,17 @@
+2024-01-05 22:42:34,827 INFO NewReminderASP.WebUI.Controllers.UserController - Received authentication request for user with login: Work
+2024-01-05 22:42:36,299 INFO NewReminderASP.WebUI.Controllers.UserController - User successfully authenticated
+2024-01-05 22:42:36,299 INFO NewReminderASP.WebUI.Controllers.UserController - User found successfully. Creating claims for the user
+2024-01-05 22:42:36,300 INFO NewReminderASP.WebUI.Controllers.UserController - Added role claim: Admin for user: Work
+2024-01-05 23:38:11,130 INFO NewReminderASP.WebUI.Controllers.UserController - Received authentication request for user with login: Work
+2024-01-05 23:40:05,554 INFO NewReminderASP.WebUI.Controllers.UserController - Received authentication request for user with login: pa
+2024-01-05 23:40:05,709 INFO NewReminderASP.WebUI.Controllers.UserController - User successfully authenticated
+2024-01-05 23:40:05,710 INFO NewReminderASP.WebUI.Controllers.UserController - Added role claim: Admin for user: pa
+2024-01-05 23:49:08,043 INFO NewReminderASP.WebUI.Controllers.UserController - Received authentication request for user with login: Work
+2024-01-05 23:49:08,170 INFO NewReminderASP.WebUI.Controllers.UserController - User successfully authenticated
+2024-01-05 23:49:08,171 INFO NewReminderASP.WebUI.Controllers.UserController - Added role claim: Admin for user: Work
+2024-01-05 23:51:15,673 INFO NewReminderASP.WebUI.Controllers.UserController - Received authentication request for user with login: pa
+2024-01-05 23:51:15,801 INFO NewReminderASP.WebUI.Controllers.UserController - User successfully authenticated
+2024-01-05 23:51:15,802 INFO NewReminderASP.WebUI.Controllers.UserController - Added role claim: Admin for user: pa
+2024-01-05 23:51:15,849 INFO NewReminderASP.WebUI.Controllers.UserController - User pa is not an Admin
+2024-01-05 23:51:15,849 INFO NewReminderASP.WebUI.Controllers.UserController - SomeAction method executed
+2024-01-05 23:51:15,855 INFO NewReminderASP.WebUI.Controllers.UserController - Retrieved user data from the provider
