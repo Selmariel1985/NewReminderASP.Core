@@ -46,13 +46,20 @@
   <ItemGroup>
     <Compile Include="Contract\IAddressService.cs" />
     <Compile Include="Contract\ICountryService.cs" />
+    <Compile Include="Contract\IEventService.cs" />
     <Compile Include="Contract\IPersonalInfoService.cs" />
     <Compile Include="Contract\IUserService.cs" />
     <Compile Include="Dtos\AddressDto.cs" />
     <Compile Include="Dtos\CountryDto.cs" />
+    <Compile Include="Dtos\EventDetailDto.cs" />
+    <Compile Include="Dtos\EventDto.cs" />
+    <Compile Include="Dtos\EventRecurrenceDto.cs" />
+    <Compile Include="Dtos\EventTypeDto.cs" />
     <Compile Include="Dtos\PersonalInfoDto.cs" />
+    <Compile Include="Dtos\PhoneTypeDto.cs" />
     <Compile Include="Dtos\RoleDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
+    <Compile Include="Dtos\UserPhoneDto.cs" />
     <Compile Include="Dtos\UserRoleDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
