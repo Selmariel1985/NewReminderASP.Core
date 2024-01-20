@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Contract\IAddressService.cs" />
     <Compile Include="Contract\ICountryService.cs" />
+    <Compile Include="Contract\IEventService.cs" />
     <Compile Include="Contract\IPersonalInfoService.cs" />
     <Compile Include="Contract\IUserService.cs" />
     <Compile Include="Dtos\AddressDto.cs" />

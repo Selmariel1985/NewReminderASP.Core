@@ -76,8 +76,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\AddressProvider.cs" />
     <Compile Include="Provider\CountryProvider.cs" />
+    <Compile Include="Provider\EventProvider.cs" />
     <Compile Include="Provider\IAddressProvider.cs" />
     <Compile Include="Provider\ICountryProvider.cs" />
+    <Compile Include="Provider\IEventProvider.cs" />
     <Compile Include="Provider\IPersonalInformationProvider.cs" />
     <Compile Include="Provider\IUserProvider.cs" />
     <Compile Include="Provider\PersonalInformationProvider.cs" />
