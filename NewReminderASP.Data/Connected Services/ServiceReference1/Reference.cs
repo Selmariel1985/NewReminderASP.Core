@@ -604,4 +604,317 @@ namespace NewReminderASP.Data.ServiceReference1 {
             return base.Channel.DeletePersonalInfoAsync(id);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IEventService")]
+    public interface IEventService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GeEvents", ReplyAction="http://tempuri.org/IEventService/GeEventsResponse")]
+        NewReminderASP.Services.Dtos.EventDto[] GeEvents();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GeEvents", ReplyAction="http://tempuri.org/IEventService/GeEventsResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GeEventsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEvent", ReplyAction="http://tempuri.org/IEventService/GetEventResponse")]
+        NewReminderASP.Services.Dtos.EventDto GetEvent(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEvent", ReplyAction="http://tempuri.org/IEventService/GetEventResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto> GetEventAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/UpdateEvent", ReplyAction="http://tempuri.org/IEventService/UpdateEventResponse")]
+        void UpdateEvent(NewReminderASP.Services.Dtos.EventDto updatedEvent);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/UpdateEvent", ReplyAction="http://tempuri.org/IEventService/UpdateEventResponse")]
+        System.Threading.Tasks.Task UpdateEventAsync(NewReminderASP.Services.Dtos.EventDto updatedEvent);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddEvent", ReplyAction="http://tempuri.org/IEventService/AddEventResponse")]
+        void AddEvent(NewReminderASP.Services.Dtos.EventDto events);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddEvent", ReplyAction="http://tempuri.org/IEventService/AddEventResponse")]
+        System.Threading.Tasks.Task AddEventAsync(NewReminderASP.Services.Dtos.EventDto events);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/DeleteEvent", ReplyAction="http://tempuri.org/IEventService/DeleteEventResponse")]
+        void DeleteEvent(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/DeleteEvent", ReplyAction="http://tempuri.org/IEventService/DeleteEventResponse")]
+        System.Threading.Tasks.Task DeleteEventAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventDetails", ReplyAction="http://tempuri.org/IEventService/GetEventDetailsResponse")]
+        NewReminderASP.Services.Dtos.EventDetailDto[] GetEventDetails();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventDetails", ReplyAction="http://tempuri.org/IEventService/GetEventDetailsResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDetailDto[]> GetEventDetailsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventDetail", ReplyAction="http://tempuri.org/IEventService/GetEventDetailResponse")]
+        NewReminderASP.Services.Dtos.EventDetailDto GetEventDetail(int eventId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventDetail", ReplyAction="http://tempuri.org/IEventService/GetEventDetailResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDetailDto> GetEventDetailAsync(int eventId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/UpdateEventDetail", ReplyAction="http://tempuri.org/IEventService/UpdateEventDetailResponse")]
+        void UpdateEventDetail(NewReminderASP.Services.Dtos.EventDetailDto updatedEventDetail);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/UpdateEventDetail", ReplyAction="http://tempuri.org/IEventService/UpdateEventDetailResponse")]
+        System.Threading.Tasks.Task UpdateEventDetailAsync(NewReminderASP.Services.Dtos.EventDetailDto updatedEventDetail);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddEventDetail", ReplyAction="http://tempuri.org/IEventService/AddEventDetailResponse")]
+        void AddEventDetail(NewReminderASP.Services.Dtos.EventDetailDto eventDetail);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddEventDetail", ReplyAction="http://tempuri.org/IEventService/AddEventDetailResponse")]
+        System.Threading.Tasks.Task AddEventDetailAsync(NewReminderASP.Services.Dtos.EventDetailDto eventDetail);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/DeleteEventDetail", ReplyAction="http://tempuri.org/IEventService/DeleteEventDetailResponse")]
+        void DeleteEventDetail(int eventId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/DeleteEventDetail", ReplyAction="http://tempuri.org/IEventService/DeleteEventDetailResponse")]
+        System.Threading.Tasks.Task DeleteEventDetailAsync(int eventId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventRecurrences", ReplyAction="http://tempuri.org/IEventService/GetEventRecurrencesResponse")]
+        NewReminderASP.Services.Dtos.EventRecurrenceDto[] GetEventRecurrences();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventRecurrences", ReplyAction="http://tempuri.org/IEventService/GetEventRecurrencesResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventRecurrenceDto[]> GetEventRecurrencesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventRecurrence", ReplyAction="http://tempuri.org/IEventService/GetEventRecurrenceResponse")]
+        NewReminderASP.Services.Dtos.EventRecurrenceDto GetEventRecurrence(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventRecurrence", ReplyAction="http://tempuri.org/IEventService/GetEventRecurrenceResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventRecurrenceDto> GetEventRecurrenceAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/UpdateEventRecurrence", ReplyAction="http://tempuri.org/IEventService/UpdateEventRecurrenceResponse")]
+        void UpdateEventRecurrence(NewReminderASP.Services.Dtos.EventRecurrenceDto updatedEventRecurrence);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/UpdateEventRecurrence", ReplyAction="http://tempuri.org/IEventService/UpdateEventRecurrenceResponse")]
+        System.Threading.Tasks.Task UpdateEventRecurrenceAsync(NewReminderASP.Services.Dtos.EventRecurrenceDto updatedEventRecurrence);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddEventRecurrence", ReplyAction="http://tempuri.org/IEventService/AddEventRecurrenceResponse")]
+        void AddEventRecurrence(NewReminderASP.Services.Dtos.EventRecurrenceDto eventRecurrence);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddEventRecurrence", ReplyAction="http://tempuri.org/IEventService/AddEventRecurrenceResponse")]
+        System.Threading.Tasks.Task AddEventRecurrenceAsync(NewReminderASP.Services.Dtos.EventRecurrenceDto eventRecurrence);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/DeleteEventRecurrence", ReplyAction="http://tempuri.org/IEventService/DeleteEventRecurrenceResponse")]
+        void DeleteEventRecurrence(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/DeleteEventRecurrence", ReplyAction="http://tempuri.org/IEventService/DeleteEventRecurrenceResponse")]
+        System.Threading.Tasks.Task DeleteEventRecurrenceAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventTypes", ReplyAction="http://tempuri.org/IEventService/GetEventTypesResponse")]
+        NewReminderASP.Services.Dtos.EventTypeDto[] GetEventTypes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventTypes", ReplyAction="http://tempuri.org/IEventService/GetEventTypesResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventTypeDto[]> GetEventTypesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventType", ReplyAction="http://tempuri.org/IEventService/GetEventTypeResponse")]
+        NewReminderASP.Services.Dtos.EventTypeDto GetEventType(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventType", ReplyAction="http://tempuri.org/IEventService/GetEventTypeResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventTypeDto> GetEventTypeAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/UpdateEventType", ReplyAction="http://tempuri.org/IEventService/UpdateEventTypeResponse")]
+        void UpdateEventType(NewReminderASP.Services.Dtos.EventTypeDto updatedEventType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/UpdateEventType", ReplyAction="http://tempuri.org/IEventService/UpdateEventTypeResponse")]
+        System.Threading.Tasks.Task UpdateEventTypeAsync(NewReminderASP.Services.Dtos.EventTypeDto updatedEventType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddPEventType", ReplyAction="http://tempuri.org/IEventService/AddPEventTypeResponse")]
+        void AddPEventType(NewReminderASP.Services.Dtos.EventTypeDto eventType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddPEventType", ReplyAction="http://tempuri.org/IEventService/AddPEventTypeResponse")]
+        System.Threading.Tasks.Task AddPEventTypeAsync(NewReminderASP.Services.Dtos.EventTypeDto eventType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/DeleteEventType", ReplyAction="http://tempuri.org/IEventService/DeleteEventTypeResponse")]
+        void DeleteEventType(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/DeleteEventType", ReplyAction="http://tempuri.org/IEventService/DeleteEventTypeResponse")]
+        System.Threading.Tasks.Task DeleteEventTypeAsync(int id);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IEventServiceChannel : NewReminderASP.Data.ServiceReference1.IEventService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class EventServiceClient : System.ServiceModel.ClientBase<NewReminderASP.Data.ServiceReference1.IEventService>, NewReminderASP.Data.ServiceReference1.IEventService {
+        
+        public EventServiceClient() {
+        }
+        
+        public EventServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public EventServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public EventServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public EventServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public NewReminderASP.Services.Dtos.EventDto[] GeEvents() {
+            return base.Channel.GeEvents();
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GeEventsAsync() {
+            return base.Channel.GeEventsAsync();
+        }
+        
+        public NewReminderASP.Services.Dtos.EventDto GetEvent(int Id) {
+            return base.Channel.GetEvent(Id);
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto> GetEventAsync(int Id) {
+            return base.Channel.GetEventAsync(Id);
+        }
+        
+        public void UpdateEvent(NewReminderASP.Services.Dtos.EventDto updatedEvent) {
+            base.Channel.UpdateEvent(updatedEvent);
+        }
+        
+        public System.Threading.Tasks.Task UpdateEventAsync(NewReminderASP.Services.Dtos.EventDto updatedEvent) {
+            return base.Channel.UpdateEventAsync(updatedEvent);
+        }
+        
+        public void AddEvent(NewReminderASP.Services.Dtos.EventDto events) {
+            base.Channel.AddEvent(events);
+        }
+        
+        public System.Threading.Tasks.Task AddEventAsync(NewReminderASP.Services.Dtos.EventDto events) {
+            return base.Channel.AddEventAsync(events);
+        }
+        
+        public void DeleteEvent(int id) {
+            base.Channel.DeleteEvent(id);
+        }
+        
+        public System.Threading.Tasks.Task DeleteEventAsync(int id) {
+            return base.Channel.DeleteEventAsync(id);
+        }
+        
+        public NewReminderASP.Services.Dtos.EventDetailDto[] GetEventDetails() {
+            return base.Channel.GetEventDetails();
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDetailDto[]> GetEventDetailsAsync() {
+            return base.Channel.GetEventDetailsAsync();
+        }
+        
+        public NewReminderASP.Services.Dtos.EventDetailDto GetEventDetail(int eventId) {
+            return base.Channel.GetEventDetail(eventId);
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDetailDto> GetEventDetailAsync(int eventId) {
+            return base.Channel.GetEventDetailAsync(eventId);
+        }
+        
+        public void UpdateEventDetail(NewReminderASP.Services.Dtos.EventDetailDto updatedEventDetail) {
+            base.Channel.UpdateEventDetail(updatedEventDetail);
+        }
+        
+        public System.Threading.Tasks.Task UpdateEventDetailAsync(NewReminderASP.Services.Dtos.EventDetailDto updatedEventDetail) {
+            return base.Channel.UpdateEventDetailAsync(updatedEventDetail);
+        }
+        
+        public void AddEventDetail(NewReminderASP.Services.Dtos.EventDetailDto eventDetail) {
+            base.Channel.AddEventDetail(eventDetail);
+        }
+        
+        public System.Threading.Tasks.Task AddEventDetailAsync(NewReminderASP.Services.Dtos.EventDetailDto eventDetail) {
+            return base.Channel.AddEventDetailAsync(eventDetail);
+        }
+        
+        public void DeleteEventDetail(int eventId) {
+            base.Channel.DeleteEventDetail(eventId);
+        }
+        
+        public System.Threading.Tasks.Task DeleteEventDetailAsync(int eventId) {
+            return base.Channel.DeleteEventDetailAsync(eventId);
+        }
+        
+        public NewReminderASP.Services.Dtos.EventRecurrenceDto[] GetEventRecurrences() {
+            return base.Channel.GetEventRecurrences();
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventRecurrenceDto[]> GetEventRecurrencesAsync() {
+            return base.Channel.GetEventRecurrencesAsync();
+        }
+        
+        public NewReminderASP.Services.Dtos.EventRecurrenceDto GetEventRecurrence(int Id) {
+            return base.Channel.GetEventRecurrence(Id);
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventRecurrenceDto> GetEventRecurrenceAsync(int Id) {
+            return base.Channel.GetEventRecurrenceAsync(Id);
+        }
+        
+        public void UpdateEventRecurrence(NewReminderASP.Services.Dtos.EventRecurrenceDto updatedEventRecurrence) {
+            base.Channel.UpdateEventRecurrence(updatedEventRecurrence);
+        }
+        
+        public System.Threading.Tasks.Task UpdateEventRecurrenceAsync(NewReminderASP.Services.Dtos.EventRecurrenceDto updatedEventRecurrence) {
+            return base.Channel.UpdateEventRecurrenceAsync(updatedEventRecurrence);
+        }
+        
+        public void AddEventRecurrence(NewReminderASP.Services.Dtos.EventRecurrenceDto eventRecurrence) {
+            base.Channel.AddEventRecurrence(eventRecurrence);
+        }
+        
+        public System.Threading.Tasks.Task AddEventRecurrenceAsync(NewReminderASP.Services.Dtos.EventRecurrenceDto eventRecurrence) {
+            return base.Channel.AddEventRecurrenceAsync(eventRecurrence);
+        }
+        
+        public void DeleteEventRecurrence(int id) {
+            base.Channel.DeleteEventRecurrence(id);
+        }
+        
+        public System.Threading.Tasks.Task DeleteEventRecurrenceAsync(int id) {
+            return base.Channel.DeleteEventRecurrenceAsync(id);
+        }
+        
+        public NewReminderASP.Services.Dtos.EventTypeDto[] GetEventTypes() {
+            return base.Channel.GetEventTypes();
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventTypeDto[]> GetEventTypesAsync() {
+            return base.Channel.GetEventTypesAsync();
+        }
+        
+        public NewReminderASP.Services.Dtos.EventTypeDto GetEventType(int Id) {
+            return base.Channel.GetEventType(Id);
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventTypeDto> GetEventTypeAsync(int Id) {
+            return base.Channel.GetEventTypeAsync(Id);
+        }
+        
+        public void UpdateEventType(NewReminderASP.Services.Dtos.EventTypeDto updatedEventType) {
+            base.Channel.UpdateEventType(updatedEventType);
+        }
+        
+        public System.Threading.Tasks.Task UpdateEventTypeAsync(NewReminderASP.Services.Dtos.EventTypeDto updatedEventType) {
+            return base.Channel.UpdateEventTypeAsync(updatedEventType);
+        }
+        
+        public void AddPEventType(NewReminderASP.Services.Dtos.EventTypeDto eventType) {
+            base.Channel.AddPEventType(eventType);
+        }
+        
+        public System.Threading.Tasks.Task AddPEventTypeAsync(NewReminderASP.Services.Dtos.EventTypeDto eventType) {
+            return base.Channel.AddPEventTypeAsync(eventType);
+        }
+        
+        public void DeleteEventType(int id) {
+            base.Channel.DeleteEventType(id);
+        }
+        
+        public System.Threading.Tasks.Task DeleteEventTypeAsync(int id) {
+            return base.Channel.DeleteEventTypeAsync(id);
+        }
+    }
 }

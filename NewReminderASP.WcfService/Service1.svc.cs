@@ -10,7 +10,7 @@ namespace NewReminderASP.WcfService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
-    public class Service1 : IUserService, ICountryService, IAddressService, IPersonalInfoService
+    public class Service1 : IUserService, ICountryService, IAddressService, IPersonalInfoService, IEventService
     {
         private string connectionString =
             "Data Source=DESKTOP-HAJP4KN\\SQLEXPRESS;Initial Catalog=ReminderEF;Persist Security Info=True;User ID=supergrisha;Password=supergrisha;";
@@ -146,7 +146,7 @@ namespace NewReminderASP.WcfService
 
 
 
-       
+
 
         public void AssignRolesToUser(UserDto user, List<string> roles)
         {
@@ -600,6 +600,7 @@ namespace NewReminderASP.WcfService
 
             return users;
         }
+
         public List<CountryDto> GetCountries()
         {
             List<CountryDto> countries = new List<CountryDto>();
@@ -700,6 +701,7 @@ namespace NewReminderASP.WcfService
                 command.ExecuteNonQuery();
             }
         }
+
         public List<PersonalInfoDto> GetPersonalInfos()
         {
             List<PersonalInfoDto> personalInfos = new List<PersonalInfoDto>();
@@ -730,8 +732,8 @@ namespace NewReminderASP.WcfService
             }
 
             return personalInfos;
-        
-    }
+
+        }
 
         public PersonalInfoDto GetPersonalInfo(int userId)
         {
@@ -809,7 +811,431 @@ namespace NewReminderASP.WcfService
                 command.ExecuteNonQuery();
             }
         }
+
+        public List<EventDto> GeEvents()
+        {
+            List<EventDto> events = new List<EventDto>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("GetEvent", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        EventDto getEvent = new EventDto
+                        {
+                            ID = reader.GetInt32(0),
+                            UserID = reader.GetInt32(1),
+                            EventTypeID = reader.GetInt32(2),
+                            Title = reader.GetString(3),
+                            Date = reader.GetDateTime(4),
+                            Time = reader.GetTimeSpan(5),
+                            RecurrenceID = reader.GetInt32(6),
+                            Reminders = reader.GetString(7)
+                        };
+                        events.Add(getEvent);
+                    }
+                }
+            }
+
+            return events;
+        }
+
+        public EventDto GetEvent(int Id)
+        {
+            EventDto events = new EventDto();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("GetEvent", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", Id);
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        events.ID = reader.GetInt32(0);
+                        events.UserID = reader.GetInt32(1);
+                        events.EventTypeID = reader.GetInt32(2);
+                        events.Title = reader.GetString(3);
+                        events.Date = reader.GetDateTime(4);
+                        events.Time = reader.GetTimeSpan(5);
+                        events.RecurrenceID = reader.GetInt32(6);
+                        events.Reminders = reader.GetString(7);
+                    }
+                }
+            }
+
+            return events;
+        }
+
+        public void UpdateEvent(EventDto updatedEvent)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("UpdateEvent", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", updatedEvent.ID);
+                command.Parameters.AddWithValue("@UserID", updatedEvent.UserID);
+                command.Parameters.AddWithValue("@EventTypeID", updatedEvent.EventTypeID);
+                command.Parameters.AddWithValue("@Title", updatedEvent.Title);
+                command.Parameters.AddWithValue("@Date", updatedEvent.Date);
+                command.Parameters.AddWithValue("@Time", updatedEvent.Time);
+                command.Parameters.AddWithValue("@RecurrenceID", updatedEvent.RecurrenceID);
+                command.Parameters.AddWithValue("@Reminders", updatedEvent.Reminders);
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void AddEvent(EventDto events)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("AddEvent", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", events.ID);
+                command.Parameters.AddWithValue("@UserID", events.UserID);
+                command.Parameters.AddWithValue("@EventTypeID", events.EventTypeID);
+                command.Parameters.AddWithValue("@Title", events.Title);
+                command.Parameters.AddWithValue("@Date", events.Date);
+                command.Parameters.AddWithValue("@Time", events.Time);
+                command.Parameters.AddWithValue("@RecurrenceID", events.RecurrenceID);
+                command.Parameters.AddWithValue("@Reminders", events.Reminders);
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteEvent(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("DeleteEvent", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", id);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public List<EventDetailDto> GetEventDetails()
+        {
+            List<EventDetailDto> eventDetails = new List<EventDetailDto>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("GetEventDetails", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        EventDetailDto getEvent = new EventDetailDto
+                        {
+                            EventID = reader.GetInt32(0),
+                            Description = reader.GetString(1),
+                            Status = reader.GetString(2)
+                            
+                        };
+                        eventDetails.Add(getEvent);
+                    }
+                }
+            }
+
+            return eventDetails;
+        }
+
+        public EventDetailDto GetEventDetail(int eventId)
+        {
+            EventDetailDto eventDetails = new EventDetailDto();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("GetEventDetail", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@EventID", eventId);
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        eventDetails.EventID = reader.GetInt32(0);
+                        eventDetails.Description = reader.GetString(1);
+                        eventDetails.Status = reader.GetString(2);
+                       
+                    }
+                }
+            }
+
+            return eventDetails;
+        }
+
+        public void UpdateEventDetail(EventDetailDto updatedEventDetail)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("UpdateEventDetail", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@EventID", updatedEventDetail.EventID);
+                command.Parameters.AddWithValue("@Description", updatedEventDetail.Description);
+                command.Parameters.AddWithValue("@Status", updatedEventDetail.Status);
+               
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void AddEventDetail(EventDetailDto eventDetail)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("AddEventDetail", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@EventID", eventDetail.EventID);
+                command.Parameters.AddWithValue("@Description", eventDetail.Description);
+                command.Parameters.AddWithValue("@Status", eventDetail.Status);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteEventDetail(int eventId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("DeleteEventDetail", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@EventID", eventId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public List<EventRecurrenceDto> GetEventRecurrences()
+        {
+            List<EventRecurrenceDto> eventRecurrences = new List<EventRecurrenceDto>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("GetEventRecurrences", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        EventRecurrenceDto getEvent = new EventRecurrenceDto
+                        {
+                            ID = reader.GetInt32(0),
+                            RecurrenceType = reader.GetString(1),
+                           
+                        };
+                        eventRecurrences.Add(getEvent);
+                    }
+                }
+            }
+
+            return eventRecurrences;
+        }
+
+        public EventRecurrenceDto GetEventRecurrence(int Id)
+        {
+            EventRecurrenceDto eventRecurrences = new EventRecurrenceDto();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("GetEventRecurrence", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", Id);
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        eventRecurrences.ID = reader.GetInt32(0);
+                        eventRecurrences.RecurrenceType = reader.GetString(1);
+                       
+
+                    }
+                }
+            }
+
+            return eventRecurrences;
+        }
+
+        public void UpdateEventRecurrence(EventRecurrenceDto updatedEventRecurrence)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("UpdateEventRecurrence", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", updatedEventRecurrence.ID);
+                command.Parameters.AddWithValue("@RecurrenceType", updatedEventRecurrence.RecurrenceType);
+               
+
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void AddEventRecurrence(EventRecurrenceDto eventRecurrence)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("AddEventRecurrence", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", eventRecurrence.ID);
+                command.Parameters.AddWithValue("@RecurrenceType", eventRecurrence.RecurrenceType);
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteEventRecurrence(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("DeleteEventRecurrence", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", id);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public List<EventTypeDto> GetEventTypes()
+        {
+            List<EventTypeDto> eventTypes = new List<EventTypeDto>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("GetEventType", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        EventTypeDto getEvent = new EventTypeDto
+                        {
+                            ID = reader.GetInt32(0),
+                            TypeName = reader.GetString(1),
+                            
+                        };
+                        eventTypes.Add(getEvent);
+                    }
+                }
+            }
+
+            return eventTypes;
+        }
+
+        public EventTypeDto GetEventType(int Id)
+        {
+            EventTypeDto eventTypes = new EventTypeDto();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("GetEventType", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", Id);
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        eventTypes.ID = reader.GetInt32(0);
+                        eventTypes.TypeName = reader.GetString(1);
+
+
+                    }
+                }
+            }
+
+            return eventTypes;
+        }
+
+        public void UpdateEventType(EventTypeDto updatedEventType)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("UpdateEventType", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", updatedEventType.ID);
+                command.Parameters.AddWithValue("@TypeName", updatedEventType.TypeName);
+
+
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void AddPEventType(EventTypeDto eventType)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("AddEventType", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", eventType.ID);
+                command.Parameters.AddWithValue("@TypeName", eventType.TypeName);
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteEventType(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("DeleteEventType", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", id);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
     }
-
-
 }
+

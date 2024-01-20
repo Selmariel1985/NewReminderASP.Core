@@ -16,6 +16,8 @@ namespace NewReminderASP.Data.Container
             builder.RegisterType<AddressRepository>().As<IAddressRepository>();
             builder.RegisterType<PersonalInformationClient>().As<IPersonalInformationClient>();
             builder.RegisterType<PersonalInformationRepository>().As<IPersonalInformationRepository>();
+            builder.RegisterType<EventClient>().As<IEventClient>();
+            builder.RegisterType<EventRepository>().As<IEventRepository>();
         }
     }
 }
