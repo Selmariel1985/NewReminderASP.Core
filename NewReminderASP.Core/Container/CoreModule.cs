@@ -11,6 +11,7 @@ namespace NewReminderASP.Core.Container
             builder.RegisterType<CountryProvider>().As<ICountryProvider>();
             builder.RegisterType<AddressProvider>().As<IAddressProvider>(); 
             builder.RegisterType<PersonalInformationProvider>().As<IPersonalInformationProvider>();
+            builder.RegisterType<EventProvider>().As<IEventProvider>();
 
         }
     }

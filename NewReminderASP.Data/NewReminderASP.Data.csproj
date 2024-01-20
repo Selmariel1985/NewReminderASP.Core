@@ -134,6 +134,10 @@
     <None Include="Properties\DataSources\NewReminderASP.Domain.Entities.User.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.AddressDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.CountryDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.EventDetailDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.EventDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.EventRecurrenceDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.EventTypeDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.PersonalInfoDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.RoleDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.UserDto.datasource" />
