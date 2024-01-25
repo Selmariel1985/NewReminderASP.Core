@@ -18,6 +18,8 @@ namespace NewReminderASP.Data.Container
             builder.RegisterType<PersonalInformationRepository>().As<IPersonalInformationRepository>();
             builder.RegisterType<EventClient>().As<IEventClient>();
             builder.RegisterType<EventRepository>().As<IEventRepository>();
+            builder.RegisterType<PhoneClient>().As<IPhoneClient>();
+            builder.RegisterType<PhoneRepository>().As<IPhoneRepository>();
         }
     }
 }

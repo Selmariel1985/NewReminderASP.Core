@@ -80,9 +80,11 @@
     <Compile Include="Client\IAddressClient.cs" />
     <Compile Include="Client\ICountryClient.cs" />
     <Compile Include="Client\IEventClient.cs" />
+    <Compile Include="Client\IPhoneClient.cs" />
     <Compile Include="Client\IPersonalInformationClient.cs" />
     <Compile Include="Client\IUserClient.cs" />
     <Compile Include="Client\PersonalInformationClient.cs" />
+    <Compile Include="Client\PhoneClient.cs" />
     <Compile Include="Client\UserClient.cs" />
     <Compile Include="Connected Services\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -98,8 +100,10 @@
     <Compile Include="Repository\ICountryRepository.cs" />
     <Compile Include="Repository\IEventRepository.cs" />
     <Compile Include="Repository\IPersonalInformationRepository.cs" />
+    <Compile Include="Repository\IPhoneRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\PersonalInformationRepository.cs" />
+    <Compile Include="Repository\PhoneRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,8 +143,10 @@
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.EventRecurrenceDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.EventTypeDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.PersonalInfoDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.PhoneTypeDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.RoleDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.UserDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.UserPhoneDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.UserRoleDto.datasource" />
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ namespace NewReminderASP.WcfService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
-    public class Service1 : IUserService, ICountryService, IAddressService, IPersonalInfoService, IEventService
+    public class Service1 : IUserService, ICountryService, IAddressService, IPersonalInfoService, IEventService, IPhoneService
     {
         private string connectionString =
             "Data Source=DESKTOP-HAJP4KN\\SQLEXPRESS;Initial Catalog=ReminderEF;Persist Security Info=True;User ID=supergrisha;Password=supergrisha;";
@@ -817,7 +817,7 @@ namespace NewReminderASP.WcfService
             List<EventDto> events = new List<EventDto>();
 
             using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlCommand command = new SqlCommand("GetEvent", connection))
+            using (SqlCommand command = new SqlCommand("GetEvents", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
 
@@ -883,7 +883,6 @@ namespace NewReminderASP.WcfService
             using (SqlCommand command = new SqlCommand("UpdateEvent", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@ID", updatedEvent.ID);
                 command.Parameters.AddWithValue("@UserID", updatedEvent.UserID);
                 command.Parameters.AddWithValue("@EventTypeID", updatedEvent.EventTypeID);
                 command.Parameters.AddWithValue("@Title", updatedEvent.Title);
@@ -904,7 +903,6 @@ namespace NewReminderASP.WcfService
             using (SqlCommand command = new SqlCommand("AddEvent", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@ID", events.ID);
                 command.Parameters.AddWithValue("@UserID", events.UserID);
                 command.Parameters.AddWithValue("@EventTypeID", events.EventTypeID);
                 command.Parameters.AddWithValue("@Title", events.Title);
@@ -1236,6 +1234,55 @@ namespace NewReminderASP.WcfService
             }
         }
 
+        public List<UserPhoneDto> GetUserPhones()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public UserPhoneDto GetUserPhone(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void UpdateUserPhone(UserPhoneDto updatedUserPhone)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddUserPhone(UserPhoneDto userPhone)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteUserPhone(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<PhoneTypeDto> GetPhoneTypes()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public PhoneTypeDto GetPhoneType(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void UpdatePhoneType(PhoneTypeDto updatedPhoneType)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddPhoneType(PhoneTypeDto eventPhoneType)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeletePhoneType(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
 

@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Event";
+}
+
+<h2>Countries</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>UserID Name </th>
+        <th>EventTypeID</th>
+        <th>Title Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>RecurrenceID</th>
+        <th>Reminders</th>
+    </tr>
+    @foreach (var events in Model)
+    {
+        <tr>
+            <td>@events.ID</td>
+            <td>@events.UserID</td>
+            <td>@events.EventTypeID</td>
+            <td>@events.Title</td>
+            <td>@events.Date</td>
+            <td>@events.Time</td>
+            <td>@events.RecurrenceID</td>
+            <td>@events.Reminders</td>
+        </tr>
+    }
+</table>

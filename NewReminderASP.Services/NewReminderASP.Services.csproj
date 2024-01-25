@@ -48,6 +48,7 @@
     <Compile Include="Contract\ICountryService.cs" />
     <Compile Include="Contract\IEventService.cs" />
     <Compile Include="Contract\IPersonalInfoService.cs" />
+    <Compile Include="Contract\IPhoneService.cs" />
     <Compile Include="Contract\IUserService.cs" />
     <Compile Include="Dtos\AddressDto.cs" />
     <Compile Include="Dtos\CountryDto.cs" />

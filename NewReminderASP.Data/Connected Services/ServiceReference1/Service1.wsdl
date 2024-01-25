@@ -326,6 +326,66 @@
   <wsdl:message name="IEventService_DeleteEventType_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteEventTypeResponse" />
   </wsdl:message>
+  <wsdl:message name="IPhoneService_GetUserPhones_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPhones" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetUserPhones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPhonesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetUserPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPhone" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetUserPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_UpdateUserPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserPhone" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_UpdateUserPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_AddUserPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserPhone" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_AddUserPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_DeleteUserPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserPhone" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_DeleteUserPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetPhoneTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhoneTypes" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetPhoneTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhoneTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetPhoneType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhoneType" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetPhoneType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhoneTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_UpdatePhoneType_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePhoneType" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_UpdatePhoneType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePhoneTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_AddPhoneType_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPhoneType" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_AddPhoneType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPhoneTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_DeletePhoneType_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePhoneType" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_DeletePhoneType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePhoneTypeResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="GetUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUsers" message="tns:IUserService_GetUsers_InputMessage" />
@@ -546,6 +606,48 @@
     <wsdl:operation name="DeleteEventType">
       <wsdl:input wsaw:Action="http://tempuri.org/IEventService/DeleteEventType" message="tns:IEventService_DeleteEventType_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEventService/DeleteEventTypeResponse" message="tns:IEventService_DeleteEventType_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IPhoneService">
+    <wsdl:operation name="GetUserPhones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/GetUserPhones" message="tns:IPhoneService_GetUserPhones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/GetUserPhonesResponse" message="tns:IPhoneService_GetUserPhones_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/GetUserPhone" message="tns:IPhoneService_GetUserPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/GetUserPhoneResponse" message="tns:IPhoneService_GetUserPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/UpdateUserPhone" message="tns:IPhoneService_UpdateUserPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/UpdateUserPhoneResponse" message="tns:IPhoneService_UpdateUserPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/AddUserPhone" message="tns:IPhoneService_AddUserPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/AddUserPhoneResponse" message="tns:IPhoneService_AddUserPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/DeleteUserPhone" message="tns:IPhoneService_DeleteUserPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/DeleteUserPhoneResponse" message="tns:IPhoneService_DeleteUserPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoneTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/GetPhoneTypes" message="tns:IPhoneService_GetPhoneTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/GetPhoneTypesResponse" message="tns:IPhoneService_GetPhoneTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoneType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/GetPhoneType" message="tns:IPhoneService_GetPhoneType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/GetPhoneTypeResponse" message="tns:IPhoneService_GetPhoneType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePhoneType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/UpdatePhoneType" message="tns:IPhoneService_UpdatePhoneType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/UpdatePhoneTypeResponse" message="tns:IPhoneService_UpdatePhoneType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPhoneType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/AddPhoneType" message="tns:IPhoneService_AddPhoneType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/AddPhoneTypeResponse" message="tns:IPhoneService_AddPhoneType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePhoneType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/DeletePhoneType" message="tns:IPhoneService_DeletePhoneType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/DeletePhoneTypeResponse" message="tns:IPhoneService_DeletePhoneType_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserService" type="tns:IUserService">
@@ -1040,6 +1142,99 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IPhoneService" type="tns:IPhoneService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUserPhones">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/GetUserPhones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPhone">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/GetUserPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPhone">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/UpdateUserPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserPhone">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/AddUserPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserPhone">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/DeleteUserPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoneTypes">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/GetPhoneTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoneType">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/GetPhoneType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePhoneType">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/UpdatePhoneType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPhoneType">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/AddPhoneType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePhoneType">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/DeletePhoneType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="Service1">
     <wsdl:port name="BasicHttpBinding_IUserService" binding="tns:BasicHttpBinding_IUserService">
       <soap:address location="http://localhost:64859/Service1.svc" />
@@ -1054,6 +1249,9 @@
       <soap:address location="http://localhost:64859/Service1.svc" />
     </wsdl:port>
     <wsdl:port name="BasicHttpBinding_IEventService" binding="tns:BasicHttpBinding_IEventService">
+      <soap:address location="http://localhost:64859/Service1.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IPhoneService" binding="tns:BasicHttpBinding_IPhoneService">
       <soap:address location="http://localhost:64859/Service1.svc" />
     </wsdl:port>
   </wsdl:service>

@@ -153,4 +153,33 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="EventTypeDto" nillable="true" type="tns:EventTypeDto" />
+  <xs:complexType name="ArrayOfUserPhoneDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserPhoneDto" nillable="true" type="tns:UserPhoneDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserPhoneDto" nillable="true" type="tns:ArrayOfUserPhoneDto" />
+  <xs:complexType name="UserPhoneDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CountryID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneTypeID" type="xs:int" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserPhoneDto" nillable="true" type="tns:UserPhoneDto" />
+  <xs:complexType name="ArrayOfPhoneTypeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PhoneTypeDto" nillable="true" type="tns:PhoneTypeDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPhoneTypeDto" nillable="true" type="tns:ArrayOfPhoneTypeDto" />
+  <xs:complexType name="PhoneTypeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="TypeName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PhoneTypeDto" nillable="true" type="tns:PhoneTypeDto" />
 </xs:schema>

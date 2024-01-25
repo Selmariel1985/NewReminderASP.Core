@@ -917,4 +917,177 @@ namespace NewReminderASP.Data.ServiceReference1 {
             return base.Channel.DeleteEventTypeAsync(id);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IPhoneService")]
+    public interface IPhoneService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetUserPhones", ReplyAction="http://tempuri.org/IPhoneService/GetUserPhonesResponse")]
+        NewReminderASP.Services.Dtos.UserPhoneDto[] GetUserPhones();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetUserPhones", ReplyAction="http://tempuri.org/IPhoneService/GetUserPhonesResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.UserPhoneDto[]> GetUserPhonesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetUserPhone", ReplyAction="http://tempuri.org/IPhoneService/GetUserPhoneResponse")]
+        NewReminderASP.Services.Dtos.UserPhoneDto GetUserPhone(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetUserPhone", ReplyAction="http://tempuri.org/IPhoneService/GetUserPhoneResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.UserPhoneDto> GetUserPhoneAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/UpdateUserPhone", ReplyAction="http://tempuri.org/IPhoneService/UpdateUserPhoneResponse")]
+        void UpdateUserPhone(NewReminderASP.Services.Dtos.UserPhoneDto updatedUserPhone);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/UpdateUserPhone", ReplyAction="http://tempuri.org/IPhoneService/UpdateUserPhoneResponse")]
+        System.Threading.Tasks.Task UpdateUserPhoneAsync(NewReminderASP.Services.Dtos.UserPhoneDto updatedUserPhone);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/AddUserPhone", ReplyAction="http://tempuri.org/IPhoneService/AddUserPhoneResponse")]
+        void AddUserPhone(NewReminderASP.Services.Dtos.UserPhoneDto userPhone);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/AddUserPhone", ReplyAction="http://tempuri.org/IPhoneService/AddUserPhoneResponse")]
+        System.Threading.Tasks.Task AddUserPhoneAsync(NewReminderASP.Services.Dtos.UserPhoneDto userPhone);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/DeleteUserPhone", ReplyAction="http://tempuri.org/IPhoneService/DeleteUserPhoneResponse")]
+        void DeleteUserPhone(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/DeleteUserPhone", ReplyAction="http://tempuri.org/IPhoneService/DeleteUserPhoneResponse")]
+        System.Threading.Tasks.Task DeleteUserPhoneAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetPhoneTypes", ReplyAction="http://tempuri.org/IPhoneService/GetPhoneTypesResponse")]
+        NewReminderASP.Services.Dtos.PhoneTypeDto[] GetPhoneTypes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetPhoneTypes", ReplyAction="http://tempuri.org/IPhoneService/GetPhoneTypesResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.PhoneTypeDto[]> GetPhoneTypesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetPhoneType", ReplyAction="http://tempuri.org/IPhoneService/GetPhoneTypeResponse")]
+        NewReminderASP.Services.Dtos.PhoneTypeDto GetPhoneType(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetPhoneType", ReplyAction="http://tempuri.org/IPhoneService/GetPhoneTypeResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.PhoneTypeDto> GetPhoneTypeAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/UpdatePhoneType", ReplyAction="http://tempuri.org/IPhoneService/UpdatePhoneTypeResponse")]
+        void UpdatePhoneType(NewReminderASP.Services.Dtos.PhoneTypeDto updatedPhoneType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/UpdatePhoneType", ReplyAction="http://tempuri.org/IPhoneService/UpdatePhoneTypeResponse")]
+        System.Threading.Tasks.Task UpdatePhoneTypeAsync(NewReminderASP.Services.Dtos.PhoneTypeDto updatedPhoneType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/AddPhoneType", ReplyAction="http://tempuri.org/IPhoneService/AddPhoneTypeResponse")]
+        void AddPhoneType(NewReminderASP.Services.Dtos.PhoneTypeDto eventPhoneType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/AddPhoneType", ReplyAction="http://tempuri.org/IPhoneService/AddPhoneTypeResponse")]
+        System.Threading.Tasks.Task AddPhoneTypeAsync(NewReminderASP.Services.Dtos.PhoneTypeDto eventPhoneType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/DeletePhoneType", ReplyAction="http://tempuri.org/IPhoneService/DeletePhoneTypeResponse")]
+        void DeletePhoneType(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/DeletePhoneType", ReplyAction="http://tempuri.org/IPhoneService/DeletePhoneTypeResponse")]
+        System.Threading.Tasks.Task DeletePhoneTypeAsync(int id);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IPhoneServiceChannel : NewReminderASP.Data.ServiceReference1.IPhoneService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class PhoneServiceClient : System.ServiceModel.ClientBase<NewReminderASP.Data.ServiceReference1.IPhoneService>, NewReminderASP.Data.ServiceReference1.IPhoneService {
+        
+        public PhoneServiceClient() {
+        }
+        
+        public PhoneServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public PhoneServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PhoneServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PhoneServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public NewReminderASP.Services.Dtos.UserPhoneDto[] GetUserPhones() {
+            return base.Channel.GetUserPhones();
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.UserPhoneDto[]> GetUserPhonesAsync() {
+            return base.Channel.GetUserPhonesAsync();
+        }
+        
+        public NewReminderASP.Services.Dtos.UserPhoneDto GetUserPhone(int id) {
+            return base.Channel.GetUserPhone(id);
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.UserPhoneDto> GetUserPhoneAsync(int id) {
+            return base.Channel.GetUserPhoneAsync(id);
+        }
+        
+        public void UpdateUserPhone(NewReminderASP.Services.Dtos.UserPhoneDto updatedUserPhone) {
+            base.Channel.UpdateUserPhone(updatedUserPhone);
+        }
+        
+        public System.Threading.Tasks.Task UpdateUserPhoneAsync(NewReminderASP.Services.Dtos.UserPhoneDto updatedUserPhone) {
+            return base.Channel.UpdateUserPhoneAsync(updatedUserPhone);
+        }
+        
+        public void AddUserPhone(NewReminderASP.Services.Dtos.UserPhoneDto userPhone) {
+            base.Channel.AddUserPhone(userPhone);
+        }
+        
+        public System.Threading.Tasks.Task AddUserPhoneAsync(NewReminderASP.Services.Dtos.UserPhoneDto userPhone) {
+            return base.Channel.AddUserPhoneAsync(userPhone);
+        }
+        
+        public void DeleteUserPhone(int id) {
+            base.Channel.DeleteUserPhone(id);
+        }
+        
+        public System.Threading.Tasks.Task DeleteUserPhoneAsync(int id) {
+            return base.Channel.DeleteUserPhoneAsync(id);
+        }
+        
+        public NewReminderASP.Services.Dtos.PhoneTypeDto[] GetPhoneTypes() {
+            return base.Channel.GetPhoneTypes();
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.PhoneTypeDto[]> GetPhoneTypesAsync() {
+            return base.Channel.GetPhoneTypesAsync();
+        }
+        
+        public NewReminderASP.Services.Dtos.PhoneTypeDto GetPhoneType(int id) {
+            return base.Channel.GetPhoneType(id);
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.PhoneTypeDto> GetPhoneTypeAsync(int id) {
+            return base.Channel.GetPhoneTypeAsync(id);
+        }
+        
+        public void UpdatePhoneType(NewReminderASP.Services.Dtos.PhoneTypeDto updatedPhoneType) {
+            base.Channel.UpdatePhoneType(updatedPhoneType);
+        }
+        
+        public System.Threading.Tasks.Task UpdatePhoneTypeAsync(NewReminderASP.Services.Dtos.PhoneTypeDto updatedPhoneType) {
+            return base.Channel.UpdatePhoneTypeAsync(updatedPhoneType);
+        }
+        
+        public void AddPhoneType(NewReminderASP.Services.Dtos.PhoneTypeDto eventPhoneType) {
+            base.Channel.AddPhoneType(eventPhoneType);
+        }
+        
+        public System.Threading.Tasks.Task AddPhoneTypeAsync(NewReminderASP.Services.Dtos.PhoneTypeDto eventPhoneType) {
+            return base.Channel.AddPhoneTypeAsync(eventPhoneType);
+        }
+        
+        public void DeletePhoneType(int id) {
+            base.Channel.DeletePhoneType(id);
+        }
+        
+        public System.Threading.Tasks.Task DeletePhoneTypeAsync(int id) {
+            return base.Channel.DeletePhoneTypeAsync(id);
+        }
+    }
 }

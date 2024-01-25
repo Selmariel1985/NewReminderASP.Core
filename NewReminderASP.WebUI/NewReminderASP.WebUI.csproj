@@ -276,7 +276,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Event\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="libman.json" />
@@ -315,6 +314,11 @@
     <Content Include="Views\Info\Details.cshtml" />
     <Content Include="Views\Info\Create.cshtml" />
     <Content Include="Views\Info\Delete.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
+    <Content Include="Views\Event\Create.cshtml" />
+    <Content Include="Views\Event\Details.cshtml" />
+    <Content Include="Views\Event\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NewReminderASP.Core\NewReminderASP.Core.csproj">

@@ -81,8 +81,10 @@
     <Compile Include="Provider\ICountryProvider.cs" />
     <Compile Include="Provider\IEventProvider.cs" />
     <Compile Include="Provider\IPersonalInformationProvider.cs" />
+    <Compile Include="Provider\IPhoneProvider.cs" />
     <Compile Include="Provider\IUserProvider.cs" />
     <Compile Include="Provider\PersonalInformationProvider.cs" />
+    <Compile Include="Provider\PhoneProvider.cs" />
     <Compile Include="Provider\UserProvider.cs" />
   </ItemGroup>
   <ItemGroup>
