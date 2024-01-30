@@ -283,6 +283,10 @@ public class UserClient : IUserClient
         return allRoles;
     }
 
+   
+
+
+
 
     public UserRole GetUserRoles(int userId)
     {

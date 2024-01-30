@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Caching.Memory;
+using NewReminderASP.Data.Client;
 using NewReminderASP.Data.Repository;
 using NewReminderASP.Domain.Entities;
 
@@ -128,5 +129,8 @@ namespace NewReminderASP.Core.Provider
         {
             _userRepository.AddUserRoleNormal(userLogin, roleName);
         }
+
+       
+        
     }
 }

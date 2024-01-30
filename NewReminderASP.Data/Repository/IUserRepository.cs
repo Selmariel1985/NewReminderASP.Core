@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NewReminderASP.Domain.Entities;
+using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Data.Repository
 {
@@ -29,5 +30,6 @@ namespace NewReminderASP.Data.Repository
         void AssignRolesToUser(User user, List<string> roles);
 
         void AddUserRoleNormal(string userLogin, string roleName);
+        
     }
 }

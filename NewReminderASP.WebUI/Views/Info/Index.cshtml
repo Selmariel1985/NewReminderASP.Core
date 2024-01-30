@@ -1,9 +1,11 @@
 ﻿
+@model IEnumerable<NewReminderASP.Domain.Entities.PersonalInfo>
+
 @{
     ViewBag.Title = "Info";
 }
 
-<h2>Countries</h2>
+<h2>Info</h2>
 
 <table>
     <tr>
@@ -18,7 +20,7 @@
     {
         <tr>
             <td>@info.UserID</td>
-            <td>@info.FirstName</td>
+            <td>@Html.ActionLink(!string.IsNullOrEmpty(info.FirstName) ? info.FirstName : "Default Name", "Details", "Info", new { id = info.UserID }, null)</td>
             <td>@info.LastName</td>
             <td>@info.MiddleName</td>
             <td>@info.Birthdate</td>

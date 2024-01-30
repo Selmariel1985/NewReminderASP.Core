@@ -206,6 +206,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PhoneController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -319,6 +320,11 @@
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Event\Details.cshtml" />
     <Content Include="Views\Event\Delete.cshtml" />
+    <Content Include="Views\Phone\Index.cshtml" />
+    <Content Include="Views\Phone\Edit.cshtml" />
+    <Content Include="Views\Phone\Details.cshtml" />
+    <Content Include="Views\Phone\Create.cshtml" />
+    <Content Include="Views\Phone\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NewReminderASP.Core\NewReminderASP.Core.csproj">

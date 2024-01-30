@@ -12,45 +12,54 @@ namespace NewReminderASP.Data.Client
 {
     public class PhoneClient : IPhoneClient
     {
+       
+
         public List<UserPhone> GetUserPhones()
         {
-            var userPhones = new List<UserPhone>();
+          
+            
+                var userPhones = new List<UserPhone>();
 
-            using (var connection = new PhoneServiceClient())
-            {
-                try
+                using (var connection = new PhoneServiceClient())
                 {
-                    connection.Open();
+                    try
+                    {
+                        connection.Open();
 
-                    var result = connection.GetUserPhones();
+                        var result = connection.GetUserPhones();
 
-                    if (result != null)
-                        foreach (var userPhone in result)
-                            userPhones.Add(
-                                new UserPhone
+                        if (result != null)
+                        {
+                            foreach (var userPhoneDto in result)
+                            {
+                                var userPhone = new UserPhone
                                 {
-                                    ID = userPhone.ID,
-                                    UserID = userPhone.UserID,
-                                    PhoneNumber = userPhone.PhoneNumber,
-                                    PhoneTypeID = userPhone.PhoneTypeID,
-                                    CountryID = userPhone.CountryID
-                                   
-                                });
+                                    ID = userPhoneDto.ID,
+                                    Login = userPhoneDto.Login,
+                                    PhoneNumber = userPhoneDto.PhoneNumber,
+                                    PhoneTypes = userPhoneDto.PhoneType,
+                                    CountryName = userPhoneDto.CountryName
 
-                    connection.Close();
+                                };
+
+                                userPhones.Add(userPhone);
+                            }
+                        }
+
+                        connection.Close();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
+
+                return userPhones;
             }
 
-            return userPhones;
-        }
 
-
-        public UserPhone GetUserPhone(int id)
+            public UserPhone GetUserPhone(int id)
         {
             UserPhone userPhone = null;
 
@@ -66,10 +75,10 @@ namespace NewReminderASP.Data.Client
                         userPhone = new UserPhone
                         {
                             ID = result.ID,
-                            UserID = result.UserID,
+                            Login = result.Login,
                             PhoneNumber = result.PhoneNumber,
-                            PhoneTypeID = result.PhoneTypeID,
-                            CountryID = result.CountryID
+                            PhoneTypes = result.PhoneType,
+                            CountryName = result.CountryName
                         };
 
                     connection.Close();
@@ -96,10 +105,10 @@ namespace NewReminderASP.Data.Client
                     {
 
                         ID = updatedUserPhone.ID,
-                        UserID = updatedUserPhone.UserID,
+                        Login = updatedUserPhone.Login,
                         PhoneNumber = updatedUserPhone.PhoneNumber,
-                        PhoneTypeID = updatedUserPhone.PhoneTypeID,
-                        CountryID = updatedUserPhone.CountryID
+                        PhoneType = updatedUserPhone.PhoneTypes,
+                        CountryName = updatedUserPhone.CountryName
                     });
 
                     connection.Close();
@@ -123,10 +132,10 @@ namespace NewReminderASP.Data.Client
                     connection.AddUserPhone(new UserPhoneDto
                     {
                         ID = userPhone.ID,
-                        UserID = userPhone.UserID,
+                        Login = userPhone.Login,
                         PhoneNumber = userPhone.PhoneNumber,
-                        PhoneTypeID = userPhone.PhoneTypeID,
-                        CountryID = userPhone.CountryID
+                        PhoneType = userPhone.PhoneTypes,
+                        CountryName = userPhone.CountryName
                     });
 
                     connection.Close();

@@ -140,6 +140,7 @@ namespace NewReminderASP.WebUI.Controllers
             var userRoles = _provider.GetUsersRoles();
             return View(userRoles);
         }
+       
 
         public ActionResult CreateUserRoleById()
         {

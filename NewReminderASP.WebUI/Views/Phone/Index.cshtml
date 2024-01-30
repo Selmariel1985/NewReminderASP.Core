@@ -1,0 +1,23 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.UserPhone>
+
+<h2>Phones</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>LoginLogin </th>
+        <th>PhoneNumber</th>
+        <th>PhoneTypes</th>
+        <th>CountryName</th>
+    </tr>
+    @foreach (var phones in Model)
+    {
+        <tr>
+            <td>@phones.ID</td>
+            <td>@Html.ActionLink(!string.IsNullOrEmpty(phones.Login) ? phones.Login : "Default Name", "Details", "Info", new { id = phones.ID }, null)</td>
+            <td>@Html.ActionLink(phones.PhoneNumber, "Details", "Phone", new { id = phones.ID }, null)</td>
+            <td>@phones.PhoneTypes</td>
+            <td>@phones.CountryName</td>
+        </tr>
+    }
+</table>

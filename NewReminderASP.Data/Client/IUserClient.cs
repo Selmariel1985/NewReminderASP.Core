@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NewReminderASP.Domain.Entities;
+using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Data.Client
 {
@@ -30,5 +31,6 @@ namespace NewReminderASP.Data.Client
         void AssignRolesToUser(User user, List<string> roles);
 
         void AddUserRoleNormal(string userLogin, string roleName);
+        
     }
 }
