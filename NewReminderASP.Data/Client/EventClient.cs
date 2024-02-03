@@ -31,12 +31,12 @@ namespace NewReminderASP.Data.Client
                             events.Add(new Event
                             {
                                 ID = eventss.ID,
-                                UserID = eventss.UserID,
-                                EventTypeID = eventss.EventTypeID,
+                                Login = eventss.Login,
+                                EventTypes = eventss.EventType,
                                 Title = eventss.Title,
                                 Date = eventss.Date,
                                 Time = eventss.Time,
-                                RecurrenceID = eventss.RecurrenceID,
+                                Recurrence = eventss.Recurrence,
                                 Reminders = eventss.Reminders
                             });
                         }
@@ -71,12 +71,12 @@ namespace NewReminderASP.Data.Client
                         events = new Event
                         {
                             ID = result.ID,
-                            UserID = result.UserID,
-                            EventTypeID = result.EventTypeID,
+                            Login = result.Login,
+                            EventTypes = result.EventType,
                             Title = result.Title,
                             Date = result.Date,
                             Time = result.Time,
-                            RecurrenceID = result.RecurrenceID,
+                            Recurrence = result.Recurrence,
                             Reminders = result.Reminders
                         };
                     }
@@ -104,12 +104,12 @@ namespace NewReminderASP.Data.Client
                     connection.UpdateEvent(new EventDto
                     {
                         ID = updatedEvent.ID,
-                        UserID = updatedEvent.UserID,
-                        EventTypeID = updatedEvent.EventTypeID,
+                        Login = updatedEvent.Login,
+                        EventType = updatedEvent.EventTypes,
                         Title = updatedEvent.Title,
                         Date = updatedEvent.Date,
                         Time = updatedEvent.Time,
-                        RecurrenceID = updatedEvent.RecurrenceID,
+                        Recurrence = updatedEvent.Recurrence,
                         Reminders = updatedEvent.Reminders
                     });
 
@@ -133,13 +133,13 @@ namespace NewReminderASP.Data.Client
 
                     connection.AddEvent(new EventDto
                     {
-                        ID = events.ID,
-                        UserID = events.UserID,
-                        EventTypeID = events.EventTypeID,
+                        
+                        Login = events.Login,
+                        EventType = events.EventTypes,
                         Title = events.Title,
                         Date = events.Date,
                         Time = events.Time,
-                        RecurrenceID = events.RecurrenceID,
+                        Recurrence = events.Recurrence,
                         Reminders = events.Reminders
                     });
 

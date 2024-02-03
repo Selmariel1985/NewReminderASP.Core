@@ -28,9 +28,9 @@ namespace NewReminderASP.WebUI.Controllers
             return View(tt);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string login)
         {
-            var personalInfo = _provider.GetPersonalInfo(id);
+            var personalInfo = _provider.GetPersonalInfo(login);
             if (personalInfo == null) return HttpNotFound();
             return View(personalInfo);
         }
@@ -48,34 +48,34 @@ namespace NewReminderASP.WebUI.Controllers
 
             return View(personalInfo);
         }
-        public ActionResult Details(int id)
+        public ActionResult Details(string login)
         {
-            var personalInfo = _provider.GetPersonalInfo(id);
+            var personalInfo = _provider.GetPersonalInfo(login);
             if (personalInfo == null) return HttpNotFound();
             return View(personalInfo);
         }
         public ActionResult Create()
         {
-            return View();
+            return View(new PersonalInfo());
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PersonalInfo personalInfo)
+        public ActionResult Create(string userLogin, PersonalInfo personalInfo)
         {
             if (ModelState.IsValid)
             {
-                _provider.AddPersonalInfo(personalInfo);
+                _provider.AddPersonalInfo(userLogin, personalInfo);
                 return RedirectToAction("Index");
             }
 
             return View(personalInfo);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string login)
         {
-            var personalInfo = _provider.GetPersonalInfo(id);
+            var personalInfo = _provider.GetPersonalInfo(login);
             if (personalInfo == null) return HttpNotFound();
             return View(personalInfo);
         }
@@ -84,9 +84,9 @@ namespace NewReminderASP.WebUI.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string login)
         {
-            _provider.DeletePersonalInfo(id);
+            _provider.DeletePersonalInfo(login);
             return RedirectToAction("Index");
         }
     }

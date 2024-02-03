@@ -30,7 +30,7 @@ namespace NewReminderASP.Data.Client
                         {
                             personalInfos.Add(new PersonalInfo
                             {
-                                UserID = personalInfo.UserID,
+                                Login = personalInfo.Login,
                                 FirstName = personalInfo.FirstName,
                                 LastName = personalInfo.LastName,
                                 MiddleName = personalInfo.MiddleName,
@@ -52,7 +52,7 @@ namespace NewReminderASP.Data.Client
             return personalInfos;
         }
 
-        public PersonalInfo GetPersonalInfo(int userId)
+        public PersonalInfo GetPersonalInfo(string login)
         {
             PersonalInfo personalInfo = null;
 
@@ -62,13 +62,13 @@ namespace NewReminderASP.Data.Client
                 {
                     connection.Open();
 
-                    var result = connection.GetPersonalInfo(userId);
+                    var result = connection.GetPersonalInfo(login);
 
                     if (result != null)
                     {
                         personalInfo = new PersonalInfo
                         {
-                            UserID = result.UserID,
+                            Login = result.Login,
                             FirstName = result.FirstName,
                             LastName = result.LastName,
                             MiddleName = result.MiddleName,
@@ -99,7 +99,7 @@ namespace NewReminderASP.Data.Client
 
                     connection.UpdatePersonalInfo(new PersonalInfoDto
                     {
-                        UserID = updatedPersonalInfo.UserID,
+                        Login = updatedPersonalInfo.Login,
                         FirstName = updatedPersonalInfo.FirstName,
                         LastName = updatedPersonalInfo.LastName,
                         MiddleName = updatedPersonalInfo.MiddleName,
@@ -117,7 +117,7 @@ namespace NewReminderASP.Data.Client
             }
         }
 
-        public void AddPersonalInfo(PersonalInfo personalInfo)
+        public void AddPersonalInfo(string userLogin, PersonalInfo personalInfo)
         {
             using (var connection = new PersonalInfoServiceClient())
             {
@@ -125,8 +125,9 @@ namespace NewReminderASP.Data.Client
                 {
                     connection.Open();
 
-                    connection.AddPersonalInfo(new PersonalInfoDto
+                    connection.AddPersonalInfo(userLogin, new PersonalInfoDto
                     {
+                        Login = personalInfo.Login,
                         FirstName = personalInfo.FirstName,
                         LastName = personalInfo.LastName,
                         MiddleName = personalInfo.MiddleName,
@@ -144,7 +145,7 @@ namespace NewReminderASP.Data.Client
             }
         }
 
-        public void DeletePersonalInfo(int id)
+        public void DeletePersonalInfo(string login)
         {
             using (var connection = new PersonalInfoServiceClient())
             {
@@ -152,7 +153,7 @@ namespace NewReminderASP.Data.Client
                 {
                     connection.Open();
 
-                    connection.DeletePersonalInfo(id);
+                    connection.DeletePersonalInfo(login);
 
                     connection.Close();
                 }

@@ -70,10 +70,13 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CountryID" type="xs:int" />
+      <xs:element minOccurs="0" name="CountryName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AddressDto" nillable="true" type="tns:AddressDto" />
@@ -89,6 +92,7 @@
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="MiddleName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserID" type="xs:int" />
     </xs:sequence>
@@ -103,8 +107,11 @@
   <xs:complexType name="EventDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EventType" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EventTypeID" type="xs:int" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Recurrence" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RecurrenceID" type="xs:int" />
       <xs:element minOccurs="0" name="Reminders" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Time" type="ser:duration" />

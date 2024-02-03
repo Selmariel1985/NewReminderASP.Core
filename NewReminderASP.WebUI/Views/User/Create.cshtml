@@ -4,6 +4,42 @@
     ViewBag.Title = "Create user";
 }
 
+<style>
+    h2 {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .form-horizontal {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+        .form-horizontal .form-group {
+            margin-bottom: 20px;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .form-horizontal .form-control {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+        }
+</style>
+
 <h2>User Registration</h2>
 
 @using (Html.BeginForm("Register", "Register", FormMethod.Post))

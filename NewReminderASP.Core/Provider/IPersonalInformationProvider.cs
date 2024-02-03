@@ -1,4 +1,5 @@
 ﻿using NewReminderASP.Domain.Entities;
+using NewReminderASP.Services.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,11 @@ namespace NewReminderASP.Core.Provider
     {
         List<PersonalInfo> GetPersonalInfos();
 
-        PersonalInfo GetPersonalInfo(int userId);
+        PersonalInfo GetPersonalInfo(string login);
 
         void UpdatePersonalInfo(PersonalInfo updatedPersonalInfo);
-        void AddPersonalInfo(PersonalInfo personalInfo);
-        void DeletePersonalInfo(int id);
+        void AddPersonalInfo(string userLogin, PersonalInfo personalInfo);
+        void DeletePersonalInfo(string login);
 
     }
 }

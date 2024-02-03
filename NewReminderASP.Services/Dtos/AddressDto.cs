@@ -16,5 +16,14 @@ namespace NewReminderASP.Services.Dtos
         [DataMember] public string PostalCode { get; set; }
 
         [DataMember] public string Description { get; set; }
+
+        [DataMember] public string CountryName { get; set; }
+
+        [DataMember] public int UserID { get; set; }
+        [DataMember] public string Login { get; set; }
+
+
+
+
     }
 }

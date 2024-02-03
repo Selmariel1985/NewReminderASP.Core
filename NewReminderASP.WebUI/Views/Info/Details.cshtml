@@ -1,55 +1,75 @@
 ﻿@model NewReminderASP.Domain.Entities.PersonalInfo
-
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "PersonalInfo Details";
 }
+
+<style>
+    .info-details {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 600px;
+    }
+
+    .info-details h2 {
+        color: #333;
+    }
+
+    .info-details dl {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+    }
+
+    .info-details dt {
+        flex: 1 1 30%;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .info-details dd {
+        flex: 1 1 70%;
+        margin-bottom: 5px;
+    }
+
+    .info-details hr {
+        border: 0;
+        border-top: 1px solid #ddd;
+        margin: 15px 0;
+    }
+
+    .info-details a {
+        color: #007bff;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+</style>
 
 <h2>Info Details</h2>
 
-<div>
-    <h4>User ID: @Model.UserID</h4>
+<div class="info-details">
+    <h4>User : @Model.Login</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MiddleName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MiddleName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Birthdate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Birthdate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.FirstName)</dt>
+        <dd>@Html.DisplayFor(model => model.FirstName)</dd>
+        <dt>@Html.DisplayNameFor(model => model.LastName)</dt>
+        <dd>@Html.DisplayFor(model => model.LastName)</dd>
+        <dt>@Html.DisplayNameFor(model => model.MiddleName)</dt>
+        <dd>@Html.DisplayFor(model => model.MiddleName)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Birthdate)</dt>
+        <dd>@Html.DisplayFor(model => model.Birthdate)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Gender)</dt>
+        <dd>@Html.DisplayFor(model => model.Gender)</dd>
     </dl>
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.UserID }) |
+    @Html.ActionLink("Edit", "Edit", new { login = Model.Login }) |
+    @Html.ActionLink("Delete", "Delete", new { login = Model.Login }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

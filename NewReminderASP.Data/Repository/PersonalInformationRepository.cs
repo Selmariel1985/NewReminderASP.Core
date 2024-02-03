@@ -22,9 +22,9 @@ namespace NewReminderASP.Data.Repository
             return _personalInformationClient.GetPersonalInfos().ToList();
         }
 
-        public PersonalInfo GetPersonalInfo(int userId)
+        public PersonalInfo GetPersonalInfo(string login)
         {
-            return _personalInformationClient.GetPersonalInfo(userId);
+            return _personalInformationClient.GetPersonalInfo(login);
         }
 
         public void UpdatePersonalInfo(PersonalInfo updatedPersonalInfo)
@@ -32,14 +32,14 @@ namespace NewReminderASP.Data.Repository
             _personalInformationClient.UpdatePersonalInfo(updatedPersonalInfo);
         }
 
-        public void AddPersonalInfo(PersonalInfo personalInfo)
+        public void AddPersonalInfo(string userLogin, PersonalInfo personalInfo)
         {
-            _personalInformationClient.AddPersonalInfo(personalInfo);
+            _personalInformationClient.AddPersonalInfo( userLogin,  personalInfo);
         }
 
-        public void DeletePersonalInfo(int id)
+        public void DeletePersonalInfo(string login)
         {
-            _personalInformationClient.DeletePersonalInfo(id);
+            _personalInformationClient.DeletePersonalInfo(login);
         }
     }
 }

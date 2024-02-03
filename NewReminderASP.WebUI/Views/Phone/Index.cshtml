@@ -1,23 +1,51 @@
 ﻿@model IEnumerable<NewReminderASP.Domain.Entities.UserPhone>
 
+<style>
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
 <h2>Phones</h2>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>LoginLogin </th>
-        <th>PhoneNumber</th>
-        <th>PhoneTypes</th>
-        <th>CountryName</th>
-    </tr>
-    @foreach (var phones in Model)
-    {
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
         <tr>
-            <td>@phones.ID</td>
-            <td>@Html.ActionLink(!string.IsNullOrEmpty(phones.Login) ? phones.Login : "Default Name", "Details", "Info", new { id = phones.ID }, null)</td>
-            <td>@Html.ActionLink(phones.PhoneNumber, "Details", "Phone", new { id = phones.ID }, null)</td>
-            <td>@phones.PhoneTypes</td>
-            <td>@phones.CountryName</td>
+            <th>ID</th>
+            <th>Login</th>
+            <th>Phone Number</th>
+            <th>Phone Types</th>
+            <th>Country Name</th>
         </tr>
-    }
-</table>
+        </thead>
+        <tbody>
+        @foreach (var phones in Model)
+        {
+            <tr>
+                <td>@phones.ID</td>
+                <td>@Html.ActionLink(!string.IsNullOrEmpty(phones.Login) ? phones.Login : "Default Name", "Details", "Phone", new { id = phones.ID }, null)</td>
+                <td>@Html.ActionLink(phones.PhoneNumber, "Details", "Phone", new { id = phones.ID }, null)</td>
+                <td>@phones.PhoneTypes</td>
+                <td>@phones.CountryName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

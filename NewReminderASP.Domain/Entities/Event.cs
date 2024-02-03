@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 
 
@@ -14,7 +15,9 @@ namespace NewReminderASP.Domain.Entities
         public int EventTypeID { get; set; }
         
         public string Title { get; set; }
-        
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+
         public DateTime Date { get; set; }
         
         public TimeSpan Time { get; set; }
@@ -29,5 +32,8 @@ namespace NewReminderASP.Domain.Entities
        
         public virtual EventRecurrence EventRecurrence { get; set; }
         public virtual EventDetail EventDetail { get; set; }
+        public string Recurrence { get; set; }
+        public string EventTypes { get; set; }
+        public string Login { get; set; }
     }
 }

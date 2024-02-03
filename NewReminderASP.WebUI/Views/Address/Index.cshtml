@@ -1,7 +1,30 @@
-﻿
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.Address>
+
 @{
     ViewBag.Title = "Addresses";
 }
+
+<style>
+   
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
 
 <h2>Addresses</h2>
 
@@ -10,9 +33,10 @@
         <th>ID</th>
         <th>Street</th>
         <th>City</th>
-        <th>CountryID</th>
+        <th>CountryName</th>
         <th>PostalCode</th>
         <th>Description</th>
+        <th>Login</th>
     </tr>
     @foreach (var address in Model)
     {
@@ -20,9 +44,10 @@
             <td>@address.ID</td>
             <td>@address.Street</td>
             <td>@address.City</td>
-            <td>@address.CountryID</td>
+            <td>@Html.ActionLink(!string.IsNullOrEmpty(address.CountryName) ? address.CountryName : "Default Name", "Details", "Address", new { id = address.ID }, null)</td>
             <td>@address.PostalCode</td>
             <td>@address.Description</td>
+            <td>@address.Login</td>
         </tr>
     }
 </table>

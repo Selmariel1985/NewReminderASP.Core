@@ -11,10 +11,10 @@ namespace NewReminderASP.Data.Repository
     {
         List<PersonalInfo> GetPersonalInfos();
 
-        PersonalInfo GetPersonalInfo(int userId);
+        PersonalInfo GetPersonalInfo(string login);
 
         void UpdatePersonalInfo(PersonalInfo updatedPersonalInfo);
-        void AddPersonalInfo(PersonalInfo personalInfo);
-        void DeletePersonalInfo(int id);
+        void AddPersonalInfo(string userLogin, PersonalInfo personalInfo);
+        void DeletePersonalInfo(string login);
     }
 }

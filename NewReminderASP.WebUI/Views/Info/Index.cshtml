@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<NewReminderASP.Domain.Entities.PersonalInfo>
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.PersonalInfo>
 
 @{
     ViewBag.Title = "Info";
@@ -7,9 +6,31 @@
 
 <h2>Info</h2>
 
+<style>
+   
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
 <table>
     <tr>
-        <th>UserID</th>
+        <th>Login</th>
         <th>First Name </th>
         <th>Last Name</th>
         <th>Middle Name</th>
@@ -19,11 +40,11 @@
     @foreach (var info in Model)
     {
         <tr>
-            <td>@info.UserID</td>
-            <td>@Html.ActionLink(!string.IsNullOrEmpty(info.FirstName) ? info.FirstName : "Default Name", "Details", "Info", new { id = info.UserID }, null)</td>
+            <td>@info.Login</td>
+            <td>@Html.ActionLink(!string.IsNullOrEmpty(info.FirstName) ? info.FirstName : "Default Name", "Details", "Info", new { login = info.Login }, null)</td>
             <td>@info.LastName</td>
             <td>@info.MiddleName</td>
-            <td>@info.Birthdate</td>
+            <td>@info.Birthdate.ToString("yyyy-MM-dd")</td>
             <td>@info.Gender</td>
         </tr>
     }

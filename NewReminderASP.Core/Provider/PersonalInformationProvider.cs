@@ -21,9 +21,9 @@ namespace NewReminderASP.Core.Provider
             return _personalInformationRepository.GetPersonalInfos().ToList();
         }
 
-        public PersonalInfo GetPersonalInfo(int userId)
+        public PersonalInfo GetPersonalInfo(string login)
         {
-            return _personalInformationRepository.GetPersonalInfo(userId);
+            return _personalInformationRepository.GetPersonalInfo(login);
         }
 
         public void UpdatePersonalInfo(PersonalInfo updatedPersonalInfo)
@@ -31,14 +31,14 @@ namespace NewReminderASP.Core.Provider
              _personalInformationRepository.UpdatePersonalInfo(updatedPersonalInfo);
         }
 
-        public void AddPersonalInfo(PersonalInfo personalInfo)
+        public void AddPersonalInfo(string userLogin, PersonalInfo personalInfo)
         {
-            _personalInformationRepository.AddPersonalInfo(personalInfo);
+            _personalInformationRepository.AddPersonalInfo(userLogin,  personalInfo);
         }
 
-        public void DeletePersonalInfo(int id)
+        public void DeletePersonalInfo(string login)
         {
-            _personalInformationRepository.DeletePersonalInfo(id);
+            _personalInformationRepository.DeletePersonalInfo(login);
         }
     }
 }

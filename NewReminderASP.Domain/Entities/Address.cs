@@ -8,6 +8,11 @@
         public int CountryID { get; set; }
         public string PostalCode { get; set; }
         public string Description { get; set; }
+        public string CountryName { get; set; }
+
+        public int UserID { get; set; }
+        public string Login { get; set; }
+
         public virtual Country Country { get; set; }
     }
 }

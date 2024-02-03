@@ -38,9 +38,10 @@ namespace NewReminderASP.WcfService
                                 ID = reader.GetInt32(0),
                                 Street = reader.GetString(1),
                                 City = reader.GetString(2),
-                                CountryID = reader.GetInt32(3),
+                                CountryName = reader.GetString(3),
                                 PostalCode = reader.GetString(4),
-                                Description = reader.GetString(5)
+                                Description = reader.GetString(5),
+                                Login = reader.GetString(6)
                             };
                             addresses.Add(address);
                         }
@@ -74,9 +75,10 @@ namespace NewReminderASP.WcfService
                             address.ID = reader.GetInt32(0);
                             address.Street = reader.GetString(1);
                             address.City = reader.GetString(2);
-                            address.CountryID = reader.GetInt32(3);
+                            address.CountryName = reader.GetString(3);
                             address.PostalCode = reader.GetString(4);
                             address.Description = reader.GetString(5);
+                            address.Login = reader.GetString(6);
                         }
                     }
                 }
@@ -97,9 +99,10 @@ namespace NewReminderASP.WcfService
                     command.Parameters.AddWithValue("@ID", updatedAddress.ID);
                     command.Parameters.AddWithValue("@Street", updatedAddress.Street);
                     command.Parameters.AddWithValue("@City", updatedAddress.City);
-                    command.Parameters.AddWithValue("@CountryID", updatedAddress.CountryID);
+                    command.Parameters.AddWithValue("@CountryName", updatedAddress.CountryName);
                     command.Parameters.AddWithValue("@PostalCode", updatedAddress.PostalCode);
                     command.Parameters.AddWithValue("@Description", updatedAddress.Description);
+                    command.Parameters.AddWithValue("@Login", updatedAddress.Login);
 
                     connection.Open();
                     command.ExecuteNonQuery();
@@ -118,9 +121,10 @@ namespace NewReminderASP.WcfService
                     // Add parameters if the add stored procedure requires them
                     command.Parameters.AddWithValue("@Street", address.Street);
                     command.Parameters.AddWithValue("@City", address.City);
-                    command.Parameters.AddWithValue("@CountryID", address.CountryID);
+                    command.Parameters.AddWithValue("@CountryName", address.CountryName);
                     command.Parameters.AddWithValue("@PostalCode", address.PostalCode);
                     command.Parameters.AddWithValue("@Description", address.Description);
+                    command.Parameters.AddWithValue("@Login", address.Login);
 
                     connection.Open();
                     command.ExecuteNonQuery();
@@ -263,12 +267,12 @@ namespace NewReminderASP.WcfService
                         var getEvent = new EventDto
                         {
                             ID = reader.GetInt32(0),
-                            UserID = reader.GetInt32(1),
-                            EventTypeID = reader.GetInt32(2),
+                            Login = reader.GetString(1),
+                            EventType = reader.GetString(2),
                             Title = reader.GetString(3),
                             Date = reader.GetDateTime(4),
                             Time = reader.GetTimeSpan(5),
-                            RecurrenceID = reader.GetInt32(6),
+                            Recurrence = reader.GetString(6),
                             Reminders = reader.GetString(7)
                         };
                         events.Add(getEvent);
@@ -296,12 +300,12 @@ namespace NewReminderASP.WcfService
                     if (reader.Read())
                     {
                         events.ID = reader.GetInt32(0);
-                        events.UserID = reader.GetInt32(1);
-                        events.EventTypeID = reader.GetInt32(2);
+                        events.Login = reader.GetString(1);
+                        events.EventType = reader.GetString(2);
                         events.Title = reader.GetString(3);
                         events.Date = reader.GetDateTime(4);
                         events.Time = reader.GetTimeSpan(5);
-                        events.RecurrenceID = reader.GetInt32(6);
+                        events.Recurrence = reader.GetString(6);
                         events.Reminders = reader.GetString(7);
                     }
                 }
@@ -316,12 +320,13 @@ namespace NewReminderASP.WcfService
             using (var command = new SqlCommand("UpdateEvent", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@UserID", updatedEvent.UserID);
-                command.Parameters.AddWithValue("@EventTypeID", updatedEvent.EventTypeID);
+                command.Parameters.AddWithValue("@ID", updatedEvent.ID);
+                command.Parameters.AddWithValue("@Login", updatedEvent.Login);
+                command.Parameters.AddWithValue("@EventType", updatedEvent.EventType);
                 command.Parameters.AddWithValue("@Title", updatedEvent.Title);
                 command.Parameters.AddWithValue("@Date", updatedEvent.Date);
                 command.Parameters.AddWithValue("@Time", updatedEvent.Time);
-                command.Parameters.AddWithValue("@RecurrenceID", updatedEvent.RecurrenceID);
+                command.Parameters.AddWithValue("@Recurrence", updatedEvent.Recurrence);
                 command.Parameters.AddWithValue("@Reminders", updatedEvent.Reminders);
 
 
@@ -336,20 +341,18 @@ namespace NewReminderASP.WcfService
             using (var command = new SqlCommand("AddEvent", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@UserID", events.UserID);
-                command.Parameters.AddWithValue("@EventTypeID", events.EventTypeID);
+                command.Parameters.AddWithValue("@Login", events.Login);
+                command.Parameters.AddWithValue("@EventType", events.EventType);
                 command.Parameters.AddWithValue("@Title", events.Title);
                 command.Parameters.AddWithValue("@Date", events.Date);
                 command.Parameters.AddWithValue("@Time", events.Time);
-                command.Parameters.AddWithValue("@RecurrenceID", events.RecurrenceID);
+                command.Parameters.AddWithValue("@Recurrence", events.Recurrence);
                 command.Parameters.AddWithValue("@Reminders", events.Reminders);
 
-
                 connection.Open();
-                command.ExecuteNonQuery();
+                command.ExecuteNonQuery();  // This line executes the stored procedure
             }
         }
-
         public void DeleteEvent(int id)
         {
             using (var connection = new SqlConnection(connectionString))
@@ -440,7 +443,7 @@ namespace NewReminderASP.WcfService
             using (var command = new SqlCommand("AddEventDetail", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@EventID", eventDetail.EventID);
+               
                 command.Parameters.AddWithValue("@Description", eventDetail.Description);
                 command.Parameters.AddWithValue("@Status", eventDetail.Status);
 
@@ -536,7 +539,7 @@ namespace NewReminderASP.WcfService
             using (var command = new SqlCommand("AddEventRecurrence", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@ID", eventRecurrence.ID);
+               
                 command.Parameters.AddWithValue("@RecurrenceType", eventRecurrence.RecurrenceType);
 
 
@@ -632,7 +635,7 @@ namespace NewReminderASP.WcfService
             using (var command = new SqlCommand("AddEventType", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@ID", eventType.ID);
+               
                 command.Parameters.AddWithValue("@TypeName", eventType.TypeName);
 
 
@@ -671,7 +674,7 @@ namespace NewReminderASP.WcfService
                     {
                         var personalInfo = new PersonalInfoDto
                         {
-                            UserID = reader.GetInt32(0),
+                            Login = reader.GetString(0),
                             FirstName = reader.GetString(1),
                             LastName = reader.GetString(2),
                             MiddleName = reader.GetString(3),
@@ -686,15 +689,15 @@ namespace NewReminderASP.WcfService
             return personalInfos;
         }
 
-        public PersonalInfoDto GetPersonalInfo(int userId)
+        public PersonalInfoDto GetPersonalInfo(string login)
         {
-            var personalInfo = new PersonalInfoDto();
+            PersonalInfoDto personalInfo = null;
 
             using (var connection = new SqlConnection(connectionString))
             using (var command = new SqlCommand("GetPersonalInfo", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@UserID", userId);
+                command.Parameters.Add(new SqlParameter("@Login", login));
 
                 connection.Open();
 
@@ -702,12 +705,15 @@ namespace NewReminderASP.WcfService
                 {
                     if (reader.Read())
                     {
-                        personalInfo.UserID = reader.GetInt32(0);
-                        personalInfo.FirstName = reader.GetString(1);
-                        personalInfo.LastName = reader.GetString(2);
-                        personalInfo.MiddleName = reader.GetString(3);
-                        personalInfo.Birthdate = reader.GetDateTime(4);
-                        personalInfo.Gender = reader.GetString(5);
+                        personalInfo = new PersonalInfoDto
+                        {
+                            Login = reader.GetString(0),
+                            FirstName = reader.GetString(1),
+                            LastName = reader.GetString(2),
+                            MiddleName = reader.GetString(3),
+                            Birthdate = reader.GetDateTime(4),
+                            Gender = reader.GetString(5)
+                        };
                     }
                 }
             }
@@ -715,13 +721,14 @@ namespace NewReminderASP.WcfService
             return personalInfo;
         }
 
+
         public void UpdatePersonalInfo(PersonalInfoDto updatedPersonalInfo)
         {
             using (var connection = new SqlConnection(connectionString))
             using (var command = new SqlCommand("UpdatePersonalInfo", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@UserID", updatedPersonalInfo.UserID);
+                command.Parameters.AddWithValue("@Login", updatedPersonalInfo.Login);
                 command.Parameters.AddWithValue("@FirstName", updatedPersonalInfo.FirstName);
                 command.Parameters.AddWithValue("@LastName", updatedPersonalInfo.LastName);
                 command.Parameters.AddWithValue("@MiddleName", updatedPersonalInfo.MiddleName);
@@ -733,12 +740,13 @@ namespace NewReminderASP.WcfService
             }
         }
 
-        public void AddPersonalInfo(PersonalInfoDto personalInfo)
+        public void AddPersonalInfo(string userLogin, PersonalInfoDto personalInfo)
         {
             using (var connection = new SqlConnection(connectionString))
             using (var command = new SqlCommand("AddPersonalInfo", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserLogin", personalInfo.Login);
                 command.Parameters.AddWithValue("@FirstName", personalInfo.FirstName);
                 command.Parameters.AddWithValue("@LastName", personalInfo.LastName);
                 command.Parameters.AddWithValue("@MiddleName", personalInfo.MiddleName);
@@ -750,13 +758,13 @@ namespace NewReminderASP.WcfService
             }
         }
 
-        public void DeletePersonalInfo(int id)
+        public void DeletePersonalInfo(string login)
         {
             using (var connection = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("DeletePersonalInfo", connection))
+            using (var command = new SqlCommand("DeletePersonalInfoByLogin", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@UserID", id);
+                command.Parameters.AddWithValue("@Login", login);
 
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -828,6 +836,7 @@ namespace NewReminderASP.WcfService
             using (var command = new SqlCommand("UpdateUserPhone", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
+
                 command.Parameters.AddWithValue("@Login", updatedUserPhone.Login);
                 command.Parameters.AddWithValue("@PhoneNumber", updatedUserPhone.PhoneNumber);
                 command.Parameters.AddWithValue("@PhoneType", updatedUserPhone.PhoneType);

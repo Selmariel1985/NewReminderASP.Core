@@ -1,0 +1,6 @@
+2024-01-31 20:29:09,132 INFO NewReminderASP.WebUI.Controllers.LoginController - Rendering AuthenticateUser view
+2024-01-31 20:29:46,337 INFO NewReminderASP.WebUI.Controllers.LoginController - Attempting user authentication for login: Work
+2024-01-31 20:29:49,177 INFO NewReminderASP.WebUI.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-01-31 20:31:02,029 INFO NewReminderASP.WebUI.Controllers.LoginController - Rendering AuthenticateUser view
+2024-01-31 20:31:08,055 INFO NewReminderASP.WebUI.Controllers.LoginController - Attempting user authentication for login: Work
+2024-01-31 20:31:09,771 INFO NewReminderASP.WebUI.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin

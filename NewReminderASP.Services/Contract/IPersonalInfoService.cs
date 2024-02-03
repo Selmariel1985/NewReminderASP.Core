@@ -11,12 +11,12 @@ namespace NewReminderASP.Services.Contract
         [OperationContract]
         List<PersonalInfoDto> GetPersonalInfos();
         [OperationContract]
-        PersonalInfoDto GetPersonalInfo(int userId);
+        PersonalInfoDto GetPersonalInfo(string login);
         [OperationContract]
         void UpdatePersonalInfo(PersonalInfoDto updatedPersonalInfo);
         [OperationContract]
-        void AddPersonalInfo(PersonalInfoDto personalInfo);
+        void AddPersonalInfo(string userLogin, PersonalInfoDto personalInfo);
         [OperationContract]
-        void DeletePersonalInfo(int id);
+        void DeletePersonalInfo(string login);
     }
 }

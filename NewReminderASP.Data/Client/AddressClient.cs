@@ -29,9 +29,10 @@ namespace NewReminderASP.Data.Client
                                     ID = adressDto.ID,
                                     Street = adressDto.Street,
                                     City = adressDto.City,
-                                    CountryID = adressDto.CountryID,
+                                    CountryName = adressDto.CountryName,
                                     PostalCode = adressDto.PostalCode,
-                                    Description = adressDto.Description
+                                    Description = adressDto.Description,
+                                    Login = adressDto.Login
                                 });
 
                     connection.Close();
@@ -64,9 +65,10 @@ namespace NewReminderASP.Data.Client
                             ID = result.ID,
                             Street = result.Street,
                             City = result.City,
-                            CountryID = result.CountryID,
+                            CountryName = result.CountryName,
                             PostalCode = result.PostalCode,
-                            Description = result.Description
+                            Description = result.Description,
+                            Login = result.Login
                         };
 
                     connection.Close();
@@ -95,9 +97,10 @@ namespace NewReminderASP.Data.Client
                         ID = updateAddress.ID,
                         Street = updateAddress.Street,
                         City = updateAddress.City,
-                        CountryID = updateAddress.CountryID,
+                        CountryName = updateAddress.CountryName,
                         PostalCode = updateAddress.PostalCode,
-                        Description = updateAddress.Description
+                        Description = updateAddress.Description,
+                        Login = updateAddress.Login
                     });
 
                     connection.Close();
@@ -122,9 +125,10 @@ namespace NewReminderASP.Data.Client
                     {
                         Street = address.Street,
                         City = address.City,
-                        CountryID = address.CountryID,
+                        CountryName = address.CountryName,
                         PostalCode = address.PostalCode,
-                        Description = address.Description
+                        Description = address.Description,
+                        Login = address.Login
                     });
 
                     connection.Close();

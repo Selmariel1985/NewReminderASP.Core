@@ -1,6 +1,7 @@
 ﻿using NewReminderASP.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -23,6 +24,7 @@ namespace NewReminderASP.Services.Dtos
 
         public string Title { get; set; }
         [DataMember]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 
         public DateTime Date { get; set; }
         [DataMember]
@@ -34,8 +36,15 @@ namespace NewReminderASP.Services.Dtos
         [DataMember]
 
         public string Reminders { get; set; }
-        
 
-        
+        [DataMember]
+
+        public string Login { get; set; }
+        [DataMember]
+
+        public string EventType { get; set; }
+        [DataMember]
+
+        public string Recurrence { get; set; }
     }
 }

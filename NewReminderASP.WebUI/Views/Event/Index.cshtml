@@ -1,31 +1,63 @@
-﻿@{
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.Event>
+
+@{
     ViewBag.Title = "Event";
 }
 
+<style>
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
 <h2>Events</h2>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>UserID Name </th>
-        <th>EventTypeID</th>
-        <th>Title Name</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>RecurrenceID</th>
-        <th>Reminders</th>
-    </tr>
-    @foreach (var events in Model)
-    {
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
         <tr>
-            <td>@events.ID</td>
-            <td>@events.UserID</td>
-            <td>@events.EventTypeID</td>
-            <td>@events.Title</td>
-            <td>@events.Date</td>
-            <td>@events.Time</td>
-            <td>@events.RecurrenceID</td>
-            <td>@events.Reminders</td>
+            <th>ID</th>
+            <th>User Name</th>
+            <th>Event Type</th>
+            <th>Title Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Recurrence</th>
+            <th>Reminders</th>
         </tr>
-    }
-</table>
+        </thead>
+        <tbody>
+        @foreach (var events in Model)
+        {
+            <tr>
+                <td>@events.ID</td>
+                <td>@events.Login</td>
+                <td>@events.EventTypes</td>
+                <td>@events.Title</td>
+                <td>@events.Date.ToString("yyyy-MM-dd")</td>
+                <td>@events.Time</td>
+                <td>@events.Recurrence</td>
+                <td>
+                    @Html.ActionLink(!string.IsNullOrEmpty(events.Reminders) ? events.Reminders : "Default Name", "Details", "Event", new { id = events.ID }, null)
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

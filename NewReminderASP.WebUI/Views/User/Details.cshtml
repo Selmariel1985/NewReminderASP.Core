@@ -1,44 +1,85 @@
 ﻿@model NewReminderASP.Domain.Entities.User
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "User Details";
 }
 
-<h2>User Details: @Model.Login</h2>
+<style>
+    .user-details {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 600px;
+    }
 
-<div>
-    <h4>User ID: @Model.Id</h4>
-    <hr/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Login)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Login)
-        </dd>
-        <dt>
-            Roles
-        </dt>
-        <dd>
-            <ul>
-                @foreach (var role in Model.UserRoles)
-                {
-                    <li>@role.Role.Name</li>
-                }
-            </ul>
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-      
-    </dl>
+    .user-details h2 {
+        color: #333;
+        text-align: center;
+    }
+
+    .user-details dl {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+    }
+
+    .user-details dt {
+        flex: 1 1 30%;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .user-details dd {
+        flex: 1 1 70%;
+        margin-bottom: 5px;
+    }
+
+    .user-details hr {
+        border: 0;
+        border-top: 1px solid #ddd;
+        margin: 15px 0;
+    }
+
+    .user-details a {
+        color: #007bff;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+</style>
+
+<div class="user-details">
+    <h2>User Details: @Model.Login</h2>
+
+    <div>
+        <h4>User ID: @Model.Id</h4>
+        <hr />
+        <dl>
+            <dt>@Html.DisplayNameFor(model => model.Login)</dt>
+            <dd>@Html.DisplayFor(model => model.Login)</dd>
+
+            <dt>Roles</dt>
+            <dd>
+                <ul class="roles-list">
+                    @foreach (var role in Model.UserRoles)
+                    {
+                        <li>@role.Role.Name</li>
+                    }
+                </ul>
+            </dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+            <dd>@Html.DisplayFor(model => model.Email)</dd>
+        </dl>
+    </div>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

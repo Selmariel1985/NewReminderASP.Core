@@ -513,10 +513,10 @@ namespace NewReminderASP.Data.ServiceReference1 {
         System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.PersonalInfoDto[]> GetPersonalInfosAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalInfoService/GetPersonalInfo", ReplyAction="http://tempuri.org/IPersonalInfoService/GetPersonalInfoResponse")]
-        NewReminderASP.Services.Dtos.PersonalInfoDto GetPersonalInfo(int userId);
+        NewReminderASP.Services.Dtos.PersonalInfoDto GetPersonalInfo(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalInfoService/GetPersonalInfo", ReplyAction="http://tempuri.org/IPersonalInfoService/GetPersonalInfoResponse")]
-        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.PersonalInfoDto> GetPersonalInfoAsync(int userId);
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.PersonalInfoDto> GetPersonalInfoAsync(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalInfoService/UpdatePersonalInfo", ReplyAction="http://tempuri.org/IPersonalInfoService/UpdatePersonalInfoResponse")]
         void UpdatePersonalInfo(NewReminderASP.Services.Dtos.PersonalInfoDto updatedPersonalInfo);
@@ -525,16 +525,16 @@ namespace NewReminderASP.Data.ServiceReference1 {
         System.Threading.Tasks.Task UpdatePersonalInfoAsync(NewReminderASP.Services.Dtos.PersonalInfoDto updatedPersonalInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalInfoService/AddPersonalInfo", ReplyAction="http://tempuri.org/IPersonalInfoService/AddPersonalInfoResponse")]
-        void AddPersonalInfo(NewReminderASP.Services.Dtos.PersonalInfoDto personalInfo);
+        void AddPersonalInfo(string userLogin, NewReminderASP.Services.Dtos.PersonalInfoDto personalInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalInfoService/AddPersonalInfo", ReplyAction="http://tempuri.org/IPersonalInfoService/AddPersonalInfoResponse")]
-        System.Threading.Tasks.Task AddPersonalInfoAsync(NewReminderASP.Services.Dtos.PersonalInfoDto personalInfo);
+        System.Threading.Tasks.Task AddPersonalInfoAsync(string userLogin, NewReminderASP.Services.Dtos.PersonalInfoDto personalInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalInfoService/DeletePersonalInfo", ReplyAction="http://tempuri.org/IPersonalInfoService/DeletePersonalInfoResponse")]
-        void DeletePersonalInfo(int id);
+        void DeletePersonalInfo(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalInfoService/DeletePersonalInfo", ReplyAction="http://tempuri.org/IPersonalInfoService/DeletePersonalInfoResponse")]
-        System.Threading.Tasks.Task DeletePersonalInfoAsync(int id);
+        System.Threading.Tasks.Task DeletePersonalInfoAsync(string login);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -572,12 +572,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
             return base.Channel.GetPersonalInfosAsync();
         }
         
-        public NewReminderASP.Services.Dtos.PersonalInfoDto GetPersonalInfo(int userId) {
-            return base.Channel.GetPersonalInfo(userId);
+        public NewReminderASP.Services.Dtos.PersonalInfoDto GetPersonalInfo(string login) {
+            return base.Channel.GetPersonalInfo(login);
         }
         
-        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.PersonalInfoDto> GetPersonalInfoAsync(int userId) {
-            return base.Channel.GetPersonalInfoAsync(userId);
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.PersonalInfoDto> GetPersonalInfoAsync(string login) {
+            return base.Channel.GetPersonalInfoAsync(login);
         }
         
         public void UpdatePersonalInfo(NewReminderASP.Services.Dtos.PersonalInfoDto updatedPersonalInfo) {
@@ -588,20 +588,20 @@ namespace NewReminderASP.Data.ServiceReference1 {
             return base.Channel.UpdatePersonalInfoAsync(updatedPersonalInfo);
         }
         
-        public void AddPersonalInfo(NewReminderASP.Services.Dtos.PersonalInfoDto personalInfo) {
-            base.Channel.AddPersonalInfo(personalInfo);
+        public void AddPersonalInfo(string userLogin, NewReminderASP.Services.Dtos.PersonalInfoDto personalInfo) {
+            base.Channel.AddPersonalInfo(userLogin, personalInfo);
         }
         
-        public System.Threading.Tasks.Task AddPersonalInfoAsync(NewReminderASP.Services.Dtos.PersonalInfoDto personalInfo) {
-            return base.Channel.AddPersonalInfoAsync(personalInfo);
+        public System.Threading.Tasks.Task AddPersonalInfoAsync(string userLogin, NewReminderASP.Services.Dtos.PersonalInfoDto personalInfo) {
+            return base.Channel.AddPersonalInfoAsync(userLogin, personalInfo);
         }
         
-        public void DeletePersonalInfo(int id) {
-            base.Channel.DeletePersonalInfo(id);
+        public void DeletePersonalInfo(string login) {
+            base.Channel.DeletePersonalInfo(login);
         }
         
-        public System.Threading.Tasks.Task DeletePersonalInfoAsync(int id) {
-            return base.Channel.DeletePersonalInfoAsync(id);
+        public System.Threading.Tasks.Task DeletePersonalInfoAsync(string login) {
+            return base.Channel.DeletePersonalInfoAsync(login);
         }
     }
     
