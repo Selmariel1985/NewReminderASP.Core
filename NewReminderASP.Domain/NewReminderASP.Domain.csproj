@@ -50,6 +50,7 @@
     <Compile Include="Entities\EventType.cs" />
     <Compile Include="Entities\PersonalInfo.cs" />
     <Compile Include="Entities\PhoneType.cs" />
+    <Compile Include="Entities\RegisterViewModel.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserPhone.cs" />

@@ -50,6 +50,20 @@
         text-decoration: none;
         margin-right: 10px;
     }
+    .btn-group {
+        text-align: center;
+    }
+
+        .btn-group .btn {
+            color: #ffffff; 
+            background-color: #007bff; 
+            border-color: #007bff; 
+        }
+
+            .btn-group .btn:hover {
+                background-color: #0056b3; 
+                border-color: #0056b3; 
+            }
 </style>
 
 <div class="user-details">
@@ -77,9 +91,9 @@
         </dl>
     </div>
 
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    <div class="btn-group" role="group" aria-label="User actions">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn " })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn " })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn " })
+    </div>
 </div>

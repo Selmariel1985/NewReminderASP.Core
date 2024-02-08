@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NewReminderASP.Domain.Entities;
+using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Core.Provider
 {
@@ -16,6 +17,7 @@ namespace NewReminderASP.Core.Provider
         void UpdateCountry(Address updatedAddress);
 
         void AddAddress(Address address);
+        void AddAddressRegister(Address address);
 
         void DeleteAddress(int id);
     }

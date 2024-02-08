@@ -15,6 +15,7 @@ namespace NewReminderASP.Data.Repository
         void UpdateCountry(Address updatedAddress);
 
         void AddAddress(Address address);
+        void AddAddressRegister(Address address);
 
         void DeleteAddress(int id);
     }

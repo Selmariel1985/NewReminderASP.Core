@@ -1,0 +1,46 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.EventRecurrence>
+
+@{
+    ViewBag.Title = "Event Recurrence";
+}
+
+<style>
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
+<h2>Event Recurrence</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>RecurrenceType</th>
+        
+
+    </tr>
+    @foreach (var eventRecurrence in Model)
+    {
+        <tr>
+            
+            <td>@eventRecurrence.ID</td>
+            <td>@Html.ActionLink(!string.IsNullOrEmpty(eventRecurrence.RecurrenceType) ? eventRecurrence.RecurrenceType : "Default Name", "DetailsEventRecurrences", "Event", new { id = eventRecurrence.ID }, null)</td>
+        </tr>
+    }
+</table>

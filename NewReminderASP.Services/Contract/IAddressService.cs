@@ -21,6 +21,9 @@ namespace NewReminderASP.Services.Contract
         void AddAddress(AddressDto address);
 
         [OperationContract]
+        void AddAddressRegister(AddressDto address);
+            
+        [OperationContract]
         void DeleteAddress(int id);
     }
 }

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.EventDetail>
+
+@{
+    ViewBag.Title = "Event Detail";
+}
+
+<style>
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
+<h2>Event Detail</h2>
+
+<table>
+    <tr>
+        <th>EventID</th>
+        <th>Description</th>
+        <th>Status</th>
+        
+    </tr>
+    @foreach (var eventDetail in Model)
+    {
+        <tr>
+            <td>@eventDetail.EventID</td>
+            <td>@eventDetail.Description</td>
+            <td>@Html.ActionLink(!string.IsNullOrEmpty(eventDetail.Status) ? eventDetail.Status : "Default Name", "DetailsEventDetails", "Event", new { id = eventDetail.EventID }, null)</td>
+        </tr>
+    }
+</table>

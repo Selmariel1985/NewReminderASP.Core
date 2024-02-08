@@ -1,0 +1,87 @@
+﻿@model NewReminderASP.Domain.Entities.EventRecurrence
+
+@{
+    ViewBag.Title = "Event Recurrence";
+}
+
+<style>
+
+    .eventRecurrence-details {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 600px;
+    }
+
+        .eventRecurrence-details h2 {
+            color: #333;
+        }
+
+        .eventRecurrence-details dl {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+        }
+
+        .eventRecurrence-details dt {
+            flex: 1 1 30%;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .eventRecurrence-details dd {
+            flex: 1 1 70%;
+            margin-bottom: 5px;
+        }
+
+        .eventRecurrence-details hr {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin: 15px 0;
+        }
+
+        .eventRecurrence-details a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+    .btn-group {
+        text-align: center;
+    }
+
+        .btn-group .btn {
+            color: #ffffff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-group .btn:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+</style>
+
+
+<h2>Event Recurrence</h2>
+
+<div class="eventRecurrence-details">
+    <h4>Event Recurrence: @Model.RecurrenceType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.RecurrenceType)</dt>
+        <dd>@Html.DisplayFor(model => model.RecurrenceType)</dd>
+      
+
+    </dl>
+</div>
+
+
+<div class="btn-group" role="group" aria-label="User actions">
+    @Html.ActionLink("Edit", "EditEventRecurrences", new { id = Model.ID }, new { @class = "btn " })
+    @Html.ActionLink("Delete", "DeleteEventRecurrence", new { id = Model.ID }, new { @class = "btn " })
+    @Html.ActionLink("Back to List", "GetEventRecurrences", null, new { @class = "btn " })
+</div>

@@ -1,0 +1,79 @@
+﻿@model NewReminderASP.Domain.Entities.PhoneType
+
+@{
+    ViewBag.Title = "Edit User Phone Type";
+}
+
+<style>
+    .form-container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f4f4f4;
+        border-radius: 5px;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+
+    .text-danger {
+        color: #dc3545;
+        font-size: 12px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+</style>
+
+<h4>Phone User: @Model.TypeName</h4>
+
+@using (Html.BeginForm())
+{
+    <div class="form-container">
+        <h4>User Phone</h4>
+        <hr />
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypeName, new { @class = "control-label" })
+            @Html.EditorFor(model => model.TypeName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TypeName, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "GetPhoneType")
+</div>

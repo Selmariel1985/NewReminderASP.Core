@@ -147,7 +147,32 @@ namespace NewReminderASP.Data.Client
                 }
             }
         }
+        public void AddUserPhoneRegister(UserPhone userPhone)
+        {
+            using (var connection = new PhoneServiceClient())
+            {
+                try
+                {
+                    connection.Open();
 
+                    connection.AddUserPhoneRegister(new UserPhoneDto
+                    {
+                        ID = userPhone.ID,
+                        Login = userPhone.Login,
+                        PhoneNumber = userPhone.PhoneNumber,
+                        PhoneTypeID = userPhone.PhoneTypeID,
+                        CountryID = userPhone.CountryID
+                    });
+
+                    connection.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
+        }
         public void DeleteUserPhone(int id)
         {
             using (var connection = new PhoneServiceClient())
@@ -268,7 +293,7 @@ namespace NewReminderASP.Data.Client
 
                     connection.AddPhoneType(new PhoneTypeDto
                     {
-                        ID = eventPhoneType.ID,
+                       
                         TypeName = eventPhoneType.TypeName
                     });
 
@@ -301,5 +326,7 @@ namespace NewReminderASP.Data.Client
                 }
             }
         }
+
+       
     }
 }

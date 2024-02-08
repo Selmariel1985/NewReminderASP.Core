@@ -141,6 +141,34 @@ namespace NewReminderASP.Data.Client
             }
         }
 
+        public void AddAddressRegister(Address address)
+        {
+            using (var connection = new AddressServiceClient())
+            {
+                try
+                {
+                    connection.Open();
+
+                    connection.AddAddressRegister(new AddressDto
+                    {
+                        Street = address.Street,
+                        City = address.City,
+                        CountryID = address.CountryID,
+                        PostalCode = address.PostalCode,
+                        Description = address.Description,
+                        Login = address.Login
+                    });
+
+                    connection.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
+        }
+
         public void DeleteAddress(int id)
         {
             using (var connection = new AddressServiceClient())

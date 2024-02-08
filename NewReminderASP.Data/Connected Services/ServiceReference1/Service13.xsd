@@ -349,6 +349,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddAddressRegister">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="address" nillable="true" type="q24:AddressDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddAddressRegisterResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="DeleteAddress">
     <xs:complexType>
       <xs:sequence>
@@ -369,7 +381,7 @@
   <xs:element name="GetPersonalInfosResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetPersonalInfosResult" nillable="true" type="q24:ArrayOfPersonalInfoDto" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetPersonalInfosResult" nillable="true" type="q25:ArrayOfPersonalInfoDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -383,14 +395,14 @@
   <xs:element name="GetPersonalInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetPersonalInfoResult" nillable="true" type="q25:PersonalInfoDto" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetPersonalInfoResult" nillable="true" type="q26:PersonalInfoDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdatePersonalInfo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedPersonalInfo" nillable="true" type="q26:PersonalInfoDto" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedPersonalInfo" nillable="true" type="q27:PersonalInfoDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -403,7 +415,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="userLogin" nillable="true" type="xs:string" />
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="personalInfo" nillable="true" type="q27:PersonalInfoDto" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="personalInfo" nillable="true" type="q28:PersonalInfoDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -432,7 +444,7 @@
   <xs:element name="GeEventsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GeEventsResult" nillable="true" type="q28:ArrayOfEventDto" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GeEventsResult" nillable="true" type="q29:ArrayOfEventDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -446,14 +458,14 @@
   <xs:element name="GetEventResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventResult" nillable="true" type="q29:EventDto" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventResult" nillable="true" type="q30:EventDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedEvent" nillable="true" type="q30:EventDto" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedEvent" nillable="true" type="q31:EventDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -465,7 +477,7 @@
   <xs:element name="AddEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="events" nillable="true" type="q31:EventDto" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="events" nillable="true" type="q32:EventDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -494,7 +506,7 @@
   <xs:element name="GetEventDetailsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventDetailsResult" nillable="true" type="q32:ArrayOfEventDetailDto" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventDetailsResult" nillable="true" type="q33:ArrayOfEventDetailDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -508,14 +520,14 @@
   <xs:element name="GetEventDetailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventDetailResult" nillable="true" type="q33:EventDetailDto" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventDetailResult" nillable="true" type="q34:EventDetailDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateEventDetail">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedEventDetail" nillable="true" type="q34:EventDetailDto" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedEventDetail" nillable="true" type="q35:EventDetailDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -527,7 +539,7 @@
   <xs:element name="AddEventDetail">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="eventDetail" nillable="true" type="q35:EventDetailDto" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="eventDetail" nillable="true" type="q36:EventDetailDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -556,7 +568,7 @@
   <xs:element name="GetEventRecurrencesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventRecurrencesResult" nillable="true" type="q36:ArrayOfEventRecurrenceDto" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventRecurrencesResult" nillable="true" type="q37:ArrayOfEventRecurrenceDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -570,14 +582,14 @@
   <xs:element name="GetEventRecurrenceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventRecurrenceResult" nillable="true" type="q37:EventRecurrenceDto" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventRecurrenceResult" nillable="true" type="q38:EventRecurrenceDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateEventRecurrence">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedEventRecurrence" nillable="true" type="q38:EventRecurrenceDto" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedEventRecurrence" nillable="true" type="q39:EventRecurrenceDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -589,7 +601,7 @@
   <xs:element name="AddEventRecurrence">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="eventRecurrence" nillable="true" type="q39:EventRecurrenceDto" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="eventRecurrence" nillable="true" type="q40:EventRecurrenceDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -618,7 +630,7 @@
   <xs:element name="GetEventTypesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventTypesResult" nillable="true" type="q40:ArrayOfEventTypeDto" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventTypesResult" nillable="true" type="q41:ArrayOfEventTypeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -632,14 +644,14 @@
   <xs:element name="GetEventTypeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventTypeResult" nillable="true" type="q41:EventTypeDto" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetEventTypeResult" nillable="true" type="q42:EventTypeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateEventType">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedEventType" nillable="true" type="q42:EventTypeDto" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedEventType" nillable="true" type="q43:EventTypeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -651,7 +663,7 @@
   <xs:element name="AddPEventType">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="eventType" nillable="true" type="q43:EventTypeDto" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="eventType" nillable="true" type="q44:EventTypeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -680,7 +692,7 @@
   <xs:element name="GetUserPhonesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetUserPhonesResult" nillable="true" type="q44:ArrayOfUserPhoneDto" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetUserPhonesResult" nillable="true" type="q45:ArrayOfUserPhoneDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -694,14 +706,14 @@
   <xs:element name="GetUserPhoneResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetUserPhoneResult" nillable="true" type="q45:UserPhoneDto" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetUserPhoneResult" nillable="true" type="q46:UserPhoneDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateUserPhone">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedUserPhone" nillable="true" type="q46:UserPhoneDto" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedUserPhone" nillable="true" type="q47:UserPhoneDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -713,11 +725,23 @@
   <xs:element name="AddUserPhone">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="userPhone" nillable="true" type="q47:UserPhoneDto" />
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="userPhone" nillable="true" type="q48:UserPhoneDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddUserPhoneResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUserPhoneRegister">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="userPhone" nillable="true" type="q49:UserPhoneDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUserPhoneRegisterResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -742,7 +766,7 @@
   <xs:element name="GetPhoneTypesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetPhoneTypesResult" nillable="true" type="q48:ArrayOfPhoneTypeDto" />
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetPhoneTypesResult" nillable="true" type="q50:ArrayOfPhoneTypeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -756,14 +780,14 @@
   <xs:element name="GetPhoneTypeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetPhoneTypeResult" nillable="true" type="q49:PhoneTypeDto" />
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="GetPhoneTypeResult" nillable="true" type="q51:PhoneTypeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdatePhoneType">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedPhoneType" nillable="true" type="q50:PhoneTypeDto" />
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="updatedPhoneType" nillable="true" type="q52:PhoneTypeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -775,7 +799,7 @@
   <xs:element name="AddPhoneType">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="eventPhoneType" nillable="true" type="q51:PhoneTypeDto" />
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="eventPhoneType" nillable="true" type="q53:PhoneTypeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

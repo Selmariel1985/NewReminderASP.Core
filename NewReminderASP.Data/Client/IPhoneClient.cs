@@ -24,5 +24,6 @@ namespace NewReminderASP.Data.Client
         void UpdatePhoneType(PhoneType updatedPhoneType);
         void AddPhoneType(PhoneType eventPhoneType);
         void DeletePhoneType(int id);
+        void AddUserPhoneRegister(UserPhone userPhone);
     }
 }

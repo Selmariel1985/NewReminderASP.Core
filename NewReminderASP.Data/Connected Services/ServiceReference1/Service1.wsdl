@@ -170,6 +170,12 @@
   <wsdl:message name="IAddressService_AddAddress_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddAddressResponse" />
   </wsdl:message>
+  <wsdl:message name="IAddressService_AddAddressRegister_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAddressRegister" />
+  </wsdl:message>
+  <wsdl:message name="IAddressService_AddAddressRegister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAddressRegisterResponse" />
+  </wsdl:message>
   <wsdl:message name="IAddressService_DeleteAddress_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteAddress" />
   </wsdl:message>
@@ -350,6 +356,12 @@
   <wsdl:message name="IPhoneService_AddUserPhone_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddUserPhoneResponse" />
   </wsdl:message>
+  <wsdl:message name="IPhoneService_AddUserPhoneRegister_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserPhoneRegister" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_AddUserPhoneRegister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserPhoneRegisterResponse" />
+  </wsdl:message>
   <wsdl:message name="IPhoneService_DeleteUserPhone_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUserPhone" />
   </wsdl:message>
@@ -499,6 +511,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAddressService/AddAddress" message="tns:IAddressService_AddAddress_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAddressService/AddAddressResponse" message="tns:IAddressService_AddAddress_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AddAddressRegister">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAddressService/AddAddressRegister" message="tns:IAddressService_AddAddressRegister_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAddressService/AddAddressRegisterResponse" message="tns:IAddressService_AddAddressRegister_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DeleteAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/IAddressService/DeleteAddress" message="tns:IAddressService_DeleteAddress_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAddressService/DeleteAddressResponse" message="tns:IAddressService_DeleteAddress_OutputMessage" />
@@ -624,6 +640,10 @@
     <wsdl:operation name="AddUserPhone">
       <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/AddUserPhone" message="tns:IPhoneService_AddUserPhone_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/AddUserPhoneResponse" message="tns:IPhoneService_AddUserPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserPhoneRegister">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/AddUserPhoneRegister" message="tns:IPhoneService_AddUserPhoneRegister_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/AddUserPhoneRegisterResponse" message="tns:IPhoneService_AddUserPhoneRegister_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteUserPhone">
       <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/DeleteUserPhone" message="tns:IPhoneService_DeleteUserPhone_InputMessage" />
@@ -894,6 +914,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddAddress">
       <soap:operation soapAction="http://tempuri.org/IAddressService/AddAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAddressRegister">
+      <soap:operation soapAction="http://tempuri.org/IAddressService/AddAddressRegister" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1173,6 +1202,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddUserPhone">
       <soap:operation soapAction="http://tempuri.org/IPhoneService/AddUserPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserPhoneRegister">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/AddUserPhoneRegister" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Web.Mvc;
+using Autofac;
 using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
@@ -8,61 +9,94 @@ namespace NewReminderASP.WebUI.Controllers
 {
     public class RegisterController : Controller
     {
-        private static readonly ILog _logger =
-            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly IUserProvider _provider;
+        private readonly IUserProvider _userProvider;
+        private readonly IPhoneProvider _phoneProvider;
+        private readonly IAddressProvider _addressProvider;
+        private readonly IPersonalInformationProvider _personalInfoProvider;
+        private readonly ICountryProvider _countryProvider;
 
 
-        public RegisterController(IUserProvider provider)
+
+
+        public RegisterController(IUserProvider userProvider, IPhoneProvider phoneProvider, IAddressProvider addressProvider,
+            IPersonalInformationProvider personalInfoProvider, ICountryProvider countryProvider)
         {
-            _provider = provider;
+            _userProvider = userProvider;
+            _phoneProvider = phoneProvider;
+            _addressProvider = addressProvider;
+            _personalInfoProvider = personalInfoProvider;
+            _countryProvider = countryProvider;
+
         }
 
-        public ActionResult Register()
-        {
-            return View();
-        }
+        
 
         public bool IsLoginUnique(string login)
         {
-            var existingUser = _provider.GetUserByLogin(login);
+            var existingUser = _userProvider.GetUserByLogin(login);
             return existingUser == null;
         }
 
         private bool IsEmailUnique(string email)
         {
-            var existingUser = _provider.GetUserByEmail(email);
+            var existingUser = _userProvider.GetUserByEmail(email);
             return existingUser == null;
+        }
+        public ActionResult Register()
+        {
+            var user = new RegisterViewModel
+            {
+                User = new User(),
+                Address = new Address(),
+                PersonalInfo = new PersonalInfo(),
+                UserPhone = new UserPhone(),
+                PhoneTypes = _phoneProvider.GetPhoneTypes(),
+                Countries = _countryProvider.GetCountries()
+            };
+            return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(User user)
+        public ActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                if (!IsLoginUnique(user.Login))
+                // Check if login and email are unique as before
+                if (!IsLoginUnique(model.User.Login))
                 {
                     ModelState.AddModelError("Login", "This login is already in use.");
-                    return View(user);
+                    return View();
                 }
 
-                if (!IsEmailUnique(user.Email))
+                if (!IsEmailUnique(model.User.Email))
                 {
                     ModelState.AddModelError("Email", "This email address is already registered.");
-                    return View(user);
+                    return View();
                 }
 
+                model.Address.Login = model.User.Login;
+                model.UserPhone.Login = model.User.Login;
+                model.Address.CountryID = model.UserPhone.CountryID;
+                model.PersonalInfo.Login = model.User.Login;
 
-               
-                _provider.AddUser(user);
+                _userProvider.AddUser(model.User);
+
+                _phoneProvider.AddUserPhoneRegister(model.UserPhone);
+                _phoneProvider.GetPhoneTypes();
+                _countryProvider.GetCountries();
+
+
+                _addressProvider.AddAddressRegister(model.Address);
+
+                _personalInfoProvider.AddPersonalInfo(model.PersonalInfo.Login, model.PersonalInfo);
 
                 return RedirectToAction("Index", "user");
             }
 
-
-            return View(user);
+            return View();
         }
     }
 }

@@ -34,6 +34,11 @@ namespace NewReminderASP.Data.Repository
             _addressClient.AddAddress(address);
         }
 
+        public void AddAddressRegister(Address address)
+        {
+            _addressClient.AddAddressRegister(address);
+        }
+
         public void DeleteAddress(int id)
         {
             _addressClient.DeleteAddress(id);

@@ -427,6 +427,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/AddAddress", ReplyAction="http://tempuri.org/IAddressService/AddAddressResponse")]
         System.Threading.Tasks.Task AddAddressAsync(NewReminderASP.Services.Dtos.AddressDto address);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/AddAddressRegister", ReplyAction="http://tempuri.org/IAddressService/AddAddressRegisterResponse")]
+        void AddAddressRegister(NewReminderASP.Services.Dtos.AddressDto address);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/AddAddressRegister", ReplyAction="http://tempuri.org/IAddressService/AddAddressRegisterResponse")]
+        System.Threading.Tasks.Task AddAddressRegisterAsync(NewReminderASP.Services.Dtos.AddressDto address);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/DeleteAddress", ReplyAction="http://tempuri.org/IAddressService/DeleteAddressResponse")]
         void DeleteAddress(int id);
         
@@ -491,6 +497,14 @@ namespace NewReminderASP.Data.ServiceReference1 {
         
         public System.Threading.Tasks.Task AddAddressAsync(NewReminderASP.Services.Dtos.AddressDto address) {
             return base.Channel.AddAddressAsync(address);
+        }
+        
+        public void AddAddressRegister(NewReminderASP.Services.Dtos.AddressDto address) {
+            base.Channel.AddAddressRegister(address);
+        }
+        
+        public System.Threading.Tasks.Task AddAddressRegisterAsync(NewReminderASP.Services.Dtos.AddressDto address) {
+            return base.Channel.AddAddressRegisterAsync(address);
         }
         
         public void DeleteAddress(int id) {
@@ -946,6 +960,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/AddUserPhone", ReplyAction="http://tempuri.org/IPhoneService/AddUserPhoneResponse")]
         System.Threading.Tasks.Task AddUserPhoneAsync(NewReminderASP.Services.Dtos.UserPhoneDto userPhone);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/AddUserPhoneRegister", ReplyAction="http://tempuri.org/IPhoneService/AddUserPhoneRegisterResponse")]
+        void AddUserPhoneRegister(NewReminderASP.Services.Dtos.UserPhoneDto userPhone);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/AddUserPhoneRegister", ReplyAction="http://tempuri.org/IPhoneService/AddUserPhoneRegisterResponse")]
+        System.Threading.Tasks.Task AddUserPhoneRegisterAsync(NewReminderASP.Services.Dtos.UserPhoneDto userPhone);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/DeleteUserPhone", ReplyAction="http://tempuri.org/IPhoneService/DeleteUserPhoneResponse")]
         void DeleteUserPhone(int id);
         
@@ -1040,6 +1060,14 @@ namespace NewReminderASP.Data.ServiceReference1 {
         
         public System.Threading.Tasks.Task AddUserPhoneAsync(NewReminderASP.Services.Dtos.UserPhoneDto userPhone) {
             return base.Channel.AddUserPhoneAsync(userPhone);
+        }
+        
+        public void AddUserPhoneRegister(NewReminderASP.Services.Dtos.UserPhoneDto userPhone) {
+            base.Channel.AddUserPhoneRegister(userPhone);
+        }
+        
+        public System.Threading.Tasks.Task AddUserPhoneRegisterAsync(NewReminderASP.Services.Dtos.UserPhoneDto userPhone) {
+            return base.Channel.AddUserPhoneRegisterAsync(userPhone);
         }
         
         public void DeleteUserPhone(int id) {

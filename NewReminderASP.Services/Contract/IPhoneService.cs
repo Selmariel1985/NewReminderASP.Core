@@ -21,6 +21,9 @@ namespace NewReminderASP.Services.Contract
         void UpdateUserPhone(UserPhoneDto updatedUserPhone);
         [OperationContract]
         void AddUserPhone(UserPhoneDto userPhone);
+
+        [OperationContract]
+        void AddUserPhoneRegister(UserPhoneDto userPhone);
         [OperationContract]
         void DeleteUserPhone(int id);
         [OperationContract]

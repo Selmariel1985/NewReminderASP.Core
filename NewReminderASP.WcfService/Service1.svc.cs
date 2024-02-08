@@ -95,7 +95,7 @@ namespace NewReminderASP.WcfService
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    // Add parameters if your update stored procedure requires them
+                   
                     command.Parameters.AddWithValue("@ID", updatedAddress.ID);
                     command.Parameters.AddWithValue("@Street", updatedAddress.Street);
                     command.Parameters.AddWithValue("@City", updatedAddress.City);
@@ -118,10 +118,32 @@ namespace NewReminderASP.WcfService
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    // Add parameters if the add stored procedure requires them
+                    
                     command.Parameters.AddWithValue("@Street", address.Street);
                     command.Parameters.AddWithValue("@City", address.City);
                     command.Parameters.AddWithValue("@CountryName", address.CountryName);
+                    command.Parameters.AddWithValue("@PostalCode", address.PostalCode);
+                    command.Parameters.AddWithValue("@Description", address.Description);
+                    command.Parameters.AddWithValue("@Login", address.Login);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void AddAddressRegister(AddressDto address)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("AddAddressRegister", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+
+                    command.Parameters.AddWithValue("@Street", address.Street);
+                    command.Parameters.AddWithValue("@City", address.City);
+                    command.Parameters.AddWithValue("@CountryID", address.CountryID);
                     command.Parameters.AddWithValue("@PostalCode", address.PostalCode);
                     command.Parameters.AddWithValue("@Description", address.Description);
                     command.Parameters.AddWithValue("@Login", address.Login);
@@ -443,7 +465,7 @@ namespace NewReminderASP.WcfService
             using (var command = new SqlCommand("AddEventDetail", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-               
+                command.Parameters.AddWithValue("@EventID", eventDetail.EventID);
                 command.Parameters.AddWithValue("@Description", eventDetail.Description);
                 command.Parameters.AddWithValue("@Status", eventDetail.Status);
 
@@ -566,7 +588,7 @@ namespace NewReminderASP.WcfService
             var eventTypes = new List<EventTypeDto>();
 
             using (var connection = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("GetEventType", connection))
+            using (var command = new SqlCommand("GetEventTypes", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
 
@@ -635,7 +657,7 @@ namespace NewReminderASP.WcfService
             using (var command = new SqlCommand("AddEventType", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-               
+                command.Parameters.AddWithValue("@ID", eventType.ID);
                 command.Parameters.AddWithValue("@TypeName", eventType.TypeName);
 
 
@@ -643,8 +665,10 @@ namespace NewReminderASP.WcfService
                 command.ExecuteNonQuery();
             }
         }
-
-        public void DeleteEventType(int id)
+       
+           
+        
+public void DeleteEventType(int id)
         {
             using (var connection = new SqlConnection(connectionString))
             using (var command = new SqlCommand("DeleteEventType", connection))
@@ -865,6 +889,23 @@ namespace NewReminderASP.WcfService
             }
         }
 
+        public void AddUserPhoneRegister(UserPhoneDto userPhone)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("AddUserPhoneRegister", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@Login", userPhone.Login);
+                command.Parameters.AddWithValue("@PhoneNumber", userPhone.PhoneNumber);
+                command.Parameters.AddWithValue("@PhoneTypeID", userPhone.PhoneTypeID);
+                command.Parameters.AddWithValue("@CountryID", userPhone.CountryID);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
         public void DeleteUserPhone(int id)
         {
             using (var connection = new SqlConnection(connectionString))
@@ -883,7 +924,7 @@ namespace NewReminderASP.WcfService
             var phoneTypes = new List<PhoneTypeDto>();
 
             using (var connection = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("GetPhoneTypeDto", connection))
+            using (var command = new SqlCommand("GetPhoneTypes", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
 
@@ -952,7 +993,7 @@ namespace NewReminderASP.WcfService
             using (var command = new SqlCommand("AddPhoneType", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@ID", eventPhoneType.ID);
+               
                 command.Parameters.AddWithValue("@TypeName", eventPhoneType.TypeName);
 
 

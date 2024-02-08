@@ -573,6 +573,10 @@ namespace NewReminderASP.Data.Client
             }
         }
 
+
+
+
+
         public void DeleteEventType(int id)
         {
             using (var connection = new EventServiceClient())

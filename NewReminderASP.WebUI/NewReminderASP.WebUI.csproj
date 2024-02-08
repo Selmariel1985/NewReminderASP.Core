@@ -325,6 +325,26 @@
     <Content Include="Views\Phone\Details.cshtml" />
     <Content Include="Views\Phone\Create.cshtml" />
     <Content Include="Views\Phone\Delete.cshtml" />
+    <Content Include="Views\Phone\GetPhoneType.cshtml" />
+    <Content Include="Views\Phone\DetailsPhoneType.cshtml" />
+    <Content Include="Views\Phone\EditPhoneType.cshtml" />
+    <Content Include="Views\Phone\CreatePhoneType.cshtml" />
+    <Content Include="Views\Phone\DeletePhoneType.cshtml" />
+    <Content Include="Views\Event\GetEventTypes.cshtml" />
+    <Content Include="Views\Event\EditEventTypes.cshtml" />
+    <Content Include="Views\Event\DetailsEventTypes.cshtml" />
+    <Content Include="Views\Event\CreateEventTypes.cshtml" />
+    <Content Include="Views\Event\DeleteEventType.cshtml" />
+    <Content Include="Views\Event\GetEventRecurrences.cshtml" />
+    <Content Include="Views\Event\EditEventRecurrences.cshtml" />
+    <Content Include="Views\Event\DetailsEventRecurrences.cshtml" />
+    <Content Include="Views\Event\CreateEventRecurrences.cshtml" />
+    <Content Include="Views\Event\DeleteEventRecurrence.cshtml" />
+    <Content Include="Views\Event\GetEventDetails.cshtml" />
+    <Content Include="Views\Event\EditEventDetails.cshtml" />
+    <Content Include="Views\Event\DetailsEventDetails.cshtml" />
+    <Content Include="Views\Event\CreateEventDetails.cshtml" />
+    <Content Include="Views\Event\DeleteEventDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NewReminderASP.Core\NewReminderASP.Core.csproj">

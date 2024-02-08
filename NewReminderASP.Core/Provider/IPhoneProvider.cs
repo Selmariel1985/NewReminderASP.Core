@@ -1,4 +1,5 @@
 ﻿using NewReminderASP.Domain.Entities;
+using NewReminderASP.Services.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace NewReminderASP.Core.Provider
 
         void UpdateUserPhone(UserPhone updatedUserPhone);
         void AddUserPhone(UserPhone userPhone);
+        void AddUserPhoneRegister(UserPhone userPhone);
         void DeleteUserPhone(int id);
 
         List<PhoneType> GetPhoneTypes();

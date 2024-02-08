@@ -1,0 +1,47 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.PhoneType>
+
+<style>
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
+<h2>Phones Type</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TypeName</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var phonesTypes in Model)
+            {
+                <tr>
+                    <td>@phonesTypes.ID</td>
+                    <td>@Html.ActionLink(!string.IsNullOrEmpty(phonesTypes.TypeName) ? phonesTypes.TypeName : "Default Name", "DetailsPhoneType", "Phone", new { id = phonesTypes.ID }, null)</td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

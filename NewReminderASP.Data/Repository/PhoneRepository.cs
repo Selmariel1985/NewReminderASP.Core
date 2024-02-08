@@ -36,6 +36,11 @@ namespace NewReminderASP.Data.Repository
             _phoneClient.AddUserPhone(userPhone);
         }
 
+        public void AddUserPhoneRegister(UserPhone userPhone)
+        {
+            _phoneClient.AddUserPhoneRegister(userPhone);
+        }
+
         public void DeleteUserPhone(int id)
         {
             _phoneClient.DeleteUserPhone(id);

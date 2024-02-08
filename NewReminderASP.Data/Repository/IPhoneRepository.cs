@@ -15,6 +15,7 @@ namespace NewReminderASP.Data.Repository
 
         void UpdateUserPhone(UserPhone updatedUserPhone);
         void AddUserPhone(UserPhone userPhone);
+        void AddUserPhoneRegister(UserPhone userPhone);
         void DeleteUserPhone(int id);
 
         List<PhoneType> GetPhoneTypes();
