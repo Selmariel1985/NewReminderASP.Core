@@ -785,7 +785,7 @@ public void DeleteEventType(int id)
         public void DeletePersonalInfo(string login)
         {
             using (var connection = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("DeletePersonalInfoByLogin", connection))
+            using (var command = new SqlCommand("DeletePersonalInfo", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Login", login);

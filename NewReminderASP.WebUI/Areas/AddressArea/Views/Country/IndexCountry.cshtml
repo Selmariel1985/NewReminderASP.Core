@@ -1,0 +1,47 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.Country>
+
+@{
+    ViewBag.Title = "Countries";
+}
+
+<style>
+  
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
+<h2>Countries</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Country Code</th>
+        <th>Phone Code</th>
+        <th>Name</th>
+    </tr>
+    @foreach (var country in Model)
+    {
+        <tr>
+            <td>@country.ID</td>
+            <td>@country.CountryCode</td>
+            <td>@country.PhoneCode</td>
+            <td>@Html.ActionLink(!string.IsNullOrEmpty(country.Name) ? country.Name : "Default Name", "DetailsCountry", "Country", new { id = country.ID }, null)</td>
+        </tr>
+    }
+</table>

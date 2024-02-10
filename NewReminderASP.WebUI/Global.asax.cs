@@ -37,7 +37,7 @@ namespace NewReminderASP.WebUI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             XmlConfigurator.Configure();
         }
-
+        
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {
             if (FormsAuthentication.CookiesSupported)

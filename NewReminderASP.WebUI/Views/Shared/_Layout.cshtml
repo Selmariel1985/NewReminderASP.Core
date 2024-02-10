@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,14 +11,14 @@
         .navbar .nav-link {
             color: white;
             text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-            transition: color 0.3s; 
+            transition: color 0.3s;
         }
 
             .navbar .nav-link:hover {
-                color: #ff5733; 
+                color: #ff5733;
             }
 
-       
+
         .navbar .navbar-brand {
             color: white;
             text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
@@ -27,38 +28,36 @@
             .navbar .navbar-brand:hover {
                 color: #ff5733;
             }
-                 
-
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-    <div class="container">
-        @Html.ActionLink("Reminder", "Index", "User", new { area = "" }, new { @class = "navbar-brand" })
-        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-            <ul class="navbar-nav flex-grow-1">
-                <li>@Html.ActionLink("Index", "Index", "User", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Register", "Register", "Register", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Countries", "Index", "Country", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Addresses", "Index", "Address", new { area = "" }, new { @class = "nav-link" })</li>
-            </ul>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("Reminder", "Index", "User", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Index", "Index", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Register", "Register", "Register", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Countries", "IndexCountry", "Country", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Addresses", "Index", "Address", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
         </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
     </div>
-</nav>
-<div class="container body-content">
-    @RenderBody()
-    <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
-</div>
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
