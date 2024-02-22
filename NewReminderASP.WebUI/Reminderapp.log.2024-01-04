@@ -1,0 +1,17 @@
+2024-01-04 23:31:54,607 INFO NewReminderASP.WebUI.Controllers.UserController - Получен запрос на аутентификацию для пользователя с login: pa
+2024-01-04 23:31:59,080 INFO NewReminderASP.WebUI.Controllers.UserController - Пользователь успешно аутентифицирован
+2024-01-04 23:31:59,080 INFO NewReminderASP.WebUI.Controllers.UserController - Пользователь успешно найден. Создание утверждений (Claims)
+2024-01-04 23:31:59,121 INFO NewReminderASP.WebUI.Controllers.UserController - Пользователь не Admin
+2024-01-04 23:31:59,121 INFO NewReminderASP.WebUI.Controllers.UserController - Метод SomeAction вызван
+2024-01-04 23:35:06,661 INFO NewReminderASP.WebUI.Controllers.UserController - Получен запрос на аутентификацию для пользователя с login: pa
+2024-01-04 23:35:10,881 INFO NewReminderASP.WebUI.Controllers.UserController - Пользователь успешно аутентифицирован
+2024-01-04 23:35:10,881 INFO NewReminderASP.WebUI.Controllers.UserController - Пользователь успешно найден. Создание утверждений (Claims)
+2024-01-04 23:35:10,910 INFO NewReminderASP.WebUI.Controllers.UserController - Пользователь не Admin
+2024-01-04 23:35:10,910 INFO NewReminderASP.WebUI.Controllers.UserController - Метод SomeAction вызван
+2024-01-04 23:41:08,959 INFO NewReminderASP.WebUI.Controllers.UserController - Получен запрос на аутентификацию для пользователя с login: pa
+2024-01-04 23:41:13,141 INFO NewReminderASP.WebUI.Controllers.UserController - Пользователь успешно аутентифицирован
+2024-01-04 23:41:13,141 INFO NewReminderASP.WebUI.Controllers.UserController - Пользователь успешно найден. Создание утверждений (Claims)
+2024-01-04 23:41:13,169 INFO NewReminderASP.WebUI.Controllers.UserController - Пользователь не Admin
+2024-01-04 23:41:13,169 INFO NewReminderASP.WebUI.Controllers.UserController - Метод SomeAction вызван
+2024-01-04 23:41:25,294 INFO NewReminderASP.WebUI.Controllers.UserController - Пользователь не Admin
+2024-01-04 23:41:25,294 INFO NewReminderASP.WebUI.Controllers.UserController - Метод SomeAction вызван

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="/PWfrL7nGpeQwiw/3pDbwMsQ5SQlgZNwcmF+PJXLI5g=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="OJAszWYzt++aajsMMdhwsyV24bwn50u4WOtSf455XZg=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IUserService">
       <properties>
@@ -657,10 +657,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IUserService" contract="ServiceReference1.IUserService" bindingType="basicHttpBinding" address="http://localhost:64859/Service1.svc" bindingConfiguration="BasicHttpBinding_IUserService">
+    <endpoint name="BasicHttpBinding_IUserService" contract="ServiceReference1.IUserService" bindingType="basicHttpBinding" address="http://localhost:1080/Service1.svc" bindingConfiguration="BasicHttpBinding_IUserService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:64859/Service1.svc</serializedValue>
+          <serializedValue>http://localhost:1080/Service1.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -742,10 +742,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="BasicHttpBinding_ICountryService" contract="ServiceReference1.ICountryService" bindingType="basicHttpBinding" address="http://localhost:64859/Service1.svc" bindingConfiguration="BasicHttpBinding_ICountryService">
+    <endpoint name="BasicHttpBinding_ICountryService" contract="ServiceReference1.ICountryService" bindingType="basicHttpBinding" address="http://localhost:1080/Service1.svc" bindingConfiguration="BasicHttpBinding_ICountryService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:64859/Service1.svc</serializedValue>
+          <serializedValue>http://localhost:1080/Service1.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -827,10 +827,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="BasicHttpBinding_IAddressService" contract="ServiceReference1.IAddressService" bindingType="basicHttpBinding" address="http://localhost:64859/Service1.svc" bindingConfiguration="BasicHttpBinding_IAddressService">
+    <endpoint name="BasicHttpBinding_IAddressService" contract="ServiceReference1.IAddressService" bindingType="basicHttpBinding" address="http://localhost:1080/Service1.svc" bindingConfiguration="BasicHttpBinding_IAddressService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:64859/Service1.svc</serializedValue>
+          <serializedValue>http://localhost:1080/Service1.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -912,10 +912,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="BasicHttpBinding_IPersonalInfoService" contract="ServiceReference1.IPersonalInfoService" bindingType="basicHttpBinding" address="http://localhost:64859/Service1.svc" bindingConfiguration="BasicHttpBinding_IPersonalInfoService">
+    <endpoint name="BasicHttpBinding_IPersonalInfoService" contract="ServiceReference1.IPersonalInfoService" bindingType="basicHttpBinding" address="http://localhost:1080/Service1.svc" bindingConfiguration="BasicHttpBinding_IPersonalInfoService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:64859/Service1.svc</serializedValue>
+          <serializedValue>http://localhost:1080/Service1.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -997,10 +997,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="BasicHttpBinding_IEventService" contract="ServiceReference1.IEventService" bindingType="basicHttpBinding" address="http://localhost:64859/Service1.svc" bindingConfiguration="BasicHttpBinding_IEventService">
+    <endpoint name="BasicHttpBinding_IEventService" contract="ServiceReference1.IEventService" bindingType="basicHttpBinding" address="http://localhost:1080/Service1.svc" bindingConfiguration="BasicHttpBinding_IEventService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:64859/Service1.svc</serializedValue>
+          <serializedValue>http://localhost:1080/Service1.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1082,10 +1082,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="BasicHttpBinding_IPhoneService" contract="ServiceReference1.IPhoneService" bindingType="basicHttpBinding" address="http://localhost:64859/Service1.svc" bindingConfiguration="BasicHttpBinding_IPhoneService">
+    <endpoint name="BasicHttpBinding_IPhoneService" contract="ServiceReference1.IPhoneService" bindingType="basicHttpBinding" address="http://localhost:1080/Service1.svc" bindingConfiguration="BasicHttpBinding_IPhoneService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:64859/Service1.svc</serializedValue>
+          <serializedValue>http://localhost:1080/Service1.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
