@@ -11,7 +11,7 @@ namespace NewReminderASP.Data.Client
         Address GetAddress(int id);
 
 
-        void UpdateCountry(Address updatedAddress);
+        void UpdateAddress(Address updatedAddress);
 
         void AddAddress(Address newAddress);
         void AddAddressRegister(Address address);

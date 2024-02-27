@@ -12,7 +12,7 @@ namespace NewReminderASP.Data.Repository
         Address GetAddress(int id);
 
 
-        void UpdateCountry(Address updatedAddress);
+        void UpdateAddress(Address updatedAddress);
 
         void AddAddress(Address address);
         void AddAddressRegister(Address address);

@@ -24,9 +24,9 @@ namespace NewReminderASP.Core.Provider
             return _addressRepository.GetAddress(id);
         }
 
-        public void UpdateCountry(Address updatedAddress)
+        public void UpdateAddress(Address updatedAddress)
         {
-            _addressRepository.UpdateCountry(updatedAddress);
+            _addressRepository.UpdateAddress(updatedAddress);
         }
 
         public void AddAddress(Address address)

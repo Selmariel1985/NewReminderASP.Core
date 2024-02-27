@@ -90,7 +90,7 @@ namespace NewReminderASP.Data.Client
         }
 
 
-        public void UpdateCountry(Address updateAddress)
+        public void UpdateAddress(Address updateAddress)
         {
             using (var connection = new AddressServiceClient())
             {

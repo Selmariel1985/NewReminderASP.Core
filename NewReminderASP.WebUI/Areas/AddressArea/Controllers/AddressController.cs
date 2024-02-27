@@ -26,30 +26,30 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 
         public ActionResult Details(int id)
         {
-            var addreess = _provider.GetAddress(id);
-            if (addreess == null) return HttpNotFound();
-            return View(addreess);
+            var address = _provider.GetAddress(id);
+            if (address == null) return HttpNotFound();
+            return View(address);
         }
 
         public ActionResult Edit(int id)
         {
-            var addreess = _provider.GetAddress(id);
-            if (addreess == null) return HttpNotFound();
-            return View(addreess);
+            var address = _provider.GetAddress(id);
+            if (address == null) return HttpNotFound();
+            return View(address);
         }
 
         // POST: User/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Address addreess)
+        public ActionResult Edit(Address address)
         {
             if (ModelState.IsValid)
             {
-                _provider.UpdateCountry(addreess);
+                _provider.UpdateAddress(address);
                 return RedirectToAction("Index");
             }
 
-            return View(addreess);
+            return View(address);
         }
 
         public ActionResult Create()
@@ -60,22 +60,22 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Address addreess)
+        public ActionResult Create(Address address)
         {
             if (ModelState.IsValid)
             {
-                _provider.AddAddress(addreess);
+                _provider.AddAddress(address);
                 return RedirectToAction("Index");
             }
 
-            return View(addreess);
+            return View(address);
         }
 
         public ActionResult Delete(int id)
         {
-            var addreess = _provider.GetAddress(id);
-            if (addreess == null) return HttpNotFound();
-            return View(addreess);
+            var address = _provider.GetAddress(id);
+            if (address == null) return HttpNotFound();
+            return View(address);
         }
 
 
@@ -88,17 +88,17 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            if (!filterContext.ExceptionHandled)
-            {
-                _logger.Error("An unhandled exception occurred", filterContext.Exception);
-                filterContext.Result = new ViewResult
-                {
-                    ViewName = "Error"
-                };
-                filterContext.ExceptionHandled = true;
-            }
-        }
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    if (!filterContext.ExceptionHandled)
+        //    {
+        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
+        //        filterContext.Result = new ViewResult
+        //        {
+        //            ViewName = "Error"
+        //        };
+        //        filterContext.ExceptionHandled = true;
+        //    }
+        //}
     }
 }

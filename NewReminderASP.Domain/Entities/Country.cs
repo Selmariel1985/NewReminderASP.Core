@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace NewReminderASP.Domain.Entities
 {
@@ -9,7 +10,7 @@ namespace NewReminderASP.Domain.Entities
         public string CountryCode { get; set; }
 
         public string PhoneCode { get; set; }
-
+     
         public string Name { get; set; }
         public virtual ICollection<Address> Addresses { get; set; }
     }
