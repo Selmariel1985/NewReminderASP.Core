@@ -22,7 +22,7 @@ namespace NewReminderASP.Services.Contract
 
         [OperationContract]
         void AddAddressRegister(AddressDto address);
-            
+
         [OperationContract]
         void DeleteAddress(int id);
     }

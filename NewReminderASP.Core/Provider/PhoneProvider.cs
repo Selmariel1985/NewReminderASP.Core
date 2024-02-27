@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NewReminderASP.Data.Repository;
 using NewReminderASP.Domain.Entities;
 
@@ -11,6 +8,7 @@ namespace NewReminderASP.Core.Provider
     public class PhoneProvider : IPhoneProvider
     {
         private readonly IPhoneRepository _phoneRepository;
+
         public PhoneProvider(IPhoneRepository phoneRepository)
         {
             _phoneRepository = phoneRepository;
@@ -72,4 +70,3 @@ namespace NewReminderASP.Core.Provider
         }
     }
 }
-

@@ -106,7 +106,5 @@ namespace NewReminderASP.Data.Repository
         {
             _userClient.AddUserRoleNormal(userLogin, roleName);
         }
-
-        
     }
 }

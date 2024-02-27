@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using log4net;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
@@ -12,54 +9,50 @@ namespace NewReminderASP.Data.Client
 {
     public class PhoneClient : IPhoneClient
     {
-       
-
         public List<UserPhone> GetUserPhones()
         {
-          
-            
-                var userPhones = new List<UserPhone>();
+            var userPhones = new List<UserPhone>();
 
-                using (var connection = new PhoneServiceClient())
+            using (var connection = new PhoneServiceClient())
+            {
+                try
                 {
-                    try
-                    {
-                        connection.Open();
+                    connection.Open();
 
-                        var result = connection.GetUserPhones();
+                    var result = connection.GetUserPhones();
 
-                        if (result != null)
+                    if (result != null)
+                        foreach (var userPhoneDto in result)
                         {
-                            foreach (var userPhoneDto in result)
+                            var userPhone = new UserPhone
                             {
-                                var userPhone = new UserPhone
-                                {
-                                    ID = userPhoneDto.ID,
-                                    Login = userPhoneDto.Login,
-                                    PhoneNumber = userPhoneDto.PhoneNumber,
-                                    PhoneTypes = userPhoneDto.PhoneType,
-                                    CountryName = userPhoneDto.CountryName
+                                ID = userPhoneDto.ID,
+                                Login = userPhoneDto.Login,
+                                PhoneNumber = userPhoneDto.PhoneNumber,
+                                PhoneTypes = userPhoneDto.PhoneType,
+                                CountryName = userPhoneDto.CountryName
+                            };
 
-                                };
-
-                                userPhones.Add(userPhone);
-                            }
+                            userPhones.Add(userPhone);
                         }
 
-                        connection.Close();
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        throw;
-                    }
+                    connection.Close();
                 }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
 
-                return userPhones;
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
+                    throw;
+                }
             }
 
+            return userPhones;
+        }
 
-            public UserPhone GetUserPhone(int id)
+
+        public UserPhone GetUserPhone(int id)
         {
             UserPhone userPhone = null;
 
@@ -86,6 +79,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -103,7 +99,6 @@ namespace NewReminderASP.Data.Client
 
                     connection.UpdateUserPhone(new UserPhoneDto
                     {
-
                         ID = updatedUserPhone.ID,
                         Login = updatedUserPhone.Login,
                         PhoneNumber = updatedUserPhone.PhoneNumber,
@@ -116,6 +111,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -143,10 +141,14 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
         }
+
         public void AddUserPhoneRegister(UserPhone userPhone)
         {
             using (var connection = new PhoneServiceClient())
@@ -169,10 +171,14 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
         }
+
         public void DeleteUserPhone(int id)
         {
             using (var connection = new PhoneServiceClient())
@@ -188,6 +194,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -212,7 +221,6 @@ namespace NewReminderASP.Data.Client
                                 {
                                     ID = phoneType.ID,
                                     TypeName = phoneType.TypeName
-
                                 });
 
                     connection.Close();
@@ -220,6 +228,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -251,6 +262,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -268,7 +282,6 @@ namespace NewReminderASP.Data.Client
 
                     connection.UpdatePhoneType(new PhoneTypeDto
                     {
-
                         ID = updatedPhoneType.ID,
                         TypeName = updatedPhoneType.TypeName
                     });
@@ -278,6 +291,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -293,7 +309,6 @@ namespace NewReminderASP.Data.Client
 
                     connection.AddPhoneType(new PhoneTypeDto
                     {
-                       
                         TypeName = eventPhoneType.TypeName
                     });
 
@@ -302,6 +317,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -322,11 +340,12 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
         }
-
-       
     }
 }

@@ -349,6 +349,13 @@
     <Content Include="Areas\AccountsArea\Views\_ViewStart.cshtml" />
     <Content Include="Areas\RegisterArea\Views\_ViewStart.cshtml" />
     <Content Include="Areas\RegisterArea\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\RegisterArea\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\PersonInfoArea\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\AccountsArea\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\AddressArea\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\ContactsArea\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\EventsArea\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\LoginArea\Views\Shared\Error.cshtml" />
     <None Include="packages.config" />
     <Content Include="Reminderapp.log" />
     <Content Include="Areas\AccountsArea\Views\User\SomeAction.cshtml" />

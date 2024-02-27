@@ -15,7 +15,7 @@ namespace NewReminderASP.Services.Dtos
 
         [DataMember] public int CountryID { get; set; }
         [DataMember] public string Login { get; set; }
-       
+
         [DataMember] public string PhoneType { get; set; }
         [DataMember] public string CountryName { get; set; }
     }

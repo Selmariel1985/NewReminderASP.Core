@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using log4net;
 using Microsoft.Extensions.Caching.Memory;
-using NewReminderASP.Data.Client;
 using NewReminderASP.Data.Repository;
 using NewReminderASP.Domain.Entities;
 
@@ -16,7 +16,7 @@ namespace NewReminderASP.Core.Provider
         public UserProvider(IUserRepository userRepository, IMemoryCache cache)
         {
             _userRepository = userRepository;
-            _cache = cache; // Внедрение зависимости IMemoryCache
+            _cache = cache;
         }
 
         public List<User> GetUsers()
@@ -31,7 +31,24 @@ namespace NewReminderASP.Core.Provider
 
         public User GetUserByLogin(string login)
         {
-            return _userRepository.GetUserByLogin(login);
+            try
+            {
+                var cacheKey = "user_" + login;
+
+                if (_cache.TryGetValue(cacheKey,
+                        out User cachedUser)) return cachedUser; // Return user from cache if found
+
+                var user = _userRepository.GetUserByLogin(login);
+                if (user != null) _cache.Set(cacheKey, user, TimeSpan.FromMinutes(5));
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred while fetching user by login", ex);
+                throw;
+            }
         }
 
         public User GetUserByEmail(string email)
@@ -61,25 +78,7 @@ namespace NewReminderASP.Core.Provider
 
         public User GetUserByPasswordAndLogin(string password, string login)
         {
-            var cacheKey = "user_" + login + "_" + password;
-
-            if (_cache.TryGetValue(cacheKey, out User cachedUser))
-            {
-                // Check if cached user data is still valid, refresh if necessary
-                var updatedUser = _userRepository.GetUserByPasswordAndLogin(password, login);
-                if (updatedUser != null &&
-                    updatedUser.Version == cachedUser.Version) return cachedUser; // Return user from cache if found
-            }
-
-            var user = _userRepository.GetUserByPasswordAndLogin(password, login);
-            if (user != null)
-            {
-                // Add a version number to the cache key to prevent stale data
-                cacheKey = "user_" + login + "_" + password + "_" + user.Version;
-                _cache.Set(cacheKey, user, TimeSpan.FromMinutes(5)); // Cache the user data
-            }
-
-            return user; // Return the user from the repository
+            return _userRepository.GetUserByPasswordAndLogin(password, login);
         }
 
 
@@ -129,8 +128,5 @@ namespace NewReminderASP.Core.Provider
         {
             _userRepository.AddUserRoleNormal(userLogin, roleName);
         }
-
-       
-        
     }
 }

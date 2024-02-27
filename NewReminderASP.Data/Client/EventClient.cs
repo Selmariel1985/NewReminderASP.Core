@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using log4net;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
@@ -17,7 +15,6 @@ namespace NewReminderASP.Data.Client
 
             using (var connection = new EventServiceClient())
             {
-
                 try
                 {
                     connection.Open();
@@ -25,9 +22,7 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GeEvents();
 
                     if (result != null)
-                    {
                         foreach (var eventss in result)
-                        {
                             events.Add(new Event
                             {
                                 ID = eventss.ID,
@@ -39,14 +34,15 @@ namespace NewReminderASP.Data.Client
                                 Recurrence = eventss.Recurrence,
                                 Reminders = eventss.Reminders
                             });
-                        }
-                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -67,7 +63,6 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEvent(Id);
 
                     if (result != null)
-                    {
                         events = new Event
                         {
                             ID = result.ID,
@@ -79,13 +74,15 @@ namespace NewReminderASP.Data.Client
                             Recurrence = result.Recurrence,
                             Reminders = result.Reminders
                         };
-                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -118,6 +115,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -133,7 +133,6 @@ namespace NewReminderASP.Data.Client
 
                     connection.AddEvent(new EventDto
                     {
-                        
                         Login = events.Login,
                         EventType = events.EventTypes,
                         Title = events.Title,
@@ -148,6 +147,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -168,6 +170,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -179,7 +184,6 @@ namespace NewReminderASP.Data.Client
 
             using (var connection = new EventServiceClient())
             {
-
                 try
                 {
                     connection.Open();
@@ -187,23 +191,22 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEventDetails();
 
                     if (result != null)
-                    {
                         foreach (var eventDetail in result)
-                        {
                             eventDetails.Add(new EventDetail
                             {
                                 EventID = eventDetail.EventID,
                                 Description = eventDetail.Description,
                                 Status = eventDetail.Status
                             });
-                        }
-                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -224,20 +227,21 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEventDetail(eventId);
 
                     if (result != null)
-                    {
                         eventDetail = new EventDetail
                         {
                             EventID = result.EventID,
                             Description = result.Description,
                             Status = result.Status
                         };
-                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -265,10 +269,12 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
-
         }
 
         public void AddEventDetail(EventDetail eventDetail)
@@ -291,6 +297,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -311,6 +320,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -322,7 +334,6 @@ namespace NewReminderASP.Data.Client
 
             using (var connection = new EventServiceClient())
             {
-
                 try
                 {
                     connection.Open();
@@ -330,22 +341,21 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEventRecurrences();
 
                     if (result != null)
-                    {
                         foreach (var eventRecurrence in result)
-                        {
                             eventRecurrences.Add(new EventRecurrence
                             {
                                 ID = eventRecurrence.ID,
                                 RecurrenceType = eventRecurrence.RecurrenceType
                             });
-                        }
-                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -366,19 +376,20 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEventRecurrence(Id);
 
                     if (result != null)
-                    {
                         eventRecurrence = new EventRecurrence
                         {
                             ID = result.ID,
                             RecurrenceType = result.RecurrenceType
                         };
-                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -405,6 +416,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -429,6 +443,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -449,6 +466,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -460,7 +480,6 @@ namespace NewReminderASP.Data.Client
 
             using (var connection = new EventServiceClient())
             {
-
                 try
                 {
                     connection.Open();
@@ -468,22 +487,21 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEventTypes();
 
                     if (result != null)
-                    {
                         foreach (var eventType in result)
-                        {
                             eventTypes.Add(new EventType
                             {
                                 ID = eventType.ID,
                                 TypeName = eventType.TypeName
                             });
-                        }
-                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -504,19 +522,20 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEventType(Id);
 
                     if (result != null)
-                    {
                         eventType = new EventType
                         {
                             ID = result.ID,
                             TypeName = result.TypeName
                         };
-                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -543,6 +562,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -558,7 +580,6 @@ namespace NewReminderASP.Data.Client
 
                     connection.AddPEventType(new EventTypeDto
                     {
-
                         ID = eventType.ID,
                         TypeName = eventType.TypeName
                     });
@@ -568,13 +589,13 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
         }
-
-
-
 
 
         public void DeleteEventType(int id)
@@ -592,6 +613,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }

@@ -21,9 +21,5 @@ namespace NewReminderASP.Services.Dtos
 
         [DataMember] public int UserID { get; set; }
         [DataMember] public string Login { get; set; }
-
-
-
-
     }
 }

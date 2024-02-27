@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NewReminderASP.Data.Client;
 using NewReminderASP.Domain.Entities;
 
@@ -34,7 +31,7 @@ namespace NewReminderASP.Data.Repository
 
         public void AddPersonalInfo(string userLogin, PersonalInfo personalInfo)
         {
-            _personalInformationClient.AddPersonalInfo( userLogin,  personalInfo);
+            _personalInformationClient.AddPersonalInfo(userLogin, personalInfo);
         }
 
         public void DeletePersonalInfo(string login)

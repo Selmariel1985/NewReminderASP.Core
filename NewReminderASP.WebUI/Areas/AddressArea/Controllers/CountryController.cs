@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Reflection;
+using System.Web.Mvc;
+using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
 
@@ -6,6 +8,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 {
     public class CountryController : Controller
     {
+        private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly ICountryProvider _provider;
 
         public CountryController(ICountryProvider provider)
@@ -42,13 +45,13 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             if (ModelState.IsValid)
             {
                 _provider.UpdateCountry(country);
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexCountry");
             }
 
             return View(country);
         }
 
-        public ActionResult CreatCountry()
+        public ActionResult CreateCountry()
         {
             return View();
         }
@@ -61,7 +64,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             if (ModelState.IsValid)
             {
                 _provider.AddCountry(country);
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexCountry");
             }
 
             return View(country);
@@ -81,7 +84,20 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             _provider.DeleteCountry(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexCountry");
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
         }
     }
 }

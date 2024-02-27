@@ -1,10 +1,5 @@
-﻿using NewReminderASP.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Services.Contract
@@ -20,8 +15,10 @@ namespace NewReminderASP.Services.Contract
 
         [OperationContract]
         void UpdateEvent(EventDto updatedEvent);
+
         [OperationContract]
         void AddEvent(EventDto events);
+
         [OperationContract]
         void DeleteEvent(int id);
 
@@ -33,8 +30,10 @@ namespace NewReminderASP.Services.Contract
 
         [OperationContract]
         void UpdateEventDetail(EventDetailDto updatedEventDetail);
+
         [OperationContract]
         void AddEventDetail(EventDetailDto eventDetail);
+
         [OperationContract]
         void DeleteEventDetail(int eventId);
 
@@ -46,8 +45,10 @@ namespace NewReminderASP.Services.Contract
 
         [OperationContract]
         void UpdateEventRecurrence(EventRecurrenceDto updatedEventRecurrence);
+
         [OperationContract]
         void AddEventRecurrence(EventRecurrenceDto eventRecurrence);
+
         [OperationContract]
         void DeleteEventRecurrence(int id);
 
@@ -59,8 +60,10 @@ namespace NewReminderASP.Services.Contract
 
         [OperationContract]
         void UpdateEventType(EventTypeDto updatedEventType);
+
         [OperationContract]
         void AddPEventType(EventTypeDto eventType);
+
         [OperationContract]
         void DeleteEventType(int id);
     }

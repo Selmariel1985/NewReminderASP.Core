@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using log4net;
 using NewReminderASP.Data.Client;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
@@ -35,6 +36,9 @@ public class CountryClient : ICountryClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -69,6 +73,9 @@ public class CountryClient : ICountryClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -97,6 +104,9 @@ public class CountryClient : ICountryClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -122,6 +132,9 @@ public class CountryClient : ICountryClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -142,6 +155,9 @@ public class CountryClient : ICountryClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }

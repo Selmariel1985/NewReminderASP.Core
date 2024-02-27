@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using log4net;
 using NewReminderASP.Data.Client;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
@@ -31,6 +32,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -57,6 +61,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -72,7 +79,7 @@ public class UserClient : IUserClient
             {
                 connection.Open();
 
-                var result = connection.GetUsers(); 
+                var result = connection.GetUsers();
 
                 if (result != null)
                     foreach (var userDto in result)
@@ -85,10 +92,10 @@ public class UserClient : IUserClient
                             Email = userDto.Email,
                             UserRoles = userDto.Roles.Select(r =>
                                 new
-                                    UserRole 
+                                    UserRole
                                     {
                                         User = new User { Id = userDto.Id },
-                                        Role 
+                                        Role
                                             = new Role { Name = r }
                                     }).ToList()
                         };
@@ -100,6 +107,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -128,10 +138,10 @@ public class UserClient : IUserClient
                         Password = result.Password,
                         UserRoles = result.Roles.Select(r =>
                             new
-                                UserRole 
+                                UserRole
                                 {
-                                    User = new User { Id = result.Id }, 
-                                    Role = new Role { Name = r } 
+                                    User = new User { Id = result.Id },
+                                    Role = new Role { Name = r }
                                 }).ToList()
                     };
 
@@ -140,13 +150,16 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
 
         return user;
     }
-   
+
     public User GetUserByPasswordAndLogin(string password, string login)
     {
         User user = null;
@@ -168,11 +181,11 @@ public class UserClient : IUserClient
                         Password = result.Password,
                         UserRoles = result.Roles.Select(r =>
                             new
-                                UserRole 
+                                UserRole
                                 {
                                     User = new User { Id = result.Id },
-                                    Role 
-                                        = new Role { Name = r } 
+                                    Role
+                                        = new Role { Name = r }
                                 }).ToList()
                     };
 
@@ -181,6 +194,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -213,6 +229,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -244,6 +263,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -276,16 +298,15 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
 
         return allRoles;
     }
-
-   
-
-
 
 
     public UserRole GetUserRoles(int userId)
@@ -312,6 +333,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -338,6 +362,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -364,11 +391,11 @@ public class UserClient : IUserClient
                         Password = result.Password,
                         UserRoles = result.Roles.Select(r =>
                             new
-                                UserRole 
+                                UserRole
                                 {
                                     User = new User { Id = result.Id },
-                                    Role 
-                                        = new Role { Name = r } 
+                                    Role
+                                        = new Role { Name = r }
                                 }).ToList()
                     };
 
@@ -377,6 +404,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -409,12 +439,16 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
 
         return user;
     }
+
     public void AddUser(User user)
     {
         using (var connection = new UserServiceClient())
@@ -436,10 +470,14 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
     }
+
     public void UpdateUser(User updatedUser)
     {
         using (var connection = new UserServiceClient())
@@ -461,13 +499,13 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
     }
-
-
-    
 
 
     public void DeleteUser(int id)
@@ -485,6 +523,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -515,6 +556,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -536,6 +580,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }
@@ -554,6 +601,9 @@ public class UserClient : IUserClient
             catch (Exception e)
             {
                 Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
                 throw;
             }
         }

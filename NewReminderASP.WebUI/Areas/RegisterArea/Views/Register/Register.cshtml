@@ -128,20 +128,21 @@
         </div>
     </div>
 
-    <<div class="form-group">
+    <div class="form-group">
         @Html.LabelFor(model => model.UserPhone.PhoneTypeID, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.UserPhone.PhoneTypeID, new SelectList(Model.PhoneTypes, "ID", "TypeName"), "Select Phone Type", new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.UserPhone.PhoneTypeID, "", new { @class = "text-danger" })
         </div>
     </div>
-     <div class="form-group">
-         @Html.LabelFor(model => model.UserPhone.CountryID, htmlAttributes: new { @class = "control-label col-md-2" })
-         <div class="col-md-10">
-             @Html.DropDownListFor(model => model.UserPhone.CountryID, new SelectList(Model.Countries, "ID", "Name"), "Select Phone Type", new { @class = "form-control" })
-             @Html.ValidationMessageFor(model => model.UserPhone.CountryID, "", new { @class = "text-danger" })
-         </div>
-         </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserPhone.CountryID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.UserPhone.CountryID, new SelectList(Model.Countries, "ID", "Name"), "Select Phone Type", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UserPhone.CountryID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
          <div class="form-group">
              @Html.LabelFor(model => model.Address.Street, htmlAttributes: new { @class = "col-md-2 control-label" })
              <div class="col-md-10">

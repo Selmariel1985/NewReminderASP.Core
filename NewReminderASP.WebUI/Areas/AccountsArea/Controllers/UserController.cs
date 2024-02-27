@@ -60,13 +60,22 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
         public ActionResult Index()
         {
-            var users = _provider.GetUsers();
+            try
+            {
+                var users = _provider.GetUsers();
 
 
-            var currentUser = HttpContext.User;
+                var currentUser = HttpContext.User;
 
 
-            return View( new Tuple<IEnumerable<User>, ClaimsPrincipal>(users, (ClaimsPrincipal)currentUser));
+                return View(new Tuple<IEnumerable<User>, ClaimsPrincipal>(users, (ClaimsPrincipal)currentUser));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                _logger.Error("An error occurred in Index()", ex);
+                return View("Error");
+            }
         }
 
 
@@ -87,13 +96,23 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
         // POST: User/Edit/5
         [HttpPost]
-        
         public ActionResult Edit(User user)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _provider.UpdateUser(user);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _provider.UpdateUser(user);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                _logger.Error("An error occurred in Index()", ex);
+
+
+                return View("Error");
             }
 
             return View(user);
@@ -109,14 +128,26 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(User user)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _provider.AddUser(user);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _provider.AddUser(user);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                _logger.Error("An error occurred in Index()", ex);
+
+
+                return View("Error");
             }
 
             return View(user);
         }
+
         public ActionResult Delete(int id)
         {
             var user = _provider.GetUser(id);
@@ -147,11 +178,14 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             var userRoles = _provider.GetUsersRoles();
             return View(userRoles);
         }
-       
+
 
         public ActionResult CreateUserRoleById()
         {
-            return View();
+            var model = new UserRole();
+            model.Users = _provider.GetUsers();
+            model.Roles = _provider.GetRoles();
+            return View(model);
         }
 
 
@@ -162,6 +196,10 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             if (ModelState.IsValid)
             {
                 _provider.AddUserRole(userRole); // Assuming userRole contains UserId, RoleId, and Roles
+                userRole.Users = _provider.GetUsers(); // Example method to fetch all users from the database
+                userRole.Roles = _provider.GetRoles(); // Example method to fetch all roles from the database
+
+
                 return RedirectToAction("Index");
             }
 
@@ -179,12 +217,14 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
         {
             if (ModelState.IsValid)
             {
-                _provider.AddUserRoleNormal(userLogin, roleName); // Assuming userRole contains UserId, RoleId, and Roles
+                _provider.AddUserRoleNormal(userLogin,
+                    roleName); // Assuming userRole contains UserId, RoleId, and Roles
+
+
                 return RedirectToAction("Index");
             }
 
             return View();
         }
-
     }
 }

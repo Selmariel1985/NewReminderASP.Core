@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Web.Mvc;
 using log4net;
 using NewReminderASP.Core.Provider;
@@ -10,18 +11,27 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IPersonalInformationProvider _provider;
+        private readonly IUserProvider _userProvider;
 
-
-        public InfoController(IPersonalInformationProvider provider)
+        public InfoController(IPersonalInformationProvider provider, IUserProvider userProvider)
         {
             _provider = provider;
+            _userProvider = userProvider;
         }
 
 
         public ActionResult Index()
         {
-            var tt = _provider.GetPersonalInfos();
-            return View(tt);
+            try
+            {
+                var tt = _provider.GetPersonalInfos();
+                return View(tt);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Error fetching personal information", ex);
+                return View("Error");
+            }
         }
 
         public ActionResult Edit(string login)
@@ -41,8 +51,10 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
                 _provider.UpdatePersonalInfo(personalInfo);
                 return RedirectToAction("Index");
             }
-
+          
             return View(personalInfo);
+
+           
         }
         public ActionResult Details(string login)
         {
@@ -50,9 +62,15 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             if (personalInfo == null) return HttpNotFound();
             return View(personalInfo);
         }
+       
+
+
         public ActionResult Create()
         {
-            return View(new PersonalInfo());
+            var model = new PersonalInfo();
+            model.Users = _userProvider.GetUsers();
+         
+            return View(model);
         }
 
 
@@ -63,6 +81,7 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             if (ModelState.IsValid)
             {
                 _provider.AddPersonalInfo(userLogin, personalInfo);
+                personalInfo.Users = _userProvider.GetUsers();
                 return RedirectToAction("Index");
             }
 
@@ -82,8 +101,29 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string login)
         {
-            _provider.DeletePersonalInfo(login);
-            return RedirectToAction("Index");
+            try
+            {
+                _provider.DeletePersonalInfo(login);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Error deleting personal information", ex);
+                ModelState.AddModelError(string.Empty, "Ошибка при удалении персональной информации.");
+                return View(_provider.GetPersonalInfo(login));
+            }
+        }
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
         }
     }
 }

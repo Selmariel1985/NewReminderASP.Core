@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Reflection;
+using System.Web.Mvc;
+using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
 
@@ -7,6 +9,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
     [Authorize(Roles = "Admin")]
     public class AddressController : Controller
     {
+        private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IAddressProvider _provider;
 
         public AddressController(IAddressProvider provider)
@@ -83,6 +86,19 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
         {
             _provider.DeleteAddress(id);
             return RedirectToAction("Index");
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
         }
     }
 }

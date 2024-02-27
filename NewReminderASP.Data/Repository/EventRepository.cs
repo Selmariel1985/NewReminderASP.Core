@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NewReminderASP.Data.Client;
 using NewReminderASP.Domain.Entities;
 
@@ -16,6 +13,7 @@ namespace NewReminderASP.Data.Repository
         {
             _eventClient = eventClient;
         }
+
         public List<Event> GeEvents()
         {
             return _eventClient.GeEvents().ToList();

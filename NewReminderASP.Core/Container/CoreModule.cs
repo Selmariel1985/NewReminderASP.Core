@@ -9,11 +9,10 @@ namespace NewReminderASP.Core.Container
         {
             builder.RegisterType<UserProvider>().As<IUserProvider>();
             builder.RegisterType<CountryProvider>().As<ICountryProvider>();
-            builder.RegisterType<AddressProvider>().As<IAddressProvider>(); 
+            builder.RegisterType<AddressProvider>().As<IAddressProvider>();
             builder.RegisterType<PersonalInformationProvider>().As<IPersonalInformationProvider>();
             builder.RegisterType<EventProvider>().As<IEventProvider>();
             builder.RegisterType<PhoneProvider>().As<IPhoneProvider>();
-
         }
     }
 }

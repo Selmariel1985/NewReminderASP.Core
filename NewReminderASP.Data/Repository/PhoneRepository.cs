@@ -1,16 +1,14 @@
-﻿using NewReminderASP.Domain.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NewReminderASP.Data.Client;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.Data.Repository
 {
     public class PhoneRepository : IPhoneRepository
     {
         private readonly IPhoneClient _phoneClient;
+
         public PhoneRepository(IPhoneClient phoneClient)
         {
             _phoneClient = phoneClient;

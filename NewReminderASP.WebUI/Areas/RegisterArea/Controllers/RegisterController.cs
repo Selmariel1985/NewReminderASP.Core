@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Web.Mvc;
 using Autofac;
 using log4net;
@@ -9,7 +10,7 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
 {
     [RouteArea("RegisterArea")]
     [RoutePrefix("Register")]
-    [AllowAnonymous]
+    
     public class RegisterController : Controller
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -65,41 +66,68 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!IsLoginUnique(model.User.Login))
             {
-                // Check if login and email are unique as before
-                if (!IsLoginUnique(model.User.Login))
-                {
-                    ModelState.AddModelError("Login", "This login is already in use.");
-                    return View();
-                }
-
-                if (!IsEmailUnique(model.User.Email))
-                {
-                    ModelState.AddModelError("Email", "This email address is already registered.");
-                    return View();
-                }
-
-                model.Address.Login = model.User.Login;
-                model.UserPhone.Login = model.User.Login;
-                model.Address.CountryID = model.UserPhone.CountryID;
-                model.PersonalInfo.Login = model.User.Login;
-
-                _userProvider.AddUser(model.User);
-
-                _phoneProvider.AddUserPhoneRegister(model.UserPhone);
-                _phoneProvider.GetPhoneTypes();
-                _countryProvider.GetCountries();
-
-
-                _addressProvider.AddAddressRegister(model.Address);
-
-                _personalInfoProvider.AddPersonalInfo(model.PersonalInfo.Login, model.PersonalInfo);
-
-                return RedirectToAction("Index", "user", new { area = "AccountsArea" });
+                ModelState.AddModelError("User.Login", "This login is already in use.");
             }
 
-            return View();
+            if (!IsEmailUnique(model.User.Email))
+            {
+                ModelState.AddModelError("User.Email", "This email address is already registered.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                var user = new RegisterViewModel
+                {
+                    User = model.User,
+                    Address = model.Address,
+                    PersonalInfo = model.PersonalInfo,
+                    UserPhone = model.UserPhone,
+                    PhoneTypes = _phoneProvider.GetPhoneTypes(),
+                    Countries = _countryProvider.GetCountries()
+                };
+                return View(user);
+            }
+
+            try
+            {
+                _userProvider.AddUser(model.User);
+                _phoneProvider.AddUserPhoneRegister(model.UserPhone);
+                _addressProvider.AddAddressRegister(model.Address);
+                _personalInfoProvider.AddPersonalInfo(model.PersonalInfo.Login, model.PersonalInfo);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("An error occurred while registering new user", ex);
+                ModelState.AddModelError("", "An error occurred while processing your request. Please try again later.");
+                
+                var user = new RegisterViewModel
+                {
+                    User = model.User,
+                    Address = model.Address,
+                    PersonalInfo = model.PersonalInfo,
+                    UserPhone = model.UserPhone,
+                    PhoneTypes = _phoneProvider.GetPhoneTypes(),
+                    Countries = _countryProvider.GetCountries()
+                };
+                return View("Error");
+            }
+
+            return RedirectToAction("Index", "user", new { area = "AccountsArea" });
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
         }
     }
 }

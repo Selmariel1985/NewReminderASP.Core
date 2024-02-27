@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Contract;
 using NewReminderASP.Services.Dtos;
 
@@ -95,7 +94,7 @@ namespace NewReminderASP.WcfService
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                   
+
                     command.Parameters.AddWithValue("@ID", updatedAddress.ID);
                     command.Parameters.AddWithValue("@Street", updatedAddress.Street);
                     command.Parameters.AddWithValue("@City", updatedAddress.City);
@@ -118,7 +117,7 @@ namespace NewReminderASP.WcfService
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    
+
                     command.Parameters.AddWithValue("@Street", address.Street);
                     command.Parameters.AddWithValue("@City", address.City);
                     command.Parameters.AddWithValue("@CountryName", address.CountryName);
@@ -372,9 +371,10 @@ namespace NewReminderASP.WcfService
                 command.Parameters.AddWithValue("@Reminders", events.Reminders);
 
                 connection.Open();
-                command.ExecuteNonQuery();  // This line executes the stored procedure
+                command.ExecuteNonQuery(); // This line executes the stored procedure
             }
         }
+
         public void DeleteEvent(int id)
         {
             using (var connection = new SqlConnection(connectionString))
@@ -561,7 +561,7 @@ namespace NewReminderASP.WcfService
             using (var command = new SqlCommand("AddEventRecurrence", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-               
+
                 command.Parameters.AddWithValue("@RecurrenceType", eventRecurrence.RecurrenceType);
 
 
@@ -665,10 +665,9 @@ namespace NewReminderASP.WcfService
                 command.ExecuteNonQuery();
             }
         }
-       
-           
-        
-public void DeleteEventType(int id)
+
+
+        public void DeleteEventType(int id)
         {
             using (var connection = new SqlConnection(connectionString))
             using (var command = new SqlCommand("DeleteEventType", connection))
@@ -728,7 +727,6 @@ public void DeleteEventType(int id)
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
-                    {
                         personalInfo = new PersonalInfoDto
                         {
                             Login = reader.GetString(0),
@@ -738,7 +736,6 @@ public void DeleteEventType(int id)
                             Birthdate = reader.GetDateTime(4),
                             Gender = reader.GetString(5)
                         };
-                    }
                 }
             }
 
@@ -878,7 +875,7 @@ public void DeleteEventType(int id)
             using (var command = new SqlCommand("AddUserPhone", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-              
+
                 command.Parameters.AddWithValue("@Login", userPhone.Login);
                 command.Parameters.AddWithValue("@PhoneNumber", userPhone.PhoneNumber);
                 command.Parameters.AddWithValue("@PhoneType", userPhone.PhoneType);
@@ -993,7 +990,7 @@ public void DeleteEventType(int id)
             using (var command = new SqlCommand("AddPhoneType", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-               
+
                 command.Parameters.AddWithValue("@TypeName", eventPhoneType.TypeName);
 
 

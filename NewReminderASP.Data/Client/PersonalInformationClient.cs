@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using log4net;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
@@ -17,7 +15,6 @@ namespace NewReminderASP.Data.Client
 
             using (var connection = new PersonalInfoServiceClient())
             {
-               
                 try
                 {
                     connection.Open();
@@ -25,9 +22,7 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetPersonalInfos();
 
                     if (result != null)
-                    {
                         foreach (var personalInfo in result)
-                        {
                             personalInfos.Add(new PersonalInfo
                             {
                                 Login = personalInfo.Login,
@@ -37,14 +32,15 @@ namespace NewReminderASP.Data.Client
                                 Birthdate = personalInfo.Birthdate,
                                 Gender = personalInfo.Gender
                             });
-                        }
-                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -65,7 +61,6 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetPersonalInfo(login);
 
                     if (result != null)
-                    {
                         personalInfo = new PersonalInfo
                         {
                             Login = result.Login,
@@ -75,13 +70,15 @@ namespace NewReminderASP.Data.Client
                             Birthdate = result.Birthdate,
                             Gender = result.Gender
                         };
-                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -112,6 +109,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -140,6 +140,9 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
@@ -160,10 +163,12 @@ namespace NewReminderASP.Data.Client
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
                     throw;
                 }
             }
         }
-        
     }
 }

@@ -41,7 +41,7 @@
 
 <h2>Add User Role</h2>
 
-@using (Html.BeginForm("CreateUserRole", "User", FormMethod.Post))
+@using (Html.BeginForm("CreateUserRoleById", "User", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -49,22 +49,14 @@
         <h4>User</h4>
         <hr />
 
-
         <div class="form-group">
-            @Html.LabelFor(model => model.UserId, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.UserId, new SelectList(Model.Users, "Id", "Login"), "Select User", new { @class = "form-control" })
         </div>
 
-
         <div class="form-group">
-            @Html.LabelFor(model => model.RoleId, new { @class = "control-label col-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RoleId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.RoleId, new SelectList(Model.Roles, "Id", "Name"), "Select Role", new { @class = "form-control" })
         </div>
 
         <div class="form-group">
@@ -74,7 +66,8 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="row mt-2">
+    <div class="col-md-6">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
 </div>

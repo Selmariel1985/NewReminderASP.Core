@@ -1,10 +1,5 @@
-﻿using NewReminderASP.Domain.Entities;
-using NewReminderASP.Services.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.Core.Provider
 {
@@ -17,6 +12,5 @@ namespace NewReminderASP.Core.Provider
         void UpdatePersonalInfo(PersonalInfo updatedPersonalInfo);
         void AddPersonalInfo(string userLogin, PersonalInfo personalInfo);
         void DeletePersonalInfo(string login);
-
     }
 }

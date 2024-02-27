@@ -17,7 +17,7 @@ namespace NewReminderASP.Domain.Entities
 
         public string Email { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
-        public virtual ICollection<PersonalInfo> PersonalInfos{ get; set; }
+        public virtual ICollection<PersonalInfo> PersonalInfos { get; set; }
 
         [NotMapped] public int Version { get; set; }
     }

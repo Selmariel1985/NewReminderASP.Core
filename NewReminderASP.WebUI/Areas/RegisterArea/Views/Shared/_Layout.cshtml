@@ -6,24 +6,40 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .navbar .nav-link {
+            color: white;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+            transition: color 0.3s;
+        }
+
+            .navbar .nav-link:hover {
+                color: #ff5733;
+            }
+
+
+        .navbar .navbar-brand {
+            color: white;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+            transition: color 0.3s;
+        }
+
+            .navbar .navbar-brand:hover {
+                color: #ff5733;
+            }
+    </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
+            @Html.ActionLink("Login", "Login", "Login", new { area = "LoginArea" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
         </div>
-    </div>
+    </nav>
 
     <div class="container body-content">
         @RenderBody()
@@ -35,6 +51,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", false)
 </body>
 </html>

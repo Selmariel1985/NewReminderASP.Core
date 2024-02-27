@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using NewReminderASP.Domain.Entities;
-using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Core.Provider
 {

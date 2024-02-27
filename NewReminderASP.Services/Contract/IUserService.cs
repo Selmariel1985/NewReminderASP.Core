@@ -51,7 +51,7 @@ namespace NewReminderASP.Services.Contract
 
         [OperationContract]
         UserRoleDto[] GetUsersRoles();
-        
+
 
         [OperationContract]
         RoleDto GetRolesByID(int id);
@@ -61,7 +61,5 @@ namespace NewReminderASP.Services.Contract
 
         [OperationContract]
         void AddUserRoleNormal(string userLogin, string roleName);
-
-
     }
 }
