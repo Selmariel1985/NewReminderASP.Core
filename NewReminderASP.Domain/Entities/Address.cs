@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace NewReminderASP.Domain.Entities
 {
@@ -19,5 +20,8 @@ namespace NewReminderASP.Domain.Entities
         public string Login { get; set; }
 
         public virtual Country Country { get; set; }
+        public List<User> Users { get; set; }
+        public List<Country> Countries { get; set; }
+        public virtual User User { get; set; }
     }
 }

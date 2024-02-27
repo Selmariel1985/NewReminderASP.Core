@@ -11,10 +11,15 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IAddressProvider _provider;
+        private readonly IUserProvider _userProvider;
+        private readonly ICountryProvider _countryProvider;
 
-        public AddressController(IAddressProvider provider)
+        public AddressController(IAddressProvider provider, IUserProvider userProvider, ICountryProvider countryProvider)
         {
             _provider = provider;
+            _userProvider = userProvider;
+            _countryProvider = countryProvider;
+
         }
 
 
@@ -33,9 +38,15 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 
         public ActionResult Edit(int id)
         {
-            var address = _provider.GetAddress(id);
-            if (address == null) return HttpNotFound();
-            return View(address);
+            var model = _provider.GetAddress(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+
+            model.Countries = _countryProvider.GetCountries();
+
+            return View(model);
         }
 
         // POST: User/Edit/5
@@ -54,7 +65,11 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var model = new Address();
+            model.Users = _userProvider.GetUsers();
+            model.Countries = _countryProvider.GetCountries();
+
+            return View(model);
         }
 
 
@@ -65,6 +80,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             if (ModelState.IsValid)
             {
                 _provider.AddAddress(address);
+               
                 return RedirectToAction("Index");
             }
 
