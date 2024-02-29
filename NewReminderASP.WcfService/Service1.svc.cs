@@ -86,26 +86,58 @@ namespace NewReminderASP.WcfService
             return address;
         }
 
-        public void UpdateAddress(AddressDto updatedAddress)
+        public AddressDto GetAddressByID(int id)
         {
+            var address = new AddressDto();
+
             using (var connection = new SqlConnection(connectionString))
             {
-                using (var command = new SqlCommand("UpdateAddress", connection))
+                using (var command = new SqlCommand("GetAddressByID", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
 
-                    command.Parameters.AddWithValue("@ID", updatedAddress.ID);
-                    command.Parameters.AddWithValue("@Street", updatedAddress.Street);
-                    command.Parameters.AddWithValue("@City", updatedAddress.City);
-                    command.Parameters.AddWithValue("@CountryName", updatedAddress.CountryName);
-                    command.Parameters.AddWithValue("@PostalCode", updatedAddress.PostalCode);
-                    command.Parameters.AddWithValue("@Description", updatedAddress.Description);
-                    command.Parameters.AddWithValue("@Login", updatedAddress.Login);
+                    command.Parameters.AddWithValue("@ID", id);
 
                     connection.Open();
-                    command.ExecuteNonQuery();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            address.ID = reader.GetInt32(0);
+                            address.Street = reader.GetString(1);
+                            address.City = reader.GetString(2);
+                            address.CountryID = reader.GetInt32(3);
+                            address.PostalCode = reader.GetString(4);
+                            address.Description = reader.GetString(5);
+                            address.Login = reader.GetString(6);
+                        }
+                    }
                 }
+            }
+
+            return address;
+        }
+
+        public void UpdateAddress(AddressDto updatedAddress)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("[UpdateAddress]", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@id", updatedAddress.ID);
+                command.Parameters.AddWithValue("@street", updatedAddress.Street);
+                command.Parameters.AddWithValue("@city", updatedAddress.City);
+                
+                command.Parameters.AddWithValue("@countryID", updatedAddress.CountryID);
+                command.Parameters.AddWithValue("@postalCode", updatedAddress.PostalCode);
+                command.Parameters.AddWithValue("@description", updatedAddress.Description);
+                command.Parameters.AddWithValue("@login", updatedAddress.Login);
+
+                connection.Open();
+                command.ExecuteNonQuery();
             }
         }
 
@@ -186,7 +218,7 @@ namespace NewReminderASP.WcfService
                     {
                         var country = new CountryDto
                         {
-                            ID = reader.GetInt32(0),
+                            CountryID = reader.GetInt32(0),
                             CountryCode = reader.GetString(1),
                             PhoneCode = reader.GetString(2),
                             Name = reader.GetString(3)
@@ -215,7 +247,7 @@ namespace NewReminderASP.WcfService
                 {
                     if (reader.Read())
                     {
-                        country.ID = reader.GetInt32(0);
+                        country.CountryID = reader.GetInt32(0);
                         country.CountryCode = reader.GetString(1);
                         country.PhoneCode = reader.GetString(2);
                         country.Name = reader.GetString(3);
@@ -232,7 +264,7 @@ namespace NewReminderASP.WcfService
             using (var command = new SqlCommand("UpdateCountry", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@CountryID", updateCountry.ID);
+                command.Parameters.AddWithValue("@CountryID", updateCountry.CountryID);
                 command.Parameters.AddWithValue("@CountryCode", updateCountry.CountryCode);
                 command.Parameters.AddWithValue("@PhoneCode", updateCountry.PhoneCode);
                 command.Parameters.AddWithValue("@CountryName", updateCountry.Name);

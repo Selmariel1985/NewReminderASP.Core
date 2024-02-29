@@ -10,9 +10,9 @@ namespace NewReminderASP.Domain.Entities
     public class PersonalInfo
     {
         public int UserID { get; set; }
-        [Required(ErrorMessage = "Имя обязательно для заполнения")]
+       
         public string FirstName { get; set; }
-        [Required(ErrorMessage = "Фамилия обязательно для заполнения")]
+       
         public string LastName { get; set; }
 
         public string MiddleName { get; set; }

@@ -6,7 +6,7 @@ namespace NewReminderASP.Services.Dtos
     public class CountryDto
 
     {
-        [DataMember] public int ID { get; set; }
+        [DataMember] public int CountryID { get; set; }
 
         [DataMember] public string CountryCode { get; set; }
 

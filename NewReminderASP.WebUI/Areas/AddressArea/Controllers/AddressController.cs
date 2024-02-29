@@ -6,7 +6,7 @@ using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     public class AddressController : Controller
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -38,7 +38,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 
         public ActionResult Edit(int id)
         {
-            var model = _provider.GetAddress(id);
+            var model = _provider.GetAddressByID(id);
             if (model == null)
             {
                 return HttpNotFound();
@@ -79,8 +79,8 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
         {
             if (ModelState.IsValid)
             {
-                _provider.AddAddress(address);
-               
+                _provider.AddAddressRegister(address);
+
                 return RedirectToAction("Index");
             }
 

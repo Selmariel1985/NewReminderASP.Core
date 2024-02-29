@@ -1,10 +1,10 @@
-﻿@model NewReminderASP.Domain.Entities.Address
+﻿﻿@model NewReminderASP.Domain.Entities.Address
 @{
     ViewBag.Title = "Create Address";
 }
 
 <style>
-    
+
     .form-horizontal {
         max-width: 600px;
         margin: 20px auto;
@@ -50,7 +50,7 @@
 
     .form-group {
         margin-bottom: 20px;
-        overflow: hidden; 
+        overflow: hidden;
     }
 
     .col-md-2 {
@@ -102,10 +102,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CountryName, htmlAttributes: new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(model => model.CountryID, htmlAttributes: new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CountryName, new SelectList(Model.Countries, "Name", "Name"), "Select Country", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CountryName, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
             </div>
         </div>
 

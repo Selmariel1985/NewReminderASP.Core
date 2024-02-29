@@ -88,6 +88,44 @@ namespace NewReminderASP.Data.Client
 
             return address;
         }
+        public Address GetAddressByID(int id)
+        {
+            Address address = null;
+
+            using (var connection = new AddressServiceClient())
+            {
+                try
+                {
+                    connection.Open();
+
+                    var result = connection.GetAddressByID(id);
+
+                    if (result != null)
+                        address = new Address
+                        {
+                            ID = result.ID,
+                            Street = result.Street,
+                            City = result.City,
+                            CountryID = result.CountryID,
+                            PostalCode = result.PostalCode,
+                            Description = result.Description,
+                            Login = result.Login
+                        };
+
+                    connection.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
+                    throw;
+                }
+            }
+
+            return address;
+        }
 
 
         public void UpdateAddress(Address updateAddress)
@@ -103,7 +141,7 @@ namespace NewReminderASP.Data.Client
                         ID = updateAddress.ID,
                         Street = updateAddress.Street,
                         City = updateAddress.City,
-                        CountryName = updateAddress.CountryName,
+                        CountryID = updateAddress.CountryID,
                         PostalCode = updateAddress.PostalCode,
                         Description = updateAddress.Description,
                         Login = updateAddress.Login

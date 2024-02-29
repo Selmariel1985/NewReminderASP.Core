@@ -23,6 +23,10 @@ namespace NewReminderASP.Core.Provider
         {
             return _addressRepository.GetAddress(id);
         }
+        public Address GetAddressByID(int id)
+        {
+            return _addressRepository.GetAddressByID(id);
+        }
 
         public void UpdateAddress(Address updatedAddress)
         {

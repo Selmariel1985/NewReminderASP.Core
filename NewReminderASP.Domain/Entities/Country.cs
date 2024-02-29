@@ -5,7 +5,7 @@ namespace NewReminderASP.Domain.Entities
 {
     public class Country
     {
-        public int ID { get; set; }
+        public int CountryID { get; set; }
 
         public string CountryCode { get; set; }
 

@@ -415,6 +415,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/GetAddress", ReplyAction="http://tempuri.org/IAddressService/GetAddressResponse")]
         System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.AddressDto> GetAddressAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/GetAddressByID", ReplyAction="http://tempuri.org/IAddressService/GetAddressByIDResponse")]
+        NewReminderASP.Services.Dtos.AddressDto GetAddressByID(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/GetAddressByID", ReplyAction="http://tempuri.org/IAddressService/GetAddressByIDResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.AddressDto> GetAddressByIDAsync(int id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/UpdateAddress", ReplyAction="http://tempuri.org/IAddressService/UpdateAddressResponse")]
         void UpdateAddress(NewReminderASP.Services.Dtos.AddressDto updatedAddress);
         
@@ -481,6 +487,14 @@ namespace NewReminderASP.Data.ServiceReference1 {
         
         public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.AddressDto> GetAddressAsync(int id) {
             return base.Channel.GetAddressAsync(id);
+        }
+        
+        public NewReminderASP.Services.Dtos.AddressDto GetAddressByID(int id) {
+            return base.Channel.GetAddressByID(id);
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.AddressDto> GetAddressByIDAsync(int id) {
+            return base.Channel.GetAddressByIDAsync(id);
         }
         
         public void UpdateAddress(NewReminderASP.Services.Dtos.AddressDto updatedAddress) {

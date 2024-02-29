@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewReminderASP.Domain.Entities
@@ -7,7 +8,7 @@ namespace NewReminderASP.Domain.Entities
 
     {
         public int Id { get; set; }
-
+        [Required(ErrorMessage = "Please enter a login")]
         public string Login { get; set; }
 
 

@@ -1,11 +1,11 @@
-﻿@model NewReminderASP.Domain.Entities.Address
+﻿﻿@model NewReminderASP.Domain.Entities.Address
 
 @{
     ViewBag.Title = "Edit Address";
 }
 
 <style>
-    
+
     .form-container {
         max-width: 400px;
         margin: 0 auto;
@@ -60,7 +60,7 @@
     {
         @Html.AntiForgeryToken()
 
-        
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label" })
@@ -75,9 +75,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CountryName, htmlAttributes: new { @class = "control-label" })
-            @Html.DropDownListFor(model => model.CountryName, new SelectList(Model.Countries, "Name", "Name"), "Select Country", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.CountryName, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.CountryID, "Country" , htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">

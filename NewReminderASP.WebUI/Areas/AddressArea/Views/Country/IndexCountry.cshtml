@@ -30,7 +30,7 @@
 
 <table>
     <tr>
-        <th>ID</th>
+        <th>CountryID </th>
         <th>Country Code</th>
         <th>Phone Code</th>
         <th>Name</th>
@@ -38,10 +38,10 @@
     @foreach (var country in Model)
     {
         <tr>
-            <td>@country.ID</td>
+            <td>@country.CountryID </td>
             <td>@country.CountryCode</td>
             <td>@country.PhoneCode</td>
-            <td>@Html.ActionLink(!string.IsNullOrEmpty(country.Name) ? country.Name : "Default Name", "DetailsCountry", "Country", new { id = country.ID }, null)</td>
+            <td>@Html.ActionLink(!string.IsNullOrEmpty(country.Name) ? country.Name : "Default Name", "DetailsCountry", "Country", new { id = country.CountryID }, null)</td>
         </tr>
     }
 </table>

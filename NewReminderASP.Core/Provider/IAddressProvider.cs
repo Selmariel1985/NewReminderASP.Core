@@ -11,8 +11,8 @@ namespace NewReminderASP.Core.Provider
 
 
         Address GetAddress(int id);
-
-
+        
+        Address GetAddressByID(int id);
         void UpdateAddress(Address updatedAddress);
 
         void AddAddress(Address address);

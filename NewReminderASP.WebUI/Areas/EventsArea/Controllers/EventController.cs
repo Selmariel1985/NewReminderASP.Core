@@ -285,17 +285,17 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             _provider.DeleteEventDetail(id);
             return RedirectToAction("GetEventDetails");
         }
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            if (!filterContext.ExceptionHandled)
-            {
-                _logger.Error("An unhandled exception occurred", filterContext.Exception);
-                filterContext.Result = new ViewResult
-                {
-                    ViewName = "Error"
-                };
-                filterContext.ExceptionHandled = true;
-            }
-        }
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    if (!filterContext.ExceptionHandled)
+        //    {
+        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
+        //        filterContext.Result = new ViewResult
+        //        {
+        //            ViewName = "Error"
+        //        };
+        //        filterContext.ExceptionHandled = true;
+        //    }
+        //}
     }
 }

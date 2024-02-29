@@ -54,7 +54,7 @@
   <xs:complexType name="CountryDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="CountryCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="CountryID" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneCode" nillable="true" type="xs:string" />
     </xs:sequence>

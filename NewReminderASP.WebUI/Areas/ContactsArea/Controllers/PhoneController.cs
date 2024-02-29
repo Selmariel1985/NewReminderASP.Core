@@ -1,14 +1,10 @@
-﻿using log4net;
+﻿using System.Reflection;
+using System.Web.Mvc;
+using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Web;
-using System.Web.Mvc;
 
-namespace NewReminderASP.WebUI.Controllers
+namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
 {
     public class PhoneController : Controller
     {
@@ -67,7 +63,7 @@ namespace NewReminderASP.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 _provider.AddUserPhone(userPhone);
-                return RedirectToAction("GetPhoneType");
+                return RedirectToAction("Index");
             }
 
             return View(userPhone);

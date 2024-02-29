@@ -10,7 +10,7 @@ namespace NewReminderASP.Data.Client
 
         Address GetAddress(int id);
 
-
+        Address GetAddressByID(int id);
         void UpdateAddress(Address updatedAddress);
 
         void AddAddress(Address newAddress);
