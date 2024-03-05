@@ -5,7 +5,8 @@
 }
 
 <style>
-    h2 {
+
+    .container-form {
         max-width: 600px;
         margin: 20px auto;
         padding: 20px;
@@ -16,75 +17,107 @@
         text-align: center;
     }
 
-    .form-horizontal {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #e6e6e6;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
+
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left;
     }
 
-        .form-horizontal .form-group {
-            margin-bottom: 20px;
-            overflow: hidden;
-            text-align: left;
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .btn-save {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .btn-save:hover {
+            background-color: #218838;
         }
 
-        .form-horizontal .form-control {
-            display: inline-block;
-            text-align: left;
-            margin: 0 auto;
-        }
+    
+    .btn-back {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .btn-back:hover {
+            background-color: #0056b3;
 </style>
 
-<h2>User Create</h2>
+<div class="container-form">
+<h2>User Create Form</h2>
 
 @using (Html.BeginForm("Create", "User", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>User</h4>
-        <hr />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Login, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Login, new { @class = "control-label col-md-2" })
+        <div>
+            @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your login" } })
+            @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { type = "password", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+        <div>
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { type = "password", @class = "form-control", placeholder = "Enter your password" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
         </div>
+    </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-2" })
         
+            <div>
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { type = "password", @class = "form-control", placeholder = "Confirm your password" } })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            <div>
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your email" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 
-
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div>
+                <input type="submit" value="Save" class="btn-save"/>
             </div>
         </div>
+        }
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index", "User")
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
+</div>
 </div>

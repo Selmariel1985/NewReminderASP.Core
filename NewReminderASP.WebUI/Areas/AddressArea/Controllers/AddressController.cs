@@ -60,6 +60,8 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
                 return RedirectToAction("Index");
             }
 
+            
+            address.Countries = _countryProvider.GetCountries(); // Ensure Countries property is populated
             return View(address);
         }
 
@@ -72,7 +74,6 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return View(model);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Address address)
@@ -80,10 +81,12 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             if (ModelState.IsValid)
             {
                 _provider.AddAddressRegister(address);
-
                 return RedirectToAction("Index");
             }
 
+           
+            address.Users = _userProvider.GetUsers(); // Ensure Users property is populated
+            address.Countries = _countryProvider.GetCountries(); // Ensure Countries property is populated
             return View(address);
         }
 
@@ -104,17 +107,17 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return RedirectToAction("Index");
         }
 
-        //protected override void OnException(ExceptionContext filterContext)
-        //{
-        //    if (!filterContext.ExceptionHandled)
-        //    {
-        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
-        //        filterContext.Result = new ViewResult
-        //        {
-        //            ViewName = "Error"
-        //        };
-        //        filterContext.ExceptionHandled = true;
-        //    }
-        //}
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
+        }
     }
 }

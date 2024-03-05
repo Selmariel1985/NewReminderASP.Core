@@ -892,8 +892,8 @@ namespace NewReminderASP.WcfService
 
                 command.Parameters.AddWithValue("@Login", updatedUserPhone.Login);
                 command.Parameters.AddWithValue("@PhoneNumber", updatedUserPhone.PhoneNumber);
-                command.Parameters.AddWithValue("@PhoneType", updatedUserPhone.PhoneType);
-                command.Parameters.AddWithValue("@CountryName", updatedUserPhone.CountryName);
+                command.Parameters.AddWithValue("@PhoneTypeID", updatedUserPhone.PhoneTypeID);
+                command.Parameters.AddWithValue("@CountryID", updatedUserPhone.CountryID);
 
 
                 connection.Open();

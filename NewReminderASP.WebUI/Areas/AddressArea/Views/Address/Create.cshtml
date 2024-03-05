@@ -68,6 +68,40 @@
     .col-md-offset-2 {
         margin-left: 16.66666667%;
     }
+    .btn-save {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .btn-save:hover {
+            background-color: #218838;
+        }
+
+    
+    .btn-back {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .btn-back:hover {
+            background-color: #0056b3;
+
 </style>
 
 <div class="form-horizontal">
@@ -80,7 +114,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Login, new SelectList(Model.Users, "Login", "Login"), "Select User", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Login, new SelectList(Model.Users, "Login", "Login"), "Select User", new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -102,7 +136,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CountryID, htmlAttributes: new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(model => model.CountryID, "Country", htmlAttributes: new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
@@ -127,12 +161,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn-save btn-primary" />
             </div>
         </div>
     }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
+<div class="row mt-2">
+    <div class="col-md-6">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
     </div>
+</div>
+   
 </div>

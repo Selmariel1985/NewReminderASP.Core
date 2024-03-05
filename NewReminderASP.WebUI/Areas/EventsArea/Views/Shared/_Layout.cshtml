@@ -7,26 +7,45 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
-        .navbar .nav-link {
-            color: white;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-            transition: color 0.3s;
+        .navbar {
+            background-color: #343a40;
+            padding: 8px 16px;
+            box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.5);
         }
 
-            .navbar .nav-link:hover {
-                color: #ff5733;
+            .navbar .navbar-brand {
+                color: #ffffff;
+                font-size: 1.5rem;
+                transition: color 0.3s;
             }
 
+                .navbar .navbar-brand:hover {
+                    color: #ff5733;
+                }
 
-        .navbar .navbar-brand {
-            color: white;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-            transition: color 0.3s;
+            .navbar .navbar-nav .nav-link {
+                color: #ffffff;
+                transition: color 0.3s;
+            }
+
+                .navbar .navbar-nav .nav-link:hover {
+                    color: #ff5733;
+                }
+
+
+        .container {
+            padding-top: 20px; 
+            padding-bottom: 20px; 
         }
 
-            .navbar .navbar-brand:hover {
-                color: #ff5733;
-            }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 0;
+            background-color: #343a40;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -39,12 +58,16 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("User", "Index", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Register", "Register", "Register", new { area = "RegisterArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Countries", "IndexCountry", "Country", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Addresses", "Index", "Address", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
+                    
                     <li>@Html.ActionLink("Event", "Index", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("PersonInfo", "index", "Info", new { area = "PersonInfoArea" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Get Event Details", "GetEventDetails", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Get Event  Recurrences", "GetEventRecurrences", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Get EventTypes", "GetEventTypes", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Create Event", "Create", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Create Event Details", "CreateEventDetails", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Create Event Recurrences", "CreateEventRecurrences", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Create Event Types", "CreateEventTypes", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
+
 
                 </ul>
             </div>

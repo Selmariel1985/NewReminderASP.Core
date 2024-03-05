@@ -62,7 +62,8 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             if (personalInfo == null) return HttpNotFound();
             return View(personalInfo);
         }
-       
+
+        
 
 
         public ActionResult Create()
@@ -81,10 +82,10 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             if (ModelState.IsValid)
             {
                 _provider.AddPersonalInfo(userLogin, personalInfo);
-                personalInfo.Users = _userProvider.GetUsers();
+                
                 return RedirectToAction("Index");
             }
-
+            personalInfo.Users = _userProvider.GetUsers();
             return View(personalInfo);
         }
 

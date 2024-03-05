@@ -11,14 +11,14 @@ namespace NewReminderASP.Domain.Entities
         [Required(ErrorMessage = "Please enter a login")]
         public string Login { get; set; }
 
-
+        [Required(ErrorMessage = "Please enter a Password")]
         public string Password { get; set; }
 
         [NotMapped] public string ConfirmPassword { get; set; }
-
+        [Required(ErrorMessage = "Please enter a Password")]
         public string Email { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
-        public virtual ICollection<PersonalInfo> PersonalInfos { get; set; }
+       
 
         [NotMapped] public int Version { get; set; }
     }

@@ -11,11 +11,16 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         // GET: Phone
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IPhoneProvider _provider;
+        private readonly IUserProvider _userProvider;
+        private readonly ICountryProvider _countryProvider;
 
 
-        public PhoneController(IPhoneProvider provider)
+        public PhoneController(IPhoneProvider provider, IUserProvider userProvider, ICountryProvider countryProvider)
         {
             _provider = provider;
+            _userProvider = userProvider;
+            _countryProvider = countryProvider;
+
         }
 
 
@@ -26,9 +31,17 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         }
         public ActionResult Edit(int id)
         {
-            var userPhone = _provider.GetUserPhone(id);
-            if (userPhone == null) return HttpNotFound();
-            return View(userPhone);
+
+            var model = _provider.GetUserPhone(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+
+            model.Countries = _countryProvider.GetCountries();
+            model.PhonesTypes = _provider.GetPhoneTypes();
+            return View(model);
+           
         }
 
         // POST: User/Edit/5
@@ -36,13 +49,17 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
 
         public ActionResult Edit(UserPhone userPhone)
         {
+
             if (ModelState.IsValid)
             {
                 _provider.UpdateUserPhone(userPhone);
                 return RedirectToAction("Index");
             }
 
+            userPhone.PhonesTypes = _provider.GetPhoneTypes();
+            userPhone.Countries = _countryProvider.GetCountries(); // Ensure Countries property is populated
             return View(userPhone);
+            
         }
         public ActionResult Details(int id)
         {
@@ -52,7 +69,13 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         }
         public ActionResult Create()
         {
-            return View();
+            var model = new UserPhone();
+            model.PhonesTypes = _provider.GetPhoneTypes();
+            model.Users = _userProvider.GetUsers();
+            model.Countries = _countryProvider.GetCountries();
+
+
+            return View(model);
         }
 
 
@@ -62,11 +85,15 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         {
             if (ModelState.IsValid)
             {
-                _provider.AddUserPhone(userPhone);
+                _provider.AddUserPhoneRegister(userPhone);
                 return RedirectToAction("Index");
             }
 
+            userPhone.Users = _userProvider.GetUsers(); 
+            userPhone.Countries = _countryProvider.GetCountries(); 
+            userPhone.PhonesTypes = _provider.GetPhoneTypes(); 
             return View(userPhone);
+           
         }
 
         public ActionResult Delete(int id)

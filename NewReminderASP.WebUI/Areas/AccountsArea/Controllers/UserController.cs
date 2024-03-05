@@ -123,7 +123,6 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View();
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(User user)
@@ -132,21 +131,28 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _provider.AddUser(user);
-                    return RedirectToAction("Index");
+                    if (user.Password == user.ConfirmPassword)
+                    {
+                        _provider.AddUser(user);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("ConfirmPassword", "The password and confirm password do not match");
+                    }
                 }
+                return View(user); // Return the view with the user object to display validation errors
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
-                _logger.Error("An error occurred in Index()", ex);
-
-
-                return View("Error");
+                // Handle other exceptions or errors here
+                return View("Error"); // Return an error view
             }
-
-            return View(user);
         }
+
+
+
+       
 
         public ActionResult Delete(int id)
         {
@@ -179,7 +185,6 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(userRoles);
         }
 
-
         public ActionResult CreateUserRoleById()
         {
             var model = new UserRole();
@@ -188,23 +193,25 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(model);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateUserRoleById(UserRole userRole)
         {
             if (ModelState.IsValid)
             {
-                _provider.AddUserRole(userRole); // Assuming userRole contains UserId, RoleId, and Roles
-                userRole.Users = _provider.GetUsers(); // Example method to fetch all users from the database
-                userRole.Roles = _provider.GetRoles(); // Example method to fetch all roles from the database
-
-
+                _provider.AddUserRole(userRole);
                 return RedirectToAction("Index");
             }
 
+            // If the model state is not valid, return the view with the invalid model
+            userRole.Users = _provider.GetUsers(); // Ensure Users property is populated
+            userRole.Roles = _provider.GetRoles(); // Ensure Roles property is populated
             return View(userRole);
         }
+       
+
+
+        
 
         public ActionResult CreateUserRole()
         {
@@ -225,6 +232,18 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             }
 
             return View();
+        }
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
         }
     }
 }

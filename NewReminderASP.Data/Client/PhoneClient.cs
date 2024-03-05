@@ -102,8 +102,8 @@ namespace NewReminderASP.Data.Client
                         ID = updatedUserPhone.ID,
                         Login = updatedUserPhone.Login,
                         PhoneNumber = updatedUserPhone.PhoneNumber,
-                        PhoneType = updatedUserPhone.PhoneTypes,
-                        CountryName = updatedUserPhone.CountryName
+                        PhoneTypeID = updatedUserPhone.PhoneTypeID,
+                        CountryID = updatedUserPhone.CountryID
                     });
 
                     connection.Close();

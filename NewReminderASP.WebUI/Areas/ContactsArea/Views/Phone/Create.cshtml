@@ -16,7 +16,7 @@
     }
 
     .form-horizontal {
-        max-width: 600px;
+        max-width: 700px;
         margin: 20px auto;
         padding: 20px;
         background-color: #f9f9f9;
@@ -37,6 +37,39 @@
             text-align: left;
             margin: 0 auto;
         }
+    .btn-save {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .btn-save:hover {
+            background-color: #218838;
+        }
+
+    
+    .btn-back {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .btn-back:hover {
+            background-color: #0056b3;
 </style>
 
 <h2>Add Phone</h2>
@@ -53,7 +86,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Login, new SelectList(Model.Users, "Login", "Login"), "Select User", new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -67,17 +100,17 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PhoneTypes, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PhoneTypeID, "PhoneType", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneTypes, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhoneTypes, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.PhoneTypeID, new SelectList(Model.PhonesTypes, "ID", "TypeName"), "Select Phone Type", new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.PhoneTypeID, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.CountryName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CountryID, "Country", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CountryName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CountryName, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
             </div>
         </div>
        
@@ -86,12 +119,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn-save btn-primary" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="row mt-2">
+<div class="col-md-6">
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
+</div>
 </div>

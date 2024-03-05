@@ -80,26 +80,36 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
                     return View();
                 }
 
-                model.Address.Login = model.User.Login;
-                model.UserPhone.Login = model.User.Login;
-                model.Address.CountryID = model.UserPhone.CountryID;
-                model.PersonalInfo.Login = model.User.Login;
+                if (model.User.Password != model.User.ConfirmPassword)
+                {
+                    ModelState.AddModelError("ConfirmPassword", "The password and confirm password do not match");
+                    return View();
+                }
+               
+                if (ModelState.IsValid)
+                {
+                   
+                    model.Address.Login = model.User.Login;
+                    model.UserPhone.Login = model.User.Login;
+                    model.Address.CountryID = model.UserPhone.CountryID;
+                    model.PersonalInfo.Login = model.User.Login;
+                    
+                    _userProvider.AddUser(model.User);
 
-                _userProvider.AddUser(model.User);
+                    _phoneProvider.AddUserPhoneRegister(model.UserPhone);
+                   
+                    
+                    _addressProvider.AddAddressRegister(model.Address);
+                    _personalInfoProvider.AddPersonalInfo(model.PersonalInfo.Login, model.PersonalInfo);
 
-                _phoneProvider.AddUserPhoneRegister(model.UserPhone);
-                _phoneProvider.GetPhoneTypes();
-                _countryProvider.GetCountries();
+                    return RedirectToAction("Login", "Login", new { area = "LoginArea" });
+                }
+            } 
 
+           model.Countries = _countryProvider.GetCountries();
+           model.PhoneTypes = _phoneProvider.GetPhoneTypes();
 
-                _addressProvider.AddAddressRegister(model.Address);
-
-                _personalInfoProvider.AddPersonalInfo(model.PersonalInfo.Login, model.PersonalInfo);
-
-                return RedirectToAction("Index", "user", new { area = "AccountsArea" });
-            }
-
-            return View();
+            return View(model);
         }
     }
 }
