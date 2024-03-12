@@ -3,69 +3,36 @@
     ViewBag.Title = "Create UserRole";
 }
 
-<style>
-    h2 {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #e6e6e6;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
+<link href="~/styles.css" rel="stylesheet"/>
+<div class="form-horizontal">
+    <h2>Add User Role</h2>
 
-    .form-horizontal {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #e6e6e6;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm(new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
 
-        .form-horizontal .form-group {
-            margin-bottom: 20px;
-            overflow: hidden;
-            text-align: left;
-        }
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserLogin, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.UserLogin, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserLogin, "", new { @class = "text-danger" })
+                </div>
 
-        .form-horizontal .form-control {
-            display: inline-block;
-            text-align: left;
-            margin: 0 auto;
-        }
-</style>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RoleName, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.RoleName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                </div>
 
-<h2>Add User Role</h2>
-
-<div class="row">
-    <div class="col-md-6">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserLogin, htmlAttributes: new { @class = "control-label" })
-                @Html.TextBoxFor(model => model.UserLogin, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserLogin, "", new { @class = "text-danger" })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.RoleName, htmlAttributes: new { @class = "control-label" })
-                @Html.TextBoxFor(model => model.RoleName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        }
+                <button type="submit" class="btn btn-primary">Submit</button>
+            }
+        </div>
     </div>
-</div>
 
-<div class="row mt-2">
-    <div class="col-md-6">
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
     </div>
 </div>

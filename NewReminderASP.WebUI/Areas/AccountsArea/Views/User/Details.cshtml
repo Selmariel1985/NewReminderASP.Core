@@ -4,69 +4,10 @@
     ViewBag.Title = "User Details";
 }
 
-<style>
-    .user-details {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        margin: 20px auto;
-        max-width: 600px;
-    }
+<link href="~/styles.css" rel="stylesheet" />
 
-    .user-details h2 {
-        color: #333;
-        text-align: center;
-    }
 
-    .user-details dl {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin: 0;
-        padding: 0;
-    }
-
-    .user-details dt {
-        flex: 1 1 30%;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .user-details dd {
-        flex: 1 1 70%;
-        margin-bottom: 5px;
-    }
-
-    .user-details hr {
-        border: 0;
-        border-top: 1px solid #ddd;
-        margin: 15px 0;
-    }
-
-    .user-details a {
-        color: #007bff;
-        text-decoration: none;
-        margin-right: 10px;
-    }
-    .btn-group {
-        text-align: center;
-    }
-
-        .btn-group .btn {
-            color: #ffffff; 
-            background-color: #007bff; 
-            border-color: #007bff; 
-        }
-
-            .btn-group .btn:hover {
-                background-color: #0056b3; 
-                border-color: #0056b3; 
-            }
-</style>
-
-<div class="user-details">
+<div class="details-details">
     <h2>User Details: @Model.Login</h2>
 
     <div>

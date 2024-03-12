@@ -3,130 +3,64 @@
     ViewBag.Title = "Create User Phone";
 }
 
-<style>
-    h2 {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #e6e6e6;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
+<link href="~/styles.css" rel="stylesheet" />
+<div class="form-horizontal">
+    <h2>Add Phone</h2>
 
-    .form-horizontal {
-        max-width: 700px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #e6e6e6;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-
-        .form-horizontal .form-group {
-            margin-bottom: 20px;
-            overflow: hidden;
-            text-align: left;
-        }
-
-        .form-horizontal .form-control {
-            display: inline-block;
-            text-align: left;
-            margin: 0 auto;
-        }
-    .btn-save {
-        background-color: #28a745;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-        .btn-save:hover {
-            background-color: #218838;
-        }
-
-    
-    .btn-back {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-        .btn-back:hover {
-            background-color: #0056b3;
-</style>
-
-<h2>Add Phone</h2>
-
-@using (Html.BeginForm("Create", "Phone", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Crete Phone</h4>
-        <hr />
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Login, new SelectList(Model.Users, "Login", "Login"), "Select User", new { @class = "form-control", required = "required" })
-                @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhoneTypeID, "PhoneType", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.PhoneTypeID, new SelectList(Model.PhonesTypes, "ID", "TypeName"), "Select Phone Type", new { @class = "form-control", required = "required" })
-                @Html.ValidationMessageFor(model => model.PhoneTypeID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.CountryID, "Country", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "form-control", required = "required" })
-                @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-       
+    @using (Html.BeginForm("Create", "Phone", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
 
        
+            <h4>Crete Phone</h4>
+           
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn-save btn-primary" />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Login, new SelectList(Model.Users, "Login", "Login"), "Select User", new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+                </div>
             </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneTypeID, "PhoneType", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.PhoneTypeID, new SelectList(Model.PhonesTypes, "ID", "TypeName"), "Select Phone Type", new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.PhoneTypeID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CountryID, "Country", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn-save btn-primary" />
+                </div>
+            </div>
+        
+    }
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
         </div>
     </div>
-}
-
-<div class="row mt-2">
-<div class="col-md-6">
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
-</div>
 </div>

@@ -15,7 +15,7 @@ namespace NewReminderASP.Domain.Entities
         public string Password { get; set; }
 
         [NotMapped] public string ConfirmPassword { get; set; }
-        [Required(ErrorMessage = "Please enter a Password")]
+        [Required(ErrorMessage = "Please enter a Email")]
         public string Email { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
        

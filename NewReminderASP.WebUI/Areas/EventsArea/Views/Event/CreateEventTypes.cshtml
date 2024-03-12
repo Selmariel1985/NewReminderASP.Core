@@ -3,84 +3,17 @@
     ViewBag.Title = "Event Type";
 }
 
-<style>
-    h2 {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #e6e6e6;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
 
-    .form-horizontal {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #e6e6e6;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
+<link href="~/styles.css" rel="stylesheet" />
 
-        .form-horizontal .form-group {
-            margin-bottom: 20px;
-            overflow: hidden;
-            text-align: left;
-        }
+<div class="form-horizontal">
 
-        .form-horizontal .form-control {
-            display: inline-block;
-            text-align: left;
-            margin: 0 auto;
-        }
-    .btn-save {
-        background-color: #28a745;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+    <h2>Add Event Type</h2>
 
-        .btn-save:hover {
-            background-color: #218838;
-        }
+    @using (Html.BeginForm("CreateEventTypes", "Event", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
 
-
-    .btn-back {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-        .btn-back:hover {
-            background-color: #0056b3;
-</style>
-
-<h2>Add Event Type</h2>
-
-@using (Html.BeginForm("CreateEventTypes", "Event", FormMethod.Post, new { @class = "form-horizontal" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div>
-
-        <hr />
 
         <div class="form-group">
             @Html.LabelFor(model => model.TypeName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -89,21 +22,21 @@
                 @Html.ValidationMessageFor(model => model.TypeName, "", new { @class = "text-danger" })
             </div>
         </div>
-        
-        
+
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn-save btn-primary" />
             </div>
         </div>
-    </div>
-}
 
-<div class="row mt-2">
-    <div class="col-md-6">
-        @Html.ActionLink("Back to List", "GetEventTypes", null, new { @class = "btn-back" })
+    }
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back to List", "GetEventTypes", null, new { @class = "btn-back" })
+        </div>
     </div>
 </div>
-        
 
-        <
+        

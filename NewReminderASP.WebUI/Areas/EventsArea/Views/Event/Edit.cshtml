@@ -4,59 +4,14 @@
     ViewBag.Title = "Edit Event";
 }
 
-<h2>Edit Event</h2>
-<style>
 
-    .form-container {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f4f4f4;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+<link href="~/styles.css" rel="stylesheet" />
+<div class="form-container">
+    <h2>Edit Event</h2>
 
-    .control-label {
-        font-weight: bold;
-    }
+    @using (Html.BeginForm())
+    {
 
-    .form-control {
-        width: 100%;
-        padding: 10px;
-        margin: 5px 0;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        box-sizing: border-box;
-    }
-
-    .text-danger {
-        color: #dc3545;
-        font-size: 12px;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background-color 0.3s;
-    }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-</style>
-
-@using (Html.BeginForm())
-{
-    <div class="form-container">
         <h2>Edit Event</h2>
 
         @Html.HiddenFor(model => model.UserID)
@@ -104,11 +59,14 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
+            <input type="submit" value="Save" class="btn btn-save" />
         </div>
-    </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    }
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-6">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
+    </div>
 </div>

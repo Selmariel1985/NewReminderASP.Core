@@ -4,57 +4,7 @@
     ViewBag.Title = "User Registration";
 }
 
-<style>
-    h2 {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #e6e6e6;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-
-    .form-horizontal {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #e6e6e6;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-
-        .form-horizontal .form-group {
-            margin-bottom: 20px;
-            overflow: hidden;
-            text-align: left;
-        }
-
-        .form-horizontal .form-control {
-            display: inline-block;
-            text-align: left;
-            margin: 0 auto;
-        }
-    .btn-save {
-        background-color: #28a745;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-        .btn-save:hover {
-            background-color: #218838;
-        }
-</style>
+<link href="~/styles.css" rel="stylesheet" />
 
 <h2>User Registration</h2>
 
@@ -63,8 +13,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>User</h4>
-        <hr/>
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.User.Login, new { @class = "control-label col-md-2" })
@@ -129,7 +78,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PersonalInfo.Gender, new { @class = "control-label col-2" })
+            @Html.LabelFor(model => model.PersonalInfo.Gender, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PersonalInfo.Gender, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PersonalInfo.Gender, "", new { @class = "text-danger" })
