@@ -2,26 +2,29 @@
 
 <link href="~/styles.css" rel="stylesheet" />
 
-<h2>Phones Type</h2>
+<div class="form-container">
 
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>TypeName</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var phonesTypes in Model)
-            {
+    <h2>Phones Type</h2>
+
+   
+    <table class="table-eco">
+            <thead>
                 <tr>
-                    <td>@phonesTypes.ID</td>
-                    <td>@Html.ActionLink(!string.IsNullOrEmpty(phonesTypes.TypeName) ? phonesTypes.TypeName : "Default Name", "DetailsPhoneType", "Phone", new { id = phonesTypes.ID }, null)</td>
-                    
+                    <th>ID</th>
+                    <th>TypeName</th>
+
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var phonesTypes in Model)
+                {
+                    <tr>
+                        <td>@phonesTypes.ID</td>
+                        <td>@Html.ActionLink(!string.IsNullOrEmpty(phonesTypes.TypeName) ? phonesTypes.TypeName : "Default Name", "DetailsPhoneType", "Phone", new { id = phonesTypes.ID }, null)</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    
 </div>

@@ -5,14 +5,13 @@
 }
 
 <link href="~/styles.css" rel="stylesheet"/>
-
-
 <div class="details-details">
-    <h2>User Details: @Model.Login</h2>
 
+    <h2>User Details: @Model.Login</h2>
+    <h2>User ID: @Model.Id</h2>
     <div>
-        <h4>User ID: @Model.Id</h4>
-        <hr />
+
+
         <dl>
             <dt>@Html.DisplayNameFor(model => model.Login)</dt>
             <dd>@Html.DisplayFor(model => model.Login)</dd>
@@ -33,8 +32,8 @@
     </div>
 
     <div class="btn-group" role="group" aria-label="User actions">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn " })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn " })
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn " })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn" })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
     </div>
 </div>

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using log4net;
+﻿using log4net;
 using NewReminderASP.Data.Client;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class UserClient : IUserClient
 {
@@ -93,11 +93,11 @@ public class UserClient : IUserClient
                             UserRoles = userDto.Roles.Select(r =>
                                 new
                                     UserRole
-                                    {
-                                        User = new User { Id = userDto.Id },
-                                        Role
+                                {
+                                    User = new User { Id = userDto.Id },
+                                    Role
                                             = new Role { Name = r }
-                                    }).ToList()
+                                }).ToList()
                         };
                         users.Add(user);
                     }
@@ -139,10 +139,10 @@ public class UserClient : IUserClient
                         UserRoles = result.Roles.Select(r =>
                             new
                                 UserRole
-                                {
-                                    User = new User { Id = result.Id },
-                                    Role = new Role { Name = r }
-                                }).ToList()
+                            {
+                                User = new User { Id = result.Id },
+                                Role = new Role { Name = r }
+                            }).ToList()
                     };
 
                 client.Close();
@@ -182,11 +182,11 @@ public class UserClient : IUserClient
                         UserRoles = result.Roles.Select(r =>
                             new
                                 UserRole
-                                {
-                                    User = new User { Id = result.Id },
-                                    Role
+                            {
+                                User = new User { Id = result.Id },
+                                Role
                                         = new Role { Name = r }
-                                }).ToList()
+                            }).ToList()
                     };
 
                 client.Close();
@@ -392,11 +392,11 @@ public class UserClient : IUserClient
                         UserRoles = result.Roles.Select(r =>
                             new
                                 UserRole
-                                {
-                                    User = new User { Id = result.Id },
-                                    Role
+                            {
+                                User = new User { Id = result.Id },
+                                Role
                                         = new Role { Name = r }
-                                }).ToList()
+                            }).ToList()
                     };
 
                 connection.Close();
@@ -567,14 +567,21 @@ public class UserClient : IUserClient
     }
 
 
-    public void AddRole(int id, string name)
+    public void AddRole(Role role)
     {
         using (var connection = new UserServiceClient())
         {
             try
             {
                 connection.Open();
-                connection.AddRole(id, name);
+
+                connection.AddRole(new RoleDto
+                {
+                    Name = role.Name
+
+                });
+
+
                 connection.Close();
             }
             catch (Exception e)
@@ -588,14 +595,14 @@ public class UserClient : IUserClient
         }
     }
 
-    public void RemoveRole(int id, string name)
+    public void RemoveRole(int id)
     {
         using (var connection = new UserServiceClient())
         {
             try
             {
                 connection.Open();
-                connection.RemoveRole(id, name);
+                connection.RemoveRole(id);
                 connection.Close();
             }
             catch (Exception e)

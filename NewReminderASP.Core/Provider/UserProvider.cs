@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using log4net;
+﻿using log4net;
 using Microsoft.Extensions.Caching.Memory;
 using NewReminderASP.Data.Repository;
 using NewReminderASP.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NewReminderASP.Core.Provider
 {
@@ -103,9 +103,9 @@ namespace NewReminderASP.Core.Provider
         }
 
 
-        public void AddRole(int id, string name)
+        public void AddRole(Role role)
         {
-            _userRepository.AddRole(id, name);
+            _userRepository.AddRole(role);
         }
 
         public void AddUserRole(UserRole userRole)
@@ -113,9 +113,9 @@ namespace NewReminderASP.Core.Provider
             _userRepository.AddUserRole(userRole);
         }
 
-        public void RemoveRole(int id, string name)
+        public void RemoveRole(int id)
         {
-            _userRepository.RemoveRole(id, name);
+            _userRepository.RemoveRole(id);
         }
 
 

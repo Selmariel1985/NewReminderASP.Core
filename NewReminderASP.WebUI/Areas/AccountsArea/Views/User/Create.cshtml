@@ -1,54 +1,50 @@
 ﻿@model NewReminderASP.Domain.Entities.User
 
 @{
-    ViewBag.Title = "Create user";
+    ViewBag.Title = "Create New User";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 
-<div class="form-horizontal">
-    <h2>User Create </h2>
-
+<div class="create-form">
+    <h2>Create User</h2>
     @using (Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Login, new { @class = "control-label col-md-2" })
-            <div>
-                @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your login" } })
-                @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+            <label for="login">Login:</label>
+            <div class="input-container">
+                @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Username" } }) @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
-            <div>
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { type = "password", @class = "form-control", placeholder = "Enter your password" } })
+            <label for="password">Password:</label>
+            <div class="input-container">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { type = "password", @class = "form-control", placeholder = "Enter Password" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ConfirmPassword, "Confirm  Password", new { @class = "control-label col-md-2" })
-
-            <div>
-                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { type = "password", @class = "form-control", placeholder = "Confirm your password" } })
+            <label for="confirmPassword">Confirm Password:</label>
+            <div class="input-container">
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { type = "password", @class = "form-control", placeholder = "Confirm Password" } })
                 @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div>
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your email" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            <label for="email">Email:</label>
+            <div class="input-container">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Email Address" } }) @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <div>
-                <input type="submit" value="Save" class="btn-save" />
+            <div class="submit-button-container">
+                <button type="submit" class="btn btn-primary">Create User</button>
             </div>
         </div>
     }
@@ -56,6 +52,6 @@
 
 <div class="row mt-2">
     <div class="col-md-6">
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
     </div>
 </div>

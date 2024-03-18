@@ -5,23 +5,25 @@
 }
 
 <link href="~/styles.css" rel="stylesheet" />
+<div class="form-container">
 
-<h2>Countries</h2>
+    <h2>Countries</h2>
 
-<table>
-    <tr>
-        <th>CountryID </th>
-        <th>Country Code</th>
-        <th>Phone Code</th>
-        <th>Name</th>
-    </tr>
-    @foreach (var country in Model)
-    {
+    <table class="table-eco">
         <tr>
-            <td>@country.CountryID </td>
-            <td>@country.CountryCode</td>
-            <td>@country.PhoneCode</td>
-            <td>@Html.ActionLink(!string.IsNullOrEmpty(country.Name) ? country.Name : "Default Name", "DetailsCountry", "Country", new { id = country.CountryID }, null)</td>
+            <th>CountryID </th>
+            <th>Country Code</th>
+            <th>Phone Code</th>
+            <th>Name</th>
         </tr>
-    }
-</table>
+        @foreach (var country in Model)
+        {
+            <tr>
+                <td>@country.CountryID </td>
+                <td>@country.CountryCode</td>
+                <td>@country.PhoneCode</td>
+                <td>@Html.ActionLink(!string.IsNullOrEmpty(country.Name) ? country.Name : "Default Name", "DetailsCountry", "Country", new { id = country.CountryID }, null)</td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,8 +1,8 @@
-﻿using System.Reflection;
-using System.Web.Mvc;
-using log4net;
+﻿using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
+using System.Reflection;
+using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 {

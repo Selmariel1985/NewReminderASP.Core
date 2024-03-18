@@ -18,7 +18,7 @@ namespace NewReminderASP.Domain.Entities
         [Required(ErrorMessage = "Please enter a Email")]
         public string Email { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
-       
+
 
         [NotMapped] public int Version { get; set; }
     }

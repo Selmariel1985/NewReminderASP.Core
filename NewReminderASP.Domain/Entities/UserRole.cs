@@ -5,9 +5,9 @@ namespace NewReminderASP.Domain.Entities
 {
     public class UserRole
     {
-       
+
         public string RoleName { get; set; }
-        
+
         public string UserLogin { get; set; }
         [Required(ErrorMessage = "Please enter the User")]
         public int UserId { get; set; }

@@ -1,13 +1,12 @@
-﻿using System;
+﻿using log4net;
+using NewReminderASP.Core.Provider;
+using NewReminderASP.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Claims;
 using System.Web.Mvc;
 using System.Web.Security;
-using log4net;
-using Microsoft.AspNet.Identity;
-using NewReminderASP.Core.Provider;
-using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 {
@@ -29,32 +28,6 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             FormsAuthentication.SignOut(); // Signs the user out
             return
                 RedirectToAction("Login", "Login", new { area = "LoginArea" });
-        }
-
-        [Authorize]
-        public ActionResult SomeAction()
-        {
-            var userId = User.Identity.GetUserName();
-            var user = _provider.GetUserByLogin(userId);
-
-            if (User.IsInRole("Admin"))
-            {
-                _logger.InfoFormat("User {0} is an Admin", user.Login);
-            }
-            else
-            {
-                _logger.InfoFormat("User {0} is not an Admin", user.Login);
-                // Handle unauthorized access here
-                return View("Unauthorized");
-            }
-
-            _logger.Info("SomeAction method executed");
-
-            var users = _provider.GetUsers(); // assuming Provider is your user data provider
-
-            _logger.Info("Retrieved user data from the provider");
-
-            return View();
         }
 
 
@@ -136,23 +109,22 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
                         _provider.AddUser(user);
                         return RedirectToAction("Index");
                     }
-                    else
-                    {
-                        ModelState.AddModelError("ConfirmPassword", "The password and confirm password do not match");
-                    }
+
+                    ModelState.AddModelError("ConfirmPassword", "The password and confirm password do not match");
                 }
+
                 return View(user); // Return the view with the user object to display validation errors
             }
             catch (Exception ex)
             {
-                // Handle other exceptions or errors here
-                return View("Error"); // Return an error view
+                Console.WriteLine(ex);
+                _logger.Error("An error occurred in Index()", ex);
+
+
+                return View("Error");
             }
         }
 
-
-
-       
 
         public ActionResult Delete(int id)
         {
@@ -178,6 +150,42 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(tt);
         }
 
+        public ActionResult CreateRole()
+        {
+
+            return View();
+        }
+
+        public ActionResult DeleteRole(int id)
+        {
+            var role = _provider.GetRolesByID(id);
+            if (role == null) return HttpNotFound();
+            return View(role);
+        }
+
+        [HttpPost]
+        [ActionName("DeleteRole")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteRoleConfirmed(int id)
+        {
+            _provider.RemoveRole(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRole(Role role)
+        {
+            if (ModelState.IsValid)
+            {
+                _provider.AddRole(role);
+                return RedirectToAction("Index");
+            }
+
+            return View(role);
+        }
+
+
 
         public ActionResult UserRole()
         {
@@ -187,9 +195,11 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
         public ActionResult CreateUserRoleById()
         {
-            var model = new UserRole();
-            model.Users = _provider.GetUsers();
-            model.Roles = _provider.GetRoles();
+            var model = new UserRole
+            {
+                Users = _provider.GetUsers(),
+                Roles = _provider.GetRoles()
+            };
             return View(model);
         }
 
@@ -208,10 +218,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             userRole.Roles = _provider.GetRoles(); // Ensure Roles property is populated
             return View(userRole);
         }
-       
 
-
-        
 
         public ActionResult CreateUserRole()
         {
@@ -233,17 +240,71 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
             return View();
         }
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            if (!filterContext.ExceptionHandled)
-            {
-                _logger.Error("An unhandled exception occurred", filterContext.Exception);
-                filterContext.Result = new ViewResult
-                {
-                    ViewName = "Error"
-                };
-                filterContext.ExceptionHandled = true;
-            }
-        }
+
+        //public ActionResult RoleDetails(int id)
+        //{
+        //    var userRole = _provider.GetUserRoles(id);
+        //    if (userRole == null) return HttpNotFound();
+        //    return View(userRole);
+        //}
+
+        //public ActionResult RoleEdit(int id)
+        //{
+        //    var model = _provider.GetAddressByID(id);
+        //    if (model == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    model.Countries = _countryProvider.GetCountries();
+
+        //    return View(model);
+        //}
+
+        //// POST: User/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult RoleEdit(Address address)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _provider.UpdateAddress(address);
+        //        return RedirectToAction("Index");
+        //    }
+
+
+        //    address.Countries = _countryProvider.GetCountries(); // Ensure Countries property is populated
+        //    return View(address);
+        //}
+        //public ActionResult RoleDelete(int id)
+        //{
+        //    var address = _provider.GetAddress(id);
+        //    if (address == null) return HttpNotFound();
+        //    return View(address);
+        //}
+
+
+        //[HttpPost]
+        //[ActionName("RoleDelete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult RoleDeleteConfirmed(int id)
+        //{
+        //    _provider.DeleteAddress(id);
+        //    return RedirectToAction("Index");
+        //}
+
+
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    if (!filterContext.ExceptionHandled)
+        //    {
+        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
+        //        filterContext.Result = new ViewResult
+        //        {
+        //            ViewName = "Error"
+        //        };
+        //        filterContext.ExceptionHandled = true;
+        //    }
+        //}
     }
 }

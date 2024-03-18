@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using NewReminderASP.Data.Client;
+﻿using NewReminderASP.Data.Client;
 using NewReminderASP.Domain.Entities;
+using System.Collections.Generic;
 
 namespace NewReminderASP.Data.Repository
 {
@@ -60,14 +60,14 @@ namespace NewReminderASP.Data.Repository
             return _userClient.GetUserByPasswordAndLogin(password, login);
         }
 
-        public void AddRole(int id, string name)
+        public void AddRole(Role role)
         {
-            _userClient.AddRole(id, name);
+            _userClient.AddRole(role);
         }
 
-        public void RemoveRole(int id, string name)
+        public void RemoveRole(int id)
         {
-            _userClient.RemoveRole(id, name);
+            _userClient.RemoveRole(id);
         }
 
 

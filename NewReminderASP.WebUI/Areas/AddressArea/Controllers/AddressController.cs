@@ -1,12 +1,12 @@
-﻿using System.Reflection;
-using System.Web.Mvc;
-using log4net;
+﻿using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
+using System.Reflection;
+using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 {
-    
+
     public class AddressController : Controller
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -60,7 +60,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
                 return RedirectToAction("Index");
             }
 
-            
+
             address.Countries = _countryProvider.GetCountries(); // Ensure Countries property is populated
             return View(address);
         }
@@ -84,7 +84,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
                 return RedirectToAction("Index");
             }
 
-           
+
             address.Users = _userProvider.GetUsers(); // Ensure Users property is populated
             address.Countries = _countryProvider.GetCountries(); // Ensure Countries property is populated
             return View(address);

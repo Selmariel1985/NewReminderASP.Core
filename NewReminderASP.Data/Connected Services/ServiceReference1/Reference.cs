@@ -82,10 +82,10 @@ namespace NewReminderASP.Data.ServiceReference1 {
         System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.UserRoleDto> GetUserRolesAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddRole", ReplyAction="http://tempuri.org/IUserService/AddRoleResponse")]
-        void AddRole(int id, string name);
+        void AddRole(NewReminderASP.Services.Dtos.RoleDto role);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddRole", ReplyAction="http://tempuri.org/IUserService/AddRoleResponse")]
-        System.Threading.Tasks.Task AddRoleAsync(int id, string name);
+        System.Threading.Tasks.Task AddRoleAsync(NewReminderASP.Services.Dtos.RoleDto role);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddUserRole", ReplyAction="http://tempuri.org/IUserService/AddUserRoleResponse")]
         void AddUserRole(NewReminderASP.Services.Dtos.UserRoleDto userRole);
@@ -94,10 +94,10 @@ namespace NewReminderASP.Data.ServiceReference1 {
         System.Threading.Tasks.Task AddUserRoleAsync(NewReminderASP.Services.Dtos.UserRoleDto userRole);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RemoveRole", ReplyAction="http://tempuri.org/IUserService/RemoveRoleResponse")]
-        void RemoveRole(int id, string name);
+        void RemoveRole(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RemoveRole", ReplyAction="http://tempuri.org/IUserService/RemoveRoleResponse")]
-        System.Threading.Tasks.Task RemoveRoleAsync(int id, string name);
+        System.Threading.Tasks.Task RemoveRoleAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUsersRoles", ReplyAction="http://tempuri.org/IUserService/GetUsersRolesResponse")]
         NewReminderASP.Services.Dtos.UserRoleDto[] GetUsersRoles();
@@ -239,12 +239,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
             return base.Channel.GetUserRolesAsync(userId);
         }
         
-        public void AddRole(int id, string name) {
-            base.Channel.AddRole(id, name);
+        public void AddRole(NewReminderASP.Services.Dtos.RoleDto role) {
+            base.Channel.AddRole(role);
         }
         
-        public System.Threading.Tasks.Task AddRoleAsync(int id, string name) {
-            return base.Channel.AddRoleAsync(id, name);
+        public System.Threading.Tasks.Task AddRoleAsync(NewReminderASP.Services.Dtos.RoleDto role) {
+            return base.Channel.AddRoleAsync(role);
         }
         
         public void AddUserRole(NewReminderASP.Services.Dtos.UserRoleDto userRole) {
@@ -255,12 +255,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
             return base.Channel.AddUserRoleAsync(userRole);
         }
         
-        public void RemoveRole(int id, string name) {
-            base.Channel.RemoveRole(id, name);
+        public void RemoveRole(int id) {
+            base.Channel.RemoveRole(id);
         }
         
-        public System.Threading.Tasks.Task RemoveRoleAsync(int id, string name) {
-            return base.Channel.RemoveRoleAsync(id, name);
+        public System.Threading.Tasks.Task RemoveRoleAsync(int id) {
+            return base.Channel.RemoveRoleAsync(id);
         }
         
         public NewReminderASP.Services.Dtos.UserRoleDto[] GetUsersRoles() {

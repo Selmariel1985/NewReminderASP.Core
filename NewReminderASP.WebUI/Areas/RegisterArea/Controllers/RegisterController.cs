@@ -1,9 +1,8 @@
-﻿using System.Reflection;
-using System.Web.Mvc;
-using Autofac;
-using log4net;
+﻿using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
+using System.Reflection;
+using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
 {
@@ -85,29 +84,29 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
                     ModelState.AddModelError("ConfirmPassword", "The password and confirm password do not match");
                     return View();
                 }
-               
+
                 if (ModelState.IsValid)
                 {
-                   
+
                     model.Address.Login = model.User.Login;
                     model.UserPhone.Login = model.User.Login;
                     model.Address.CountryID = model.UserPhone.CountryID;
                     model.PersonalInfo.Login = model.User.Login;
-                    
+
                     _userProvider.AddUser(model.User);
 
                     _phoneProvider.AddUserPhoneRegister(model.UserPhone);
-                   
-                    
+
+
                     _addressProvider.AddAddressRegister(model.Address);
                     _personalInfoProvider.AddPersonalInfo(model.PersonalInfo.Login, model.PersonalInfo);
 
                     return RedirectToAction("Login", "Login", new { area = "LoginArea" });
                 }
-            } 
+            }
 
-           model.Countries = _countryProvider.GetCountries();
-           model.PhoneTypes = _phoneProvider.GetPhoneTypes();
+            model.Countries = _countryProvider.GetCountries();
+            model.PhoneTypes = _phoneProvider.GetPhoneTypes();
 
             return View(model);
         }

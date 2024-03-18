@@ -1,9 +1,9 @@
-﻿using System;
-using System.Reflection;
-using System.Web.Mvc;
-using log4net;
+﻿using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
+using System;
+using System.Reflection;
+using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
 {
@@ -51,10 +51,10 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
                 _provider.UpdatePersonalInfo(personalInfo);
                 return RedirectToAction("Index");
             }
-          
+
             return View(personalInfo);
 
-           
+
         }
         public ActionResult Details(string login)
         {
@@ -63,14 +63,14 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             return View(personalInfo);
         }
 
-        
+
 
 
         public ActionResult Create()
         {
             var model = new PersonalInfo();
             model.Users = _userProvider.GetUsers();
-         
+
             return View(model);
         }
 
@@ -82,7 +82,7 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             if (ModelState.IsValid)
             {
                 _provider.AddPersonalInfo(userLogin, personalInfo);
-                
+
                 return RedirectToAction("Index");
             }
             personalInfo.Users = _userProvider.GetUsers();

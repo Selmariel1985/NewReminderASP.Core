@@ -4,38 +4,48 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    
+    <meta name="description" content="Your website description here">
+    <meta name="keywords" content="key1, key2, key3">
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/styles.css" rel="stylesheet" />
+    <link href="~/styles.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Reminder", "Index", "User", new { area = "AccountsArea" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("User", "Index", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Create User", "Create", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("CreateUserRole", "CreateUserRoleById", "user", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Register", "Register", "Register", new { area = "RegisterArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Countries", "IndexCountry", "Country", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Addresses", "Index", "Address", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Event", "Index", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("PersonInfo", "index", "Info", new { area = "PersonInfoArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Phone", "Index", "Phone", new { area = "ContactsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Role", "Role", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <div class="container">
+        @Html.ActionLink("Reminder", "Index", "User", new { area = "AccountsArea" }, new { @class = "navbar-brand" })
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li>@Html.ActionLink("User", "Index", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Create User", "Create", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("CreateUserRole", "CreateUserRoleById", "user", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Register", "Register", "Register", new { area = "RegisterArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Countries", "IndexCountry", "Country", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Addresses", "Index", "Address", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Event", "Index", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("PersonInfo", "index", "Info", new { area = "PersonInfoArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Phone", "Index", "Phone", new { area = "ContactsArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Role", "Role", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("CreateRole", "CreateRole", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
+                
+            </ul>
         </div>
-    </nav>
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+</nav>
+
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer class="footer">
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+
+    <script src="~/scripts/bootstrap.bundle.min.js"></script>
+</div>
+</body>
+</html>

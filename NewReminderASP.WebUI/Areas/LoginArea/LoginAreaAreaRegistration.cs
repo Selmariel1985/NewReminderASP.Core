@@ -2,20 +2,20 @@
 
 namespace NewReminderASP.WebUI.Areas.LoginArea
 {
-    public class LoginAreaAreaRegistration : AreaRegistration 
+    public class LoginAreaAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "LoginArea";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "LoginArea_default", 
+                "LoginArea_default",
                 "LoginArea/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );

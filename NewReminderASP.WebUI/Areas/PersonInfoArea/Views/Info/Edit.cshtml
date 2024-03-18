@@ -4,50 +4,48 @@
     ViewBag.Title = "Edit Personal Information";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
-<div class="form-container">
+<link href="~/styles.css" rel="stylesheet"/>
+<div class="edit-container">
     <h2>Edit Personal Information</h2>
+    <h2>User: @Model.Login</h2>
 
     @using (Html.BeginForm())
     {
+        <hr/>
 
-        <h4>Info</h4>
-        <hr />
-
-        <h4>User: @Model.Login</h4>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
-            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.FirstName, new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
-            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.LastName, new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MiddleName, new { @class = "control-label" })
-            @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.MiddleName, new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Birthdate, new { @class = "control-label" })
-            @Html.EditorFor(model => model.Birthdate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.Birthdate, new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.Birthdate, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.Birthdate, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gender, new { @class = "control-label" })
-            @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.Gender, new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-save" />
+            <input type="submit" value="Save" class="btn btn-save"/>
         </div>
     }
 </div>

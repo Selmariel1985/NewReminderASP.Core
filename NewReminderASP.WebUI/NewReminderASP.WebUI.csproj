@@ -242,6 +242,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Nature.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -357,9 +358,10 @@
     <Content Include="Areas\ContactsArea\Views\Shared\Error.cshtml" />
     <Content Include="Areas\EventsArea\Views\Shared\Error.cshtml" />
     <Content Include="Areas\LoginArea\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\AccountsArea\Views\User\CreateRole.cshtml" />
+    <Content Include="Areas\AccountsArea\Views\User\DeleteRole.cshtml" />
     <None Include="packages.config" />
     <Content Include="Reminderapp.log" />
-    <Content Include="Areas\AccountsArea\Views\User\SomeAction.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.esm.min.js.map" />

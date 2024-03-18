@@ -5,29 +5,30 @@
 }
 
 <link href="~/styles.css" rel="stylesheet" />
+<div class="form-container">
+    <h2>Addresses</h2>
 
-<h2>Addresses</h2>
-
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Street</th>
-        <th>City</th>
-        <th>CountryName</th>
-        <th>PostalCode</th>
-        <th>Description</th>
-        <th>Login</th>
-    </tr>
-    @foreach (var address in Model)
-    {
+    <table class="table-eco">
         <tr>
-            <td>@address.ID</td>
-            <td>@address.Street</td>
-            <td>@address.City</td>
-            <td>@Html.ActionLink(!string.IsNullOrEmpty(address.CountryName) ? address.CountryName : "Default Name", "Details", "Address", new { id = address.ID }, null)</td>
-            <td>@address.PostalCode</td>
-            <td>@address.Description</td>
-            <td>@address.Login</td>
+            <th>ID</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>CountryName</th>
+            <th>PostalCode</th>
+            <th>Description</th>
+            <th>Login</th>
         </tr>
-    }
-</table>
+        @foreach (var address in Model)
+        {
+            <tr>
+                <td>@address.ID</td>
+                <td>@address.Street</td>
+                <td>@address.City</td>
+                <td>@Html.ActionLink(!string.IsNullOrEmpty(address.CountryName) ? address.CountryName : "Default Name", "Details", "Address", new { id = address.ID }, null)</td>
+                <td>@address.PostalCode</td>
+                <td>@address.Description</td>
+                <td>@address.Login</td>
+            </tr>
+        }
+    </table>
+</div>

@@ -5,22 +5,24 @@
 }
 
 <link href="~/styles.css" rel="stylesheet" />
+<div class="form-container">
 
-<h2>Event Type</h2>
+    <h2>Event Type</h2>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>TypeName</th>
-
-
-    </tr>
-    @foreach (var eventType in Model)
-    {
+    <table class="table-eco">
         <tr>
+            <th>ID</th>
+            <th>TypeName</th>
 
-            <td>@eventType.ID</td>
-            <td>@Html.ActionLink(!string.IsNullOrEmpty(eventType.TypeName) ? eventType.TypeName : "Default Name", "DetailsEventTypes", "Event", new { id = eventType.ID }, null)</td>
+
         </tr>
-    }
-</table>
+        @foreach (var eventType in Model)
+        {
+            <tr>
+
+                <td>@eventType.ID</td>
+                <td>@Html.ActionLink(!string.IsNullOrEmpty(eventType.TypeName) ? eventType.TypeName : "Default Name", "DetailsEventTypes", "Event", new { id = eventType.ID }, null)</td>
+            </tr>
+        }
+    </table>
+</div>

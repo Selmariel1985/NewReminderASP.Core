@@ -1,11 +1,11 @@
-﻿using System;
+﻿using log4net;
+using NewReminderASP.Core.Provider;
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using log4net;
-using NewReminderASP.Core.Provider;
 
 namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
 {

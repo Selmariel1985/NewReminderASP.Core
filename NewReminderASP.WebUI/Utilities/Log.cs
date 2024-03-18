@@ -1,8 +1,4 @@
 ﻿using log4net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace NewReminderASP.WebUI.Utilities
 {

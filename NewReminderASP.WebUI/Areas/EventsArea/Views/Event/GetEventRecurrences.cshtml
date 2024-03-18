@@ -5,22 +5,25 @@
 }
 
 <link href="~/styles.css" rel="stylesheet" />
+<div class="form-container">
 
-<h2>Event Recurrence</h2>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>RecurrenceType</th>
-        
+    <h2>Event Recurrence</h2>
 
-    </tr>
-    @foreach (var eventRecurrence in Model)
-    {
+    <table class="table-eco">
         <tr>
-            
-            <td>@eventRecurrence.ID</td>
-            <td>@Html.ActionLink(!string.IsNullOrEmpty(eventRecurrence.RecurrenceType) ? eventRecurrence.RecurrenceType : "Default Name", "DetailsEventRecurrences", "Event", new { id = eventRecurrence.ID }, null)</td>
+            <th>ID</th>
+            <th>RecurrenceType</th>
+
+
         </tr>
-    }
-</table>
+        @foreach (var eventRecurrence in Model)
+        {
+            <tr>
+
+                <td>@eventRecurrence.ID</td>
+                <td>@Html.ActionLink(!string.IsNullOrEmpty(eventRecurrence.RecurrenceType) ? eventRecurrence.RecurrenceType : "Default Name", "DetailsEventRecurrences", "Event", new { id = eventRecurrence.ID }, null)</td>
+            </tr>
+        }
+    </table>
+</div>

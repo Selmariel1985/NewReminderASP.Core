@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using NewReminderASP.Data.Client;
+﻿using NewReminderASP.Data.Client;
 using NewReminderASP.Domain.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NewReminderASP.Data.Repository
 {

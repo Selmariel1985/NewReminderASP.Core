@@ -7,7 +7,7 @@
 
 <link href="~/styles.css" rel="stylesheet" />
 
-<div class="form-container">
+<div class="edit-container">
     <h2>Edit Event Type</h2>
 
     @using (Html.BeginForm())
@@ -15,8 +15,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TypeName, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.TypeName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.TypeName, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.TypeName, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.TypeName, "", new { @class = "text-danger" })
         </div>
 

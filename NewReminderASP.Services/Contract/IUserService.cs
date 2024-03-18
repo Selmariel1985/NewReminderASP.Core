@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using NewReminderASP.Services.Dtos;
+using System.Collections.Generic;
 using System.ServiceModel;
-using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Services.Contract
 {
@@ -41,13 +41,13 @@ namespace NewReminderASP.Services.Contract
         UserRoleDto GetUserRoles(int userId);
 
         [OperationContract]
-        void AddRole(int id, string name);
+        void AddRole(RoleDto role);
 
         [OperationContract]
         void AddUserRole(UserRoleDto userRole);
 
         [OperationContract]
-        void RemoveRole(int id, string name);
+        void RemoveRole(int id);
 
         [OperationContract]
         UserRoleDto[] GetUsersRoles();

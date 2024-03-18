@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using NewReminderASP.Services.Contract;
+using NewReminderASP.Services.Dtos;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using NewReminderASP.Services.Contract;
-using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.WcfService
 {
@@ -130,7 +130,7 @@ namespace NewReminderASP.WcfService
                 command.Parameters.AddWithValue("@id", updatedAddress.ID);
                 command.Parameters.AddWithValue("@street", updatedAddress.Street);
                 command.Parameters.AddWithValue("@city", updatedAddress.City);
-                
+
                 command.Parameters.AddWithValue("@countryID", updatedAddress.CountryID);
                 command.Parameters.AddWithValue("@postalCode", updatedAddress.PostalCode);
                 command.Parameters.AddWithValue("@description", updatedAddress.Description);
@@ -1168,57 +1168,28 @@ namespace NewReminderASP.WcfService
         }
 
 
-        public void AddRole(int id, string name)
+        public void AddRole(RoleDto role)
         {
             using (var connection = new SqlConnection(connectionString))
             using (var command = new SqlCommand("AddRole", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@Id", id);
-                command.Parameters.AddWithValue("@Name", name);
+
+                command.Parameters.AddWithValue("@Name", role.Name);
 
                 connection.Open();
                 command.ExecuteNonQuery();
             }
         }
 
-        public void AddUserRole(UserRoleDto userRole)
-        {
-            using (var connection = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("AddUserRole", connection))
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@UserId", userRole.UserId);
-                command.Parameters.AddWithValue("@RoleId", userRole.RoleId);
-
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-        }
-
-
-        public void AddUserRoleNormal(string userLogin, string roleName)
-        {
-            using (var connection = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("AddUserRole1", connection))
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@UserLogin", userLogin);
-                command.Parameters.AddWithValue("@RoleName", roleName);
-
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-        }
-
-        public void RemoveRole(int id, string name)
+        public void RemoveRole(int id)
         {
             using (var connection = new SqlConnection(connectionString))
             using (var command = new SqlCommand("RemoveRole", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Id", id);
-                command.Parameters.AddWithValue("@Name", name);
+
 
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -1251,7 +1222,65 @@ namespace NewReminderASP.WcfService
             }
 
             return roles.ToArray();
+
         }
+
+        public RoleDto GetRolesByID(int id)
+        {
+            RoleDto role = null;
+
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("GetRoleById", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Id", id);
+
+                connection.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                        role = new RoleDto
+                        {
+                            Id = reader.GetInt32(0),
+                            Name = reader.GetString(1)
+                        };
+                }
+            }
+
+            return role;
+        }
+
+        public void AddUserRole(UserRoleDto userRole)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("AddUserRole", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserId", userRole.UserId);
+                command.Parameters.AddWithValue("@RoleId", userRole.RoleId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+
+        public void AddUserRoleNormal(string userLogin, string roleName)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("AddUserRole1", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserLogin", userLogin);
+                command.Parameters.AddWithValue("@RoleName", roleName);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+
 
         public UserRoleDto[] GetUsersRoles()
         {
@@ -1281,31 +1310,6 @@ namespace NewReminderASP.WcfService
             return userRoles.ToArray();
         }
 
-        public RoleDto GetRolesByID(int id)
-        {
-            RoleDto role = null;
-
-            using (var connection = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("GetRoleById", connection))
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@Id", id);
-
-                connection.Open();
-
-                using (var reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                        role = new RoleDto
-                        {
-                            Id = reader.GetInt32(0),
-                            Name = reader.GetString(1)
-                        };
-                }
-            }
-
-            return role;
-        }
 
         public UserRoleDto GetUserRoles(int userId)
         {

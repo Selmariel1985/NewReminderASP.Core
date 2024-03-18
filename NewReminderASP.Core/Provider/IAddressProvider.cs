@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using NewReminderASP.Domain.Entities;
+﻿using NewReminderASP.Domain.Entities;
+using System.Collections.Generic;
 
 namespace NewReminderASP.Core.Provider
 {
@@ -11,7 +11,7 @@ namespace NewReminderASP.Core.Provider
 
 
         Address GetAddress(int id);
-        
+
         Address GetAddressByID(int id);
         void UpdateAddress(Address updatedAddress);
 

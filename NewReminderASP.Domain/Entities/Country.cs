@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace NewReminderASP.Domain.Entities
 {
@@ -12,6 +11,6 @@ namespace NewReminderASP.Domain.Entities
         public string PhoneCode { get; set; }
         [Required(ErrorMessage = "Please select a Country Name")]
         public string Name { get; set; }
-       
+
     }
 }

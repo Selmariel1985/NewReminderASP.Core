@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Autofac;
+using Autofac.Integration.Mvc;
+using log4net;
+using log4net.Config;
+using NewReminderASP.Dependencies.Container;
+using System;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
-using Autofac;
-using Autofac.Integration.Mvc;
-using log4net.Config;
-using NewReminderASP.Dependencies.Container;
-using log4net;
 
 namespace NewReminderASP.WebUI
 {
@@ -18,19 +18,19 @@ namespace NewReminderASP.WebUI
 
         protected void Application_Start()
         {
-            
+
             var builder = new ContainerBuilder();
 
-           
+
             builder.RegisterModule(new CommonModule());
 
-            
+
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
-            
+
             var container = builder.Build();
 
-           
+
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             AreaRegistration.RegisterAllAreas();
@@ -61,11 +61,11 @@ namespace NewReminderASP.WebUI
             }
             catch (Exception ex)
             {
-                
+
                 var log = LogManager.GetLogger(typeof(MvcApplication));
                 log.Error("An error occurred in Application_PostAuthenticateRequest", ex);
 
-                
+
                 Response.StatusCode = 500;
                 Response.StatusDescription = "Internal Server Error";
             }

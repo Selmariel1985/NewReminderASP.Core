@@ -1,11 +1,12 @@
 ﻿@model NewReminderASP.Domain.Entities.UserRole
+
 @{
-    ViewBag.Title = "Create UserRole";
+    ViewBag.Title = "Create User Role";
 }
 
 <link href="~/styles.css" rel="stylesheet" />
 
-<div class="form-horizontal">
+<div class="create-form">
     <h2>Add User Role</h2>
 
     @using (Html.BeginForm("CreateUserRoleById", "User", FormMethod.Post, new { @class = "form-horizontal" }))
@@ -13,24 +14,25 @@
         @Html.AntiForgeryToken()
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UserId, "User", htmlAttributes: new { @class = "control-label" })
+            @Html.LabelFor(model => model.UserId, "User:", new { @class = "control-label" })
             @Html.DropDownListFor(model => model.UserId, new SelectList(Model.Users, "Id", "Login"), "Select User", new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RoleId, "Role", htmlAttributes: new { @class = "control-label" })
+            @Html.LabelFor(model => model.RoleId, "Role:", new { @class = "control-label" })
             @Html.DropDownListFor(model => model.RoleId, new SelectList(Model.Roles, "Id", "Name"), "Select Role", new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Create" class="btn-save" />
+            <button type="submit" class="btn btn-primary">Create</button>
         </div>
     }
 </div>
+
 <div class="row mt-2">
     <div class="col-md-6">
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
     </div>
 </div>

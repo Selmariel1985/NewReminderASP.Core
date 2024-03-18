@@ -1,8 +1,8 @@
-﻿using System.Reflection;
-using System.Web.Mvc;
-using log4net;
+﻿using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
+using System.Reflection;
+using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
 {
@@ -41,7 +41,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             model.Countries = _countryProvider.GetCountries();
             model.PhonesTypes = _provider.GetPhoneTypes();
             return View(model);
-           
+
         }
 
         // POST: User/Edit/5
@@ -59,7 +59,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             userPhone.PhonesTypes = _provider.GetPhoneTypes();
             userPhone.Countries = _countryProvider.GetCountries(); // Ensure Countries property is populated
             return View(userPhone);
-            
+
         }
         public ActionResult Details(int id)
         {
@@ -89,11 +89,11 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
                 return RedirectToAction("Index");
             }
 
-            userPhone.Users = _userProvider.GetUsers(); 
-            userPhone.Countries = _countryProvider.GetCountries(); 
-            userPhone.PhonesTypes = _provider.GetPhoneTypes(); 
+            userPhone.Users = _userProvider.GetUsers();
+            userPhone.Countries = _countryProvider.GetCountries();
+            userPhone.PhonesTypes = _provider.GetPhoneTypes();
             return View(userPhone);
-           
+
         }
 
         public ActionResult Delete(int id)
@@ -126,7 +126,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View(phoneType);
         }
 
-       
+
         [HttpPost]
 
         public ActionResult EditPhoneType(PhoneType phoneType)

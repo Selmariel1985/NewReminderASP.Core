@@ -3,20 +3,21 @@
 }
 
 <link href="~/styles.css" rel="stylesheet" />
+<div class="form-container">
+    <h2>Role List</h2>
 
-<h2>Role List</h2>
-
-<table>
-    <tr>
-        <th>UserId</th>
-        <th>RoleId</th>
-
-    </tr>
-    @foreach (var userrole in Model)
-    {
+    <table class="table-eco">
         <tr>
-            <td>@userrole.UserId</td>
-            <td>@userrole.RoleId</td>
+            <th>UserId</th>
+            <th>RoleId</th>
+
         </tr>
-    }
-</table>
+        @foreach (var userrole in Model)
+        {
+            <tr>
+                <td>@userrole.UserId</td>
+                <td>@userrole.RoleId</td>
+            </tr>
+        }
+    </table>
+    </div>

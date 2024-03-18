@@ -7,25 +7,32 @@
 
 
 <link href="~/styles.css" rel="stylesheet" />
-<h2>Info</h2>
-<table>
-    <tr>
-        <th>Login</th>
-        <th>First Name </th>
-        <th>Last Name</th>
-        <th>Middle Name</th>
-        <th>Birthdate</th>
-        <th>Gender</th>
-    </tr>
-    @foreach (var info in Model)
-    {
+
+<div class="form-container">
+
+
+
+    <h2>Info</h2>
+
+    <table class="table-eco">
         <tr>
-            <td>@info.Login</td>
-            <td>@Html.ActionLink(!string.IsNullOrEmpty(info.FirstName) ? info.FirstName : "Default Name", "Details", "Info", new { login = info.Login }, null)</td>
-            <td>@info.LastName</td>
-            <td>@info.MiddleName</td>
-            <td>@info.Birthdate.ToString("yyyy-MM-dd")</td>
-            <td>@info.Gender</td>
+            <th>Login</th>
+            <th>First Name </th>
+            <th>Last Name</th>
+            <th>Middle Name</th>
+            <th>Birthdate</th>
+            <th>Gender</th>
         </tr>
-    }
-</table>
+        @foreach (var info in Model)
+        {
+            <tr>
+                <td>@info.Login</td>
+                <td>@Html.ActionLink(!string.IsNullOrEmpty(info.FirstName) ? info.FirstName : "Default Name", "Details", "Info", new { login = info.Login }, null)</td>
+                <td>@info.LastName</td>
+                <td>@info.MiddleName</td>
+                <td>@info.Birthdate.ToString("yyyy-MM-dd")</td>
+                <td>@info.Gender</td>
+            </tr>
+        }
+    </table>
+</div>

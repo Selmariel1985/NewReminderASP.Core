@@ -5,7 +5,7 @@
 }
 
 <link href="~/styles.css" rel="stylesheet" />
-<div class="form-horizontal">
+<div class="create-form">
     <h2>Add Event</h2>
 
     @using (Html.BeginForm("Create", "Event", FormMethod.Post, FormMethod.Post, new { @class = "form-horizontal" }))
@@ -35,7 +35,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Your Title" } })
                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -43,7 +43,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter  Date" } })
                     @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Time" } })
                     @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -67,7 +67,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Reminders, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Reminders, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Reminders, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Your Reminder" } })
                     @Html.ValidationMessageFor(model => model.Reminders, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -75,16 +75,15 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn-save btn-primary" />
+                    <button type="submit" class="btn btn-primary">Create Event</button>
                 </div>
             </div>
-        
     }
+</div>
 
-    <div class="row mt-2">
-        <div class="col-md-6">
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
-        </div>
+<div class="row mt-2">
+    <div class="col-md-6">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
     </div>
 </div>
     

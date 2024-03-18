@@ -26,7 +26,7 @@ namespace NewReminderASP.Domain.Entities
 
         public User User { get; set; }
 
-       
+
         public string Recurrence { get; set; }
         public string EventTypes { get; set; }
         public string Login { get; set; }

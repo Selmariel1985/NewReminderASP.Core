@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using NewReminderASP.Services.Dtos;
+using System.Collections.Generic;
 using System.ServiceModel;
-using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Services.Contract
 {

@@ -2,17 +2,17 @@
 
 namespace NewReminderASP.WebUI.Areas.RegisterArea
 {
-    public class RegisterAreaAreaRegistration : AreaRegistration 
+    public class RegisterAreaAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "RegisterArea";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "RegisterArea_default",

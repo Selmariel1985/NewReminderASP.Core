@@ -11,7 +11,7 @@ namespace NewReminderASP.Domain.Entities
         public UserPhone UserPhone { get; set; }
         public Country Country { get; set; }
 
-        
+
         public List<PhoneType> PhoneTypes { get; set; }
 
         public List<Country> Countries { get; set; }

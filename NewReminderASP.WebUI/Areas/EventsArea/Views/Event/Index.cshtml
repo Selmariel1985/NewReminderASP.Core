@@ -6,38 +6,41 @@
 
 <link href="~/styles.css" rel="stylesheet" />
 
+<div class="form-container">
+
+
 <h2>Events</h2>
 
-<div class="table-responsive">
-    <table class="table table-striped">
+
+    <table class="table-eco">
         <thead>
-        <tr>
-            <th>ID</th>
-            <th>User Name</th>
-            <th>Event Type</th>
-            <th>Title Name</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Recurrence</th>
-            <th>Reminders</th>
-        </tr>
+            <tr>
+                <th>ID</th>
+                <th>User Name</th>
+                <th>Event Type</th>
+                <th>Title Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Recurrence</th>
+                <th>Reminders</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (var events in Model)
-        {
-            <tr>
-                <td>@events.ID</td>
-                <td>@events.Login</td>
-                <td>@events.EventTypes</td>
-                <td>@events.Title</td>
-                <td>@events.Date.ToString("yyyy-MM-dd")</td>
-                <td>@events.Time</td>
-                <td>@events.Recurrence</td>
-                <td>
-                    @Html.ActionLink(!string.IsNullOrEmpty(events.Reminders) ? events.Reminders : "Default Name", "Details", "Event", new { id = events.ID }, null)
-                </td>
-            </tr>
-        }
+            @foreach (var events in Model)
+            {
+                <tr>
+                    <td>@events.ID</td>
+                    <td>@events.Login</td>
+                    <td>@events.EventTypes</td>
+                    <td>@events.Title</td>
+                    <td>@events.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@events.Time</td>
+                    <td>@events.Recurrence</td>
+                    <td>
+                        @Html.ActionLink(!string.IsNullOrEmpty(events.Reminders) ? events.Reminders : "Default Name", "Details", "Event", new { id = events.ID }, null)
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

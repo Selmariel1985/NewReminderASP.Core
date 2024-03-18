@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using NewReminderASP.Domain.Entities;
+﻿using NewReminderASP.Domain.Entities;
+using System.Collections.Generic;
 
 namespace NewReminderASP.Data.Client
 {
@@ -19,9 +19,9 @@ namespace NewReminderASP.Data.Client
 
         User GetUserByPassword(string password);
         User GetUserByPasswordAndLogin(string password, string login);
-        void AddRole(int id, string name);
+        void AddRole(Role role);
 
-        void RemoveRole(int id, string name);
+        void RemoveRole(int id);
         IReadOnlyList<Role> GetRoles();
         Role GetRolesByID(int id);
         IReadOnlyList<UserRole> GetUsersRoles();

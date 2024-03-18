@@ -1,9 +1,8 @@
-﻿using System.Reflection;
-using System.Web.Mvc;
-using Autofac;
-using log4net;
+﻿using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
+using System.Reflection;
+using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 {
@@ -27,7 +26,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             var tt = _provider.GeEvents();
             return View(tt);
         }
-        
+
         public ActionResult Edit(int id)
         {
             var model = _provider.GetEvent(id);
@@ -41,7 +40,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             model.EventRecurrences = _provider.GetEventRecurrences();
 
             return View(model);
-           
+
         }
 
         // POST: User/Edit/5
@@ -60,7 +59,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             events.EventsTypes = _provider.GetEventTypes();
             events.EventRecurrences = _provider.GetEventRecurrences();
             return View(events);
-           
+
         }
         public ActionResult Details(int id)
         {
@@ -69,9 +68,9 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(events);
         }
 
-       
-        
-       
+
+
+
         public ActionResult Create()
         {
             var model = new Event();
@@ -101,7 +100,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             events.EventsTypes = _provider.GetEventTypes();
             events.EventRecurrences = _provider.GetEventRecurrences();
 
-            
+
             return View(events);
         }
 
@@ -261,8 +260,8 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             var ttt = _provider.GetEventDetails();
             return View(ttt);
         }
-        
-        
+
+
         public ActionResult EditEventDetails(int id)
         {
             var model = _provider.GetEventDetail(id);
@@ -274,7 +273,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             model.EventsId = _provider.GeEvents();
 
             return View(model);
-           
+
         }
 
         // POST: User/Edit/5
@@ -291,7 +290,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 
             eventDetail.EventsId = _provider.GeEvents();
             return View(eventDetail);
-            
+
         }
 
         public ActionResult DetailsEventDetails(int id)
@@ -300,13 +299,13 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             if (eventDetail == null) return HttpNotFound();
             return View(eventDetail);
         }
-       
+
 
         public ActionResult CreateEventDetails()
         {
             var model = new EventDetail();
             model.EventsId = _provider.GeEvents();
-            
+
 
             return View(model);
         }
@@ -325,8 +324,8 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 
 
             eventDetail.EventsId = _provider.GeEvents();
-            
-            
+
+
 
 
             return View(eventDetail);
