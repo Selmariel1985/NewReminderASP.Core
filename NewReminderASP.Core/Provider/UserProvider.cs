@@ -1,10 +1,12 @@
 ﻿using log4net;
 using Microsoft.Extensions.Caching.Memory;
+using NewReminderASP.Data.Client;
 using NewReminderASP.Data.Repository;
 using NewReminderASP.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Security;
 
 namespace NewReminderASP.Core.Provider
 {
@@ -112,6 +114,10 @@ namespace NewReminderASP.Core.Provider
         {
             _userRepository.AddUserRole(userRole);
         }
+        public void UpdateRole(Role updatedRole)
+        {
+            _userRepository.UpdateRole(updatedRole);
+        }
 
         public void RemoveRole(int id)
         {
@@ -127,6 +133,11 @@ namespace NewReminderASP.Core.Provider
         public void AddUserRoleNormal(string userLogin, string roleName)
         {
             _userRepository.AddUserRoleNormal(userLogin, roleName);
+        }
+
+        public void UpdateUserRoles(int userId, string roleIds)
+        {
+            _userRepository.UpdateUserRoles(userId,  roleIds);
         }
     }
 }

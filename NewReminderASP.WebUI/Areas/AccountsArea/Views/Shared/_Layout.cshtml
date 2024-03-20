@@ -22,7 +22,9 @@
         <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
             <ul class="navbar-nav flex-grow-1">
                 <li>@Html.ActionLink("User", "Index", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Role", "Role", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Create User", "Create", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("CreateRole", "CreateRole", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("CreateUserRole", "CreateUserRoleById", "user", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Register", "Register", "Register", new { area = "RegisterArea" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Countries", "IndexCountry", "Country", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
@@ -31,8 +33,8 @@
                 <li>@Html.ActionLink("PersonInfo", "index", "Info", new { area = "PersonInfoArea" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Phone", "Index", "Phone", new { area = "ContactsArea" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Role", "Role", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("CreateRole", "CreateRole", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
-                
+
+
             </ul>
         </div>
     </div>

@@ -3,6 +3,8 @@ using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.PeerToPeer;
 using System.Reflection;
 using System.Security.Claims;
 using System.Web.Mvc;
@@ -57,6 +59,100 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             var user = _provider.GetUser(id);
             if (user == null) return HttpNotFound();
             return View(user);
+        }
+
+
+        public ActionResult EditUserRole(int id)
+        {
+            var userRoles = _provider.GetUserRoles(id);
+            var roles = _provider.GetRoles(); // Retrieve roles data from your provider
+
+            if (userRoles == null || roles == null)
+            {
+                return HttpNotFound();
+            }
+
+            var userRoleModel = new UserRole
+            {
+                UserId = userRoles.UserId,
+                SelectedRoleIds = userRoles.SelectedRoleIds, // Populate the selected roles if needed
+                Roles = roles // Assign the roles data to the model
+            };
+
+            return View(userRoleModel); // Pass the populated model to the view
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUserRole(UserRole userRole)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    // Update user roles based on the selected role IDs in userRole.SelectedRoleIds
+                    _provider.UpdateUserRoles(userRole.UserId, string.Join(",", userRole.SelectedRoleIds));
+
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                _logger.Error("An error occurred in EditUserRole()", ex);
+                return View("Error");
+            }
+
+            return View(userRole); // Return the view with the updated userRole model
+        }
+
+        public ActionResult EditUserAndRoles(int id)
+        {
+            var user = _provider.GetUser(id);
+            var userRoles = _provider.GetUserRoles(id);
+            var roles = _provider.GetRoles();
+
+            if (user == null || userRoles == null || roles == null)
+            {
+                return RedirectToAction("CreateUserRoleById"); 
+            }
+
+            var userAndRolesModel = new UserAndRolesModel
+            {
+                User = user,
+                UserRole = new UserRole
+                {
+                    UserId = userRoles.UserId,
+                    SelectedRoleIds = userRoles.SelectedRoleIds,
+                    Roles = roles
+                }
+            };
+
+            return View(userAndRolesModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUserAndRoles(UserAndRolesModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _provider.UpdateUser(model.User);
+                    _provider.UpdateUserRoles(model.User.Id, string.Join(",", model.UserRole.SelectedRoleIds));
+
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                _logger.Error("An error occurred in EditUserAndRoles()", ex);
+                return View("Error");
+            }
+
+            return View(model);
         }
 
 
@@ -150,11 +246,64 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(tt);
         }
 
+        public ActionResult DetailsRole(int id)
+        {
+            var role = _provider.GetRolesByID(id);
+            if (role == null) return HttpNotFound();
+            return View(role);
+        }
+
         public ActionResult CreateRole()
         {
 
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRole(Role role)
+        {
+            if (ModelState.IsValid)
+            {
+                _provider.AddRole(role);
+                return RedirectToAction("Index");
+            }
+
+            return View(role);
+        }
+
+        public ActionResult EditRole(int id)
+        {
+            var role = _provider.GetRolesByID(id);
+            if (role == null) return HttpNotFound();
+            return View(role);
+        }
+
+        // POST: User/Edit/5
+        [HttpPost]
+        public ActionResult EditRole(Role role)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _provider.UpdateRole(role);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                _logger.Error("An error occurred in Index()", ex);
+
+
+                return View("Error");
+            }
+
+            return View(role);
+        }
+
+       
 
         public ActionResult DeleteRole(int id)
         {
@@ -172,18 +321,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateRole(Role role)
-        {
-            if (ModelState.IsValid)
-            {
-                _provider.AddRole(role);
-                return RedirectToAction("Index");
-            }
-
-            return View(role);
-        }
+       
 
 
 
@@ -241,70 +379,20 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View();
         }
 
-        //public ActionResult RoleDetails(int id)
-        //{
-        //    var userRole = _provider.GetUserRoles(id);
-        //    if (userRole == null) return HttpNotFound();
-        //    return View(userRole);
-        //}
-
-        //public ActionResult RoleEdit(int id)
-        //{
-        //    var model = _provider.GetAddressByID(id);
-        //    if (model == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    model.Countries = _countryProvider.GetCountries();
-
-        //    return View(model);
-        //}
-
-        //// POST: User/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult RoleEdit(Address address)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _provider.UpdateAddress(address);
-        //        return RedirectToAction("Index");
-        //    }
 
 
-        //    address.Countries = _countryProvider.GetCountries(); // Ensure Countries property is populated
-        //    return View(address);
-        //}
-        //public ActionResult RoleDelete(int id)
-        //{
-        //    var address = _provider.GetAddress(id);
-        //    if (address == null) return HttpNotFound();
-        //    return View(address);
-        //}
 
-
-        //[HttpPost]
-        //[ActionName("RoleDelete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult RoleDeleteConfirmed(int id)
-        //{
-        //    _provider.DeleteAddress(id);
-        //    return RedirectToAction("Index");
-        //}
-
-
-        //protected override void OnException(ExceptionContext filterContext)
-        //{
-        //    if (!filterContext.ExceptionHandled)
-        //    {
-        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
-        //        filterContext.Result = new ViewResult
-        //        {
-        //            ViewName = "Error"
-        //        };
-        //        filterContext.ExceptionHandled = true;
-        //    }
-        //}
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
+        }
     }
 }

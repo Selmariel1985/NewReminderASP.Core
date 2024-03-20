@@ -1,0 +1,48 @@
+﻿@model NewReminderASP.Domain.Entities.UserAndRolesModel
+@{
+    ViewBag.Title = "Edit User";
+}
+<link href="~/styles.css" rel="stylesheet" />
+<div class="edit-container">
+    <h2>Edit User: @Model.User.Login</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.User.Id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.Login, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.User.Login, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(model => model.User.Login, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.Password, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserRole.SelectedRoleIds, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.ListBoxFor(model => model.UserRole.SelectedRoleIds, new MultiSelectList(Model.UserRole.Roles, "ID", "Name"), new { @class = "edit-form-control", size = 5, multiple = "multiple" })
+            @Html.ValidationMessageFor(model => model.UserRole.SelectedRoleIds, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-save" />
+        </div>
+    }
+</div>
+<div class="row mt-2">
+    <div class="col-md-6">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-back" })
+    </div>
+</div>
+
+

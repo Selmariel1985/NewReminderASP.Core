@@ -1,4 +1,6 @@
-﻿@{
+﻿
+@model IEnumerable<NewReminderASP.Domain.Entities.Role>
+@{
     ViewBag.Title = "Role List";
 }
 
@@ -7,17 +9,17 @@
     <h2>Role List</h2>
 
     <table class="table-eco">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-
-    </tr>
-    @foreach (var role in Model)
-    {
         <tr>
-            <td>@role.Id</td>
-            <td>@role.Name</td>
+            <th>ID</th>
+            <th>Name</th>
+
         </tr>
-    }
-</table>
-    </div>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.Id</td>
+                <td>@Html.ActionLink(role.Name, "DetailsRole", new { id = role.Id })</td>
+            </tr>
+        }
+    </table>
+</div>

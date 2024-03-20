@@ -22,6 +22,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RoleId, "Role:", new { @class = "control-label" })
             @Html.DropDownListFor(model => model.RoleId, new SelectList(Model.Roles, "Id", "Name"), "Select Role", new { @class = "form-control" })
+            @*@Html.ListBoxFor(model => model.RolesId, new SelectList(Model.Roles, "Id", "Name"), new { @class = "edit-form-control", size = 5 })*@
             @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
         </div>
 

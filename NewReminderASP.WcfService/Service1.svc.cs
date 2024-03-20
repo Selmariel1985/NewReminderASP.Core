@@ -1182,6 +1182,22 @@ namespace NewReminderASP.WcfService
             }
         }
 
+        public void UpdateRole(RoleDto updatedRole)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("UpdateRole", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@ID", updatedRole.Id);
+                command.Parameters.AddWithValue("@Name", updatedRole.Name);
+                
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
         public void RemoveRole(int id)
         {
             using (var connection = new SqlConnection(connectionString))
@@ -1264,6 +1280,23 @@ namespace NewReminderASP.WcfService
                 command.ExecuteNonQuery();
             }
         }
+
+        public void UpdateUserRoles(int userId, string roleIds)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("UpdateUserRoles", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@UserId", userId);
+                command.Parameters.AddWithValue("@RoleIds", roleIds);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+
 
 
         public void AddUserRoleNormal(string userLogin, string roleName)

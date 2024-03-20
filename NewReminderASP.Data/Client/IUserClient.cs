@@ -20,7 +20,7 @@ namespace NewReminderASP.Data.Client
         User GetUserByPassword(string password);
         User GetUserByPasswordAndLogin(string password, string login);
         void AddRole(Role role);
-
+        void UpdateRole(Role updatedRole);
         void RemoveRole(int id);
         IReadOnlyList<Role> GetRoles();
         Role GetRolesByID(int id);
@@ -30,5 +30,6 @@ namespace NewReminderASP.Data.Client
         void AssignRolesToUser(User user, List<string> roles);
 
         void AddUserRoleNormal(string userLogin, string roleName);
+        void UpdateUserRoles(int userId, string roleIds);
     }
 }

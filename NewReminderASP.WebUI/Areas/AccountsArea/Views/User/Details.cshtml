@@ -32,7 +32,7 @@
     </div>
 
     <div class="btn-group" role="group" aria-label="User actions">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn" })
+        @Html.ActionLink("Edit", "EditUserAndRoles", new { id = Model.Id }, new { @class = "btn" })
         @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn" })
         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
     </div>

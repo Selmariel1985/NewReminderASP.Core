@@ -69,6 +69,10 @@ namespace NewReminderASP.Data.Repository
         {
             _userClient.RemoveRole(id);
         }
+        public void UpdateRole(Role updatedRole)
+        {
+            _userClient.UpdateRole(updatedRole);
+        }
 
 
         public IReadOnlyList<Role> GetRoles()
@@ -105,6 +109,11 @@ namespace NewReminderASP.Data.Repository
         public void AddUserRoleNormal(string userLogin, string roleName)
         {
             _userClient.AddUserRoleNormal(userLogin, roleName);
+        }
+
+        public void UpdateUserRoles(int userId, string roleIds)
+        {
+            _userClient.UpdateUserRoles(userId,  roleIds);
         }
     }
 }

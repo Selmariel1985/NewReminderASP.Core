@@ -11,6 +11,8 @@ namespace NewReminderASP.Services.Dtos
         [DataMember] public int RoleId { get; set; }
 
         [DataMember] public List<RoleDto> Roles { get; set; }
+
+        [DataMember] public string RoleIds { get; set; }
         public string UserLogin { get; set; }
         public string RoleName { get; set; }
     }

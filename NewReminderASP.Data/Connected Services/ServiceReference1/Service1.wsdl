@@ -86,6 +86,12 @@
   <wsdl:message name="IUserService_AddUserRole_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddUserRoleResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_UpdateRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRole" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRoleResponse" />
+  </wsdl:message>
   <wsdl:message name="IUserService_RemoveRole_InputMessage">
     <wsdl:part name="parameters" element="tns:RemoveRole" />
   </wsdl:message>
@@ -109,6 +115,12 @@
   </wsdl:message>
   <wsdl:message name="IUserService_AssignRolesToUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:AssignRolesToUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUserRoles_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserRoles" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUserRoles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserRolesResponse" />
   </wsdl:message>
   <wsdl:message name="IUserService_AddUserRoleNormal_InputMessage">
     <wsdl:part name="parameters" element="tns:AddUserRoleNormal" />
@@ -457,6 +469,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddUserRole" message="tns:IUserService_AddUserRole_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AddUserRoleResponse" message="tns:IUserService_AddUserRole_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateRole" message="tns:IUserService_UpdateRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateRoleResponse" message="tns:IUserService_UpdateRole_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="RemoveRole">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/RemoveRole" message="tns:IUserService_RemoveRole_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/RemoveRoleResponse" message="tns:IUserService_RemoveRole_OutputMessage" />
@@ -472,6 +488,10 @@
     <wsdl:operation name="AssignRolesToUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AssignRolesToUser" message="tns:IUserService_AssignRolesToUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AssignRolesToUserResponse" message="tns:IUserService_AssignRolesToUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserRoles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateUserRoles" message="tns:IUserService_UpdateUserRoles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateUserRolesResponse" message="tns:IUserService_UpdateUserRoles_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddUserRoleNormal">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddUserRoleNormal" message="tns:IUserService_AddUserRoleNormal_InputMessage" />
@@ -799,6 +819,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateRole">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="RemoveRole">
       <soap:operation soapAction="http://tempuri.org/IUserService/RemoveRole" style="document" />
       <wsdl:input>
@@ -828,6 +857,15 @@
     </wsdl:operation>
     <wsdl:operation name="AssignRolesToUser">
       <soap:operation soapAction="http://tempuri.org/IUserService/AssignRolesToUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserRoles">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateUserRoles" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

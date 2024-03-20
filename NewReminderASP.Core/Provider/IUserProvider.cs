@@ -1,4 +1,5 @@
 ﻿using NewReminderASP.Domain.Entities;
+using NewReminderASP.Services.Dtos;
 using System.Collections.Generic;
 
 namespace NewReminderASP.Core.Provider
@@ -26,10 +27,11 @@ namespace NewReminderASP.Core.Provider
 
         void AddRole(Role role);
         void AddUserRole(UserRole userRole);
-
+        void UpdateRole(Role updatedRole);
         void RemoveRole(int id);
         void AssignRolesToUser(User user, List<string> roles);
 
         void AddUserRoleNormal(string userLogin, string roleName);
+        void UpdateUserRoles(int userId, string roleIds);
     }
 }

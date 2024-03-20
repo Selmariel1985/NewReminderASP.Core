@@ -16,7 +16,7 @@ namespace NewReminderASP.Data.Repository
         User GetUserByPassword(string password);
         User GetUserByPasswordAndLogin(string password, string login);
         void AddRole(Role role);
-
+        void UpdateRole(Role updatedRole);
         void RemoveRole(int id);
         IReadOnlyList<Role> GetRoles();
         IReadOnlyList<UserRole> GetUsersRoles();
@@ -29,5 +29,6 @@ namespace NewReminderASP.Data.Repository
         void AssignRolesToUser(User user, List<string> roles);
 
         void AddUserRoleNormal(string userLogin, string roleName);
+        void UpdateUserRoles(int userId, string roleIds);
     }
 }

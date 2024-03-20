@@ -47,6 +47,9 @@ namespace NewReminderASP.Services.Contract
         void AddUserRole(UserRoleDto userRole);
 
         [OperationContract]
+        void UpdateRole(RoleDto updatedRole);
+
+        [OperationContract]
         void RemoveRole(int id);
 
         [OperationContract]
@@ -60,6 +63,11 @@ namespace NewReminderASP.Services.Contract
         void AssignRolesToUser(UserDto user, List<string> roles);
 
         [OperationContract]
+        void UpdateUserRoles(int userId, string roleIds);
+
+        [OperationContract]
         void AddUserRoleNormal(string userLogin, string roleName);
+
+
     }
 }

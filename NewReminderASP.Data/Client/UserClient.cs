@@ -69,6 +69,8 @@ public class UserClient : IUserClient
         }
     }
 
+  
+
     public IReadOnlyList<User> GetUsers()
     {
         var users = new List<User>();
@@ -594,6 +596,56 @@ public class UserClient : IUserClient
             }
         }
     }
+    public void UpdateRole(Role updatedRole)
+    {
+        using (var connection = new UserServiceClient())
+        {
+            try
+            {
+                connection.Open();
+
+                connection.UpdateRole(new RoleDto
+                {
+                    Id = updatedRole.Id,
+                    Name = updatedRole.Name,
+                   
+                });
+
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+                var logger = LogManager.GetLogger("ErrorLogger");
+                logger.Error("An error occurred", e);
+                throw;
+            }
+        }
+    }
+   public void UpdateUserRoles(int userId, string roleIds)
+{
+    using (var client = new UserServiceClient())
+    {
+        try
+        {
+            client.Open();
+
+            client.UpdateUserRoles(userId, roleIds);
+
+            client.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+
+            // Logging the error
+            var logger = LogManager.GetLogger("ErrorLogger");
+            logger.Error("An error occurred", e);
+            throw;
+        }
+    }
+}
 
     public void RemoveRole(int id)
     {

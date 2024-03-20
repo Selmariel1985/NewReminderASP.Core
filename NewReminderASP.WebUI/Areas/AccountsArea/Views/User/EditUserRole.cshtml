@@ -1,0 +1,27 @@
+﻿@model NewReminderASP.Domain.Entities.UserRole
+
+@{
+    ViewBag.Title = "Edit User Roles";
+}
+<div class="edit-container">
+    <h2>Edit User Roles</h2>
+
+    <h2>Edit User: @Model.UserId</h2>
+
+    @using (Html.BeginForm("EditUserRole", "User", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.HiddenFor(model => model.UserId)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedRoleIds, "Select Role(s)")
+            @Html.ListBoxFor(model => model.SelectedRoleIds, new MultiSelectList(Model.Roles, "ID", "Name"), new { @class = "form-control", size = 5, multiple = "multiple" })
+            @Html.ValidationMessageFor(model => model.SelectedRoleIds)
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    }
+</div>

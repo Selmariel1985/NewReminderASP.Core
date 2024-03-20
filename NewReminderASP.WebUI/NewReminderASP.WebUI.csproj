@@ -360,6 +360,10 @@
     <Content Include="Areas\LoginArea\Views\Shared\Error.cshtml" />
     <Content Include="Areas\AccountsArea\Views\User\CreateRole.cshtml" />
     <Content Include="Areas\AccountsArea\Views\User\DeleteRole.cshtml" />
+    <Content Include="Areas\AccountsArea\Views\User\DetailsRole.cshtml" />
+    <Content Include="Areas\AccountsArea\Views\User\EditRole.cshtml" />
+    <Content Include="Areas\AccountsArea\Views\User\EditUserRole.cshtml" />
+    <Content Include="Areas\AccountsArea\Views\User\EditUserAndRoles.cshtml" />
     <None Include="packages.config" />
     <Content Include="Reminderapp.log" />
     <Content Include="Scripts\bootstrap.min.js.map" />

@@ -93,6 +93,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddUserRole", ReplyAction="http://tempuri.org/IUserService/AddUserRoleResponse")]
         System.Threading.Tasks.Task AddUserRoleAsync(NewReminderASP.Services.Dtos.UserRoleDto userRole);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateRole", ReplyAction="http://tempuri.org/IUserService/UpdateRoleResponse")]
+        void UpdateRole(NewReminderASP.Services.Dtos.RoleDto updatedRole);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateRole", ReplyAction="http://tempuri.org/IUserService/UpdateRoleResponse")]
+        System.Threading.Tasks.Task UpdateRoleAsync(NewReminderASP.Services.Dtos.RoleDto updatedRole);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RemoveRole", ReplyAction="http://tempuri.org/IUserService/RemoveRoleResponse")]
         void RemoveRole(int id);
         
@@ -116,6 +122,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AssignRolesToUser", ReplyAction="http://tempuri.org/IUserService/AssignRolesToUserResponse")]
         System.Threading.Tasks.Task AssignRolesToUserAsync(NewReminderASP.Services.Dtos.UserDto user, string[] roles);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateUserRoles", ReplyAction="http://tempuri.org/IUserService/UpdateUserRolesResponse")]
+        void UpdateUserRoles(int userId, string roleIds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateUserRoles", ReplyAction="http://tempuri.org/IUserService/UpdateUserRolesResponse")]
+        System.Threading.Tasks.Task UpdateUserRolesAsync(int userId, string roleIds);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddUserRoleNormal", ReplyAction="http://tempuri.org/IUserService/AddUserRoleNormalResponse")]
         void AddUserRoleNormal(string userLogin, string roleName);
@@ -255,6 +267,14 @@ namespace NewReminderASP.Data.ServiceReference1 {
             return base.Channel.AddUserRoleAsync(userRole);
         }
         
+        public void UpdateRole(NewReminderASP.Services.Dtos.RoleDto updatedRole) {
+            base.Channel.UpdateRole(updatedRole);
+        }
+        
+        public System.Threading.Tasks.Task UpdateRoleAsync(NewReminderASP.Services.Dtos.RoleDto updatedRole) {
+            return base.Channel.UpdateRoleAsync(updatedRole);
+        }
+        
         public void RemoveRole(int id) {
             base.Channel.RemoveRole(id);
         }
@@ -285,6 +305,14 @@ namespace NewReminderASP.Data.ServiceReference1 {
         
         public System.Threading.Tasks.Task AssignRolesToUserAsync(NewReminderASP.Services.Dtos.UserDto user, string[] roles) {
             return base.Channel.AssignRolesToUserAsync(user, roles);
+        }
+        
+        public void UpdateUserRoles(int userId, string roleIds) {
+            base.Channel.UpdateUserRoles(userId, roleIds);
+        }
+        
+        public System.Threading.Tasks.Task UpdateUserRolesAsync(int userId, string roleIds) {
+            return base.Channel.UpdateUserRolesAsync(userId, roleIds);
         }
         
         public void AddUserRoleNormal(string userLogin, string roleName) {
