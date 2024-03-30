@@ -14,12 +14,12 @@
 }
 
 .input-container {
-    /* Добавить немного отступов для лучшего */
+    
     padding: 5px;
 }
 
 .btn {
-    /* Базовые стили для обеих кнопок */
+   
     border: none;
     padding: 10px 20px;
     text-align: center;
@@ -51,18 +51,18 @@ html {
     
 }
 
-/* Container for the entire form */
+
 .registration-form {
     max-width: 600px;
-    margin: 0 auto; /* Center the form horizontally */
+    margin: 0 auto; 
     padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
-/* Form fieldset styling */
+
 fieldset {
     border: none;
     padding: 20px;
@@ -70,16 +70,16 @@ fieldset {
 }
 
 legend {
-    font-size: 18px; /* Increase legend font size */
+    font-size: 18px; 
     font-weight: bold;
-    margin-bottom: 10px; /* Spacing between legend and fields */
-    padding: 5px 10px; /* Add some padding to legend */
-    border: 1px solid #ddd; /* Light border around legend */
-    border-radius: 5px; /* Rounded corners for legend */
-    background-color: #f5f5f5; /* Subtle background color for legend */
+    margin-bottom: 10px; 
+    padding: 5px 10px; 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    background-color: #f5f5f5; 
 }
 
-/* Group labels and inputs */
+ 
 .form-group {
     margin-bottom: 15px;
     color: black;
@@ -89,7 +89,7 @@ legend {
     
     font-weight: bold;
     display: block;
-    width: 200px; /* Adjust label width as needed */
+    width: 200px; 
     margin-bottom: 5px;
 }
 
@@ -102,12 +102,12 @@ legend {
     box-sizing: border-box;
 }
 
-    /* Style for password input field */
+    
     .form-control[type="password"] {
-        font-family: monospace; /* Optional for password obscurity */
+        font-family: monospace; 
     }
 
-    /* Style for text area */
+    
     .form-control[rows] {
         height: auto;
     }
@@ -127,7 +127,7 @@ legend {
     }
 
 
-/* Navbar styling */
+
 .navbar {
     background-color: #343a40;
     padding: 8px 16px;
@@ -153,12 +153,12 @@ legend {
         color: #ff5733;
     }
 
-/* Content wrapper styling */
+
 .content-wrapper {
     padding: 20px;
 }
 
-/* Footer styling */
+
 footer {
     text-align: center;
     margin-top: 20px;
@@ -179,7 +179,7 @@ footer {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 
@@ -196,7 +196,7 @@ footer {
     margin-bottom: 10px;
 }
 
-/* Improved Button Animation */
+
 .btn-eco {
     background-color: #4CAF50;
     color: white;
@@ -229,21 +229,35 @@ footer {
 
     .table-eco th {
         color: #fff;
-        background-color: #4CAF50; /* Темно-зеленый текст на фоне зеленого цвета */
+        background-color: #4CAF50; 
     }
 
     .table-eco tr:nth-child(odd) {
-        background-color: #f2f2f2; /* Светло-серый фон для нечетных строк */
+        background-color: #f2f2f2; 
     }
 
     .table-eco tr:nth-child(even) {
-        background-color: #e6e6e6; /* Серый фон для четных строк */
+        background-color: #e6e6e6; 
     }
 
 
     .table-eco tr:hover {
-        background-color: #a0a0a0; /* Изменение цвета фона при наведении на строку */
+        background-color: #a0a0a0;
     }
+    .table-eco th a {
+        color: #fff; 
+        text-decoration: none; 
+    }
+
+    .table-eco td a {
+        color: #3E2723; 
+        text-decoration: none; 
+    }
+
+
+
+
+
 
 
 
@@ -258,7 +272,7 @@ footer {
 
 
 .details-details {
-    font-family: 'Roboto', sans-serif; /* Modern font stack */
+    font-family: 'Roboto', sans-serif; 
     background-color: #f4f4f4;
     padding: 20px;
     border-radius: 10px;
@@ -267,14 +281,14 @@ footer {
     max-width: 600px;
 }
 
-    /* Heading styles */
+   
     .details-details h2 {
-        color: #ff3366; /* Vibrant pink color */
+        color: #ff3366; 
         text-align: center;
-        font-size: 24px; /* Slightly larger font size */
+        font-size: 24px; 
     }
 
-    /* Definition list styles */
+    
     .details-details dl {
         display: grid;
         grid-template-columns: 30% 70%;
@@ -300,28 +314,27 @@ footer {
     }
 
     .details-details a {
-        color: #5bc0de; /* Aqua blue link color */
-        text-decoration: underline;
+        color: #5bc0de; 
         transition: color 0.3s;
     }
 
-/* Button styles */
+
 .btn-group .btn {
     color: #ffffff;
-    background-color: #20a8d8; /* Bright blue background color */
+    background-color: #20a8d8;
     border-color: #20a8d8;
     padding: 10px 20px;
-    border-radius: 20px; /* Rounded button corners */
+    border-radius: 20px; 
     text-decoration: none;
     transition: background-color 0.3s, border-color 0.3s;
 }
 
     .btn-group .btn:hover {
-        background-color: #1676a0; /* Darker blue on hover */
+        background-color: #1676a0; 
         border-color: #1676a0;
     }
 
-/* List styles */
+
 .roles-list {
     list-style: none;
     padding: 0;
@@ -402,4 +415,78 @@ footer {
 
     .btn-back:hover {
         background-color: #D84361;
+    }
+
+
+.role-tiles {
+    border: 1px solid #888;
+    padding: 12px;
+    background-color: #e0e0e0;
+    text-align: center;
+}
+
+.role-tile {
+    margin-bottom: 12px;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px #888888;
+    background-color: #f8f8f8;
+    margin-right: 10px;
+}
+
+    .role-tile input[type="checkbox"] {
+        margin-right: 6px;
+        vertical-align: middle;
+    }
+
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+}
+
+    .pagination a {
+        text-decoration: none;
+        
+        padding: 8px 12px;
+        border: 1px solid #555;
+        margin: 0 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .pagination a.active {
+            background-color: #555;
+            color: #fff;
+        }
+
+
+.filter-bar select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+    .filter-bar select:hover, .filter-bar select:focus {
+        border-color: #4CAF50; 
+    }
+
+.filter-bar .btn {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff; 
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+    .filter-bar .btn:hover {
+        background-color: #0056b3; 
     }

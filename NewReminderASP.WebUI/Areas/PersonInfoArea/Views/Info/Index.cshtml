@@ -14,14 +14,34 @@
 
     <h2>Info</h2>
 
+    <<form action="@Url.Action("Index")" method="get">
+    <div class="filter-bar">
+        <label for="orderBy">Sort by:</label>
+        <select id="orderBy" name="orderBy">
+            <option value="Login">Login</option>
+            <option value="FirstName">FirstName</option>
+            <option value="LastName">LastName</option>
+            <option value="MiddleName">MiddleName</option>
+            <option value="Birthdate">Birthdate</option>
+            <option value="Gender">Gender</option>
+        </select>
+        <label for="sortOrder">Order:</label>
+        <select id="sortOrder" name="sortOrder">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+        <input type="submit" value="Filter" class="btn" />
+    </div>
+
     <table class="table-eco">
         <tr>
-            <th>Login</th>
-            <th>First Name </th>
-            <th>Last Name</th>
-            <th>Middle Name</th>
-            <th>Birthdate</th>
-            <th>Gender</th>
+            <th>@Html.ActionLink("Login", "Index", new { orderBy = "Login", sortOrder = ViewBag.OrderBy == "Login" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+            <th>@Html.ActionLink("FirstName", "Index", new { orderBy = "FirstName", sortOrder = ViewBag.OrderBy == "FirstName" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+            <th>@Html.ActionLink("LastName", "Index", new { orderBy = "LastName", sortOrder = ViewBag.OrderBy == "LastName" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+            <th>@Html.ActionLink("MiddleName", "Index", new { orderBy = "MiddleName", sortOrder = ViewBag.OrderBy == "MiddleName" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+            <th>@Html.ActionLink("Birthdate", "Index", new { orderBy = "Birthdate", sortOrder = ViewBag.OrderBy == "Birthdate" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+            <th>@Html.ActionLink("Gender", "Index", new { orderBy = "Gender", sortOrder = ViewBag.OrderBy == "Gender" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                
         </tr>
         @foreach (var info in Model)
         {
@@ -35,4 +55,24 @@
             </tr>
         }
     </table>
+    </form>
+    <div class="pagination">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
+        }
+
+
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage + 1 })" class="btn btn-eco">Next</a>
+        }
+  
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+        }
+
+    </div>
 </div>

@@ -1,12 +1,10 @@
 ﻿using log4net;
 using Microsoft.Extensions.Caching.Memory;
-using NewReminderASP.Data.Client;
 using NewReminderASP.Data.Repository;
 using NewReminderASP.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Security;
 
 namespace NewReminderASP.Core.Provider
 {
@@ -38,7 +36,7 @@ namespace NewReminderASP.Core.Provider
                 var cacheKey = "user_" + login;
 
                 if (_cache.TryGetValue(cacheKey,
-                        out User cachedUser)) return cachedUser; // Return user from cache if found
+                        out User cachedUser)) return cachedUser;
 
                 var user = _userRepository.GetUserByLogin(login);
                 if (user != null) _cache.Set(cacheKey, user, TimeSpan.FromMinutes(5));
@@ -137,7 +135,7 @@ namespace NewReminderASP.Core.Provider
 
         public void UpdateUserRoles(int userId, string roleIds)
         {
-            _userRepository.UpdateUserRoles(userId,  roleIds);
+            _userRepository.UpdateUserRoles(userId, roleIds);
         }
     }
 }

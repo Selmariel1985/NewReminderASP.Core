@@ -403,7 +403,7 @@ namespace NewReminderASP.WcfService
                 command.Parameters.AddWithValue("@Reminders", events.Reminders);
 
                 connection.Open();
-                command.ExecuteNonQuery(); // This line executes the stored procedure
+                command.ExecuteNonQuery();
             }
         }
 
@@ -1100,7 +1100,6 @@ namespace NewReminderASP.WcfService
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Login", user.Login);
-                // Хеширование пароля перед добавлением
                 command.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(user.Password));
                 command.Parameters.AddWithValue("@Email", user.Email);
 
@@ -1117,7 +1116,6 @@ namespace NewReminderASP.WcfService
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@UserId", updateUser.Id);
                 command.Parameters.AddWithValue("@Login", updateUser.Login);
-                // Хеширование пароля перед обновлением
                 command.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(updateUser.Password));
                 command.Parameters.AddWithValue("@Email", updateUser.Email);
 
@@ -1190,7 +1188,7 @@ namespace NewReminderASP.WcfService
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@ID", updatedRole.Id);
                 command.Parameters.AddWithValue("@Name", updatedRole.Name);
-                
+
 
 
                 connection.Open();
@@ -1421,7 +1419,7 @@ namespace NewReminderASP.WcfService
                     while (reader.Read())
                         if (user == null)
                         {
-                            var hashedPassword = reader.GetString(4); // Retrieve hashed password
+                            var hashedPassword = reader.GetString(4);
 
                             user = new UserDto
                             {

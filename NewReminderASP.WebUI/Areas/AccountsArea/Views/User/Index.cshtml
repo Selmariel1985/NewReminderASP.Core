@@ -8,7 +8,6 @@
 
 <link href="~/styles.css" rel="stylesheet"/>
 
-
 <div class="user-container">
     <p>Username: @Model.Item2.Identity.Name</p>
     <div class="user-container__roles">
@@ -32,7 +31,7 @@
         </p>
     </div>
 </div>
-<br />
+<br/>
 <div class="header-bar">
     <div class="user-info">
         <a href="@Url.Action("SignOut", "User")" class="btn btn-eco">
@@ -40,29 +39,66 @@
         </a>
     </div>
 </div>
-<br />
+<br/>
 <div class="form-container">
     <h2>User List</h2>
-    <table class="table-eco">
-        <tr>
-            <th>ID</th>
-            <th>Login</th>
-            <th>Email</th>
-            <th>Roles</th>
-        </tr>
-        @foreach (var user in Model.Item1)
-        {
+    <form action="@Url.Action("Index")" method="get">
+        <div class="filter-bar">
+            <label for="orderBy">Sort by:</label>
+            <select id="orderBy" name="orderBy">
+                <option value="Id">ID</option>
+                <option value="Login">Login</option>
+                <option value="Email">Email</option>
+                <option value="Roles">Roles</option>
+            </select>
+            <label for="sortOrder">Order:</label>
+            <select id="sortOrder" name="sortOrder">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+            <input type="submit" value="Filter" class="btn"/>
+        </div>
+        <table class="table-eco">
             <tr>
-                <td>@user.Id</td>
-                <td>@Html.ActionLink(user.Login, "Details", new { id = user.Id })</td>
-                <td>@user.Email</td>
-                <td>
-                    @foreach (var role in user.UserRoles)
-                    {
-                        <span>@role.Role.Name</span>
-                    }
-                </td>
+                <th>@Html.ActionLink("ID", "Index", new { orderBy = "Id", sortOrder = ViewBag.OrderBy == "Id" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Login", "Index", new { orderBy = "Login", sortOrder = ViewBag.OrderBy == "Login" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Email", "Index", new { orderBy = "Email", sortOrder = ViewBag.OrderBy == "Email" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Roles", "Index", new { orderBy = "Roles", sortOrder = ViewBag.OrderBy == "Roles" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
             </tr>
+            @foreach (var user in Model.Item1)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@Html.ActionLink(user.Login, "Details", new { id = user.Id })</td>
+                    <td>@user.Email</td>
+                    <td>
+                        @foreach (var role in user.UserRoles)
+                        {
+                            <span>@role.Role.Name</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+       
+    </form>
+    <div class="pagination">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
         }
-    </table>
+
+   
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage + 1 })" class="btn btn-eco">Next</a>
+        }
+     
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+        }
+
+    </div>
 </div>

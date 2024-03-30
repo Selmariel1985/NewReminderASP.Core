@@ -13,7 +13,7 @@ namespace NewReminderASP.Domain.Entities
         public int UserId { get; set; }
         [Required(ErrorMessage = "Please enter the Role")]
         public int RoleId { get; set; }
-        public string RoleIds { get; set; }
+
         public List<int> SelectedRoleIds { get; set; }
 
         public virtual User User { get; set; }
@@ -21,6 +21,6 @@ namespace NewReminderASP.Domain.Entities
 
         public List<User> Users { get; set; }
         public List<Role> Roles { get; set; }
-        
-}
+
+    }
 }

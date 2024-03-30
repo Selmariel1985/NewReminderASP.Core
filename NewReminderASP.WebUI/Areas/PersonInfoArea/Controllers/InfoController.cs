@@ -2,12 +2,13 @@
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
 {
-    public class InfoController : Controller
+    public class InfoController : BaseController
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IPersonalInformationProvider _provider;
@@ -20,24 +21,35 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
         }
 
 
-        public ActionResult Index()
+        public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
-            try
-            {
-                var tt = _provider.GetPersonalInfos();
-                return View(tt);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error("Error fetching personal information", ex);
-                return View("Error");
-            }
+            var personalInfo = _provider.GetPersonalInfos().AsQueryable();
+            const int pageSize = 10;
+
+            var paginatedPersonalInfo = DynamicSortAndPaginate(personalInfo, orderBy, sortOrder, page, pageSize).ToList();
+
+
+            int totalPersonalInfo = personalInfo.Count();
+            int totalPages = (int)Math.Ceiling((double)totalPersonalInfo / pageSize);
+
+            ViewBag.OrderBy = orderBy;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(paginatedPersonalInfo);
         }
+
+      
 
         public ActionResult Edit(string login)
         {
             var personalInfo = _provider.GetPersonalInfo(login);
-            if (personalInfo == null) return HttpNotFound();
+            if (personalInfo == null)
+            {
+               
+                personalInfo = new PersonalInfo { Login = login }; 
+            }
             return View(personalInfo);
         }
 
@@ -56,6 +68,9 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
 
 
         }
+
+
+
         public ActionResult Details(string login)
         {
             var personalInfo = _provider.GetPersonalInfo(login);
@@ -114,17 +129,17 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
                 return View(_provider.GetPersonalInfo(login));
             }
         }
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            if (!filterContext.ExceptionHandled)
-            {
-                _logger.Error("An unhandled exception occurred", filterContext.Exception);
-                filterContext.Result = new ViewResult
-                {
-                    ViewName = "Error"
-                };
-                filterContext.ExceptionHandled = true;
-            }
-        }
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    if (!filterContext.ExceptionHandled)
+        //    {
+        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
+        //        filterContext.Result = new ViewResult
+        //        {
+        //            ViewName = "Error"
+        //        };
+        //        filterContext.ExceptionHandled = true;
+        //    }
+        //}
     }
 }

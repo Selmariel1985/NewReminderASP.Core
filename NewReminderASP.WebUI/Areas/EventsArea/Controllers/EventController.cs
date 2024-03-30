@@ -1,12 +1,14 @@
 ﻿using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
+using System;
+using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 {
-    public class EventController : Controller
+    public class EventController : BaseController
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IEventProvider _provider;
@@ -20,12 +22,26 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 
         }
 
-
-        public ActionResult Index()
+        public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
-            var tt = _provider.GeEvents();
-            return View(tt);
+            var events = _provider.GeEvents().AsQueryable();
+            const int pageSize = 10;
+
+            var paginatEdevents = DynamicSortAndPaginate(events, orderBy, sortOrder, page, pageSize).ToList();
+
+
+            int totalEvents = events.Count();
+            int totalPages = (int)Math.Ceiling((double)totalEvents / pageSize);
+
+            ViewBag.OrderBy = orderBy;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(paginatEdevents);
         }
+
+       
 
         public ActionResult Edit(int id)
         {
@@ -121,11 +137,25 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult GetEventTypes()
+        public ActionResult GetEventTypes(string orderBy, string sortOrder, int page = 1)
         {
-            var tt = _provider.GetEventTypes();
-            return View(tt);
+            var eventsTypes = _provider.GetEventTypes().AsQueryable();
+            const int pageSize = 10;
+
+            var paginatedEventsTypes = DynamicSortAndPaginate(eventsTypes, orderBy, sortOrder, page, pageSize).ToList();
+
+
+            int totalEventsTypes = eventsTypes.Count();
+            int totalPages = (int)Math.Ceiling((double)totalEventsTypes / pageSize);
+
+            ViewBag.OrderBy = orderBy;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(paginatedEventsTypes);
         }
+        
         public ActionResult EditEventTypes(int id)
         {
             var eventsTypes = _provider.GetEventType(id);
@@ -188,11 +218,25 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return RedirectToAction("GetEventTypes");
         }
 
-        public ActionResult GetEventRecurrences()
+        public ActionResult GetEventRecurrences(string orderBy, string sortOrder, int page = 1)
         {
-            var tt = _provider.GetEventRecurrences();
-            return View(tt);
+            var eventRecurrences = _provider.GetEventRecurrences().AsQueryable();
+            const int pageSize = 10;
+
+            var paginatedEventRecurrences = DynamicSortAndPaginate(eventRecurrences, orderBy, sortOrder, page, pageSize).ToList();
+
+
+            int totalEventRecurrences = eventRecurrences.Count();
+            int totalPages = (int)Math.Ceiling((double)totalEventRecurrences / pageSize);
+
+            ViewBag.OrderBy = orderBy;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(paginatedEventRecurrences);
         }
+       
         public ActionResult EditEventRecurrences(int id)
         {
             var eventRecurrences = _provider.GetEventRecurrence(id);
@@ -255,11 +299,26 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return RedirectToAction("GetEventRecurrences");
         }
 
-        public ActionResult GetEventDetails()
+        public ActionResult GetEventDetails(string orderBy, string sortOrder, int page = 1)
         {
-            var ttt = _provider.GetEventDetails();
-            return View(ttt);
+            var eventDetail = _provider.GetEventDetails().AsQueryable();
+            const int pageSize = 10;
+
+            var paginatedEventDetail = DynamicSortAndPaginate(eventDetail, orderBy, sortOrder, page, pageSize).ToList();
+
+
+            int totalEventDetail = eventDetail.Count();
+            int totalPages = (int)Math.Ceiling((double)totalEventDetail / pageSize);
+
+            ViewBag.OrderBy = orderBy;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(paginatedEventDetail);
         }
+
+        
 
 
         public ActionResult EditEventDetails(int id)

@@ -1,15 +1,18 @@
 ﻿using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
 {
-    public class PhoneController : Controller
+    public class PhoneController : BaseController
     {
         // GET: Phone
-        private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
         private readonly IPhoneProvider _provider;
         private readonly IUserProvider _userProvider;
         private readonly ICountryProvider _countryProvider;
@@ -23,12 +26,28 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
 
         }
 
-
-        public ActionResult Index()
+        public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
-            var tt = _provider.GetUserPhones();
-            return View(tt);
+            var userPhones = _provider.GetUserPhones().AsQueryable();
+            const int pageSize = 10;
+
+            var paginatedUserPhones = DynamicSortAndPaginate(userPhones, orderBy, sortOrder, page, pageSize).ToList();
+
+
+            int totalUserPhones = userPhones.Count();
+            int totalPages = (int)Math.Ceiling((double)totalUserPhones / pageSize);
+
+            ViewBag.OrderBy = orderBy;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(paginatedUserPhones);
         }
+
+
+        
+
         public ActionResult Edit(int id)
         {
 
@@ -57,7 +76,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             }
 
             userPhone.PhonesTypes = _provider.GetPhoneTypes();
-            userPhone.Countries = _countryProvider.GetCountries(); // Ensure Countries property is populated
+            userPhone.Countries = _countryProvider.GetCountries(); 
             return View(userPhone);
 
         }
@@ -113,12 +132,28 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return RedirectToAction("Index");
         }
 
-
-        public ActionResult GetPhoneType()
+        public ActionResult GetPhoneType(string orderBy, string sortOrder, int page = 1)
         {
-            var tt = _provider.GetPhoneTypes();
-            return View(tt);
+            var phoneType = _provider.GetPhoneTypes().AsQueryable();
+            const int pageSize = 10;
+
+            var paginatedPhoneType = DynamicSortAndPaginate(phoneType, orderBy, sortOrder, page, pageSize).ToList();
+
+
+            int totalPhoneType = phoneType.Count();
+            int totalPages = (int)Math.Ceiling((double)totalPhoneType / pageSize);
+
+            ViewBag.OrderBy = orderBy;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(paginatedPhoneType);
         }
+
+        
+
+
         public ActionResult EditPhoneType(int id)
         {
             var phoneType = _provider.GetPhoneType(id);

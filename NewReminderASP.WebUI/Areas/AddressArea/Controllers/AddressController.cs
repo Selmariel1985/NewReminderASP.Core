@@ -1,13 +1,15 @@
 ﻿using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
+using System;
+using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 {
 
-    public class AddressController : Controller
+    public class AddressController : BaseController
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IAddressProvider _provider;
@@ -23,10 +25,23 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
         }
 
 
-        public ActionResult Index()
+        public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
-            var tt = _provider.GetAddresses();
-            return View(tt);
+            var addresses = _provider.GetAddresses().AsQueryable();
+            const int pageSize = 10;
+
+            var paginatedAddresses = DynamicSortAndPaginate(addresses, orderBy, sortOrder, page, pageSize).ToList();
+
+            
+            int totalAddresses = addresses.Count();
+            int totalPages = (int)Math.Ceiling((double)totalAddresses / pageSize);
+
+            ViewBag.OrderBy = orderBy;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(paginatedAddresses);
         }
 
         public ActionResult Details(int id)
@@ -61,7 +76,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             }
 
 
-            address.Countries = _countryProvider.GetCountries(); // Ensure Countries property is populated
+            address.Countries = _countryProvider.GetCountries(); 
             return View(address);
         }
 
@@ -85,8 +100,8 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             }
 
 
-            address.Users = _userProvider.GetUsers(); // Ensure Users property is populated
-            address.Countries = _countryProvider.GetCountries(); // Ensure Countries property is populated
+            address.Users = _userProvider.GetUsers(); 
+            address.Countries = _countryProvider.GetCountries(); 
             return View(address);
         }
 

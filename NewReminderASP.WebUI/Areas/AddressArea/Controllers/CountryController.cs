@@ -1,12 +1,14 @@
 ﻿using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
+using System;
+using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 {
-    public class CountryController : Controller
+    public class CountryController : BaseController
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly ICountryProvider _provider;
@@ -17,11 +19,28 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
         }
 
 
-        public ActionResult IndexCountry()
+        public ActionResult IndexCountry(string orderBy, string sortOrder, int page = 1)
         {
-            var tt = _provider.GetCountries();
-            return View(tt);
+            var countries = _provider.GetCountries().AsQueryable();
+            const int pageSize = 10;
+
+            var paginatedCountries = DynamicSortAndPaginate(countries, orderBy, sortOrder, page, pageSize).ToList();
+
+            
+            int totalСountries = countries.Count();
+            int totalPages = (int)Math.Ceiling((double)totalСountries / pageSize);
+
+            ViewBag.OrderBy = orderBy;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(paginatedCountries);
         }
+
+
+
+
 
         public ActionResult DetailsCountry(int id)
         {

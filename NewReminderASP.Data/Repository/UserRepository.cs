@@ -113,7 +113,7 @@ namespace NewReminderASP.Data.Repository
 
         public void UpdateUserRoles(int userId, string roleIds)
         {
-            _userClient.UpdateUserRoles(userId,  roleIds);
+            _userClient.UpdateUserRoles(userId, roleIds);
         }
     }
 }
