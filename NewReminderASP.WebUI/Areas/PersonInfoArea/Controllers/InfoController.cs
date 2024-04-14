@@ -20,7 +20,10 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             _userProvider = userProvider;
         }
 
-
+        public ActionResult SignOut()
+        {
+            return SignOutAndRedirectToLogin("LoginArea");
+        }
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
             var personalInfo = _provider.GetPersonalInfos().AsQueryable();
@@ -129,17 +132,17 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
                 return View(_provider.GetPersonalInfo(login));
             }
         }
-        //protected override void OnException(ExceptionContext filterContext)
-        //{
-        //    if (!filterContext.ExceptionHandled)
-        //    {
-        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
-        //        filterContext.Result = new ViewResult
-        //        {
-        //            ViewName = "Error"
-        //        };
-        //        filterContext.ExceptionHandled = true;
-        //    }
-        //}
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
+        }
     }
 }

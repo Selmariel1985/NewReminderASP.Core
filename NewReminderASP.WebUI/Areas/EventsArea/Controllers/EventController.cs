@@ -21,7 +21,10 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             _userProvider = userProvider;
 
         }
-
+        public ActionResult SignOut()
+        {
+            return SignOutAndRedirectToLogin("LoginArea");
+        }
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
             var events = _provider.GeEvents().AsQueryable();

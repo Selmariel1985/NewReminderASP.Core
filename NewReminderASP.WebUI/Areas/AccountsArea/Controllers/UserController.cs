@@ -17,19 +17,23 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IUserProvider _provider;
+        private readonly IAddressProvider _addressProvider;
+        private readonly IPhoneProvider _phoneProvider;
+        private readonly IPersonalInformationProvider _personalInfoProvider;
 
-
-        public UserController(IUserProvider provider)
+        public UserController(IUserProvider userProvider, IAddressProvider addressProvider, IPhoneProvider phoneProvider, IPersonalInformationProvider personalInfoProvider)
         {
-            _provider = provider;
+            _provider = userProvider;
+            _addressProvider = addressProvider;
+            _phoneProvider = phoneProvider;
+            _personalInfoProvider = personalInfoProvider;
         }
 
         public ActionResult SignOut()
         {
-            FormsAuthentication.SignOut(); // Signs the user out
-            return
-                RedirectToAction("Login", "Login", new { area = "LoginArea" });
+            return SignOutAndRedirectToLogin("LoginArea");
         }
+
 
 
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
@@ -56,7 +60,20 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
         {
             var user = _provider.GetUser(id);
             if (user == null) return HttpNotFound();
-            return View(user);
+
+            var address = _addressProvider.GetAddress(id);
+            var phone = _phoneProvider.GetUserPhone(id);
+            var personalInfo = _personalInfoProvider.GetPersonalInfo(user.Login); 
+
+            var viewModel = new UserDetailsViewModel
+            {
+                User = user,
+                Address = address,
+                Phone = phone,
+                PersonalInformation = personalInfo
+            };
+
+            return View(viewModel);
         }
 
 

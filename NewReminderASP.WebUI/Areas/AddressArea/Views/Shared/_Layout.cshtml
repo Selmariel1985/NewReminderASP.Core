@@ -1,47 +1,68 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <meta name="description" content="Your website description here">
+    <meta name="keywords" content="key1, key2, key3">
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/styles.css" rel="stylesheet" />
+    <link href="~/styles.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Reminder", "Index", "User", new { area = "AccountsArea" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("User", "Index", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Register", "Register", "Register", new { area = "RegisterArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Countries", "IndexCountry", "Country", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Addresses", "Index", "Address", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Event", "Index", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("PersonInfo", "index", "Info", new { area = "PersonInfoArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Create Address", "Create", "Address", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Create Country", "CreateCountry", "Country", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Index Country", "IndexCountry", "Country", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
-                </ul>
-            </div>
+
+<div class="header-bar">
+    <div class="info">
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span>User Login: @Context.User.Identity.Name</span>
         </div>
-    </nav>
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        <div class="logout-btn">
+            <a href="@Url.Action("SignOut", "Address")" class="btn btn-eco">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
     </div>
+</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", false)
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Address Management</a>
+                <div class="dropdown-menu">
+                    <a href="@Url.Action("IndexCountry", "Country", new { area = "AddressArea" })" class="dropdown-item">Country</a>
+                    <a href="@Url.Action("CreateCountry", "Country", new { area = "AddressArea" })" class="dropdown-item">Create Country</a>
+
+                    <a href="@Url.Action("Index", "Address", new { area = "AddressArea" })" class="dropdown-item">Address</a>
+
+                    <a href="@Url.Action("Create", "Address", new { area = "AddressArea" })" class="dropdown-item">Create Address</a>
+
+
+                </div>
+            </li>
+
+
+        </div>
+
+    </div>
+</nav>
+
+
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer class="footer">
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+
+    <script src="~/scripts/bootstrap.bundle.min.js"></script>
+</div>
 </body>
 </html>

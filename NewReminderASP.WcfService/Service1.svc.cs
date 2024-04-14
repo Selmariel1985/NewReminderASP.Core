@@ -802,7 +802,7 @@ namespace NewReminderASP.WcfService
                 command.Parameters.AddWithValue("@UserLogin", personalInfo.Login);
                 command.Parameters.AddWithValue("@FirstName", personalInfo.FirstName);
                 command.Parameters.AddWithValue("@LastName", personalInfo.LastName);
-                command.Parameters.AddWithValue("@MiddleName", personalInfo.MiddleName);
+                command.Parameters.AddWithValue("@MiddleName", personalInfo?.MiddleName);
                 command.Parameters.AddWithValue("@Birthdate", personalInfo.Birthdate);
                 command.Parameters.AddWithValue("@Gender", personalInfo.Gender);
 
@@ -1173,7 +1173,7 @@ namespace NewReminderASP.WcfService
             {
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.AddWithValue("@Name", role.Name);
+                command.Parameters.AddWithValue("@Name", role?.Name);
 
                 connection.Open();
                 command.ExecuteNonQuery();

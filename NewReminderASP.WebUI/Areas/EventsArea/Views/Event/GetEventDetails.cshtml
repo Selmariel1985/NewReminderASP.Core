@@ -9,7 +9,7 @@
 
      <h2>Event Detail</h2>
 
-     <<form action="@Url.Action("GetEventDetails")" method="get">
+     <form action="@Url.Action("GetEventDetails")" method="get">
          <div class="filter-bar">
              <label for="orderBy">Sort by:</label>
              <select id="orderBy" name="orderBy">
@@ -50,16 +50,16 @@
              <a href="@Url.Action("GetEventDetails", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
          }
 
+   
 
+         @for (int i = 1; i <= ViewBag.TotalPages; i++)
+         {
+             <a href="@Url.Action("GetEventDetails", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+         }
 
          @if (ViewBag.CurrentPage < ViewBag.TotalPages)
          {
              <a href="@Url.Action("GetEventDetails", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage + 1 })" class="btn btn-eco">Next</a>
-         }
-  
-         @for (int i = 1; i <= ViewBag.TotalPages; i++)
-         {
-             <a href="@Url.Action("GetEventDetails", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
          }
 
      </div>

@@ -1,39 +1,72 @@
-﻿@model NewReminderASP.Domain.Entities.User
+﻿@model NewReminderASP.Domain.Entities.UserDetailsViewModel
 
 @{
     ViewBag.Title = "User Details";
 }
 
-<link href="~/styles.css" rel="stylesheet"/>
+<link href="~/styles.css" rel="stylesheet" />
 <div class="details-details">
 
-    <h2>User Details: @Model.Login</h2>
-    <h2>User ID: @Model.Id</h2>
+    <h2>User Details: @Model.User.Login</h2>
+    <h2>User ID: @Model.User.Id</h2>
     <div>
 
 
         <dl>
-            <dt>@Html.DisplayNameFor(model => model.Login)</dt>
-            <dd>@Html.DisplayFor(model => model.Login)</dd>
+            <dt>@Html.DisplayNameFor(model => model.User.Login)</dt>
+            <dd>@Html.DisplayFor(model => model.User.Login)</dd>
 
             <dt>Roles</dt>
             <dd>
                 <ul class="roles-list">
-                    @foreach (var role in Model.UserRoles)
+                    @foreach (var role in Model.User.UserRoles)
                     {
                         <li>@role.Role.Name</li>
                     }
                 </ul>
             </dd>
 
-            <dt>@Html.DisplayNameFor(model => model.Email)</dt>
-            <dd>@Html.DisplayFor(model => model.Email)</dd>
+            <dt>@Html.DisplayNameFor(model => model.User.Email)</dt>
+            <dd>@Html.DisplayFor(model => model.User.Email)</dd>
+            
+            <dt>@Html.DisplayNameFor(model => model.PersonalInformation.FirstName)</dt>
+            <dd>@Html.DisplayFor(model => model.PersonalInformation.FirstName)</dd>
+            <dt>@Html.DisplayNameFor(model => model.PersonalInformation.LastName)</dt>
+            <dd>@Html.DisplayFor(model => model.PersonalInformation.LastName)</dd>
+            <dt>@Html.DisplayNameFor(model => model.PersonalInformation.MiddleName)</dt>
+            <dd>@Html.DisplayFor(model => model.PersonalInformation.MiddleName)</dd>
+            <dt>@Html.DisplayNameFor(model => model.PersonalInformation.Birthdate)</dt>
+            <dd>@Html.DisplayFor(model => model.PersonalInformation.Birthdate)</dd>
+            <dt>@Html.DisplayNameFor(model => model.PersonalInformation.Gender)</dt>
+            <dd>@Html.DisplayFor(model => model.PersonalInformation.Gender)</dd>
+            
+            <dt>@Html.DisplayNameFor(model => model.Phone.PhoneNumber)</dt>
+            <dd>@Html.DisplayFor(model => model.Phone.PhoneNumber)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Phone.PhoneTypes)</dt>
+            <dd>@Html.DisplayFor(model => model.Phone.PhoneTypes)</dd>
+            
+            <dt>@Html.DisplayNameFor(model => model.Address.Street)</dt>
+            <dd>@Html.DisplayFor(model => model.Address.Street)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Address.City)</dt>
+            <dd>@Html.DisplayFor(model => model.Address.City)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Address.CountryName)</dt>
+            <dd>@Html.DisplayFor(model => model.Address.CountryName)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Address.PostalCode)</dt>
+            <dd>@Html.DisplayFor(model => model.Address.PostalCode)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Address.Description)</dt>
+            <dd>@Html.DisplayFor(model => model.Address.Description)</dd>
+
         </dl>
     </div>
 
     <div class="btn-group" role="group" aria-label="User actions">
-        @Html.ActionLink("Edit", "EditUserAndRoles", new { id = Model.Id }, new { @class = "btn" })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn" })
+        @Html.ActionLink("Edit", "EditUserAndRoles", new { id = Model.User.Id }, new { @class = "btn" })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.User.Id }, new { @class = "btn" })
         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
     </div>
 </div>

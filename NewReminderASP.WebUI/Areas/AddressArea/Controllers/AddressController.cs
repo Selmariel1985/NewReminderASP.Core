@@ -23,6 +23,10 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             _countryProvider = countryProvider;
 
         }
+        public ActionResult SignOut()
+        {
+            return SignOutAndRedirectToLogin("LoginArea");
+        }
 
 
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)

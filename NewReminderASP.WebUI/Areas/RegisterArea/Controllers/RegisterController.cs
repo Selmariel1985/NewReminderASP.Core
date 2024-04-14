@@ -14,22 +14,15 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly IUserProvider _userProvider;
-        private readonly IPhoneProvider _phoneProvider;
-        private readonly IAddressProvider _addressProvider;
-        private readonly IPersonalInformationProvider _personalInfoProvider;
-        private readonly ICountryProvider _countryProvider;
+       
 
 
 
 
-        public RegisterController(IUserProvider userProvider, IPhoneProvider phoneProvider, IAddressProvider addressProvider,
-            IPersonalInformationProvider personalInfoProvider, ICountryProvider countryProvider)
+        public RegisterController(IUserProvider userProvider)
         {
             _userProvider = userProvider;
-            _phoneProvider = phoneProvider;
-            _addressProvider = addressProvider;
-            _personalInfoProvider = personalInfoProvider;
-            _countryProvider = countryProvider;
+          
 
         }
 
@@ -51,11 +44,7 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
             var user = new RegisterViewModel
             {
                 User = new User(),
-                Address = new Address(),
-                PersonalInfo = new PersonalInfo(),
-                UserPhone = new UserPhone(),
-                PhoneTypes = _phoneProvider.GetPhoneTypes(),
-                Countries = _countryProvider.GetCountries()
+               
             };
             return View(user);
         }
@@ -88,25 +77,17 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    model.Address.Login = model.User.Login;
-                    model.UserPhone.Login = model.User.Login;
-                    model.Address.CountryID = model.UserPhone.CountryID;
-                    model.PersonalInfo.Login = model.User.Login;
+                   
 
                     _userProvider.AddUser(model.User);
 
-                    _phoneProvider.AddUserPhoneRegister(model.UserPhone);
-
-
-                    _addressProvider.AddAddressRegister(model.Address);
-                    _personalInfoProvider.AddPersonalInfo(model.PersonalInfo.Login, model.PersonalInfo);
+                   
 
                     return RedirectToAction("Login", "Login", new { area = "LoginArea" });
                 }
             }
 
-            model.Countries = _countryProvider.GetCountries();
-            model.PhoneTypes = _phoneProvider.GetPhoneTypes();
+            
 
             return View(model);
         }

@@ -9,17 +9,28 @@
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Assuming this setting is consistent with your design */
     overflow: hidden;
+    color: white; /* Set the font color for form here */
 }
 
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-weight: normal; /* Reset the font weight from unset to normal */
+}
+
+
+
 .input-container {
-    
     padding: 5px;
 }
 
 .btn {
-   
     border: none;
     padding: 10px 20px;
     text-align: center;
@@ -41,55 +52,166 @@
 
 body,
 html {
+    background-image: linear-gradient(to right, #ffecd2, #fcb69f);
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
-    background-image: url('/Nature.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    
+}
+
+    .header-bar
+        {
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; 
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-right: auto; 
+    font-size: 1rem;
+}
+
+    .user-info span {
+        margin-left: 0.5rem;
+    }
+
+.logout-btn {
+    margin-left: auto; 
+}
+
+    .logout-btn a {
+        padding: 0.5rem 1rem;
+        background-color: #ff4d4d; 
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        font-weight: bold; 
+    }
+
+        .logout-btn a:hover {
+            background-color: #ff6666; 
+        }
+
+.user-info i {
+    font-size: 1.5rem; 
+    color: #fff;
 }
 
 
-.registration-form {
-    max-width: 600px;
-    margin: 0 auto; 
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+.navbar {
+    background-color: #343a40;
+    color: #fff;
+    padding: 1rem 0;
 }
 
+.navbar-brand {
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+    margin-right: 2rem;
+}
 
-fieldset {
+.navbar-toggler {
     border: none;
-    padding: 20px;
-    margin-bottom: 20px;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
+
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .navbar-nav .nav-link {
+        display: block;
+        padding: 1rem;
+        transition: background 0.3s ease;
+    }
+
+    .navbar-nav .nav-item:hover .dropdown-menu {
+        display: block;
+    }
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #343a40;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-item {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+@media (max-width: 992px) {
+    .navbar {
+        position: relative;
+    }
+
+    .navbar-nav {
+        position: absolute;
+        background-color: #343a40;
+        width: 100%;
+        left: 0;
+        top: 60px;
+        flex-direction: column;
+        align-items: start;
+    }
+}
+
+.footer {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+
+
 
 legend {
-    font-size: 18px; 
+    font-size: 18px;
     font-weight: bold;
-    margin-bottom: 10px; 
-    padding: 5px 10px; 
-    border: 1px solid #ddd; 
-    border-radius: 5px; 
-    background-color: #f5f5f5; 
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f5f5f5;
 }
 
- 
-.form-group {
-    margin-bottom: 15px;
-    color: black;
-}
+
+
+
+
+
 
 .control-label {
-    
     font-weight: bold;
     display: block;
-    width: 200px; 
+    width: 200px;
     margin-bottom: 5px;
 }
 
@@ -102,15 +224,11 @@ legend {
     box-sizing: border-box;
 }
 
-    
-    .form-control[type="password"] {
-        font-family: monospace; 
-    }
 
-    
-    .form-control[rows] {
-        height: auto;
-    }
+
+
+
+
 
 
 .btn-primary {
@@ -128,30 +246,7 @@ legend {
 
 
 
-.navbar {
-    background-color: #343a40;
-    padding: 8px 16px;
-    box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.5);
-}
 
-.navbar-brand {
-    color: #ffffff;
-    font-size: 1.5rem;
-    transition: color 0.3s;
-}
-
-    .navbar-brand:hover {
-        color: #ff5733;
-    }
-
-.navbar-nav .nav-link {
-    color: #ffffff;
-    transition: color 0.3s;
-}
-
-    .navbar-nav .nav-link:hover {
-        color: #ff5733;
-    }
 
 
 .content-wrapper {
@@ -159,27 +254,17 @@ legend {
 }
 
 
-footer {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px 0;
-    background-color: #343a40;
-    color: #ffffff;
-}
+
 
 
 
 .form-container {
     margin-top: 20px;
     padding: 20px;
-    
     border-radius: 10px;
-    
-    
     background-color: #f9f9f9;
     border: 1px solid #ddd;
-    
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -229,29 +314,30 @@ footer {
 
     .table-eco th {
         color: #fff;
-        background-color: #4CAF50; 
+        background-color: #4CAF50;
     }
 
     .table-eco tr:nth-child(odd) {
-        background-color: #f2f2f2; 
+        background-color: #f2f2f2;
     }
 
     .table-eco tr:nth-child(even) {
-        background-color: #e6e6e6; 
+        background-color: #e6e6e6;
     }
 
 
     .table-eco tr:hover {
         background-color: #a0a0a0;
     }
+
     .table-eco th a {
-        color: #fff; 
-        text-decoration: none; 
+        color: #fff;
+        text-decoration: none;
     }
 
     .table-eco td a {
-        color: #3E2723; 
-        text-decoration: none; 
+        color: #3E2723;
+        text-decoration: none;
     }
 
 
@@ -272,7 +358,7 @@ footer {
 
 
 .details-details {
-    font-family: 'Roboto', sans-serif; 
+    font-family: 'Roboto', sans-serif;
     background-color: #f4f4f4;
     padding: 20px;
     border-radius: 10px;
@@ -281,14 +367,14 @@ footer {
     max-width: 600px;
 }
 
-   
+
     .details-details h2 {
-        color: #ff3366; 
+        color: #ff3366;
         text-align: center;
-        font-size: 24px; 
+        font-size: 24px;
     }
 
-    
+
     .details-details dl {
         display: grid;
         grid-template-columns: 30% 70%;
@@ -314,7 +400,7 @@ footer {
     }
 
     .details-details a {
-        color: #5bc0de; 
+        color: #5bc0de;
         transition: color 0.3s;
     }
 
@@ -324,13 +410,13 @@ footer {
     background-color: #20a8d8;
     border-color: #20a8d8;
     padding: 10px 20px;
-    border-radius: 20px; 
+    border-radius: 20px;
     text-decoration: none;
     transition: background-color 0.3s, border-color 0.3s;
 }
 
     .btn-group .btn:hover {
-        background-color: #1676a0; 
+        background-color: #1676a0;
         border-color: #1676a0;
     }
 
@@ -433,6 +519,7 @@ footer {
     box-shadow: 2px 2px 5px #888888;
     background-color: #f8f8f8;
     margin-right: 10px;
+    color: #333;
 }
 
     .role-tile input[type="checkbox"] {
@@ -450,7 +537,6 @@ footer {
 
     .pagination a {
         text-decoration: none;
-        
         padding: 8px 12px;
         border: 1px solid #555;
         margin: 0 5px;
@@ -470,13 +556,13 @@ footer {
 }
 
     .filter-bar select:hover, .filter-bar select:focus {
-        border-color: #4CAF50; 
+        border-color: #4CAF50;
     }
 
 .filter-bar .btn {
     padding: 8px 16px;
     border: none;
-    background-color: #007bff; 
+    background-color: #007bff;
     color: white;
     text-align: center;
     text-decoration: none;
@@ -488,5 +574,5 @@ footer {
 }
 
     .filter-bar .btn:hover {
-        background-color: #0056b3; 
+        background-color: #0056b3;
     }

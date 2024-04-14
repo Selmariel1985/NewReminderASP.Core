@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace NewReminderASP.WebUI.Areas
 {
@@ -67,7 +68,11 @@ namespace NewReminderASP.WebUI.Areas
             return roles != null ? string.Join(", ", roles) : string.Empty;
         }
 
-
+        protected ActionResult SignOutAndRedirectToLogin(string area)
+        {
+            FormsAuthentication.SignOut(); // Signs the user out
+            return RedirectToAction("Login", "Login", new { area = area });
+        }
 
     }
 

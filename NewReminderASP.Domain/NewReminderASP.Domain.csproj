@@ -54,6 +54,7 @@
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserAndRolesModel.cs" />
+    <Compile Include="Entities\UserDetailsViewModel.cs" />
     <Compile Include="Entities\UserPhone.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

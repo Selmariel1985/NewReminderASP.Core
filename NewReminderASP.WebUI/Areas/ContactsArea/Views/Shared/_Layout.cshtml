@@ -9,40 +9,62 @@
     <link href="~/styles.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Reminder", "Index", "User", new { area = "AccountsArea" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("User", "Index", "User", new { area = "AccountsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Register", "Register", "Register", new { area = "RegisterArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Countries", "IndexCountry", "Country", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Addresses", "Index", "Address", new { area = "AddressArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Event", "Index", "Event", new { area = "EventsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("PersonInfo", "index", "Info", new { area = "PersonInfoArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Create phone", "Create", "Phone", new { area = "ContactsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Create PhoneType", "CreatePhoneType", "Phone", new { area = "ContactsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Phone", "Index", "Phone", new { area = "ContactsArea" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Get PhoneType", "GetPhoneType", "Phone", new { area = "ContactsArea" }, new { @class = "nav-link" })</li>
-                </ul>
-            </div>
+
+
+
+<div class="header-bar">
+    <div class="info">
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span>User Login: @Context.User.Identity.Name</span>
         </div>
-    </nav>
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        <div class="logout-btn">
+            <a href="@Url.Action("SignOut", "Phone")" class="btn btn-eco">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
     </div>
+</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", false)
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Phone Management</a>
+                <div class="dropdown-menu">
+                    <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })" class="dropdown-item">Phone</a>
+                    <a href="@Url.Action("Create", "Phone", new { area = "ContactsArea" })" class="dropdown-item">Create Phone</a>
+
+                    <a href="@Url.Action("GetPhoneType", "Phone", new { area = "ContactsArea" })" class="dropdown-item">PhoneType</a>
+
+                    <a href="@Url.Action("CreatePhoneType", "Phone", new { area = "ContactsArea" })" class="dropdown-item">Create PhoneType</a>
+
+
+
+                </div>
+            </li>
+
+
+        </div>
+
+    </div>
+</nav>
+
+
+
+
+
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer class="footer">
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+
+    <script src="~/scripts/bootstrap.bundle.min.js"></script>
+</div>
 </body>
 </html>

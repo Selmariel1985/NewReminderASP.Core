@@ -41,19 +41,19 @@
     <div class="pagination">
         @if (ViewBag.CurrentPage > 1)
         {
-            <a href="@Url.Action("Role", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
         }
 
+   
 
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+        }
 
         @if (ViewBag.CurrentPage < ViewBag.TotalPages)
         {
-            <a href="@Url.Action("Role", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage + 1 })" class="btn btn-eco">Next</a>
-        }
-  
-        @for (int i = 1; i <= ViewBag.TotalPages; i++)
-        {
-            <a href="@Url.Action("Role", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage + 1 })" class="btn btn-eco">Next</a>
         }
 
     </div>

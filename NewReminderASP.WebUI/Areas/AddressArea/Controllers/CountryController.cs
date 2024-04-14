@@ -18,7 +18,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             _provider = provider;
         }
 
-
+        
         public ActionResult IndexCountry(string orderBy, string sortOrder, int page = 1)
         {
             var countries = _provider.GetCountries().AsQueryable();
