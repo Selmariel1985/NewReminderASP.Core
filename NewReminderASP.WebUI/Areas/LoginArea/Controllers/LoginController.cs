@@ -59,7 +59,7 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
                 var encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 System.Web.HttpContext.Current.Response.Cookies.Add(authCookie);
-
+               
                 if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 {
                     _logger.InfoFormat("User authenticated successfully. Redirecting to: {0}", returnUrl);

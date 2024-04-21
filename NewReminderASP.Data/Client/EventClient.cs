@@ -4,26 +4,44 @@ using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace NewReminderASP.Data.Client
 {
     public class EventClient : IEventClient
     {
-        public List<Event> GeEvents()
+        public List<Event> GetEvents()
         {
-            var events = new List<Event>();
+            List<Event> events = new List<Event>();
+            string currentUserLogin = HttpContext.Current.User.Identity.Name;
+            bool isAdmin = HttpContext.Current.User.IsInRole("admin");
 
             using (var connection = new EventServiceClient())
             {
                 try
                 {
                     connection.Open();
+                    var allEvents = connection.GetEvents();
 
-                    var result = connection.GeEvents();
-
-                    if (result != null)
-                        foreach (var eventss in result)
-                            events.Add(new Event
+                    if (isAdmin)
+                    {
+                        events = allEvents.Select(eventss => new Event
+                        {
+                            ID = eventss.ID,
+                            Login = eventss.Login,
+                            EventTypes = eventss.EventType,
+                            Title = eventss.Title,
+                            Date = eventss.Date,
+                            Time = eventss.Time,
+                            Recurrence = eventss.Recurrence,
+                            Reminders = eventss.Reminders
+                        }).ToList();
+                    }
+                    else
+                    {
+                        events = allEvents.Where(eventss => eventss.Login == currentUserLogin)
+                            .Select(eventss => new Event
                             {
                                 ID = eventss.ID,
                                 Login = eventss.Login,
@@ -33,14 +51,13 @@ namespace NewReminderASP.Data.Client
                                 Time = eventss.Time,
                                 Recurrence = eventss.Recurrence,
                                 Reminders = eventss.Reminders
-                            });
+                            }).ToList();
+                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-
                     var logger = LogManager.GetLogger("ErrorLogger");
                     logger.Error("An error occurred", e);
                     throw;
@@ -122,6 +139,7 @@ namespace NewReminderASP.Data.Client
                 }
             }
         }
+        string currentUserLogin = HttpContext.Current.User.Identity.Name;
 
         public void AddEvent(Event events)
         {
@@ -133,7 +151,7 @@ namespace NewReminderASP.Data.Client
 
                     connection.AddEvent(new EventDto
                     {
-                        Login = events.Login,
+                        Login = currentUserLogin,
                         EventType = events.EventTypes,
                         Title = events.Title,
                         Date = events.Date,

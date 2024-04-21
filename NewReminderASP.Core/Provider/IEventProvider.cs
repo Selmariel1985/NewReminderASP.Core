@@ -5,7 +5,7 @@ namespace NewReminderASP.Core.Provider
 {
     public interface IEventProvider
     {
-        List<Event> GeEvents();
+        List<Event> GetEvents();
 
         Event GetEvent(int Id);
 

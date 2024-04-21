@@ -4,6 +4,7 @@ using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Web;
 
 namespace NewReminderASP.Data.Client
 {
@@ -12,7 +13,9 @@ namespace NewReminderASP.Data.Client
     {
         public List<Address> GetAddresses()
         {
-            var addresses = new List<Address>();
+            List<Address> addresses = new List<Address>();
+            string currentUserLogin = HttpContext.Current.User.Identity.Name;
+            bool isAdmin = HttpContext.Current.User.IsInRole("admin");
 
             using (var connection = new AddressServiceClient())
             {
@@ -23,18 +26,68 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetAddresses();
 
                     if (result != null)
-                        foreach (var adressDto in result)
-                            addresses.Add(
-                                new Address
+                    {
+                        foreach (var addressDto in result)
+                        {
+                            if (isAdmin || addressDto.Login == currentUserLogin)
+                            {
+                                addresses.Add(new Address
                                 {
-                                    ID = adressDto.ID,
-                                    Street = adressDto.Street,
-                                    City = adressDto.City,
-                                    CountryName = adressDto.CountryName,
-                                    PostalCode = adressDto.PostalCode,
-                                    Description = adressDto.Description,
-                                    Login = adressDto.Login
+                                    ID = addressDto.ID,
+                                    Street = addressDto.Street,
+                                    City = addressDto.City,
+                                    CountryName = addressDto.CountryName,
+                                    PostalCode = addressDto.PostalCode,
+                                    Description = addressDto.Description,
+                                    Login = addressDto.Login
                                 });
+                            }
+                        }
+                    }
+
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", ex);
+                    throw;
+                }
+            }
+
+            return addresses;
+        }
+
+        public List<Address> GetAddressesByUserId(int userId)
+        {
+            var addresses = new List<Address>(); // Create a list to store Address objects
+
+            using (var connection = new AddressServiceClient()) // Replace "AddressServiceClient" with the appropriate client
+            {
+                try
+                {
+                    connection.Open();
+
+                    var result = connection.GetAddressesByUserId(userId); // Call the appropriate method to get addresses by user ID
+
+                    if (result != null)
+                    {
+                        foreach (var addressDto in result)
+                        {
+                            var address = new Address
+                            {
+
+                                Street = addressDto.Street,
+                                City = addressDto.City,
+                                CountryName = addressDto.CountryName,
+                                PostalCode = addressDto.PostalCode,
+                                Description = addressDto.Description,
+                                UserID = addressDto.UserID,
+                                Login = addressDto.Login
+                            };
+                            addresses.Add(address); // Add Address object to the list
+                        }
+                    }
 
                     connection.Close();
                 }
@@ -47,7 +100,7 @@ namespace NewReminderASP.Data.Client
                 }
             }
 
-            return addresses;
+            return addresses; // Return the list of Address objects
         }
 
         public Address GetAddress(int id)

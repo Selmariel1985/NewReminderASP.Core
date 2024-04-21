@@ -50,7 +50,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         }
 
 
-        
+
 
         public ActionResult Edit(int id)
         {
@@ -80,7 +80,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             }
 
             userPhone.PhonesTypes = _provider.GetPhoneTypes();
-            userPhone.Countries = _countryProvider.GetCountries(); 
+            userPhone.Countries = _countryProvider.GetCountries();
             return View(userPhone);
 
         }
@@ -90,6 +90,25 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             if (userPhone == null) return HttpNotFound();
             return View(userPhone);
         }
+
+        public ActionResult GetUserPhonesByUserId(int id)
+        {
+
+
+
+            List<UserPhone> userPhone = _provider.GetUserPhonesByUserId(id).ToList();
+
+            // Check if result is null or empty
+            if (userPhone == null || !userPhone.Any())
+            {
+                return HttpNotFound($"No addresses found for user ID: {id}");
+            }
+
+            return View(userPhone);
+
+
+        }
+
         public ActionResult Create()
         {
             var model = new UserPhone();
@@ -155,7 +174,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View(paginatedPhoneType);
         }
 
-        
+
 
 
         public ActionResult EditPhoneType(int id)

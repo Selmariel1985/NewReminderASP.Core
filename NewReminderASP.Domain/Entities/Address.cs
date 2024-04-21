@@ -18,10 +18,12 @@ namespace NewReminderASP.Domain.Entities
         public string CountryName { get; set; }
 
 
+        public int UserID { get; set; }
         public string Login { get; set; }
 
         public virtual Country Country { get; set; }
         public List<User> Users { get; set; }
+        public List<Address> Addresses { get; set; }
         public List<Country> Countries { get; set; }
         public virtual User User { get; set; }
     }

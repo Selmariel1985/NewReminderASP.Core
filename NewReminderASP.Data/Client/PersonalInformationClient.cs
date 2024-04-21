@@ -4,6 +4,7 @@ using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Web;
 
 namespace NewReminderASP.Data.Client
 {
@@ -12,6 +13,8 @@ namespace NewReminderASP.Data.Client
         public List<PersonalInfo> GetPersonalInfos()
         {
             var personalInfos = new List<PersonalInfo>();
+            string currentUserLogin = HttpContext.Current.User.Identity.Name;
+            bool isAdmin = HttpContext.Current.User.IsInRole("admin");
 
             using (var connection = new PersonalInfoServiceClient())
             {
@@ -22,23 +25,28 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetPersonalInfos();
 
                     if (result != null)
+                    {
                         foreach (var personalInfo in result)
-                            personalInfos.Add(new PersonalInfo
+                        {
+                            if (isAdmin || personalInfo.Login == currentUserLogin)
                             {
-                                Login = personalInfo.Login,
-                                FirstName = personalInfo.FirstName,
-                                LastName = personalInfo.LastName,
-                                MiddleName = personalInfo.MiddleName,
-                                Birthdate = personalInfo.Birthdate,
-                                Gender = personalInfo.Gender
-                            });
+                                personalInfos.Add(new PersonalInfo
+                                {
+                                    Login = personalInfo.Login,
+                                    FirstName = personalInfo.FirstName,
+                                    LastName = personalInfo.LastName,
+                                    MiddleName = personalInfo.MiddleName,
+                                    Birthdate = personalInfo.Birthdate,
+                                    Gender = personalInfo.Gender
+                                });
+                            }
+                        }
+                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-
                     var logger = LogManager.GetLogger("ErrorLogger");
                     logger.Error("An error occurred", e);
                     throw;
@@ -47,6 +55,7 @@ namespace NewReminderASP.Data.Client
 
             return personalInfos;
         }
+
 
         public PersonalInfo GetPersonalInfo(string login)
         {

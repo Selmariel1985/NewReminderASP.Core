@@ -17,6 +17,10 @@ namespace NewReminderASP.Services.Contract
         AddressDto GetAddressByID(int id);
 
         [OperationContract]
+
+        List<AddressDto> GetAddressesByUserId(int userId);
+
+        [OperationContract]
         void UpdateAddress(AddressDto updatedAddress);
 
         [OperationContract]

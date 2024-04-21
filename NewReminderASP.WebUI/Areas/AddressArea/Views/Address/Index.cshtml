@@ -48,7 +48,8 @@
                     <td>@Html.ActionLink(!string.IsNullOrEmpty(address.CountryName) ? address.CountryName : "Default Name", "Details", "Address", new { id = address.ID }, null)</td>
                     <td>@address.PostalCode</td>
                     <td>@address.Description</td>
-                    <td>@address.Login</td>
+                    <td>@Html.ActionLink(!string.IsNullOrEmpty(address.Login) ? address.Login : "Default Name", "GetAddressesByUserID", "Address", new { id = address.ID }, null)</td>
+                    
                 </tr>
             }
         </table>

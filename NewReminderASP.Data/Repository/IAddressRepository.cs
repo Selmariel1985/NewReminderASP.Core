@@ -7,6 +7,7 @@ namespace NewReminderASP.Data.Repository
 
     {
         List<Address> GetAddresses();
+        List<Address> GetAddressesByUserId(int userId);
 
 
         Address GetAddress(int id);

@@ -449,6 +449,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/GetAddressByID", ReplyAction="http://tempuri.org/IAddressService/GetAddressByIDResponse")]
         System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.AddressDto> GetAddressByIDAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/GetAddressesByUserId", ReplyAction="http://tempuri.org/IAddressService/GetAddressesByUserIdResponse")]
+        NewReminderASP.Services.Dtos.AddressDto[] GetAddressesByUserId(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/GetAddressesByUserId", ReplyAction="http://tempuri.org/IAddressService/GetAddressesByUserIdResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.AddressDto[]> GetAddressesByUserIdAsync(int userId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddressService/UpdateAddress", ReplyAction="http://tempuri.org/IAddressService/UpdateAddressResponse")]
         void UpdateAddress(NewReminderASP.Services.Dtos.AddressDto updatedAddress);
         
@@ -523,6 +529,14 @@ namespace NewReminderASP.Data.ServiceReference1 {
         
         public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.AddressDto> GetAddressByIDAsync(int id) {
             return base.Channel.GetAddressByIDAsync(id);
+        }
+        
+        public NewReminderASP.Services.Dtos.AddressDto[] GetAddressesByUserId(int userId) {
+            return base.Channel.GetAddressesByUserId(userId);
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.AddressDto[]> GetAddressesByUserIdAsync(int userId) {
+            return base.Channel.GetAddressesByUserIdAsync(userId);
         }
         
         public void UpdateAddress(NewReminderASP.Services.Dtos.AddressDto updatedAddress) {
@@ -665,11 +679,11 @@ namespace NewReminderASP.Data.ServiceReference1 {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IEventService")]
     public interface IEventService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GeEvents", ReplyAction="http://tempuri.org/IEventService/GeEventsResponse")]
-        NewReminderASP.Services.Dtos.EventDto[] GeEvents();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEvents", ReplyAction="http://tempuri.org/IEventService/GetEventsResponse")]
+        NewReminderASP.Services.Dtos.EventDto[] GetEvents();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GeEvents", ReplyAction="http://tempuri.org/IEventService/GeEventsResponse")]
-        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GeEventsAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEvents", ReplyAction="http://tempuri.org/IEventService/GetEventsResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GetEventsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEvent", ReplyAction="http://tempuri.org/IEventService/GetEventResponse")]
         NewReminderASP.Services.Dtos.EventDto GetEvent(int Id);
@@ -813,12 +827,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public NewReminderASP.Services.Dtos.EventDto[] GeEvents() {
-            return base.Channel.GeEvents();
+        public NewReminderASP.Services.Dtos.EventDto[] GetEvents() {
+            return base.Channel.GetEvents();
         }
         
-        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GeEventsAsync() {
-            return base.Channel.GeEventsAsync();
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GetEventsAsync() {
+            return base.Channel.GetEventsAsync();
         }
         
         public NewReminderASP.Services.Dtos.EventDto GetEvent(int Id) {
@@ -984,6 +998,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetUserPhones", ReplyAction="http://tempuri.org/IPhoneService/GetUserPhonesResponse")]
         System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.UserPhoneDto[]> GetUserPhonesAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetUserPhonesByUserId", ReplyAction="http://tempuri.org/IPhoneService/GetUserPhonesByUserIdResponse")]
+        NewReminderASP.Services.Dtos.UserPhoneDto[] GetUserPhonesByUserId(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetUserPhonesByUserId", ReplyAction="http://tempuri.org/IPhoneService/GetUserPhonesByUserIdResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.UserPhoneDto[]> GetUserPhonesByUserIdAsync(int userId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPhoneService/GetUserPhone", ReplyAction="http://tempuri.org/IPhoneService/GetUserPhoneResponse")]
         NewReminderASP.Services.Dtos.UserPhoneDto GetUserPhone(int id);
         
@@ -1078,6 +1098,14 @@ namespace NewReminderASP.Data.ServiceReference1 {
         
         public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.UserPhoneDto[]> GetUserPhonesAsync() {
             return base.Channel.GetUserPhonesAsync();
+        }
+        
+        public NewReminderASP.Services.Dtos.UserPhoneDto[] GetUserPhonesByUserId(int userId) {
+            return base.Channel.GetUserPhonesByUserId(userId);
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.UserPhoneDto[]> GetUserPhonesByUserIdAsync(int userId) {
+            return base.Channel.GetUserPhonesByUserIdAsync(userId);
         }
         
         public NewReminderASP.Services.Dtos.UserPhoneDto GetUserPhone(int id) {

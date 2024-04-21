@@ -7,7 +7,7 @@ namespace NewReminderASP.Data.Client
     {
         List<Address> GetAddresses();
 
-
+        List<Address> GetAddressesByUserId(int userId);
         Address GetAddress(int id);
 
         Address GetAddressByID(int id);

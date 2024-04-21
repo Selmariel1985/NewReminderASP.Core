@@ -32,5 +32,10 @@ namespace NewReminderASP.Core.Provider
 
         void AddUserRoleNormal(string userLogin, string roleName);
         void UpdateUserRoles(int userId, string roleIds);
+
+
+        //void SendConfirmationEmail(User user, string confirmationLink);
+        //void GenerateConfirmationToken(User user);
+        //bool VerifyConfirmationToken(string token);
     }
 }

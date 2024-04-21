@@ -14,9 +14,9 @@ namespace NewReminderASP.Core.Provider
             _eventRepository = eventRepository;
         }
 
-        public List<Event> GeEvents()
+        public List<Event> GetEvents()
         {
-            return _eventRepository.GeEvents().ToList();
+            return _eventRepository.GetEvents().ToList();
         }
 
         public Event GetEvent(int Id)

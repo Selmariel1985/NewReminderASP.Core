@@ -4,7 +4,9 @@ using log4net;
 using log4net.Config;
 using NewReminderASP.Dependencies.Container;
 using System;
+using System.Diagnostics;
 using System.Security.Principal;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -40,35 +42,32 @@ namespace NewReminderASP.WebUI
             XmlConfigurator.Configure();
         }
 
+
+
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {
-            try
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (authCookie != null)
             {
-                if (FormsAuthentication.CookiesSupported && Request.Cookies[FormsAuthentication.FormsCookieName] != null)
+                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                if (authTicket != null && !authTicket.Expired)
                 {
-                    var ticket = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value);
-                    if (ticket != null && !ticket.Expired)
+                    var identity = new FormsIdentity(authTicket);
+                    string[] roles = authTicket.UserData.Split(',');
+
+                    GenericPrincipal newUser = new GenericPrincipal(identity, roles);
+                    HttpContext.Current.User = Thread.CurrentPrincipal = newUser;
+
+                    // Проверяем истечение времени неактивности
+                    if ((DateTime.Now - authTicket.IssueDate).TotalMinutes > 1)
                     {
-                        var roles = ticket.UserData.Split(',');
-                        HttpContext.Current.User = new GenericPrincipal(new FormsIdentity(ticket), roles);
+                        FormsAuthentication.SignOut();
+                        FormsAuthentication.RedirectToLoginPage();
+                        Debug.WriteLine("Session expired. Logging out user.");
                     }
                 }
-
-                if (HttpContext.Current.Request.Path.Contains("/RegisterArea/Register/Register"))
-                {
-                    HttpContext.Current.SkipAuthorization = true;
-                }
-            }
-            catch (Exception ex)
-            {
-
-                var log = LogManager.GetLogger(typeof(MvcApplication));
-                log.Error("An error occurred in Application_PostAuthenticateRequest", ex);
-
-
-                Response.StatusCode = 500;
-                Response.StatusDescription = "Internal Server Error";
             }
         }
+
     }
 }

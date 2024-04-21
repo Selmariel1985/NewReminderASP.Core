@@ -1,0 +1,37 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.Address>
+@{
+    ViewBag.Title = "Addresses List";
+}
+
+<link href="~/styles.css" rel="stylesheet" />
+
+
+
+<div class="details-details">
+
+    <h2>Addresses List</h2>
+    <hr />
+    @foreach (var address in Model)
+    {
+        <div>
+            <h3> @address.Login address</h3>
+            <dl>
+                <dt>Street:</dt>
+                <dd>@address.Street</dd>
+
+                <dt>City:</dt>
+                <dd>@address.City</dd>
+
+                <dt>Country:</dt>
+                <dd>@address.CountryName</dd>
+
+                <dt>Postal Code:</dt>
+                <dd>@address.PostalCode</dd>
+
+                <dt>Description:</dt>
+                <dd>@address.Description</dd>
+            </dl>
+        </div>
+        <hr />
+    }
+</div>

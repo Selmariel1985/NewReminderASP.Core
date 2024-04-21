@@ -4,6 +4,7 @@ using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Web;
 
 namespace NewReminderASP.Data.Client
 {
@@ -12,6 +13,8 @@ namespace NewReminderASP.Data.Client
         public List<UserPhone> GetUserPhones()
         {
             var userPhones = new List<UserPhone>();
+            string currentUserLogin = HttpContext.Current.User.Identity.Name;
+            bool isAdmin = HttpContext.Current.User.IsInRole("admin");
 
             using (var connection = new PhoneServiceClient())
             {
@@ -22,26 +25,29 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetUserPhones();
 
                     if (result != null)
+                    {
                         foreach (var userPhoneDto in result)
                         {
-                            var userPhone = new UserPhone
+                            if (isAdmin || userPhoneDto.Login == currentUserLogin)
                             {
-                                ID = userPhoneDto.ID,
-                                Login = userPhoneDto.Login,
-                                PhoneNumber = userPhoneDto.PhoneNumber,
-                                PhoneTypes = userPhoneDto.PhoneType,
-                                CountryName = userPhoneDto.CountryName
-                            };
+                                var userPhone = new UserPhone
+                                {
+                                    ID = userPhoneDto.ID,
+                                    Login = userPhoneDto.Login,
+                                    PhoneNumber = userPhoneDto.PhoneNumber,
+                                    PhoneTypes = userPhoneDto.PhoneType,
+                                    CountryName = userPhoneDto.CountryName
+                                };
 
-                            userPhones.Add(userPhone);
+                                userPhones.Add(userPhone);
+                            }
                         }
+                    }
 
                     connection.Close();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-
                     var logger = LogManager.GetLogger("ErrorLogger");
                     logger.Error("An error occurred", e);
                     throw;
@@ -50,6 +56,52 @@ namespace NewReminderASP.Data.Client
 
             return userPhones;
         }
+
+        public List<UserPhone> GetUserPhonesByUserId(int userId)
+        {
+            var userPhones = new List<UserPhone>();
+
+            using (var connection = new PhoneServiceClient())
+            {
+                try
+                {
+                    connection.Open();
+
+                    var result = connection.GetUserPhonesByUserId(userId);
+
+                    if (result != null)
+                    {
+                        foreach (var userPhoneDto in result)
+                        {
+                            var userPhone = new UserPhone()
+                            {
+
+                                ID = userPhoneDto.ID,
+                                Login = userPhoneDto.Login,
+                                UserID = userPhoneDto.UserID,
+                                PhoneNumber = userPhoneDto.PhoneNumber,
+                                PhoneTypes = userPhoneDto.PhoneType,
+                                CountryName = userPhoneDto.CountryName,
+
+                            };
+                            userPhones.Add(userPhone); // Add Address object to the list
+                        }
+                    }
+
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", ex);
+                    throw;
+                }
+            }
+
+            return userPhones; // Return the list of Address objects
+        }
+
 
 
         public UserPhone GetUserPhone(int id)

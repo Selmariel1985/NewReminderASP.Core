@@ -1,0 +1,33 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.UserPhone>
+@{
+    ViewBag.Title = "Phone List";
+}
+
+<link href="~/styles.css" rel="stylesheet" />
+
+
+
+<div class="details-details">
+
+    <h2>Phone List</h2>
+    <hr />
+    @foreach (var userPhone in Model)
+    {
+        <div>
+            <h3> @userPhone.Login phone</h3>
+            <dl>
+                <dt>Phone Number:</dt>
+                <dd>@userPhone.PhoneNumber</dd>
+
+                <dt>Phone Type:</dt>
+                <dd>@userPhone.PhoneTypes</dd>
+
+                <dt>Country:</dt>
+                <dd>@userPhone.CountryName</dd>
+
+                
+            </dl>
+        </div>
+        <hr />
+    }
+</div>

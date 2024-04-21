@@ -9,7 +9,7 @@ namespace NewReminderASP.WebUI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            
+
             routes.MapRoute(
                 "LoginArea",
                 "LoginArea/{controller}/{action}/{id}",
@@ -17,7 +17,7 @@ namespace NewReminderASP.WebUI
                 new[] { "NewReminderASP.WebUI.Areas.LoginArea.Controllers" }
             );
 
-            
+
             routes.MapRoute(
                 "RegisterArea",
                 "RegisterArea/{controller}/{action}/{id}",

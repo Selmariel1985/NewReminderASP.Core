@@ -7,6 +7,8 @@ namespace NewReminderASP.Data.Repository
     {
         List<UserPhone> GetUserPhones();
 
+        List<UserPhone> GetUserPhonesByUserId(int userId);
+
         UserPhone GetUserPhone(int id);
 
         void UpdateUserPhone(UserPhone updatedUserPhone);

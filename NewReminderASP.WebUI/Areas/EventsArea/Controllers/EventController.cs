@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using Autofac;
+using log4net;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
 using System;
@@ -25,9 +26,25 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
         {
             return SignOutAndRedirectToLogin("LoginArea");
         }
+
+        //public ActionResult GetCalendarEvents()
+        //{
+        //    var events = _provider.GetEvents().Select(e => new {
+        //        title = e.Title,
+        //        start = e.Date.ToString("yyyy-MM-dd"),
+        //        allDay = true
+        //    }).ToList();
+
+        //    return Json(events, JsonRequestBehavior.AllowGet); // Ensure that allowing GET is safe for this data.
+        //}
+
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
-            var events = _provider.GeEvents().AsQueryable();
+
+           
+
+           
+            var events = _provider.GetEvents().AsQueryable();
             const int pageSize = 10;
 
             var paginatEdevents = DynamicSortAndPaginate(events, orderBy, sortOrder, page, pageSize).ToList();
@@ -44,7 +61,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(paginatEdevents);
         }
 
-       
+
 
         public ActionResult Edit(int id)
         {
@@ -97,10 +114,8 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             model.EventsTypes = _provider.GetEventTypes();
             model.EventRecurrences = _provider.GetEventRecurrences();
 
-
             return View(model);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -108,17 +123,14 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
         {
             if (ModelState.IsValid)
             {
-
-
                 _provider.AddEvent(events);
                 return RedirectToAction("Index");
             }
 
-
             events.Users = _userProvider.GetUsers();
+            events.Login = User.Identity.Name;
             events.EventsTypes = _provider.GetEventTypes();
             events.EventRecurrences = _provider.GetEventRecurrences();
-
 
             return View(events);
         }
@@ -158,7 +170,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 
             return View(paginatedEventsTypes);
         }
-        
+
         public ActionResult EditEventTypes(int id)
         {
             var eventsTypes = _provider.GetEventType(id);
@@ -239,7 +251,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 
             return View(paginatedEventRecurrences);
         }
-       
+
         public ActionResult EditEventRecurrences(int id)
         {
             var eventRecurrences = _provider.GetEventRecurrence(id);
@@ -321,7 +333,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(paginatedEventDetail);
         }
 
-        
+
 
 
         public ActionResult EditEventDetails(int id)
@@ -332,7 +344,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
                 return HttpNotFound();
             }
 
-            model.EventsId = _provider.GeEvents();
+            model.EventsId = _provider.GetEvents();
 
             return View(model);
 
@@ -350,7 +362,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             }
 
 
-            eventDetail.EventsId = _provider.GeEvents();
+            eventDetail.EventsId = _provider.GetEvents();
             return View(eventDetail);
 
         }
@@ -366,7 +378,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
         public ActionResult CreateEventDetails()
         {
             var model = new EventDetail();
-            model.EventsId = _provider.GeEvents();
+            model.EventsId = _provider.GetEvents();
 
 
             return View(model);
@@ -385,7 +397,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             }
 
 
-            eventDetail.EventsId = _provider.GeEvents();
+            eventDetail.EventsId = _provider.GetEvents();
 
 
 

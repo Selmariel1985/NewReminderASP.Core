@@ -37,7 +37,7 @@
         {
             <tr>
                 <td>@phones.ID</td>
-                <td>@Html.ActionLink(!string.IsNullOrEmpty(phones.Login) ? phones.Login : "Default Name", "Details", "Phone", new { id = phones.ID }, null)</td>
+                <td>@Html.ActionLink(!string.IsNullOrEmpty(phones.Login) ? phones.Login : "Default Name", "GetUserPhonesByUserId", "Phone", new { id = phones.ID }, null)</td>
                 <td>@Html.ActionLink(phones.PhoneNumber, "Details", "Phone", new { id = phones.ID }, null)</td>
                 <td>@phones.PhoneTypes</td>
                 <td>@phones.CountryName</td>

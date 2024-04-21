@@ -19,6 +19,11 @@ namespace NewReminderASP.Data.Repository
             return _phoneClient.GetUserPhones().ToList();
         }
 
+        public List<UserPhone> GetUserPhonesByUserId(int userId)
+        {
+            return _phoneClient.GetUserPhonesByUserId(userId).ToList();
+        }
+
         public UserPhone GetUserPhone(int id)
         {
             return _phoneClient.GetUserPhone(id);

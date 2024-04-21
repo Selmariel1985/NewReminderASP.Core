@@ -18,7 +18,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             _provider = provider;
         }
 
-        
+
         public ActionResult IndexCountry(string orderBy, string sortOrder, int page = 1)
         {
             var countries = _provider.GetCountries().AsQueryable();
@@ -26,7 +26,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 
             var paginatedCountries = DynamicSortAndPaginate(countries, orderBy, sortOrder, page, pageSize).ToList();
 
-            
+
             int totalСountries = countries.Count();
             int totalPages = (int)Math.Ceiling((double)totalСountries / pageSize);
 

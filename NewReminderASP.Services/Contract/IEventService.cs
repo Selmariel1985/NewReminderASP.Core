@@ -8,7 +8,7 @@ namespace NewReminderASP.Services.Contract
     public interface IEventService
     {
         [OperationContract]
-        List<EventDto> GeEvents();
+        List<EventDto> GetEvents();
 
         [OperationContract]
         EventDto GetEvent(int Id);

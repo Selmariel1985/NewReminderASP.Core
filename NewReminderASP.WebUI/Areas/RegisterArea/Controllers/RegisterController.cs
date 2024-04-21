@@ -14,7 +14,7 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly IUserProvider _userProvider;
-       
+
 
 
 
@@ -22,7 +22,7 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
         public RegisterController(IUserProvider userProvider)
         {
             _userProvider = userProvider;
-          
+
 
         }
 
@@ -44,7 +44,7 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
             var user = new RegisterViewModel
             {
                 User = new User(),
-               
+
             };
             return View(user);
         }
@@ -77,17 +77,17 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
                 if (ModelState.IsValid)
                 {
 
-                   
+
 
                     _userProvider.AddUser(model.User);
 
-                   
+
 
                     return RedirectToAction("Login", "Login", new { area = "LoginArea" });
                 }
             }
 
-            
+
 
             return View(model);
         }

@@ -14,9 +14,9 @@ namespace NewReminderASP.Data.Repository
             _eventClient = eventClient;
         }
 
-        public List<Event> GeEvents()
+        public List<Event> GetEvents()
         {
-            return _eventClient.GeEvents().ToList();
+            return _eventClient.GetEvents().ToList();
         }
 
         public Event GetEvent(int Id)

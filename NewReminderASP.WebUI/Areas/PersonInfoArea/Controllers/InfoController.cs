@@ -43,15 +43,16 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             return View(paginatedPersonalInfo);
         }
 
-      
+
+
 
         public ActionResult Edit(string login)
         {
             var personalInfo = _provider.GetPersonalInfo(login);
             if (personalInfo == null)
             {
-               
-                personalInfo = new PersonalInfo { Login = login }; 
+
+                personalInfo = new PersonalInfo { Login = login };
             }
             return View(personalInfo);
         }

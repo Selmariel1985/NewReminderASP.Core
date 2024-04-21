@@ -39,7 +39,7 @@ namespace NewReminderASP.Core.Provider
                         out User cachedUser)) return cachedUser;
 
                 var user = _userRepository.GetUserByLogin(login);
-                if (user != null) _cache.Set(cacheKey, user, TimeSpan.FromMinutes(5));
+                if (user != null) _cache.Set(cacheKey, user, TimeSpan.FromMinutes(1));
 
                 return user;
             }
@@ -137,5 +137,44 @@ namespace NewReminderASP.Core.Provider
         {
             _userRepository.UpdateUserRoles(userId, roleIds);
         }
+
+    //    public void GenerateConfirmationToken(User user)
+    //    {
+    //        user.ConfirmationToken = GenerateUniqueToken();
+    //        _userRepository.UpdateUser(user);
+    //    }
+
+
+    //    public void SendConfirmationEmail(User user, string confirmationLink)
+    //    {
+    //        // Implement the logic to send a confirmation email to the user
+    //        // This can involve using SMTP, an email API, or a service like SendGrid
+    //    }
+
+
+    //    private string GenerateUniqueToken()
+    //    {
+    //        // Implement a logic to generate a unique token
+    //        return Guid.NewGuid().ToString(); // Example of generating a unique token using GUID
+    //    }
+
+        
+    
+
+    //public bool VerifyConfirmationToken(string token)
+    //    {
+    //        // Assume the validToken variable contains the allowed confirmation token
+    //        string validToken = "abc123";  // Replace with the actual valid token or retrieve it from the data store
+
+    //        // Verify the validity of the confirmation token
+    //        if (token == validToken)
+    //        {
+    //            return true;  // Valid token
+    //        }
+    //        else
+    //        {
+    //            return false;  // Invalid token
+    //        }
+    //    }
     }
 }

@@ -5,7 +5,7 @@ namespace NewReminderASP.Data.Client
 {
     public interface IEventClient
     {
-        List<Event> GeEvents();
+        List<Event> GetEvents();
 
         Event GetEvent(int Id);
 

@@ -1,13 +1,14 @@
-﻿using System;
+﻿using log4net;
+using NewReminderASP.Core.Provider;
+using NewReminderASP.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Web.Mvc;
 using System.Web.Security;
-using log4net;
-using NewReminderASP.Core.Provider;
-using NewReminderASP.Domain.Entities;
+using static NewReminderASP.WebUI.MvcApplication;
 
 namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 {
@@ -31,9 +32,11 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
         public ActionResult SignOut()
         {
-            return SignOutAndRedirectToLogin("LoginArea");
+            FormsAuthentication.SignOut(); // Очистить аутентификацию
+            return RedirectToAction("Login", "Login", new { area = "LoginArea" }); // Перенаправление на страницу входа
         }
 
+       
 
 
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
@@ -61,15 +64,15 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             var user = _provider.GetUser(id);
             if (user == null) return HttpNotFound();
 
-            var address = _addressProvider.GetAddress(id);
-            var phone = _phoneProvider.GetUserPhone(id);
-            var personalInfo = _personalInfoProvider.GetPersonalInfo(user.Login); 
+            var addresses = _addressProvider.GetAddressesByUserId(id);
+            var phone = _phoneProvider.GetUserPhonesByUserId(id);
+            var personalInfo = _personalInfoProvider.GetPersonalInfo(user.Login);
 
             var viewModel = new UserDetailsViewModel
             {
                 User = user,
-                Address = address,
-                Phone = phone,
+                Addresses = addresses,
+                Phones = phone,
                 PersonalInformation = personalInfo
             };
 
@@ -266,7 +269,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(paginatedRole);
         }
 
-      
+
 
         public ActionResult DetailsRole(int id)
         {
@@ -359,7 +362,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
             return View(paginatedUserRole);
         }
-        
+
 
         public ActionResult CreateUserRoleById()
         {
@@ -409,6 +412,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View();
         }
 
+       
 
         //protected override void OnException(ExceptionContext filterContext)
         //{

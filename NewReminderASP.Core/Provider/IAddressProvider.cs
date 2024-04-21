@@ -9,6 +9,9 @@ namespace NewReminderASP.Core.Provider
     {
         List<Address> GetAddresses();
 
+        List<Address> GetAddressesByUserId(int userId);
+
+
 
         Address GetAddress(int id);
 

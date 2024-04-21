@@ -2,6 +2,7 @@
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
@@ -31,12 +32,13 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
-            var addresses = _provider.GetAddresses().AsQueryable();
+           
+
+            var addresses = _provider.GetAddresses();
+
             const int pageSize = 10;
+            var paginatedAddresses = DynamicSortAndPaginate(addresses.AsQueryable(), orderBy, sortOrder, page, pageSize).ToList();
 
-            var paginatedAddresses = DynamicSortAndPaginate(addresses, orderBy, sortOrder, page, pageSize).ToList();
-
-            
             int totalAddresses = addresses.Count();
             int totalPages = (int)Math.Ceiling((double)totalAddresses / pageSize);
 
@@ -46,6 +48,24 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             ViewBag.TotalPages = totalPages;
 
             return View(paginatedAddresses);
+        }
+
+        public ActionResult GetAddressesByUserID(int id)
+        {
+
+
+
+            List<Address> addresses = _provider.GetAddressesByUserId(id).ToList();
+
+            // Check if result is null or empty
+            if (addresses == null || !addresses.Any())
+            {
+                return HttpNotFound($"No addresses found for user ID: {id}");
+            }
+
+            return View(addresses);
+
+
         }
 
         public ActionResult Details(int id)
@@ -80,7 +100,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             }
 
 
-            address.Countries = _countryProvider.GetCountries(); 
+            address.Countries = _countryProvider.GetCountries();
             return View(address);
         }
 
@@ -104,8 +124,8 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             }
 
 
-            address.Users = _userProvider.GetUsers(); 
-            address.Countries = _countryProvider.GetCountries(); 
+            address.Users = _userProvider.GetUsers();
+            address.Countries = _countryProvider.GetCountries();
             return View(address);
         }
 
@@ -126,17 +146,17 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            if (!filterContext.ExceptionHandled)
-            {
-                _logger.Error("An unhandled exception occurred", filterContext.Exception);
-                filterContext.Result = new ViewResult
-                {
-                    ViewName = "Error"
-                };
-                filterContext.ExceptionHandled = true;
-            }
-        }
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    if (!filterContext.ExceptionHandled)
+        //    {
+        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
+        //        filterContext.Result = new ViewResult
+        //        {
+        //            ViewName = "Error"
+        //        };
+        //        filterContext.ExceptionHandled = true;
+        //    }
+        //}
     }
 }

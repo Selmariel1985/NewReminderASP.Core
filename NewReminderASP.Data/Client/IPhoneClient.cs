@@ -7,6 +7,8 @@ namespace NewReminderASP.Data.Client
     {
         List<UserPhone> GetUserPhones();
 
+        List<UserPhone> GetUserPhonesByUserId(int userId);
+
         UserPhone GetUserPhone(int id);
 
         void UpdateUserPhone(UserPhone updatedUserPhone);

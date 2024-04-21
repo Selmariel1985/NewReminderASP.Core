@@ -11,6 +11,9 @@ namespace NewReminderASP.Services.Contract
         List<UserPhoneDto> GetUserPhones();
 
         [OperationContract]
+        List<UserPhoneDto> GetUserPhonesByUserId(int userId);
+
+        [OperationContract]
         UserPhoneDto GetUserPhone(int id);
 
         [OperationContract]

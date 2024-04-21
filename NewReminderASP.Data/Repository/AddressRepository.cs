@@ -19,6 +19,11 @@ namespace NewReminderASP.Data.Repository
             return _addressClient.GetAddresses().ToList();
         }
 
+        public List<Address> GetAddressesByUserId(int userId)
+        {
+            return _addressClient.GetAddressesByUserId(userId).ToList();
+        }
+
         public Address GetAddress(int id)
         {
             return _addressClient.GetAddress(id);

@@ -120,6 +120,43 @@ namespace NewReminderASP.WcfService
             return address;
         }
 
+        public List<AddressDto> GetAddressesByUserId(int userId)
+        {
+            var addresses = new List<AddressDto>(); // Create a list to store AddressDto objects
+
+            using (var connection = new SqlConnection(connectionString)) // Replace "connectionString" with your actual connection string
+            {
+                using (var command = new SqlCommand("GetAddressesByUserID", connection)) // Replace "GetAddressesByUserID" with the actual name of the stored procedure
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add(new SqlParameter("@UserID", userId)); // Add parameter for UserID
+
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var address = new AddressDto // Create AddressDto object for each record
+                            {
+
+                                Street = reader.GetString(0),
+                                City = reader.GetString(1),
+                                CountryName = reader.GetString(2), // Assuming CountryID is an integer
+                                PostalCode = reader.GetString(3),
+                                Description = reader.GetString(4),
+                                UserID = reader.GetInt32(5),
+                                Login = reader.GetString(6)
+                            };
+                            addresses.Add(address); // Add AddressDto object to the list
+                        }
+                    }
+                }
+            }
+
+            return addresses; // Return the list of AddressDto objects
+        }
+
         public void UpdateAddress(AddressDto updatedAddress)
         {
             using (var connection = new SqlConnection(connectionString))
@@ -302,7 +339,7 @@ namespace NewReminderASP.WcfService
             }
         }
 
-        public List<EventDto> GeEvents()
+        public List<EventDto> GetEvents()
         {
             var events = new List<EventDto>();
 
@@ -854,6 +891,40 @@ namespace NewReminderASP.WcfService
 
             return userPhone;
         }
+
+        public List<UserPhoneDto> GetUserPhonesByUserId(int userId)
+        {
+            var userPhones = new List<UserPhoneDto>();
+
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("GetUserPhonesByUserId", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
+
+                connection.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var userPhone = new UserPhoneDto
+                        {
+                            ID = reader.GetInt32(0),
+                            Login = reader.GetString(1),
+                            UserID = reader.GetInt32(2),
+                            PhoneNumber = reader.GetString(3),
+                            PhoneType = reader.GetString(4),
+                            CountryName = reader.GetString(5)
+                        };
+                        userPhones.Add(userPhone);
+                    }
+                }
+            }
+
+            return userPhones;
+        }
+
 
         public UserPhoneDto GetUserPhone(int id)
         {

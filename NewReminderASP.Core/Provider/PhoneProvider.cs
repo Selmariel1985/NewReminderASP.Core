@@ -19,6 +19,11 @@ namespace NewReminderASP.Core.Provider
             return _phoneRepository.GetUserPhones().ToList();
         }
 
+        public List<UserPhone> GetUserPhonesByUserId(int userId)
+        {
+            return _phoneRepository.GetUserPhonesByUserId(userId).ToList();
+        }
+
         public UserPhone GetUserPhone(int id)
         {
             return _phoneRepository.GetUserPhone(id);
