@@ -36,7 +36,8 @@ namespace NewReminderASP.Data.Client
                                     Login = userPhoneDto.Login,
                                     PhoneNumber = userPhoneDto.PhoneNumber,
                                     PhoneTypes = userPhoneDto.PhoneType,
-                                    CountryName = userPhoneDto.CountryName
+                                    CountryName = userPhoneDto.CountryName,
+                                    UserID = userPhoneDto.UserID
                                 };
 
                                 userPhones.Add(userPhone);

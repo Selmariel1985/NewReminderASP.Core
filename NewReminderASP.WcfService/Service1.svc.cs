@@ -40,7 +40,8 @@ namespace NewReminderASP.WcfService
                                 CountryName = reader.GetString(3),
                                 PostalCode = reader.GetString(4),
                                 Description = reader.GetString(5),
-                                Login = reader.GetString(6)
+                                Login = reader.GetString(6),
+                                UserID = reader.GetInt32(7)
                             };
                             addresses.Add(address);
                         }
@@ -882,7 +883,8 @@ namespace NewReminderASP.WcfService
                             Login = reader.GetString(1),
                             PhoneNumber = reader.GetString(2),
                             PhoneType = reader.GetString(3),
-                            CountryName = reader.GetString(4)
+                            CountryName = reader.GetString(4),
+                            UserID = reader.GetInt32(5)
                         };
                         userPhone.Add(getuserPhone);
                     }

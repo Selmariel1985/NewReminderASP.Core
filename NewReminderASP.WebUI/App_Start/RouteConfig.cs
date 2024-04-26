@@ -14,23 +14,24 @@ namespace NewReminderASP.WebUI
                 "LoginArea",
                 "LoginArea/{controller}/{action}/{id}",
                 new { controller = "Login", action = "Index", id = UrlParameter.Optional },
-                new[] { "NewReminderASP.WebUI.Areas.LoginArea.Controllers" }
+                new { isAdmin = new AdminRoleRouteConstraint() }
             );
 
-
+            // Route for users with "admin" role
             routes.MapRoute(
-                "RegisterArea",
-                "RegisterArea/{controller}/{action}/{id}",
-                new { controller = "Register", action = "Index", id = UrlParameter.Optional },
-                new[] { "NewReminderASP.WebUI.Areas.RegisterArea.Controllers" }
+                "AdminUser",
+                "{controller}/{action}/{id}",
+                new { controller = "User", action = "Index", id = UrlParameter.Optional },
+                new { isAdmin = new AdminRoleRouteConstraint() }
             );
 
+            // Route for other users
             routes.MapRoute(
                 "Default",
-                "AccountsArea/{controller}/{action}/{id}",
-                new { controller = "User", action = "Index", id = UrlParameter.Optional },
-                new[] { "NewReminderASP.WebUI.Areas.AccountsArea.Controllers" }
+                "{controller}/{action}/{id}",
+                new { controller = "Event", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

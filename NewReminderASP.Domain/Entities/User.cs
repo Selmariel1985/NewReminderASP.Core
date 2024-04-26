@@ -29,6 +29,6 @@ namespace NewReminderASP.Domain.Entities
 
         [NotMapped] public int Version { get; set; }
 
-        //public string ConfirmationToken { get; set; }
+       
     }
 }

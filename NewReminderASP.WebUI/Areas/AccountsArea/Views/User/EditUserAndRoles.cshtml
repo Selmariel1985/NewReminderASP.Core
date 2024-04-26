@@ -6,7 +6,7 @@
 <link href="~/styles.css" rel="stylesheet" />
 
 <div class="edit-container">
-    @*<h2>Edit User: @Model.User.Login</h2>*@
+    <h2>Edit User: @Model.User.Login</h2>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -34,14 +34,17 @@
         <div class="form-group">
             <label class="edit-control-label" for="UserRole_SelectedRoleIds">Select Roles:</label>
             <div id="UserRole_SelectedRoleIds" class="role-tiles" data-toggle="buttons">
-    
+
                 @foreach (var role in Model.UserRole.Roles)
                 {
                     <label class="role-tile">
-                        <input type="checkbox" name="SelectedRoles" value="@role.Id" autocomplete="on" checked> <span>@role.Name</span>
+                        <input type="checkbox" name="SelectedRoles"
+                               value="@role.Id" autocomplete="on"
+                               @(Html.Raw(Model.UserRole.SelectedRoleIds != null && Model.UserRole.SelectedRoleIds.Contains(role.Id) ? "checked" : "")) />
+                        <span>@role.Name</span>
                     </label>
                 }
-    
+
                 @Html.ValidationMessageFor(model => model.UserRole.SelectedRoleIds, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -57,3 +60,4 @@
         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-back" })
     </div>
 </div>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })

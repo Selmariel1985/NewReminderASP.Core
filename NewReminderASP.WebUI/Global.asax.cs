@@ -5,6 +5,7 @@ using log4net.Config;
 using NewReminderASP.Dependencies.Container;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Security.Principal;
 using System.Threading;
 using System.Web;
@@ -40,34 +41,97 @@ namespace NewReminderASP.WebUI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             XmlConfigurator.Configure();
+
+            
+
         }
+
+
 
 
 
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {
-            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-            if (authCookie != null)
+            try
             {
-                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
-                if (authTicket != null && !authTicket.Expired)
+                if (FormsAuthentication.CookiesSupported && Request.Cookies[FormsAuthentication.FormsCookieName] != null)
                 {
-                    var identity = new FormsIdentity(authTicket);
-                    string[] roles = authTicket.UserData.Split(',');
-
-                    GenericPrincipal newUser = new GenericPrincipal(identity, roles);
-                    HttpContext.Current.User = Thread.CurrentPrincipal = newUser;
-
-                    // Проверяем истечение времени неактивности
-                    if ((DateTime.Now - authTicket.IssueDate).TotalMinutes > 1)
+                    var ticket = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value);
+                    if (ticket != null && !ticket.Expired)
                     {
-                        FormsAuthentication.SignOut();
-                        FormsAuthentication.RedirectToLoginPage();
-                        Debug.WriteLine("Session expired. Logging out user.");
+                        var roles = ticket.UserData.Split(',');
+                        HttpContext.Current.User = new GenericPrincipal(new FormsIdentity(ticket), roles);
                     }
                 }
+
+                if (HttpContext.Current.Request.Path.Contains("/RegisterArea/Register/Register"))
+                {
+                    HttpContext.Current.SkipAuthorization = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                var log = LogManager.GetLogger(typeof(MvcApplication));
+                log.Error("An error occurred in Application_PostAuthenticateRequest", ex);
+
+
+                Response.StatusCode = 500;
+                Response.StatusDescription = "Internal Server Error";
             }
         }
 
+        
+
+        protected void Session_Start(Object sender, EventArgs e)
+        {
+            Session["LastActivity"] = DateTime.UtcNow;
+        }
+
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Session != null)
+            {
+                DateTime? lastActivity = Session["LastActivity"] as DateTime?;
+                int sessionTimeoutMinutes = 25;  
+                if (lastActivity.HasValue && DateTime.UtcNow > lastActivity.Value.AddMinutes(sessionTimeoutMinutes))
+                {
+                    FormsAuthentication.SignOut();
+                    Session.Abandon();
+                }
+                else if (lastActivity.HasValue && (DateTime.UtcNow - lastActivity.Value).TotalMinutes > sessionTimeoutMinutes)
+                {
+                    FormsAuthentication.SignOut();
+                    Session.Abandon();
+                }
+                else
+                {
+                    Session["LastActivity"] = DateTime.UtcNow;
+                }
+            }
+        }
     }
 }
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

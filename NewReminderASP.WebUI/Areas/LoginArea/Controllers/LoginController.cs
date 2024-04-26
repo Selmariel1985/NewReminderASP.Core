@@ -59,14 +59,24 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
                 var encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 System.Web.HttpContext.Current.Response.Cookies.Add(authCookie);
-               
-                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                {
-                    _logger.InfoFormat("User authenticated successfully. Redirecting to: {0}", returnUrl);
-                    return Redirect(returnUrl);
-                }
 
-                return RedirectToAction("Index", "User", new { area = "AccountsArea" });
+                if (roleNames.Contains("Admin"))
+                {
+                    return RedirectToAction("Index", "User", new { area = "AccountsArea" });
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        _logger.InfoFormat("User authenticated successfully. Redirecting to: {0}", returnUrl);
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        // Redirect to the "Event" controller for users with roles other than "Admin"
+                        return RedirectToAction("Index", "Event", new { area = "EventsArea" });
+                    }
+                }
             }
             else
             {
@@ -75,20 +85,24 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
                 return View();
             }
         }
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            if (!filterContext.ExceptionHandled)
-            {
-                _logger.Error("An unhandled exception occurred", filterContext.Exception);
-                filterContext.Result = new ViewResult
-                {
-                    ViewName = "Error"
-                };
-                filterContext.ExceptionHandled = true;
-            }
-        }
 
 
 
+
+
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    if (!filterContext.ExceptionHandled)
+        //    {
+        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
+        //        filterContext.Result = new ViewResult
+        //        {
+        //            ViewName = "Error"
+        //        };
+        //        filterContext.ExceptionHandled = true;
+        //    }
     }
+
+
+
 }

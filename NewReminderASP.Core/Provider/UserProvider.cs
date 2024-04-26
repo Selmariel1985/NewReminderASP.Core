@@ -12,7 +12,7 @@ namespace NewReminderASP.Core.Provider
     {
         private readonly IMemoryCache _cache;
         private readonly IUserRepository _userRepository;
-
+       
         public UserProvider(IUserRepository userRepository, IMemoryCache cache)
         {
             _userRepository = userRepository;
@@ -50,6 +50,7 @@ namespace NewReminderASP.Core.Provider
                 throw;
             }
         }
+
 
         public User GetUserByEmail(string email)
         {

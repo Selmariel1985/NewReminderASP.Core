@@ -12,6 +12,7 @@ using static NewReminderASP.WebUI.MvcApplication;
 
 namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [RouteArea("AccountsArea")]
     [RoutePrefix("User")]
     public class UserController : BaseController
@@ -123,49 +124,72 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
         public ActionResult EditUserAndRoles(int id)
         {
             var user = _provider.GetUser(id);
-            var userRoles = _provider.GetUserRoles(id);
+           
             var roles = _provider.GetRoles();
-            var userAndRolesModel = new UserAndRolesModel
+
+            if (user != null)
             {
-                User = user,
-                UserRole = new UserRole
+                var userAndRolesModel = new UserAndRolesModel
                 {
-                    UserId = userRoles?.UserId ?? 0,
-                    SelectedRoleIds = userRoles?.SelectedRoleIds,
-                    Roles = roles
-                }
-            };
+                    User = user,
+                    UserRole = new UserRole
+                    {
+                      
+                        Roles = roles
+                    }
+                };
 
-
-            return View(userAndRolesModel);
+                return View(userAndRolesModel);
+            }
+            else
+            {
+                // Handle scenario where user is not found
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditUserAndRoles(UserAndRolesModel model, int[] SelectedRoles)
         {
+            var roles = _provider.GetRoles();
+            model.UserRole = model.UserRole ?? new UserRole(); 
+            model.UserRole.Roles = roles; 
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (string.IsNullOrEmpty(model.User.Password))
+            {
+                ModelState.AddModelError("User.Password", "Введите пароль");
+                return View(model);
+            }
+
             try
             {
-                if (ModelState.IsValid)
-                {
-                    _provider.UpdateUser(model.User);
-                    if (SelectedRoles != null)
-                        _provider.UpdateUserRoles(model.User.Id, string.Join(",", SelectedRoles));
-                    else
-                        return RedirectToAction("CreateUserRoleById");
+                _provider.UpdateUser(model.User);
 
-                    return RedirectToAction("Index");
+                if (SelectedRoles != null && SelectedRoles.Any())
+                {
+                    _provider.UpdateUserRoles(model.User.Id, string.Join(",", SelectedRoles));
                 }
+
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 _logger.Error("An error occurred in EditUserAndRoles()", ex);
-                return View();
+                ModelState.AddModelError("", "Произошла ошибка при обновлении пользователя и ролей.");
+                return View(model);
             }
-
-            return View(model);
         }
+
+
+
+
+
 
         public ActionResult Edit(int id)
         {
@@ -240,7 +264,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(user);
         }
 
-        [Authorize(Roles = "Admin")]
+       
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -1,0 +1,143 @@
+2024-04-20 12:18:13,401 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 12:18:18,987 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 12:18:21,095 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 12:19:36,722 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 12:19:42,045 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 12:19:42,164 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 12:23:32,465 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 12:23:39,789 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 12:23:39,984 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 12:24:22,606 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.AddEvent(EventDto events)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.AddEvent(EventDto events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 855
+   в NewReminderASP.Data.Client.EventClient.AddEvent(Event events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 134
+2024-04-20 12:24:54,453 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 12:24:59,206 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 12:24:59,319 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 12:25:43,497 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 12:25:43,502 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 12:25:46,938 ERROR NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - An unhandled exception occurred
+System.Web.Mvc.HttpAntiForgeryException (0x80004005): The anti-forgery cookie token and form field token do not match.
+   в System.Web.Helpers.AntiXsrf.TokenValidator.ValidateTokens(HttpContextBase httpContext, IIdentity identity, AntiForgeryToken sessionToken, AntiForgeryToken fieldToken)
+   в System.Web.Helpers.AntiXsrf.AntiForgeryWorker.Validate(HttpContextBase httpContext)
+   в System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   в System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_0.<BeginInvokeAction>b__0(AsyncCallback asyncCallback, Object asyncState)
+2024-04-20 12:25:53,352 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 12:25:57,847 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 12:25:57,944 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 12:26:14,718 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.AddEvent(EventDto events)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.AddEvent(EventDto events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 855
+   в NewReminderASP.Data.Client.EventClient.AddEvent(Event events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 134
+2024-04-20 12:27:03,111 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 12:27:07,084 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 12:27:07,194 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 12:27:24,110 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.AddEvent(EventDto events)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.AddEvent(EventDto events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 855
+   в NewReminderASP.Data.Client.EventClient.AddEvent(Event events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 134
+2024-04-20 12:32:01,975 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 12:32:08,737 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 12:32:08,917 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 12:32:31,008 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.AddEvent(EventDto events)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.AddEvent(EventDto events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 855
+   в NewReminderASP.Data.Client.EventClient.AddEvent(Event events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 134
+2024-04-20 12:36:37,911 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 12:36:44,366 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 12:36:44,589 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 12:38:05,977 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 12:38:12,408 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 12:38:12,529 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 17:12:56,412 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 17:13:02,954 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 17:13:04,769 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 17:13:37,367 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 17:13:48,845 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: User
+2024-04-20 17:13:48,945 WARN NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Authentication failed for user with login: User
+2024-04-20 17:14:08,201 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: User100
+2024-04-20 17:14:08,324 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: 
+2024-04-20 17:15:59,671 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 17:16:03,470 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 17:16:03,587 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 18:34:50,785 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 18:35:01,819 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 18:35:03,554 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 18:35:04,905 ERROR NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - An unhandled exception occurred
+System.Web.Mvc.HttpAntiForgeryException (0x80004005): The provided anti-forgery token was meant for user "", but the current user is "Work".
+   в System.Web.Helpers.AntiXsrf.TokenValidator.ValidateTokens(HttpContextBase httpContext, IIdentity identity, AntiForgeryToken sessionToken, AntiForgeryToken fieldToken)
+   в System.Web.Helpers.AntiXsrf.AntiForgeryWorker.Validate(HttpContextBase httpContext)
+   в System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   в System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_0.<BeginInvokeAction>b__0(AsyncCallback asyncCallback, Object asyncState)
+2024-04-20 18:35:10,173 ERROR NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - An unhandled exception occurred
+System.Web.Mvc.HttpAntiForgeryException (0x80004005): The provided anti-forgery token was meant for user "", but the current user is "Work".
+   в System.Web.Helpers.AntiXsrf.TokenValidator.ValidateTokens(HttpContextBase httpContext, IIdentity identity, AntiForgeryToken sessionToken, AntiForgeryToken fieldToken)
+   в System.Web.Helpers.AntiXsrf.AntiForgeryWorker.Validate(HttpContextBase httpContext)
+   в System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   в System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_0.<BeginInvokeAction>b__0(AsyncCallback asyncCallback, Object asyncState)
+2024-04-20 18:35:16,168 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 18:35:20,096 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 18:35:20,197 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 18:35:34,251 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 18:35:45,727 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: User100
+2024-04-20 18:35:45,841 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: 
+2024-04-20 18:36:46,204 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 18:36:58,363 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: User100
+2024-04-20 18:36:58,473 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: 
+2024-04-20 18:41:23,433 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 18:41:29,532 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-20 18:41:29,713 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-20 18:41:40,539 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 18:41:50,034 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: User100
+2024-04-20 18:41:50,136 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: 
+2024-04-20 20:22:20,307 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-20 20:22:52,331 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: User100
+2024-04-20 20:22:54,421 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: 

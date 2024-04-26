@@ -12,59 +12,140 @@
 
 
 
-<div class="header-bar">
-    <div class="info">
-        <div class="user-info">
-            <i class="fas fa-user-circle"></i>
-            <span>User Login: @Context.User.Identity.Name</span>
-        </div>
-        <div class="logout-btn">
-            <a href="@Url.Action("SignOut", "Phone")" class="btn btn-eco">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
+    <div class="header-bar">
+        <div class="info">
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>User Login: @Context.User.Identity.Name</span>
+            </div>
+            <div class="logout-btn">
+                <a href="@Url.Action("SignOut", "Phone")" class="btn btn-eco">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
         </div>
     </div>
-</div>
+    <div class="header-bar" id="countdown"></div>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-nav">
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Phone Management</a>
-                <div class="dropdown-menu">
-                    <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })" class="dropdown-item">Phone</a>
-                    <a href="@Url.Action("Create", "Phone", new { area = "ContactsArea" })" class="dropdown-item">Create Phone</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Phone Management</a>
+                    <div class="dropdown-menu">
+                        <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })" class="dropdown-item">Phone</a>
+                        <a href="@Url.Action("Create", "Phone", new { area = "ContactsArea" })" class="dropdown-item">Create Phone</a>
 
-                    <a href="@Url.Action("GetPhoneType", "Phone", new { area = "ContactsArea" })" class="dropdown-item">PhoneType</a>
+                        <a href="@Url.Action("GetPhoneType", "Phone", new { area = "ContactsArea" })" class="dropdown-item">PhoneType</a>
 
-                    <a href="@Url.Action("CreatePhoneType", "Phone", new { area = "ContactsArea" })" class="dropdown-item">Create PhoneType</a>
+                        <a href="@Url.Action("CreatePhoneType", "Phone", new { area = "ContactsArea" })" class="dropdown-item">Create PhoneType</a>
 
 
 
-                </div>
-            </li>
+                    </div>
+                </li>
 
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Other Management</a>
+
+                    <div class="dropdown-menu">
+
+                        <a href="@Url.Action("Index", "Address", new { area = "AddressArea" })" class="dropdown-item">Address</a>
+                        <a href="@Url.Action("Index", "Event", new { area = "EventsArea" })" class="dropdown-item">Events</a>
+                        <a href="@Url.Action("Index", "Info", new { area = "PersonInfoArea" })" class="dropdown-item">Person Info</a>
+
+
+                    </div>
+                </li>
+
+            </div>
 
         </div>
+    </nav>
 
+
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="footer">
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+
+        <script src="~/scripts/bootstrap.bundle.min.js"></script>
     </div>
-</nav>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var inactivityTime = 0;
+        var checkInterval = 1000;
+        var timeoutSeconds = 60;
+        var countdownInterval;
+
+        function resetTimer() {
+            inactivityTime = 0;
+            clearInterval(countdownInterval); // Сбросить интервал обратного отсчета при сбросе таймера
+            startCountdown(); // Перезапустить обратный отсчет после сброса таймера
+        }
+
+        function checkInactivity() {
+            inactivityTime += checkInterval;
+            if (inactivityTime >= timeoutSeconds * 1000) {
+                clearInterval(countdownInterval);
+                signOutAndRedirectToLogin('AccountsArea');
+            }
+        }
+
+        setInterval(checkInactivity, checkInterval);
+
+        document.addEventListener('click', resetTimer);
+        document.addEventListener('mousemove', resetTimer);
+        document.addEventListener('keypress', resetTimer);
+
+        function startCountdown() {
+            var seconds = timeoutSeconds;
+            var countdownElement = document.getElementById('countdown');
+
+            countdownElement.innerText = 'Time left: ' + seconds + ' seconds'; // Обновить отображение обратного отсчета в начале
+
+            countdownInterval = setInterval(function () {
+                seconds--;
+                countdownElement.innerText = 'Time left: ' + seconds + ' seconds'; // Обновить отображение обратного отсчета
+
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.innerText = 'Time is up!';
+                } else if (seconds <= 15) {
+                    countdownElement.style.color = 'red'; // Изменить цвет текста в красный при 15 секундах
+                }
+            }, 1000);
+        }
+
+        startCountdown();
 
 
 
+        function signOutAndRedirectToLogin(area) {
+            $.ajax({
+                url: '/AccountsArea/User/SignOut',
+                type: 'POST',
+                data: { area: area },
+                success: function (response) {
+                    // Обработка успешного выхода
+                    window.location.href = '/LoginArea/Login/Login?ReturnUrl=%2f';
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+    </script>
 
 
-<div class="container body-content">
-    @RenderBody()
-    <hr/>
-    <footer class="footer">
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
 
-    <script src="~/scripts/bootstrap.bundle.min.js"></script>
-</div>
 </body>
 </html>

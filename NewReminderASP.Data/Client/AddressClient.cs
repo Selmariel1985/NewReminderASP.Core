@@ -39,7 +39,8 @@ namespace NewReminderASP.Data.Client
                                     CountryName = addressDto.CountryName,
                                     PostalCode = addressDto.PostalCode,
                                     Description = addressDto.Description,
-                                    Login = addressDto.Login
+                                    Login = addressDto.Login,
+                                    UserID = addressDto.UserID
                                 });
                             }
                         }
