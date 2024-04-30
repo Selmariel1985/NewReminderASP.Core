@@ -6,10 +6,10 @@
 
 <link href="~/styles.css" rel="stylesheet" />
 
-<div class="container">
+<div class="create-form">
     <h2>User Registration</h2>
 
-    @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @class = "form-container" }))
+    @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
 

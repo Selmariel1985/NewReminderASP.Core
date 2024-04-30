@@ -25,7 +25,7 @@ namespace NewReminderASP.Domain.Entities
         public virtual ICollection<UserRole> UserRoles { get; set; }
 
         public List<int> SelectedRoleIds { get; set; }
-
+        public bool IsActive { get; set; }
 
         [NotMapped] public int Version { get; set; }
 

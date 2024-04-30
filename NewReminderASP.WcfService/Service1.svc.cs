@@ -1137,7 +1137,46 @@ namespace NewReminderASP.WcfService
                 }
             }
         }
+        public UserDto GetUserByLogin(string login)
+        {
+            UserDto user = null;
 
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("GetUserByLogin", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Login", login);
+
+                connection.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                        if (user == null)
+                        {
+                            var hashedPassword = reader.GetString(4);
+
+                            user = new UserDto
+                            {
+                                Id = reader.GetInt32(0),
+                                Login = reader.GetString(1),
+                                Email = reader.GetString(2),
+
+                                Password = hashedPassword,
+                                Roles = new List<string>()
+                            };
+                            user.Roles.Add(reader.IsDBNull(3) ? string.Empty : reader.GetString(3));
+                        }
+
+                        else
+                        {
+                            user.Roles.Add(reader.IsDBNull(3) ? string.Empty : reader.GetString(3));
+                        }
+                }
+            }
+
+            return user;
+        }
 
         public UserDto GetUserByEmail(string email)
         {
@@ -1154,11 +1193,13 @@ namespace NewReminderASP.WcfService
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
+
                         user = new UserDto
                         {
                             Id = reader.GetInt32(0),
                             Login = reader.GetString(1),
-                            Email = reader.GetString(2)
+                            Email = reader.GetString(2),
+                            Password = reader.GetString(3)
                         };
                 }
             }
@@ -1475,46 +1516,7 @@ namespace NewReminderASP.WcfService
             return user;
         }
 
-        public UserDto GetUserByLogin(string login)
-        {
-            UserDto user = null;
-
-            using (var connection = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("GetUserByLogin", connection))
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@Login", login);
-
-                connection.Open();
-
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                        if (user == null)
-                        {
-                            var hashedPassword = reader.GetString(4);
-
-                            user = new UserDto
-                            {
-                                Id = reader.GetInt32(0),
-                                Login = reader.GetString(1),
-                                Email = reader.GetString(2),
-
-                                Password = hashedPassword,
-                                Roles = new List<string>()
-                            };
-                            user.Roles.Add(reader.IsDBNull(3) ? string.Empty : reader.GetString(3));
-                        }
-
-                        else
-                        {
-                            user.Roles.Add(reader.IsDBNull(3) ? string.Empty : reader.GetString(3));
-                        }
-                }
-            }
-
-            return user;
-        }
+       
 
         public UserDto GetUserByPasswordAndLogin(string password, string login)
         {

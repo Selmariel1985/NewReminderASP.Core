@@ -1,0 +1,9 @@
+2024-04-26 21:54:15,258 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-26 21:54:37,797 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-26 21:54:40,788 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-26 22:02:06,467 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-26 22:02:13,404 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-26 22:02:13,543 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-04-26 22:04:34,090 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-04-26 22:04:41,118 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Work
+2024-04-26 22:04:41,289 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin

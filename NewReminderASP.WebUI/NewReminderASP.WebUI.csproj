@@ -115,6 +115,12 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="SendGrid, Version=9.29.3.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.9.29.3\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="StarkbankEcdsa, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b2e6337a5d77bfbc, processorArchitecture=MSIL">
+      <HintPath>..\packages\starkbank-ecdsa.1.3.3\lib\net452\StarkbankEcdsa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -142,6 +148,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System.ServiceProcess" />
@@ -387,6 +394,9 @@
     <Content Include="Areas\AccountsArea\Views\User\EditUserAndRoles.cshtml" />
     <Content Include="Areas\AddressArea\Views\Address\GetAddressesByUserID.cshtml" />
     <Content Include="Areas\ContactsArea\Views\Phone\GetUserPhonesByUserId.cshtml" />
+    <Content Include="Areas\RegisterArea\Views\Register\RegistrationPending.cshtml" />
+    <Content Include="Areas\RegisterArea\Views\Register\ConfirmationSuccess.cshtml" />
+    <Content Include="Areas\RegisterArea\Views\Register\ConfirmationFailed.cshtml" />
     <None Include="packages.config" />
     <Content Include="Reminderapp.log" />
     <Content Include="Scripts\bootstrap.min.js.map" />

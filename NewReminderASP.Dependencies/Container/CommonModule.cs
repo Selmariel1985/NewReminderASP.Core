@@ -14,6 +14,7 @@ namespace NewReminderASP.Dependencies.Container
                 .AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(typeof(DataModule).Assembly)
                 .AsImplementedInterfaces();
+            builder.RegisterType<EmailService>().AsSelf();
         }
     }
 }

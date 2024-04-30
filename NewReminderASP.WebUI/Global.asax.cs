@@ -6,6 +6,7 @@ using NewReminderASP.Dependencies.Container;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Principal;
 using System.Threading;
 using System.Web;
@@ -21,19 +22,12 @@ namespace NewReminderASP.WebUI
 
         protected void Application_Start()
         {
-
             var builder = new ContainerBuilder();
-
-
             builder.RegisterModule(new CommonModule());
-
-
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-
+           
 
             var container = builder.Build();
-
-
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             AreaRegistration.RegisterAllAreas();
@@ -41,9 +35,6 @@ namespace NewReminderASP.WebUI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             XmlConfigurator.Configure();
-
-            
-
         }
 
 

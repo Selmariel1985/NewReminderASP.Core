@@ -433,7 +433,8 @@ public class UserClient : IUserClient
                     {
                         Id = result.Id,
                         Login = result.Login,
-                        Email = result.Email
+                        Email = result.Email,
+                        Password = result.Password
                     };
 
                 connection.Close();

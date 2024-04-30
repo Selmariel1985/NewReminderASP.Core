@@ -1,6 +1,8 @@
 ﻿using log4net;
+using Microsoft.Extensions.Caching.Memory;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
+using System;
 using System.Reflection;
 using System.Web.Mvc;
 
@@ -12,21 +14,21 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
     public class RegisterController : Controller
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
         private readonly IUserProvider _userProvider;
+        private readonly IMemoryCache _cache;
+        private readonly EmailService _emailService;
 
-
-
-
-
-        public RegisterController(IUserProvider userProvider)
+        public RegisterController(IUserProvider userProvider, IMemoryCache cache, EmailService emailService)
         {
             _userProvider = userProvider;
-
-
+            _cache = cache;
+            _emailService = emailService;
         }
 
-
+        private string GenerateToken()
+        {
+            return Guid.NewGuid().ToString();
+        }
 
         public bool IsLoginUnique(string login)
         {
@@ -39,12 +41,12 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
             var existingUser = _userProvider.GetUserByEmail(email);
             return existingUser == null;
         }
+
         public ActionResult Register()
         {
             var user = new RegisterViewModel
             {
                 User = new User(),
-
             };
             return View(user);
         }
@@ -55,41 +57,51 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Check if login and email are unique as before
-                if (!IsLoginUnique(model.User.Login))
+                if (!IsLoginUnique(model.User.Login) || !IsEmailUnique(model.User.Email))
                 {
-                    ModelState.AddModelError("Login", "This login is already in use.");
-                    return View();
+                    // Return with error message
+                    return View(model);
                 }
 
-                if (!IsEmailUnique(model.User.Email))
-                {
-                    ModelState.AddModelError("Email", "This email address is already registered.");
-                    return View();
-                }
+                var token = GenerateToken();
+                // Сохранение большего количества данных пользователя в кэше
+                _cache.Set(token, model.User, TimeSpan.FromMinutes(20)); // Adjust expiration as necessary
 
-                if (model.User.Password != model.User.ConfirmPassword)
-                {
-                    ModelState.AddModelError("ConfirmPassword", "The password and confirm password do not match");
-                    return View();
-                }
-
-                if (ModelState.IsValid)
-                {
-
-
-
-                    _userProvider.AddUser(model.User);
-
-
-
-                    return RedirectToAction("Login", "Login", new { area = "LoginArea" });
-                }
+                string confirmationUrl = Url.Action("ConfirmEmail", "Register", new { token }, Request.Url.Scheme);
+                _emailService.SendConfirmationEmail(model.User.Email, confirmationUrl);
+                return View("RegistrationPending");
             }
-
-
 
             return View(model);
         }
+
+
+        [HttpGet]
+        public ActionResult ConfirmEmail(string token)
+        {
+            if (_cache.TryGetValue(token, out User cachedUser)) // Retrieving the whole user object from the cache
+            {
+                try
+                {
+                    // Activate the user as their email has been confirmed
+                    cachedUser.IsActive = true;
+                    _userProvider.AddUser(cachedUser);
+                    // Adding the user into the database
+                    
+                        _cache.Remove(token); // Removing the token from cache after successful registration
+                        return View("ConfirmationSuccess"); // Displaying the successful confirmation
+                    
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error("An error occurred during user confirmation", ex);
+                    return View("ConfirmationFailed"); // Displaying the confirmation error page
+                }
+            }
+
+            return View("ConfirmationFailed"); // Handling invalid or expired tokens or issues in fetching the data
+        }
+
+
     }
 }
