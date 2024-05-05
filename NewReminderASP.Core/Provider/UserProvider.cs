@@ -1,10 +1,10 @@
-﻿using log4net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using log4net;
 using Microsoft.Extensions.Caching.Memory;
 using NewReminderASP.Data.Repository;
 using NewReminderASP.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NewReminderASP.Core.Provider
 {
@@ -12,7 +12,7 @@ namespace NewReminderASP.Core.Provider
     {
         private readonly IMemoryCache _cache;
         private readonly IUserRepository _userRepository;
-       
+
         public UserProvider(IUserRepository userRepository, IMemoryCache cache)
         {
             _userRepository = userRepository;
@@ -113,6 +113,7 @@ namespace NewReminderASP.Core.Provider
         {
             _userRepository.AddUserRole(userRole);
         }
+
         public void UpdateRole(Role updatedRole)
         {
             _userRepository.UpdateRole(updatedRole);
@@ -139,43 +140,41 @@ namespace NewReminderASP.Core.Provider
             _userRepository.UpdateUserRoles(userId, roleIds);
         }
 
-    //    public void GenerateConfirmationToken(User user)
-    //    {
-    //        user.ConfirmationToken = GenerateUniqueToken();
-    //        _userRepository.UpdateUser(user);
-    //    }
+        //    public void GenerateConfirmationToken(User user)
+        //    {
+        //        user.ConfirmationToken = GenerateUniqueToken();
+        //        _userRepository.UpdateUser(user);
+        //    }
 
 
-    //    public void SendConfirmationEmail(User user, string confirmationLink)
-    //    {
-    //        // Implement the logic to send a confirmation email to the user
-    //        // This can involve using SMTP, an email API, or a service like SendGrid
-    //    }
+        //    public void SendConfirmationEmail(User user, string confirmationLink)
+        //    {
+        //        // Implement the logic to send a confirmation email to the user
+        //        // This can involve using SMTP, an email API, or a service like SendGrid
+        //    }
 
 
-    //    private string GenerateUniqueToken()
-    //    {
-    //        // Implement a logic to generate a unique token
-    //        return Guid.NewGuid().ToString(); // Example of generating a unique token using GUID
-    //    }
+        //    private string GenerateUniqueToken()
+        //    {
+        //        // Implement a logic to generate a unique token
+        //        return Guid.NewGuid().ToString(); // Example of generating a unique token using GUID
+        //    }
 
-        
-    
 
-    //public bool VerifyConfirmationToken(string token)
-    //    {
-    //        // Assume the validToken variable contains the allowed confirmation token
-    //        string validToken = "abc123";  // Replace with the actual valid token or retrieve it from the data store
+        //public bool VerifyConfirmationToken(string token)
+        //    {
+        //        // Assume the validToken variable contains the allowed confirmation token
+        //        string validToken = "abc123";  // Replace with the actual valid token or retrieve it from the data store
 
-    //        // Verify the validity of the confirmation token
-    //        if (token == validToken)
-    //        {
-    //            return true;  // Valid token
-    //        }
-    //        else
-    //        {
-    //            return false;  // Invalid token
-    //        }
-    //    }
+        //        // Verify the validity of the confirmation token
+        //        if (token == validToken)
+        //        {
+        //            return true;  // Valid token
+        //        }
+        //        else
+        //        {
+        //            return false;  // Invalid token
+        //        }
+        //    }
     }
 }

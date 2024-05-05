@@ -1,9 +1,9 @@
-﻿using log4net;
+﻿using System;
+using System.Collections.Generic;
+using log4net;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
-using System;
-using System.Collections.Generic;
 
 namespace NewReminderASP.Data.Client
 {

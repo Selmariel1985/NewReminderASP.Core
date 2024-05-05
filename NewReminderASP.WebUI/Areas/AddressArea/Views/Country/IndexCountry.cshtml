@@ -4,11 +4,11 @@
     ViewBag.Title = "Countries";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 <div class="form-container">
 
     <h2>Countries</h2>
-    
+
     <form action="@Url.Action("IndexCountry")" method="get">
         <div class="filter-bar">
             <label for="orderBy">Sort by:</label>
@@ -17,14 +17,14 @@
                 <option value="CountryCode">CountryCode</option>
                 <option value="PhoneCode">PhoneCode</option>
                 <option value="Name">Name</option>
-                
+
             </select>
             <label for="sortOrder">Order:</label>
             <select id="sortOrder" name="sortOrder">
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
             </select>
-            <input type="submit" value="Filter" class="btn" />
+            <input type="submit" value="Filter" class="btn"/>
         </div>
 
         <table class="table-eco">
@@ -33,7 +33,7 @@
                 <th>@Html.ActionLink("CountryCode", "IndexCountry", new { orderBy = "CountryCode", sortOrder = ViewBag.OrderBy == "CountryCode" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
                 <th>@Html.ActionLink("PhoneCode", "IndexCountry", new { orderBy = "PhoneCode", sortOrder = ViewBag.OrderBy == "PhoneCode" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
                 <th>@Html.ActionLink("Name", "IndexCountry", new { orderBy = "Name", sortOrder = ViewBag.OrderBy == "Name" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
-                
+
             </tr>
             @foreach (var country in Model)
             {
@@ -52,9 +52,8 @@
             <a href="@Url.Action("IndexCountry", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
         }
 
-   
 
-        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
         {
             <a href="@Url.Action("IndexCountry", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
         }

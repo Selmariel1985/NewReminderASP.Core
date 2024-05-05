@@ -3,7 +3,7 @@
     ViewBag.Title = "Edit User";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 
 <div class="edit-container">
     <h2>Edit User: @Model.User.Login</h2>
@@ -14,19 +14,19 @@
         @Html.HiddenFor(model => model.User.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.User.Login, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.User.Login, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.User.Login, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.User.Login, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.User.Email, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.User.Password, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.User.Password, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
         </div>
@@ -40,7 +40,7 @@
                     <label class="role-tile">
                         <input type="checkbox" name="SelectedRoles"
                                value="@role.Id" autocomplete="on"
-                               @(Html.Raw(Model.UserRole.SelectedRoleIds != null && Model.UserRole.SelectedRoleIds.Contains(role.Id) ? "checked" : "")) />
+                               @(Html.Raw(Model.UserRole.SelectedRoleIds != null && Model.UserRole.SelectedRoleIds.Contains(role.Id) ? "checked" : ""))/>
                         <span>@role.Name</span>
                     </label>
                 }
@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-save" />
+            <input type="submit" value="Save" class="btn btn-save"/>
         </div>
     }
 </div>

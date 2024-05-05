@@ -1,6 +1,6 @@
-﻿using NewReminderASP.Data.Client;
+﻿using System.Collections.Generic;
+using NewReminderASP.Data.Client;
 using NewReminderASP.Domain.Entities;
-using System.Collections.Generic;
 
 namespace NewReminderASP.Data.Repository
 {
@@ -69,6 +69,7 @@ namespace NewReminderASP.Data.Repository
         {
             _userClient.RemoveRole(id);
         }
+
         public void UpdateRole(Role updatedRole)
         {
             _userClient.UpdateRole(updatedRole);

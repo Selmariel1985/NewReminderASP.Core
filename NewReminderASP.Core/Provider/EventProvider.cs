@@ -1,7 +1,7 @@
-﻿using NewReminderASP.Data.Repository;
-using NewReminderASP.Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using NewReminderASP.Data.Repository;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.Core.Provider
 {
@@ -32,6 +32,11 @@ namespace NewReminderASP.Core.Provider
         public void AddEvent(Event events)
         {
             _eventRepository.AddEvent(events);
+        }
+
+        public void AddAdminEvent(Event events)
+        {
+            _eventRepository.AddAdminEvent(events);
         }
 
         public void DeleteEvent(int id)

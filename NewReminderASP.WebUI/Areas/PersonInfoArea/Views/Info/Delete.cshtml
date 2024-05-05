@@ -17,12 +17,12 @@
         </dd>
     </dl>
 
-    @using (Html.BeginForm("Delete", "Info", new { id = Model.Login }, FormMethod.Post))
+    @using (Html.BeginForm("Delete", "Info", new { id = Model.UserID }, FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <div class="form-actions">
-            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this info?');" />
-            
+            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this info?');"/>
+
         </div>
     }
 </div>

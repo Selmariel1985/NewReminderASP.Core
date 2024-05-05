@@ -1,7 +1,7 @@
-﻿using NewReminderASP.Data.Client;
-using NewReminderASP.Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using NewReminderASP.Data.Client;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.Data.Repository
 {
@@ -31,7 +31,8 @@ namespace NewReminderASP.Data.Repository
 
         public Address GetAddressByID(int id)
         {
-            return _addressClient.GetAddressByID(id); ;
+            return _addressClient.GetAddressByID(id);
+            ;
         }
 
         public void UpdateAddress(Address updatedAddress)

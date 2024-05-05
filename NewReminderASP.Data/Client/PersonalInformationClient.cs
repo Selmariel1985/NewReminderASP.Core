@@ -1,10 +1,10 @@
-﻿using log4net;
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using log4net;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Web;
 
 namespace NewReminderASP.Data.Client
 {
@@ -13,8 +13,8 @@ namespace NewReminderASP.Data.Client
         public List<PersonalInfo> GetPersonalInfos()
         {
             var personalInfos = new List<PersonalInfo>();
-            string currentUserLogin = HttpContext.Current.User.Identity.Name;
-            bool isAdmin = HttpContext.Current.User.IsInRole("admin");
+            var currentUserLogin = HttpContext.Current.User.Identity.Name;
+            var isAdmin = HttpContext.Current.User.IsInRole("admin");
 
             using (var connection = new PersonalInfoServiceClient())
             {
@@ -25,11 +25,8 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetPersonalInfos();
 
                     if (result != null)
-                    {
                         foreach (var personalInfo in result)
-                        {
                             if (isAdmin || personalInfo.Login == currentUserLogin)
-                            {
                                 personalInfos.Add(new PersonalInfo
                                 {
                                     Login = personalInfo.Login,
@@ -37,11 +34,9 @@ namespace NewReminderASP.Data.Client
                                     LastName = personalInfo.LastName,
                                     MiddleName = personalInfo.MiddleName,
                                     Birthdate = personalInfo.Birthdate,
-                                    Gender = personalInfo.Gender
+                                    Gender = personalInfo.Gender,
+                                    UserID = personalInfo.UserID
                                 });
-                            }
-                        }
-                    }
 
                     connection.Close();
                 }
@@ -57,7 +52,7 @@ namespace NewReminderASP.Data.Client
         }
 
 
-        public PersonalInfo GetPersonalInfo(string login)
+        public PersonalInfo GetPersonalInfo(int id)
         {
             PersonalInfo personalInfo = null;
 
@@ -67,11 +62,12 @@ namespace NewReminderASP.Data.Client
                 {
                     connection.Open();
 
-                    var result = connection.GetPersonalInfo(login);
+                    var result = connection.GetPersonalInfo(id);
 
                     if (result != null)
                         personalInfo = new PersonalInfo
                         {
+                            UserID = result.UserID,
                             Login = result.Login,
                             FirstName = result.FirstName,
                             LastName = result.LastName,
@@ -103,9 +99,10 @@ namespace NewReminderASP.Data.Client
                 {
                     connection.Open();
 
+                    // Попытка обновления существующей информации
                     connection.UpdatePersonalInfo(new PersonalInfoDto
                     {
-                        Login = updatedPersonalInfo.Login,
+                        UserID = updatedPersonalInfo.UserID,
                         FirstName = updatedPersonalInfo.FirstName,
                         LastName = updatedPersonalInfo.LastName,
                         MiddleName = updatedPersonalInfo.MiddleName,
@@ -115,18 +112,37 @@ namespace NewReminderASP.Data.Client
 
                     connection.Close();
                 }
-                catch (Exception e)
+                catch // Перехватываем любое исключение
                 {
-                    Console.WriteLine(e);
+                    try
+                    {
+                        // Если обновление не удалось, выполняем вставку новой информации
+                        connection.AddPersonalInfo(new PersonalInfoDto
+                        {
+                            UserID = updatedPersonalInfo.UserID,
+                            FirstName = updatedPersonalInfo.FirstName,
+                            LastName = updatedPersonalInfo.LastName,
+                            MiddleName = updatedPersonalInfo.MiddleName,
+                            Birthdate = updatedPersonalInfo.Birthdate,
+                            Gender = updatedPersonalInfo.Gender
+                        });
 
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
+                        connection.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred when updating or inserting personal info", ex);
+                        throw;
+                    }
                 }
             }
         }
 
-        public void AddPersonalInfo(string userLogin, PersonalInfo personalInfo)
+
+        public void AddPersonalInfo(PersonalInfo personalInfo)
         {
             using (var connection = new PersonalInfoServiceClient())
             {
@@ -134,9 +150,9 @@ namespace NewReminderASP.Data.Client
                 {
                     connection.Open();
 
-                    connection.AddPersonalInfo(userLogin, new PersonalInfoDto
+                    connection.AddPersonalInfo(new PersonalInfoDto
                     {
-                        Login = personalInfo.Login,
+                        UserID = personalInfo.UserID,
                         FirstName = personalInfo.FirstName,
                         LastName = personalInfo.LastName,
                         MiddleName = personalInfo.MiddleName,
@@ -157,7 +173,7 @@ namespace NewReminderASP.Data.Client
             }
         }
 
-        public void DeletePersonalInfo(string login)
+        public void DeletePersonalInfo(int id)
         {
             using (var connection = new PersonalInfoServiceClient())
             {
@@ -165,7 +181,7 @@ namespace NewReminderASP.Data.Client
                 {
                     connection.Open();
 
-                    connection.DeletePersonalInfo(login);
+                    connection.DeletePersonalInfo(id);
 
                     connection.Close();
                 }

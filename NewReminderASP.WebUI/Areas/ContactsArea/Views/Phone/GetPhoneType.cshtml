@@ -1,44 +1,44 @@
 ﻿@model IEnumerable<NewReminderASP.Domain.Entities.PhoneType>
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 
 <div class="form-container">
 
     <h2>Phones Type</h2>
     <form action="@Url.Action("GetPhoneType")" method="get">
-    <div class="filter-bar">
-        <label for="orderBy">Sort by:</label>
-        <select id="orderBy" name="orderBy">
-            <option value="ID">ID</option>
-            <option value="TypeName">TypeName</option>
-            
-        </select>
-        <label for="sortOrder">Order:</label>
-        <select id="sortOrder" name="sortOrder">
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
-        <input type="submit" value="Filter" class="btn" />
-    </div>
+        <div class="filter-bar">
+            <label for="orderBy">Sort by:</label>
+            <select id="orderBy" name="orderBy">
+                <option value="ID">ID</option>
+                <option value="TypeName">TypeName</option>
 
-    <table class="table-eco">
-        <tr>
-            <th>@Html.ActionLink("ID", "GetPhoneType", new { orderBy = "ID", sortOrder = ViewBag.OrderBy == "ID" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
-            <th>@Html.ActionLink("TypeName", "GetPhoneType", new { orderBy = "TypeName", sortOrder = ViewBag.OrderBy == "TypeName" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
-           
-            
-        </tr>
-        <tbody>
-        @foreach (var phonesTypes in Model)
-        {
+            </select>
+            <label for="sortOrder">Order:</label>
+            <select id="sortOrder" name="sortOrder">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+            <input type="submit" value="Filter" class="btn"/>
+        </div>
+
+        <table class="table-eco">
             <tr>
-                <td>@phonesTypes.ID</td>
-                <td>@Html.ActionLink(!string.IsNullOrEmpty(phonesTypes.TypeName) ? phonesTypes.TypeName : "Default Name", "DetailsPhoneType", "Phone", new { id = phonesTypes.ID }, null)</td>
+                <th>@Html.ActionLink("ID", "GetPhoneType", new { orderBy = "ID", sortOrder = ViewBag.OrderBy == "ID" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("TypeName", "GetPhoneType", new { orderBy = "TypeName", sortOrder = ViewBag.OrderBy == "TypeName" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+
 
             </tr>
-        }
-        </tbody>
-    </table>
+            <tbody>
+            @foreach (var phonesTypes in Model)
+            {
+                <tr>
+                    <td>@phonesTypes.ID</td>
+                    <td>@Html.ActionLink(!string.IsNullOrEmpty(phonesTypes.TypeName) ? phonesTypes.TypeName : "Default Name", "DetailsPhoneType", "Phone", new { id = phonesTypes.ID }, null)</td>
+
+                </tr>
+            }
+            </tbody>
+        </table>
     </form>
     <div class="pagination">
         @if (ViewBag.CurrentPage > 1)
@@ -46,9 +46,8 @@
             <a href="@Url.Action("GetPhoneType", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
         }
 
-   
 
-        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
         {
             <a href="@Url.Action("GetPhoneType", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
         }
@@ -59,5 +58,5 @@
         }
 
     </div>
-    
+
 </div>

@@ -1,29 +1,29 @@
-﻿using log4net;
-using NewReminderASP.Core.Provider;
-using NewReminderASP.Domain.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
+using log4net;
+using Microsoft.AspNet.Identity;
+using NewReminderASP.Core.Provider;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 {
-
     public class AddressController : BaseController
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly ICountryProvider _countryProvider;
         private readonly IAddressProvider _provider;
         private readonly IUserProvider _userProvider;
-        private readonly ICountryProvider _countryProvider;
 
-        public AddressController(IAddressProvider provider, IUserProvider userProvider, ICountryProvider countryProvider)
+        public AddressController(IAddressProvider provider, IUserProvider userProvider,
+            ICountryProvider countryProvider)
         {
             _provider = provider;
             _userProvider = userProvider;
             _countryProvider = countryProvider;
-
         }
+
         public ActionResult SignOut()
         {
             return SignOutAndRedirectToLogin("LoginArea");
@@ -32,15 +32,14 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
-           
-
             var addresses = _provider.GetAddresses();
 
             const int pageSize = 10;
-            var paginatedAddresses = DynamicSortAndPaginate(addresses.AsQueryable(), orderBy, sortOrder, page, pageSize).ToList();
+            var paginatedAddresses = DynamicSortAndPaginate(addresses.AsQueryable(), orderBy, sortOrder, page, pageSize)
+                .ToList();
 
-            int totalAddresses = addresses.Count();
-            int totalPages = (int)Math.Ceiling((double)totalAddresses / pageSize);
+            var totalAddresses = addresses.Count();
+            var totalPages = (int)Math.Ceiling((double)totalAddresses / pageSize);
 
             ViewBag.OrderBy = orderBy;
             ViewBag.SortOrder = sortOrder;
@@ -52,51 +51,54 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 
         public ActionResult GetAddressesByUserID(int id)
         {
+            if (!User.IsInRole("Admin") && User.Identity.GetUserId() == id.ToString())
+                return new HttpUnauthorizedResult();
+
+            var addresses = _provider.GetAddressesByUserId(id).ToList();
 
 
-
-            List<Address> addresses = _provider.GetAddressesByUserId(id).ToList();
-
-            // Check if result is null or empty
-            if (addresses == null || !addresses.Any())
-            {
-                return HttpNotFound($"No addresses found for user ID: {id}");
-            }
+            if (addresses == null || !addresses.Any()) return HttpNotFound($"No addresses found for user ID: {id}");
 
             return View(addresses);
-
-
         }
+
 
         public ActionResult Details(int id)
         {
             var address = _provider.GetAddress(id);
             if (address == null) return HttpNotFound();
-            return View(address);
+
+            if (User.IsInRole("Admin") || address.Login == User.Identity.Name)
+                return View(address);
+            return new HttpUnauthorizedResult();
         }
 
         public ActionResult Edit(int id)
         {
             var model = _provider.GetAddressByID(id);
-            if (model == null)
-            {
-                return HttpNotFound();
-            }
+            if (model == null || (!User.IsInRole("Admin") && model.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
 
             model.Countries = _countryProvider.GetCountries();
 
             return View(model);
         }
 
-        // POST: User/Edit/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Address address)
         {
             if (ModelState.IsValid)
             {
-                _provider.UpdateAddress(address);
-                return RedirectToAction("Index");
+                var existingAddress = _provider.GetAddress(address.ID);
+                if (existingAddress != null && (User.IsInRole("Admin") || existingAddress.Login == User.Identity.Name))
+                {
+                    _provider.UpdateAddress(address);
+                    return RedirectToAction("Index");
+                }
+
+                return new HttpUnauthorizedResult();
             }
 
 
@@ -107,6 +109,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
         public ActionResult Create()
         {
             var model = new Address();
+            model.Login = User.Identity.Name;
             model.Users = _userProvider.GetUsers();
             model.Countries = _countryProvider.GetCountries();
 
@@ -129,10 +132,37 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return View(address);
         }
 
+        public ActionResult CreateAdmin()
+        {
+            var model = new Address();
+            model.Users = _userProvider.GetUsers();
+            model.Countries = _countryProvider.GetCountries();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAdmin(Address address)
+        {
+            if (ModelState.IsValid)
+            {
+                _provider.AddAddressRegister(address);
+                return RedirectToAction("Index");
+            }
+
+
+            address.Users = _userProvider.GetUsers();
+            address.Countries = _countryProvider.GetCountries();
+            return View(address);
+        }
+
         public ActionResult Delete(int id)
         {
             var address = _provider.GetAddress(id);
-            if (address == null) return HttpNotFound();
+            if (address == null || (!User.IsInRole("Admin") && address.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
+
             return View(address);
         }
 
@@ -142,6 +172,11 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var address = _provider.GetAddress(id);
+
+
+            if (address == null || (!User.IsInRole("Admin") && address.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
             _provider.DeleteAddress(id);
             return RedirectToAction("Index");
         }

@@ -1,6 +1,6 @@
-﻿using NewReminderASP.Services.Dtos;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
+using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Services.Contract
 {
@@ -67,7 +67,5 @@ namespace NewReminderASP.Services.Contract
 
         [OperationContract]
         void AddUserRoleNormal(string userLogin, string roleName);
-
-
     }
 }

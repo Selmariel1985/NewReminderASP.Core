@@ -1,5 +1,5 @@
-﻿using NewReminderASP.Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.Data.Client
 {

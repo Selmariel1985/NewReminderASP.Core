@@ -1,10 +1,10 @@
-﻿using log4net;
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using log4net;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Web;
 
 namespace NewReminderASP.Data.Client
 {
@@ -13,9 +13,9 @@ namespace NewReminderASP.Data.Client
     {
         public List<Address> GetAddresses()
         {
-            List<Address> addresses = new List<Address>();
-            string currentUserLogin = HttpContext.Current.User.Identity.Name;
-            bool isAdmin = HttpContext.Current.User.IsInRole("admin");
+            var addresses = new List<Address>();
+            var currentUserLogin = HttpContext.Current.User.Identity.Name;
+            var isAdmin = HttpContext.Current.User.IsInRole("admin");
 
             using (var connection = new AddressServiceClient())
             {
@@ -26,11 +26,8 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetAddresses();
 
                     if (result != null)
-                    {
                         foreach (var addressDto in result)
-                        {
                             if (isAdmin || addressDto.Login == currentUserLogin)
-                            {
                                 addresses.Add(new Address
                                 {
                                     ID = addressDto.ID,
@@ -42,9 +39,6 @@ namespace NewReminderASP.Data.Client
                                     Login = addressDto.Login,
                                     UserID = addressDto.UserID
                                 });
-                            }
-                        }
-                    }
 
                     connection.Close();
                 }
@@ -63,21 +57,22 @@ namespace NewReminderASP.Data.Client
         {
             var addresses = new List<Address>(); // Create a list to store Address objects
 
-            using (var connection = new AddressServiceClient()) // Replace "AddressServiceClient" with the appropriate client
+            using (var connection =
+                   new AddressServiceClient()) // Replace "AddressServiceClient" with the appropriate client
             {
                 try
                 {
                     connection.Open();
 
-                    var result = connection.GetAddressesByUserId(userId); // Call the appropriate method to get addresses by user ID
+                    var result =
+                        connection.GetAddressesByUserId(
+                            userId); // Call the appropriate method to get addresses by user ID
 
                     if (result != null)
-                    {
                         foreach (var addressDto in result)
                         {
                             var address = new Address
                             {
-
                                 Street = addressDto.Street,
                                 City = addressDto.City,
                                 CountryName = addressDto.CountryName,
@@ -88,7 +83,6 @@ namespace NewReminderASP.Data.Client
                             };
                             addresses.Add(address); // Add Address object to the list
                         }
-                    }
 
                     connection.Close();
                 }

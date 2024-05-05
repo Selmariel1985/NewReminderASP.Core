@@ -4,11 +4,11 @@
     ViewBag.Title = "Addresses";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 <div class="form-container">
 
     <h2>Addresses</h2>
-    
+
     <form action="@Url.Action("Index")" method="get">
         <div class="filter-bar">
             <label for="orderBy">Sort by:</label>
@@ -26,7 +26,7 @@
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
             </select>
-            <input type="submit" value="Filter" class="btn" />
+            <input type="submit" value="Filter" class="btn"/>
         </div>
 
         <table class="table-eco">
@@ -50,7 +50,7 @@
                     <td>@address.Description</td>
                     <td>@Html.ActionLink(!string.IsNullOrEmpty(address.Login) ? address.Login : "Default Name", "GetAddressesByUserID", "Address", new { id = address.UserID }, null)</td>
 
-                    
+
                 </tr>
             }
         </table>
@@ -61,9 +61,8 @@
             <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
         }
 
-   
 
-        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
         {
             <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
         }

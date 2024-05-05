@@ -4,16 +4,15 @@
     ViewBag.Title = "Address Details";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
-
+<link href="~/styles.css" rel="stylesheet"/>
 
 
 <div class="details-details">
-   
+
 
     <div>
         <h2>Address: @Model.Login</h2>
-        <hr />
+        <hr/>
         <dl>
             <dt>@Html.DisplayNameFor(model => model.Street)</dt>
             <dd>@Html.DisplayFor(model => model.Street)</dd>

@@ -1,7 +1,7 @@
-﻿using NewReminderASP.Data.Repository;
-using NewReminderASP.Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using NewReminderASP.Data.Repository;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.Core.Provider
 {
@@ -20,9 +20,9 @@ namespace NewReminderASP.Core.Provider
             return _personalInformationRepository.GetPersonalInfos().ToList();
         }
 
-        public PersonalInfo GetPersonalInfo(string login)
+        public PersonalInfo GetPersonalInfo(int id)
         {
-            return _personalInformationRepository.GetPersonalInfo(login);
+            return _personalInformationRepository.GetPersonalInfo(id);
         }
 
         public void UpdatePersonalInfo(PersonalInfo updatedPersonalInfo)
@@ -30,14 +30,14 @@ namespace NewReminderASP.Core.Provider
             _personalInformationRepository.UpdatePersonalInfo(updatedPersonalInfo);
         }
 
-        public void AddPersonalInfo(string userLogin, PersonalInfo personalInfo)
+        public void AddPersonalInfo(PersonalInfo personalInfo)
         {
-            _personalInformationRepository.AddPersonalInfo(userLogin, personalInfo);
+            _personalInformationRepository.AddPersonalInfo(personalInfo);
         }
 
-        public void DeletePersonalInfo(string login)
+        public void DeletePersonalInfo(int id)
         {
-            _personalInformationRepository.DeletePersonalInfo(login);
+            _personalInformationRepository.DeletePersonalInfo(id);
         }
     }
 }

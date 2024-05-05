@@ -1,7 +1,7 @@
 ﻿﻿@model NewReminderASP.Domain.Entities.Event
 
 @{
-    ViewBag.Title = "Create Event";
+    ViewBag.Title = "Create Admin Event";
 }
 
 <link href="~/styles.css" rel="stylesheet"/>
@@ -10,26 +10,33 @@
 <!-- jQuery UI library -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
-
 <div class="create-form">
     <h2>Add Event</h2>
 
-    @using (Html.BeginForm("Create", "Event", FormMethod.Post, new { @class = "form-horizontal" }))
+    @using (Html.BeginForm("CreateAdminEvent", "Event", FormMethod.Post, FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
 
+
         <h4>Event</h4>
 
-        <!-- Event Type Selection -->
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Login, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Login, new SelectList(Model.Users, "Login", "Login"), "Select User", new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.EventTypes, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.EventTypes, new SelectList(Model.EventsTypes, "TypeName", "TypeName"), "Select Event Type", new { @class = "form-control", required = "required" })
+                @Html.DropDownListFor(model => model.EventTypes, new SelectList(Model.EventsTypes, "TypeName", "TypeName"), "Select User", new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.EventTypes, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <!-- Title Input -->
         <div class="form-group">
             @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -38,7 +45,6 @@
             </div>
         </div>
 
-        <!-- Date Selection with Datepicker -->
         <div class="form-group">
             @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -47,7 +53,6 @@
             </div>
         </div>
 
-        <!-- Time Input -->
         <div class="form-group">
             @Html.LabelFor(model => model.Time, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -56,16 +61,14 @@
             </div>
         </div>
 
-        <!-- Recurrence Selection -->
         <div class="form-group">
             @Html.LabelFor(model => model.Recurrence, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Recurrence, new SelectList(Model.EventRecurrences, "RecurrenceType", "RecurrenceType"), "Select Recurrence", new { @class = "form-control", required = "required" })
+                @Html.DropDownListFor(model => model.Recurrence, new SelectList(Model.EventRecurrences, "RecurrenceType", "RecurrenceType"), "Select User", new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.Recurrence, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <!-- Reminder Input -->
         <div class="form-group">
             @Html.LabelFor(model => model.Reminders, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -74,7 +77,7 @@
             </div>
         </div>
 
-        <!-- Submit Button -->
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button type="submit" class="btn btn-primary">Create Event</button>
@@ -97,5 +100,5 @@
             dateFormat: "dd-mm-yy"
         });
     });
-    
+
 </script>

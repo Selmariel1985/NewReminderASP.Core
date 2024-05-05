@@ -5,12 +5,13 @@ namespace NewReminderASP.Domain.Entities
 {
     public class UserRole
     {
-
         public string RoleName { get; set; }
 
         public string UserLogin { get; set; }
+
         [Required(ErrorMessage = "Please enter the User")]
         public int UserId { get; set; }
+
         [Required(ErrorMessage = "Please enter the Role")]
         public int RoleId { get; set; }
 
@@ -21,6 +22,5 @@ namespace NewReminderASP.Domain.Entities
 
         public List<User> Users { get; set; }
         public List<Role> Roles { get; set; }
-
     }
 }

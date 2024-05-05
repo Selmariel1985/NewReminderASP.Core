@@ -1,29 +1,28 @@
-﻿using log4net;
-using NewReminderASP.Core.Provider;
-using NewReminderASP.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Web.Mvc;
 using System.Web.Security;
-using static NewReminderASP.WebUI.MvcApplication;
+using log4net;
+using NewReminderASP.Core.Provider;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 {
-    [Authorize(Roles = "Admin")]
     [RouteArea("AccountsArea")]
     [RoutePrefix("User")]
     public class UserController : BaseController
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IUserProvider _provider;
         private readonly IAddressProvider _addressProvider;
-        private readonly IPhoneProvider _phoneProvider;
         private readonly IPersonalInformationProvider _personalInfoProvider;
+        private readonly IPhoneProvider _phoneProvider;
+        private readonly IUserProvider _provider;
 
-        public UserController(IUserProvider userProvider, IAddressProvider addressProvider, IPhoneProvider phoneProvider, IPersonalInformationProvider personalInfoProvider)
+        public UserController(IUserProvider userProvider, IAddressProvider addressProvider,
+            IPhoneProvider phoneProvider, IPersonalInformationProvider personalInfoProvider)
         {
             _provider = userProvider;
             _addressProvider = addressProvider;
@@ -36,8 +35,6 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             FormsAuthentication.SignOut(); // Очистить аутентификацию
             return RedirectToAction("Login", "Login", new { area = "LoginArea" }); // Перенаправление на страницу входа
         }
-
-       
 
 
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
@@ -60,27 +57,31 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
         }
 
 
-        public ActionResult Details(int id)
+        public ActionResult Details(string userName)
         {
-            var user = _provider.GetUser(id);
+            var user = _provider.GetUserByLogin(userName);
             if (user == null) return HttpNotFound();
 
-            var addresses = _addressProvider.GetAddressesByUserId(id);
-            var phone = _phoneProvider.GetUserPhonesByUserId(id);
-            var personalInfo = _personalInfoProvider.GetPersonalInfo(user.Login);
+            var userId = user.Id; // Получаем числовой идентификатор пользователя из объекта user
+
+            var addresses = _addressProvider.GetAddressesByUserId(userId);
+            var phones = _phoneProvider.GetUserPhonesByUserId(userId);
+            var personalInfo = _personalInfoProvider.GetPersonalInfo(userId);
 
             var viewModel = new UserDetailsViewModel
             {
                 User = user,
                 Addresses = addresses,
-                Phones = phone,
+                Phones = phones,
                 PersonalInformation = personalInfo
             };
 
-            return View(viewModel);
+            if (User.IsInRole("Admin") || user.Login == User.Identity.Name)
+                return View(viewModel);
+            return new HttpUnauthorizedResult();
         }
 
-
+        [Authorize(Roles = "Admin")]
         public ActionResult EditUserRole(int id)
         {
             var userRoles = _provider.GetUserRoles(id);
@@ -98,6 +99,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(userRoleModel);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditUserRole(UserRole userRole)
@@ -121,10 +123,11 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(userRole);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult EditUserAndRoles(int id)
         {
             var user = _provider.GetUser(id);
-           
+
             var roles = _provider.GetRoles();
 
             if (user != null)
@@ -134,32 +137,26 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
                     User = user,
                     UserRole = new UserRole
                     {
-                      
                         Roles = roles
                     }
                 };
 
                 return View(userAndRolesModel);
             }
-            else
-            {
-                // Handle scenario where user is not found
-                return RedirectToAction("Index");
-            }
+
+            return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditUserAndRoles(UserAndRolesModel model, int[] SelectedRoles)
         {
             var roles = _provider.GetRoles();
-            model.UserRole = model.UserRole ?? new UserRole(); 
-            model.UserRole.Roles = roles; 
+            model.UserRole = model.UserRole ?? new UserRole();
+            model.UserRole.Roles = roles;
 
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            if (!ModelState.IsValid) return View(model);
 
             if (string.IsNullOrEmpty(model.User.Password))
             {
@@ -172,9 +169,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
                 _provider.UpdateUser(model.User);
 
                 if (SelectedRoles != null && SelectedRoles.Any())
-                {
                     _provider.UpdateUserRoles(model.User.Id, string.Join(",", SelectedRoles));
-                }
 
                 return RedirectToAction("Index");
             }
@@ -187,34 +182,39 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
         }
 
 
-
-
-
-
         public ActionResult Edit(int id)
         {
             var user = _provider.GetUser(id);
-            if (user == null) return HttpNotFound();
+
+            if (user == null || (!User.IsInRole("Admin") && user.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
             return View(user);
         }
 
-        // POST: User/Edit/5
+
         [HttpPost]
-        public ActionResult Edit(User user)
+        public ActionResult Edit(int id, User user)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _provider.UpdateUser(user);
-                    return RedirectToAction("Index");
+                    var existingUser = _provider.GetUser(id);
+
+                    if (existingUser != null && (User.IsInRole("Admin") || existingUser.Login == User.Identity.Name))
+                    {
+                        // Update the user with the provided user object
+                        _provider.UpdateUser(user);
+                        return RedirectToAction("Login", "Login", new { area = "LoginArea" });
+                    }
+
+                    return new HttpUnauthorizedResult();
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                _logger.Error("An error occurred in Index()", ex);
-
+                _logger.Error("An error occurred in Edit()", ex);
 
                 return View("Error");
             }
@@ -222,11 +222,13 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(user);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(User user)
@@ -260,20 +262,28 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
         public ActionResult Delete(int id)
         {
             var user = _provider.GetUser(id);
-            if (user == null) return HttpNotFound();
+            if (user == null || (!User.IsInRole("Admin") && user.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
             return View(user);
         }
 
-       
+
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var events = _provider.GetUser(id);
+
+
+            if (events == null || (!User.IsInRole("Admin") && events.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
+
             _provider.DeleteUser(id);
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Role(string orderBy, string sortOrder, int page = 1)
         {
             var role = _provider.GetRoles().AsQueryable();
@@ -282,8 +292,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             var paginatedRole = DynamicSortAndPaginate(role, orderBy, sortOrder, page, pageSize).ToList();
 
 
-            int totalRole = role.Count();
-            int totalPages = (int)Math.Ceiling((double)totalRole / pageSize);
+            var totalRole = role.Count();
+            var totalPages = (int)Math.Ceiling((double)totalRole / pageSize);
 
             ViewBag.OrderBy = orderBy;
             ViewBag.SortOrder = sortOrder;
@@ -294,7 +304,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin")]
         public ActionResult DetailsRole(int id)
         {
             var role = _provider.GetRolesByID(id);
@@ -302,11 +312,13 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(role);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateRole()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateRole(Role role)
@@ -320,6 +332,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(role);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult EditRole(int id)
         {
             var role = _provider.GetRolesByID(id);
@@ -327,7 +340,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(role);
         }
 
-        // POST: User/Edit/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult EditRole(Role role)
         {
@@ -351,7 +364,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(role);
         }
 
-
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteRole(int id)
         {
             var role = _provider.GetRolesByID(id);
@@ -359,6 +372,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(role);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ActionName("DeleteRole")]
         [ValidateAntiForgeryToken]
@@ -368,6 +382,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult UserRole(string orderBy, string sortOrder, int page = 1)
         {
             var userRoles = _provider.GetUsersRoles().AsQueryable();
@@ -376,8 +391,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             var paginatedUserRole = DynamicSortAndPaginate(userRoles, orderBy, sortOrder, page, pageSize).ToList();
 
 
-            int totalUserRole = userRoles.Count();
-            int totalPages = (int)Math.Ceiling((double)totalUserRole / pageSize);
+            var totalUserRole = userRoles.Count();
+            var totalPages = (int)Math.Ceiling((double)totalUserRole / pageSize);
 
             ViewBag.OrderBy = orderBy;
             ViewBag.SortOrder = sortOrder;
@@ -387,7 +402,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(paginatedUserRole);
         }
 
-
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateUserRoleById()
         {
             var model = new UserRole
@@ -398,6 +413,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateUserRoleById(UserRole userRole)
@@ -414,12 +430,13 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(userRole);
         }
 
-
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateUserRole()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateUserRole(string userLogin, string roleName)
@@ -436,7 +453,6 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View();
         }
 
-       
 
         //protected override void OnException(ExceptionContext filterContext)
         //{

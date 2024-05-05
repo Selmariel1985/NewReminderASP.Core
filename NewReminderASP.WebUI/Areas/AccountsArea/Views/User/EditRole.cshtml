@@ -5,7 +5,7 @@
     ViewBag.Title = "Edit Role";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 
 <div class="edit-container">
     <h2>Edit Role</h2>
@@ -15,12 +15,11 @@
         @Html.AntiForgeryToken()
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.Name, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
 
-       
 
         <div class="form-group">
             <button type="submit" class="btn btn-save">Save</button>

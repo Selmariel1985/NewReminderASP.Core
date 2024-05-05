@@ -2,40 +2,41 @@
     ViewBag.Title = "UserRole List";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 <div class="form-container">
     <h2>Role List</h2>
 
-    <<form action="@Url.Action("UserRole")" method="get">
-    <div class="filter-bar">
-        <label for="orderBy">Sort by:</label>
-        <select id="orderBy" name="orderBy">
-            <option value="UserId">UserId</option>
-            <option value="RoleId">RoleId</option>
-           
-        </select>
-        <label for="sortOrder">Order:</label>
-        <select id="sortOrder" name="sortOrder">
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
-        <input type="submit" value="Filter" class="btn" />
-    </div>
+    <
+    <form action="@Url.Action("UserRole")" method="get">
+        <div class="filter-bar">
+            <label for="orderBy">Sort by:</label>
+            <select id="orderBy" name="orderBy">
+                <option value="UserId">UserId</option>
+                <option value="RoleId">RoleId</option>
 
-    <table class="table-eco">
-        <tr>
-            <th>@Html.ActionLink("UserId", "UserRole", new { orderBy = "UserId", sortOrder = ViewBag.OrderBy == "UserId" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
-            <th>@Html.ActionLink("RoleId", "UserRole", new { orderBy = "RoleId", sortOrder = ViewBag.OrderBy == "RoleId" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
-           
-        </tr>
-        @foreach (var userrole in Model)
-        {
+            </select>
+            <label for="sortOrder">Order:</label>
+            <select id="sortOrder" name="sortOrder">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+            <input type="submit" value="Filter" class="btn"/>
+        </div>
+
+        <table class="table-eco">
             <tr>
-                <td>@userrole.UserId</td>
-                <td>@userrole.RoleId</td>
+                <th>@Html.ActionLink("UserId", "UserRole", new { orderBy = "UserId", sortOrder = ViewBag.OrderBy == "UserId" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("RoleId", "UserRole", new { orderBy = "RoleId", sortOrder = ViewBag.OrderBy == "RoleId" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+
             </tr>
-        }
-    </table>
+            @foreach (var userrole in Model)
+            {
+                <tr>
+                    <td>@userrole.UserId</td>
+                    <td>@userrole.RoleId</td>
+                </tr>
+            }
+        </table>
     </form>
     <div class="pagination">
         @if (ViewBag.CurrentPage > 1)
@@ -43,9 +44,8 @@
             <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
         }
 
-   
 
-        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
         {
             <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
         }
@@ -56,4 +56,4 @@
         }
 
     </div>
-    </div>
+</div>

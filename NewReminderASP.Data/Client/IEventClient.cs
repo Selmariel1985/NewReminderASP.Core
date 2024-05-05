@@ -1,5 +1,5 @@
-﻿using NewReminderASP.Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.Data.Client
 {
@@ -11,6 +11,7 @@ namespace NewReminderASP.Data.Client
 
         void UpdateEvent(Event updatedEvent);
         void AddEvent(Event events);
+        void AddAdminEvent(Event events);
         void DeleteEvent(int id);
 
         List<EventDetail> GetEventDetails();

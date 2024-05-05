@@ -1,11 +1,11 @@
-﻿using log4net;
-using NewReminderASP.Core.Provider;
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using log4net;
+using NewReminderASP.Core.Provider;
 
 namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
 {
@@ -23,6 +23,15 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
         {
             _provider = provider;
         }
+
+
+        //[AllowAnonymous]
+        //public ActionResult EventAsAnonymous()
+        //{
+        //    _logger.Info("Rendering EventAsAnonymous view");
+        //    return View("EventAsAnonymous");
+        //}
+
 
         public ActionResult Login()
         {
@@ -45,7 +54,8 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
                 var roleNames = user.UserRoles.Select(ur => ur.Role.Name).ToList();
 
                 _provider.AssignRolesToUser(user, roleNames);
-                _logger.InfoFormat("User authenticated successfully. Assigned roles: {0}", string.Join(", ", roleNames));
+                _logger.InfoFormat("User authenticated successfully. Assigned roles: {0}",
+                    string.Join(", ", roleNames));
 
                 var authTicket = new FormsAuthenticationTicket(
                     1,
@@ -61,33 +71,22 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
                 System.Web.HttpContext.Current.Response.Cookies.Add(authCookie);
 
                 if (roleNames.Contains("Admin"))
-                {
                     return RedirectToAction("Index", "User", new { area = "AccountsArea" });
-                }
-                else
+
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 {
-                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                    {
-                        _logger.InfoFormat("User authenticated successfully. Redirecting to: {0}", returnUrl);
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        // Redirect to the "Event" controller for users with roles other than "Admin"
-                        return RedirectToAction("Index", "Event", new { area = "EventsArea" });
-                    }
+                    _logger.InfoFormat("User authenticated successfully. Redirecting to: {0}", returnUrl);
+                    return Redirect(returnUrl);
                 }
+
+                // Redirect to the "Event" controller for users with roles other than "Admin"
+                return RedirectToAction("Index", "Event", new { area = "EventsArea" });
             }
-            else
-            {
-                ModelState.AddModelError("", "Invalid login or password");
-                _logger.WarnFormat("Authentication failed for user with login: {0}", login);
-                return View();
-            }
+
+            ModelState.AddModelError("", "Invalid login or password");
+            _logger.WarnFormat("Authentication failed for user with login: {0}", login);
+            return View();
         }
-
-
-
 
 
         //protected override void OnException(ExceptionContext filterContext)
@@ -102,7 +101,4 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
         //        filterContext.ExceptionHandled = true;
         //    }
     }
-
-
-
 }

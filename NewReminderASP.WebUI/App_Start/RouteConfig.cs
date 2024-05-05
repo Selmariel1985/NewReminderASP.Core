@@ -25,13 +25,18 @@ namespace NewReminderASP.WebUI
                 new { isAdmin = new AdminRoleRouteConstraint() }
             );
 
+
             // Route for other users
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
                 new { controller = "Event", action = "Index", id = UrlParameter.Optional }
             );
-
+            //routes.MapRoute(
+            //    name: "EventAsAnonymous",
+            //    url: "Login/EventAsAnonymous",
+            //    defaults: new { controller = "Login", action = "EventAsAnonymous" }
+            //);
         }
     }
 }

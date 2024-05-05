@@ -1,11 +1,12 @@
-﻿using log4net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using log4net;
 using NewReminderASP.Data.Client;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 public class UserClient : IUserClient
 {
@@ -70,46 +71,53 @@ public class UserClient : IUserClient
     }
 
 
-
     public IReadOnlyList<User> GetUsers()
     {
         var users = new List<User>();
+        var currentUserLogin = HttpContext.Current.User.Identity.Name;
+        var isAdmin = HttpContext.Current.User.IsInRole("admin");
 
         using (var connection = new UserServiceClient())
         {
             try
             {
                 connection.Open();
-
                 var result = connection.GetUsers();
 
-                if (result != null)
-                    foreach (var userDto in result)
+                if (isAdmin)
+                    users = result.Select(userDto => new User
                     {
-                        var user = new User
+                        Id = userDto.Id,
+                        Login = userDto.Login,
+                        Password = userDto.Password,
+                        Email = userDto.Email,
+                        UserRoles = userDto.Roles.Select(r =>
+                            new UserRole
+                            {
+                                User = new User { Id = userDto.Id },
+                                Role = new Role { Name = r }
+                            }).ToList()
+                    }).ToList();
+                else
+                    users = result.Where(userDto => userDto.Login == currentUserLogin)
+                        .Select(userDto => new User
                         {
                             Id = userDto.Id,
                             Login = userDto.Login,
                             Password = userDto.Password,
                             Email = userDto.Email,
                             UserRoles = userDto.Roles.Select(r =>
-                                new
-                                    UserRole
+                                new UserRole
                                 {
                                     User = new User { Id = userDto.Id },
-                                    Role
-                                            = new Role { Name = r }
+                                    Role = new Role { Name = r }
                                 }).ToList()
-                        };
-                        users.Add(user);
-                    }
+                        }).ToList();
 
                 connection.Close();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-
                 var logger = LogManager.GetLogger("ErrorLogger");
                 logger.Error("An error occurred", e);
                 throw;
@@ -118,6 +126,7 @@ public class UserClient : IUserClient
 
         return users;
     }
+
 
     public User GetUser(int id)
     {
@@ -141,10 +150,10 @@ public class UserClient : IUserClient
                         UserRoles = result.Roles.Select(r =>
                             new
                                 UserRole
-                            {
-                                User = new User { Id = result.Id },
-                                Role = new Role { Name = r }
-                            }).ToList()
+                                {
+                                    User = new User { Id = result.Id },
+                                    Role = new Role { Name = r }
+                                }).ToList()
                     };
 
                 client.Close();
@@ -184,11 +193,11 @@ public class UserClient : IUserClient
                         UserRoles = result.Roles.Select(r =>
                             new
                                 UserRole
-                            {
-                                User = new User { Id = result.Id },
-                                Role
+                                {
+                                    User = new User { Id = result.Id },
+                                    Role
                                         = new Role { Name = r }
-                            }).ToList()
+                                }).ToList()
                     };
 
                 client.Close();
@@ -394,11 +403,11 @@ public class UserClient : IUserClient
                         UserRoles = result.Roles.Select(r =>
                             new
                                 UserRole
-                            {
-                                User = new User { Id = result.Id },
-                                Role
+                                {
+                                    User = new User { Id = result.Id },
+                                    Role
                                         = new Role { Name = r }
-                            }).ToList()
+                                }).ToList()
                     };
 
                 connection.Close();
@@ -581,7 +590,6 @@ public class UserClient : IUserClient
                 connection.AddRole(new RoleDto
                 {
                     Name = role.Name
-
                 });
 
 
@@ -597,6 +605,7 @@ public class UserClient : IUserClient
             }
         }
     }
+
     public void UpdateRole(Role updatedRole)
     {
         using (var connection = new UserServiceClient())
@@ -608,8 +617,7 @@ public class UserClient : IUserClient
                 connection.UpdateRole(new RoleDto
                 {
                     Id = updatedRole.Id,
-                    Name = updatedRole.Name,
-
+                    Name = updatedRole.Name
                 });
 
                 connection.Close();
@@ -624,6 +632,7 @@ public class UserClient : IUserClient
             }
         }
     }
+
     public void UpdateUserRoles(int userId, string roleIds)
     {
         using (var client = new UserServiceClient())

@@ -2,8 +2,6 @@
 {
     public class RegisterViewModel
     {
-
         public User User { get; set; }
-
     }
 }

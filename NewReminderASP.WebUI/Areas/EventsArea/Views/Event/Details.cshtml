@@ -3,13 +3,13 @@
     ViewBag.Title = "Event Details";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 
 <div class="details-details">
     <h2>Event Details</h2>
 
     <h2>User : @Model.Login</h2>
-    <hr />
+    <hr/>
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.EventTypes)</dt>
         <dd>@Html.DisplayFor(model => model.EventTypes)</dd>

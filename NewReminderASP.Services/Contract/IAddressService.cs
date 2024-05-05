@@ -1,6 +1,6 @@
-﻿using NewReminderASP.Services.Dtos;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
+using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Services.Contract
 {
@@ -13,11 +13,11 @@ namespace NewReminderASP.Services.Contract
 
         [OperationContract]
         AddressDto GetAddress(int id);
+
         [OperationContract]
         AddressDto GetAddressByID(int id);
 
         [OperationContract]
-
         List<AddressDto> GetAddressesByUserId(int userId);
 
         [OperationContract]

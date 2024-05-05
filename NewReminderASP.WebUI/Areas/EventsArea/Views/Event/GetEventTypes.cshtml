@@ -4,7 +4,7 @@
     ViewBag.Title = "Event Type";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 <div class="form-container">
 
     <h2>Event Type</h2>
@@ -15,33 +15,33 @@
             <select id="orderBy" name="orderBy">
                 <option value="ID">ID</option>
                 <option value="TypeName">TypeName</option>
-               
+
             </select>
             <label for="sortOrder">Order:</label>
             <select id="sortOrder" name="sortOrder">
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
             </select>
-            <input type="submit" value="Filter" class="btn" />
+            <input type="submit" value="Filter" class="btn"/>
         </div>
 
         <table class="table-eco">
             <tr>
                 <th>@Html.ActionLink("ID", "GetEventTypes", new { orderBy = "ID", sortOrder = ViewBag.OrderBy == "ID" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
                 <th>@Html.ActionLink("TypeName", "GetEventTypes", new { orderBy = "TypeName", sortOrder = ViewBag.OrderBy == "TypeName" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
-      
-                
-            </tr>
-        @foreach (var eventType in Model)
-        {
-            <tr>
 
-                <td>@eventType.ID</td>
-                <td>@Html.ActionLink(!string.IsNullOrEmpty(eventType.TypeName) ? eventType.TypeName : "Default Name", "DetailsEventTypes", "Event", new { id = eventType.ID }, null)</td>
+
             </tr>
-        }
-       
-    </table>
+            @foreach (var eventType in Model)
+            {
+                <tr>
+
+                    <td>@eventType.ID</td>
+                    <td>@Html.ActionLink(!string.IsNullOrEmpty(eventType.TypeName) ? eventType.TypeName : "Default Name", "DetailsEventTypes", "Event", new { id = eventType.ID }, null)</td>
+                </tr>
+            }
+
+        </table>
     </form>
     <div class="pagination">
         @if (ViewBag.CurrentPage > 1)
@@ -49,9 +49,8 @@
             <a href="@Url.Action("GetEventTypes", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
         }
 
-   
 
-        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
         {
             <a href="@Url.Action("GetEventTypes", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
         }

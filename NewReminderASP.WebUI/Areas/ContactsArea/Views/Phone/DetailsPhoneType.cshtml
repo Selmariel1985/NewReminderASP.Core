@@ -4,23 +4,23 @@
     ViewBag.Title = "Details PhoneType";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 
 <div class="details-details">
     <h2>User Phone Type Details</h2>
 
     <div>
         <h2>Phone Type : @Model.ID</h2>
-        <hr />
+        <hr/>
         <dl class="dl-horizontal">
             <dt>@Html.DisplayNameFor(model => model.TypeName)</dt>
             <dd>@Html.DisplayFor(model => model.TypeName)</dd>
 
-            
+
         </dl>
     </div>
 
-  
+
     <div class="btn-group" role="group" aria-label="User actions">
         @Html.ActionLink("Edit", "EditPhoneType", new { id = Model.ID }, new { @class = "btn " })
         @Html.ActionLink("Delete", "DeletePhoneType", new { id = Model.ID }, new { @class = "btn " })

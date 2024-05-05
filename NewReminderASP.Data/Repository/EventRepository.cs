@@ -1,13 +1,14 @@
-﻿using NewReminderASP.Data.Client;
-using NewReminderASP.Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using NewReminderASP.Data.Client;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.Data.Repository
 {
     public class EventRepository : IEventRepository
     {
         private readonly IEventClient _eventClient;
+        private IEventRepository _eventRepositoryImplementation;
 
         public EventRepository(IEventClient eventClient)
         {
@@ -32,6 +33,11 @@ namespace NewReminderASP.Data.Repository
         public void AddEvent(Event events)
         {
             _eventClient.AddEvent(events);
+        }
+
+        public void AddAdminEvent(Event events)
+        {
+            _eventClient.AddAdminEvent(events);
         }
 
         public void DeleteEvent(int id)

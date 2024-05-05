@@ -2,46 +2,35 @@
 @{
     ViewBag.Title = "Edit User";
 }
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 <div class="edit-container">
     <h2>Edit User: @Model.Login</h2>
 
     @using (Html.BeginForm())
     {
-
-
-
         @Html.HiddenFor(model => model.Id)
         <div class="form-group">
-            @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.Login, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.Email, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.Password, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.SelectedRoleIds, "Select Role(s)")
-            @Html.ListBoxFor(model => model.SelectedRoleIds, new MultiSelectList(Model.UserRoles, "ID", "Name", Model.SelectedRoleIds), new { @class = "form-control", size = 5, multiple = "multiple" })
-            @Html.ValidationMessageFor(model => model.SelectedRoleIds)
-        </div>
-
-       
 
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-save" />
+            <input type="submit" value="Save" class="btn btn-save"/>
         </div>
-
     }
 </div>
 <div class="row mt-2">
@@ -49,5 +38,3 @@
         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
     </div>
 </div>
-
-

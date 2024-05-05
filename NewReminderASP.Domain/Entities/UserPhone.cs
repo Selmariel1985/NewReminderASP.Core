@@ -8,6 +8,7 @@ namespace NewReminderASP.Domain.Entities
         public int ID { get; set; }
 
         public int UserID { get; set; }
+
         [Required(ErrorMessage = "Please enter the Phone Number")]
         public string PhoneNumber { get; set; } = string.Empty;
 

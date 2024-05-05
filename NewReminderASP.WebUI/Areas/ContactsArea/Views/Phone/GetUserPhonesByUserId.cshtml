@@ -3,14 +3,13 @@
     ViewBag.Title = "Phone List";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
-
+<link href="~/styles.css" rel="stylesheet"/>
 
 
 <div class="details-details">
 
     <h2>Phone List</h2>
-    <hr />
+    <hr/>
     @foreach (var userPhone in Model)
     {
         <div>
@@ -25,9 +24,9 @@
                 <dt>Country:</dt>
                 <dd>@userPhone.CountryName</dd>
 
-                
+
             </dl>
         </div>
-        <hr />
+        <hr/>
     }
 </div>

@@ -1,11 +1,11 @@
-﻿using log4net;
-using NewReminderASP.Core.Provider;
-using NewReminderASP.Domain.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
+using log4net;
+using Microsoft.AspNet.Identity;
+using NewReminderASP.Core.Provider;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
 {
@@ -13,9 +13,9 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
     {
         // GET: Phone
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
+        private readonly ICountryProvider _countryProvider;
         private readonly IPhoneProvider _provider;
         private readonly IUserProvider _userProvider;
-        private readonly ICountryProvider _countryProvider;
 
 
         public PhoneController(IPhoneProvider provider, IUserProvider userProvider, ICountryProvider countryProvider)
@@ -23,8 +23,8 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             _provider = provider;
             _userProvider = userProvider;
             _countryProvider = countryProvider;
-
         }
+
         public ActionResult SignOut()
         {
             return SignOutAndRedirectToLogin("LoginArea");
@@ -38,8 +38,8 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             var paginatedUserPhones = DynamicSortAndPaginate(userPhones, orderBy, sortOrder, page, pageSize).ToList();
 
 
-            int totalUserPhones = userPhones.Count();
-            int totalPages = (int)Math.Ceiling((double)totalUserPhones / pageSize);
+            var totalUserPhones = userPhones.Count();
+            var totalPages = (int)Math.Ceiling((double)totalUserPhones / pageSize);
 
             ViewBag.OrderBy = orderBy;
             ViewBag.SortOrder = sortOrder;
@@ -50,63 +50,57 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         }
 
 
-
-
         public ActionResult Edit(int id)
         {
-
             var model = _provider.GetUserPhone(id);
-            if (model == null)
-            {
-                return HttpNotFound();
-            }
+            if (model == null || (!User.IsInRole("Admin") && model.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
 
             model.Countries = _countryProvider.GetCountries();
             model.PhonesTypes = _provider.GetPhoneTypes();
             return View(model);
-
         }
 
-        // POST: User/Edit/5
-        [HttpPost]
 
+        [HttpPost]
         public ActionResult Edit(UserPhone userPhone)
         {
-
-            if (ModelState.IsValid)
+            var existingUserPhone = _provider.GetUserPhone(userPhone.ID);
+            if (existingUserPhone != null && (User.IsInRole("Admin") || existingUserPhone.Login == User.Identity.Name))
             {
                 _provider.UpdateUserPhone(userPhone);
                 return RedirectToAction("Index");
             }
 
+            return new HttpUnauthorizedResult();
+
             userPhone.PhonesTypes = _provider.GetPhoneTypes();
             userPhone.Countries = _countryProvider.GetCountries();
             return View(userPhone);
-
         }
+
         public ActionResult Details(int id)
         {
             var userPhone = _provider.GetUserPhone(id);
             if (userPhone == null) return HttpNotFound();
-            return View(userPhone);
+
+
+            if (User.IsInRole("Admin") || userPhone.Login == User.Identity.Name)
+                return View(userPhone);
+            return new HttpUnauthorizedResult();
         }
 
         public ActionResult GetUserPhonesByUserId(int id)
         {
+            if (!User.IsInRole("Admin") && User.Identity.GetUserId() == id.ToString())
+                return new HttpUnauthorizedResult();
 
 
+            var userPhone = _provider.GetUserPhonesByUserId(id).ToList();
 
-            List<UserPhone> userPhone = _provider.GetUserPhonesByUserId(id).ToList();
-
-            // Check if result is null or empty
-            if (userPhone == null || !userPhone.Any())
-            {
-                return HttpNotFound($"No addresses found for user ID: {id}");
-            }
+            if (userPhone == null || !userPhone.Any()) return HttpNotFound($"No phone found for user ID: {id}");
 
             return View(userPhone);
-
-
         }
 
         public ActionResult Create()
@@ -115,6 +109,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             model.PhonesTypes = _provider.GetPhoneTypes();
             model.Users = _userProvider.GetUsers();
             model.Countries = _countryProvider.GetCountries();
+            model.Login = User.Identity.Name;
 
 
             return View(model);
@@ -135,13 +130,44 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             userPhone.Countries = _countryProvider.GetCountries();
             userPhone.PhonesTypes = _provider.GetPhoneTypes();
             return View(userPhone);
-
         }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult CreateAdmin()
+        {
+            var model = new UserPhone();
+            model.PhonesTypes = _provider.GetPhoneTypes();
+            model.Users = _userProvider.GetUsers();
+            model.Countries = _countryProvider.GetCountries();
+
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAdmin(UserPhone userPhone)
+        {
+            if (ModelState.IsValid)
+            {
+                _provider.AddUserPhoneRegister(userPhone);
+                return RedirectToAction("Index");
+            }
+
+            userPhone.Users = _userProvider.GetUsers();
+            userPhone.Countries = _countryProvider.GetCountries();
+            userPhone.PhonesTypes = _provider.GetPhoneTypes();
+            return View(userPhone);
+        }
+
 
         public ActionResult Delete(int id)
         {
             var userPhone = _provider.GetUserPhone(id);
-            if (userPhone == null) return HttpNotFound();
+            if (userPhone == null || (!User.IsInRole("Admin") && userPhone.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
+
             return View(userPhone);
         }
 
@@ -151,10 +177,17 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var events = _provider.GetUserPhone(id);
+
+
+            if (events == null || (!User.IsInRole("Admin") && events.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
+
             _provider.DeleteUserPhone(id);
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult GetPhoneType(string orderBy, string sortOrder, int page = 1)
         {
             var phoneType = _provider.GetPhoneTypes().AsQueryable();
@@ -163,8 +196,8 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             var paginatedPhoneType = DynamicSortAndPaginate(phoneType, orderBy, sortOrder, page, pageSize).ToList();
 
 
-            int totalPhoneType = phoneType.Count();
-            int totalPages = (int)Math.Ceiling((double)totalPhoneType / pageSize);
+            var totalPhoneType = phoneType.Count();
+            var totalPages = (int)Math.Ceiling((double)totalPhoneType / pageSize);
 
             ViewBag.OrderBy = orderBy;
             ViewBag.SortOrder = sortOrder;
@@ -175,8 +208,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         }
 
 
-
-
+        [Authorize(Roles = "Admin")]
         public ActionResult EditPhoneType(int id)
         {
             var phoneType = _provider.GetPhoneType(id);
@@ -184,9 +216,8 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View(phoneType);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-
         public ActionResult EditPhoneType(PhoneType phoneType)
         {
             if (ModelState.IsValid)
@@ -197,18 +228,22 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
 
             return View(phoneType);
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult DetailsPhoneType(int id)
         {
             var phoneType = _provider.GetPhoneType(id);
             if (phoneType == null) return HttpNotFound();
             return View(phoneType);
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult CreatePhoneType()
         {
             return View();
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreatePhoneType(PhoneType phoneType)
@@ -222,6 +257,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult DeletePhoneType(int id)
         {
             var phoneType = _provider.GetPhoneType(id);
@@ -229,7 +265,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View(phoneType);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ActionName("DeletePhoneType")]
         [ValidateAntiForgeryToken]

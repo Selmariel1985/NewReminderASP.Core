@@ -1,11 +1,10 @@
-﻿using Autofac;
-using log4net;
-using NewReminderASP.Core.Provider;
-using NewReminderASP.Domain.Entities;
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
+using log4net;
+using NewReminderASP.Core.Provider;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 {
@@ -20,38 +19,23 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
         {
             _provider = provider;
             _userProvider = userProvider;
-
         }
+
         public ActionResult SignOut()
         {
             return SignOutAndRedirectToLogin("LoginArea");
         }
 
-        //public ActionResult GetCalendarEvents()
-        //{
-        //    var events = _provider.GetEvents().Select(e => new {
-        //        title = e.Title,
-        //        start = e.Date.ToString("yyyy-MM-dd"),
-        //        allDay = true
-        //    }).ToList();
-
-        //    return Json(events, JsonRequestBehavior.AllowGet); // Ensure that allowing GET is safe for this data.
-        //}
-
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
-
-           
-
-           
             var events = _provider.GetEvents().AsQueryable();
             const int pageSize = 10;
 
             var paginatEdevents = DynamicSortAndPaginate(events, orderBy, sortOrder, page, pageSize).ToList();
 
 
-            int totalEvents = events.Count();
-            int totalPages = (int)Math.Ceiling((double)totalEvents / pageSize);
+            var totalEvents = events.Count();
+            var totalPages = (int)Math.Ceiling((double)totalEvents / pageSize);
 
             ViewBag.OrderBy = orderBy;
             ViewBag.SortOrder = sortOrder;
@@ -62,49 +46,53 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
         }
 
 
-
         public ActionResult Edit(int id)
         {
             var model = _provider.GetEvent(id);
-            if (model == null)
-            {
-                return HttpNotFound();
-            }
+            if (model == null || (!User.IsInRole("Admin") && model.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
 
             model.Users = _userProvider.GetUsers();
             model.EventsTypes = _provider.GetEventTypes();
             model.EventRecurrences = _provider.GetEventRecurrences();
 
             return View(model);
-
         }
 
-        // POST: User/Edit/5
-        [HttpPost]
 
+        [HttpPost]
         public ActionResult Edit(Event events)
         {
             if (ModelState.IsValid)
             {
-                _provider.UpdateEvent(events);
-                return RedirectToAction("Index");
-            }
+                var existingEvent = _provider.GetEvent(events.ID);
+                if (existingEvent != null && (User.IsInRole("Admin") || existingEvent.Login == User.Identity.Name))
+                {
+                    _provider.UpdateEvent(events);
+                    return RedirectToAction("Index");
+                }
 
+                return new HttpUnauthorizedResult();
+            }
 
             events.Users = _userProvider.GetUsers();
             events.EventsTypes = _provider.GetEventTypes();
             events.EventRecurrences = _provider.GetEventRecurrences();
             return View(events);
-
         }
+
         public ActionResult Details(int id)
         {
             var events = _provider.GetEvent(id);
+
+
             if (events == null) return HttpNotFound();
-            return View(events);
+
+
+            if (User.IsInRole("Admin") || events.Login == User.Identity.Name)
+                return View(events);
+            return new HttpUnauthorizedResult();
         }
-
-
 
 
         public ActionResult Create()
@@ -114,8 +102,10 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             model.EventsTypes = _provider.GetEventTypes();
             model.EventRecurrences = _provider.GetEventRecurrences();
 
+
             return View(model);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -127,31 +117,76 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
                 return RedirectToAction("Index");
             }
 
+
             events.Users = _userProvider.GetUsers();
-            events.Login = User.Identity.Name;
             events.EventsTypes = _provider.GetEventTypes();
             events.EventRecurrences = _provider.GetEventRecurrences();
 
+
             return View(events);
         }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult CreateAdminEvent()
+        {
+            var model = new Event();
+            model.Users = _userProvider.GetUsers();
+            model.EventsTypes = _provider.GetEventTypes();
+            model.EventRecurrences = _provider.GetEventRecurrences();
+
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAdminEvent(Event events)
+        {
+            if (ModelState.IsValid)
+            {
+                _provider.AddAdminEvent(events);
+                return RedirectToAction("Index");
+            }
+
+
+            events.Users = _userProvider.GetUsers();
+            events.EventsTypes = _provider.GetEventTypes();
+            events.EventRecurrences = _provider.GetEventRecurrences();
+
+
+            return View(events);
+        }
+
 
         public ActionResult Delete(int id)
         {
             var events = _provider.GetEvent(id);
-            if (events == null) return HttpNotFound();
+
+
+            if (events == null || (!User.IsInRole("Admin") && events.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
+
             return View(events);
         }
-
 
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var events = _provider.GetEvent(id);
+
+
+            if (events == null || (!User.IsInRole("Admin") && events.Login != User.Identity.Name))
+                return new HttpUnauthorizedResult();
+
             _provider.DeleteEvent(id);
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult GetEventTypes(string orderBy, string sortOrder, int page = 1)
         {
             var eventsTypes = _provider.GetEventTypes().AsQueryable();
@@ -160,17 +195,19 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             var paginatedEventsTypes = DynamicSortAndPaginate(eventsTypes, orderBy, sortOrder, page, pageSize).ToList();
 
 
-            int totalEventsTypes = eventsTypes.Count();
-            int totalPages = (int)Math.Ceiling((double)totalEventsTypes / pageSize);
+            var totalEventsTypes = eventsTypes.Count();
+            var totalPages = (int)Math.Ceiling((double)totalEventsTypes / pageSize);
 
             ViewBag.OrderBy = orderBy;
             ViewBag.SortOrder = sortOrder;
             ViewBag.CurrentPage = page;
             ViewBag.TotalPages = totalPages;
 
+
             return View(paginatedEventsTypes);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult EditEventTypes(int id)
         {
             var eventsTypes = _provider.GetEventType(id);
@@ -178,9 +215,8 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(eventsTypes);
         }
 
-        // POST: User/Edit/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-
         public ActionResult EditEventTypes(EventType eventsTypes)
         {
             if (ModelState.IsValid)
@@ -191,18 +227,22 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 
             return View(eventsTypes);
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult DetailsEventTypes(int id)
         {
             var eventsTypes = _provider.GetEventType(id);
             if (eventsTypes == null) return HttpNotFound();
             return View(eventsTypes);
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateEventTypes()
         {
             return View();
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateEventTypes(EventType eventsTypes)
@@ -216,6 +256,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(eventsTypes);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteEventType(int id)
         {
             var eventsTypes = _provider.GetEventType(id);
@@ -223,7 +264,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(eventsTypes);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ActionName("DeleteEventType")]
         [ValidateAntiForgeryToken]
@@ -233,16 +274,18 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return RedirectToAction("GetEventTypes");
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult GetEventRecurrences(string orderBy, string sortOrder, int page = 1)
         {
             var eventRecurrences = _provider.GetEventRecurrences().AsQueryable();
             const int pageSize = 10;
 
-            var paginatedEventRecurrences = DynamicSortAndPaginate(eventRecurrences, orderBy, sortOrder, page, pageSize).ToList();
+            var paginatedEventRecurrences =
+                DynamicSortAndPaginate(eventRecurrences, orderBy, sortOrder, page, pageSize).ToList();
 
 
-            int totalEventRecurrences = eventRecurrences.Count();
-            int totalPages = (int)Math.Ceiling((double)totalEventRecurrences / pageSize);
+            var totalEventRecurrences = eventRecurrences.Count();
+            var totalPages = (int)Math.Ceiling((double)totalEventRecurrences / pageSize);
 
             ViewBag.OrderBy = orderBy;
             ViewBag.SortOrder = sortOrder;
@@ -252,6 +295,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(paginatedEventRecurrences);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult EditEventRecurrences(int id)
         {
             var eventRecurrences = _provider.GetEventRecurrence(id);
@@ -259,9 +303,8 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(eventRecurrences);
         }
 
-        // POST: User/Edit/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-
         public ActionResult EditEventRecurrences(EventRecurrence eventRecurrences)
         {
             if (ModelState.IsValid)
@@ -272,18 +315,21 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 
             return View(eventRecurrences);
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult DetailsEventRecurrences(int id)
         {
             var eventRecurrences = _provider.GetEventRecurrence(id);
             if (eventRecurrences == null) return HttpNotFound();
             return View(eventRecurrences);
         }
+
         public ActionResult CreateEventRecurrences()
         {
             return View();
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateEventRecurrences(EventRecurrence eventRecurrences)
@@ -297,6 +343,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(eventRecurrences);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteEventRecurrence(int id)
         {
             var eventRecurrences = _provider.GetEventRecurrence(id);
@@ -304,7 +351,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(eventRecurrences);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ActionName("DeleteEventRecurrence")]
         [ValidateAntiForgeryToken]
@@ -314,6 +361,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return RedirectToAction("GetEventRecurrences");
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult GetEventDetails(string orderBy, string sortOrder, int page = 1)
         {
             var eventDetail = _provider.GetEventDetails().AsQueryable();
@@ -322,8 +370,8 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             var paginatedEventDetail = DynamicSortAndPaginate(eventDetail, orderBy, sortOrder, page, pageSize).ToList();
 
 
-            int totalEventDetail = eventDetail.Count();
-            int totalPages = (int)Math.Ceiling((double)totalEventDetail / pageSize);
+            var totalEventDetail = eventDetail.Count();
+            var totalPages = (int)Math.Ceiling((double)totalEventDetail / pageSize);
 
             ViewBag.OrderBy = orderBy;
             ViewBag.SortOrder = sortOrder;
@@ -334,25 +382,19 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
         }
 
 
-
-
+        [Authorize(Roles = "Admin")]
         public ActionResult EditEventDetails(int id)
         {
             var model = _provider.GetEventDetail(id);
-            if (model == null)
-            {
-                return HttpNotFound();
-            }
+            if (model == null) return HttpNotFound();
 
             model.EventsId = _provider.GetEvents();
 
             return View(model);
-
         }
 
-        // POST: User/Edit/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-
         public ActionResult EditEventDetails(EventDetail eventDetail)
         {
             if (ModelState.IsValid)
@@ -364,9 +406,9 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 
             eventDetail.EventsId = _provider.GetEvents();
             return View(eventDetail);
-
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult DetailsEventDetails(int id)
         {
             var eventDetail = _provider.GetEventDetail(id);
@@ -374,7 +416,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(eventDetail);
         }
 
-
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateEventDetails()
         {
             var model = new EventDetail();
@@ -384,14 +426,13 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(model);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateEventDetails(EventDetail eventDetail)
         {
             if (ModelState.IsValid)
             {
-
                 _provider.AddEventDetail(eventDetail);
                 return RedirectToAction("GetEventDetails");
             }
@@ -400,11 +441,10 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             eventDetail.EventsId = _provider.GetEvents();
 
 
-
-
             return View(eventDetail);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteEventDetail(int id)
         {
             var eventDetail = _provider.GetEventDetail(id);
@@ -412,7 +452,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(eventDetail);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ActionName("DeleteEventDetail")]
         [ValidateAntiForgeryToken]

@@ -1,10 +1,10 @@
-﻿using log4net;
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using log4net;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Web;
 
 namespace NewReminderASP.Data.Client
 {
@@ -13,8 +13,8 @@ namespace NewReminderASP.Data.Client
         public List<UserPhone> GetUserPhones()
         {
             var userPhones = new List<UserPhone>();
-            string currentUserLogin = HttpContext.Current.User.Identity.Name;
-            bool isAdmin = HttpContext.Current.User.IsInRole("admin");
+            var currentUserLogin = HttpContext.Current.User.Identity.Name;
+            var isAdmin = HttpContext.Current.User.IsInRole("admin");
 
             using (var connection = new PhoneServiceClient())
             {
@@ -25,9 +25,7 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetUserPhones();
 
                     if (result != null)
-                    {
                         foreach (var userPhoneDto in result)
-                        {
                             if (isAdmin || userPhoneDto.Login == currentUserLogin)
                             {
                                 var userPhone = new UserPhone
@@ -42,8 +40,6 @@ namespace NewReminderASP.Data.Client
 
                                 userPhones.Add(userPhone);
                             }
-                        }
-                    }
 
                     connection.Close();
                 }
@@ -71,23 +67,19 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetUserPhonesByUserId(userId);
 
                     if (result != null)
-                    {
                         foreach (var userPhoneDto in result)
                         {
-                            var userPhone = new UserPhone()
+                            var userPhone = new UserPhone
                             {
-
                                 ID = userPhoneDto.ID,
                                 Login = userPhoneDto.Login,
                                 UserID = userPhoneDto.UserID,
                                 PhoneNumber = userPhoneDto.PhoneNumber,
                                 PhoneTypes = userPhoneDto.PhoneType,
-                                CountryName = userPhoneDto.CountryName,
-
+                                CountryName = userPhoneDto.CountryName
                             };
                             userPhones.Add(userPhone); // Add Address object to the list
                         }
-                    }
 
                     connection.Close();
                 }
@@ -102,7 +94,6 @@ namespace NewReminderASP.Data.Client
 
             return userPhones; // Return the list of Address objects
         }
-
 
 
         public UserPhone GetUserPhone(int id)

@@ -8,8 +8,6 @@ namespace NewReminderASP.WebUI
         {
             filters.Add(new HandleErrorAttribute());
             //filters.Add(new DisableAuthenticationPageCachingAttribute());
-
         }
     }
-
 }

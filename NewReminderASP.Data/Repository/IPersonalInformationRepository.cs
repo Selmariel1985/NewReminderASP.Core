@@ -1,5 +1,5 @@
-﻿using NewReminderASP.Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.Data.Repository
 {
@@ -7,10 +7,10 @@ namespace NewReminderASP.Data.Repository
     {
         List<PersonalInfo> GetPersonalInfos();
 
-        PersonalInfo GetPersonalInfo(string login);
+        PersonalInfo GetPersonalInfo(int id);
 
         void UpdatePersonalInfo(PersonalInfo updatedPersonalInfo);
-        void AddPersonalInfo(string userLogin, PersonalInfo personalInfo);
-        void DeletePersonalInfo(string login);
+        void AddPersonalInfo(PersonalInfo personalInfo);
+        void DeletePersonalInfo(int id);
     }
 }

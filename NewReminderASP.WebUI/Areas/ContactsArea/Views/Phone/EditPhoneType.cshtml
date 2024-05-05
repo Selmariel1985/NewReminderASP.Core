@@ -5,15 +5,13 @@
 }
 
 <
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 <div class="edit-container">
     <h4>Phone User: @Model.ID</h4>
 
     @using (Html.BeginForm())
     {
-
-       
-        <hr />
+        <hr/>
         @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
@@ -24,9 +22,8 @@
 
 
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-save" />
+            <input type="submit" value="Save" class="btn btn-save"/>
         </div>
-
     }
 </div>
 

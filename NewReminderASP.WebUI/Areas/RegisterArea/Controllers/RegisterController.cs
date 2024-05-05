@@ -1,10 +1,10 @@
-﻿using log4net;
+﻿using System;
+using System.Reflection;
+using System.Web.Mvc;
+using log4net;
 using Microsoft.Extensions.Caching.Memory;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
-using System;
-using System.Reflection;
-using System.Web.Mvc;
 
 namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
 {
@@ -14,9 +14,9 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
     public class RegisterController : Controller
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IUserProvider _userProvider;
         private readonly IMemoryCache _cache;
         private readonly EmailService _emailService;
+        private readonly IUserProvider _userProvider;
 
         public RegisterController(IUserProvider userProvider, IMemoryCache cache, EmailService emailService)
         {
@@ -30,25 +30,19 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
             return Guid.NewGuid().ToString();
         }
 
-        public bool IsLoginUnique(string login)
+        private bool IsLoginUnique(string login)
         {
-            var existingUser = _userProvider.GetUserByLogin(login);
-            return existingUser == null;
+            return _userProvider.GetUserByLogin(login) == null;
         }
 
         private bool IsEmailUnique(string email)
         {
-            var existingUser = _userProvider.GetUserByEmail(email);
-            return existingUser == null;
+            return _userProvider.GetUserByEmail(email) == null;
         }
 
         public ActionResult Register()
         {
-            var user = new RegisterViewModel
-            {
-                User = new User(),
-            };
-            return View(user);
+            return View(new RegisterViewModel { User = new User() });
         }
 
         [HttpPost]
@@ -57,17 +51,18 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!IsLoginUnique(model.User.Login) || !IsEmailUnique(model.User.Email))
-                {
-                    // Return with error message
-                    return View(model);
-                }
+                if (!IsLoginUnique(model.User.Login))
+                    ModelState.AddModelError("User.Login", "This login is already in use.");
+
+                if (!IsEmailUnique(model.User.Email))
+                    ModelState.AddModelError("User.Email", "This email is already registered.");
+
+                if (!ModelState.IsValid) return View(model);
 
                 var token = GenerateToken();
-                // Сохранение большего количества данных пользователя в кэше
-                _cache.Set(token, model.User, TimeSpan.FromMinutes(20)); // Adjust expiration as necessary
+                _cache.Set(token, model.User, TimeSpan.FromMinutes(20));
 
-                string confirmationUrl = Url.Action("ConfirmEmail", "Register", new { token }, Request.Url.Scheme);
+                var confirmationUrl = Url.Action("ConfirmEmail", "Register", new { token }, Request.Url.Scheme);
                 _emailService.SendConfirmationEmail(model.User.Email, confirmationUrl);
                 return View("RegistrationPending");
             }
@@ -79,29 +74,23 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
         [HttpGet]
         public ActionResult ConfirmEmail(string token)
         {
-            if (_cache.TryGetValue(token, out User cachedUser)) // Retrieving the whole user object from the cache
-            {
+            if (_cache.TryGetValue(token, out User cachedUser))
                 try
                 {
-                    // Activate the user as their email has been confirmed
                     cachedUser.IsActive = true;
                     _userProvider.AddUser(cachedUser);
-                    // Adding the user into the database
-                    
-                        _cache.Remove(token); // Removing the token from cache after successful registration
-                        return View("ConfirmationSuccess"); // Displaying the successful confirmation
-                    
+                    _userProvider.AddUserRoleNormal(cachedUser.Login, "User");
+
+                    _cache.Remove(token);
+                    return View("ConfirmationSuccess");
                 }
                 catch (Exception ex)
                 {
                     _logger.Error("An error occurred during user confirmation", ex);
-                    return View("ConfirmationFailed"); // Displaying the confirmation error page
+                    return View("ConfirmationFailed");
                 }
-            }
 
-            return View("ConfirmationFailed"); // Handling invalid or expired tokens or issues in fetching the data
+            return View("ConfirmationFailed");
         }
-
-
     }
 }

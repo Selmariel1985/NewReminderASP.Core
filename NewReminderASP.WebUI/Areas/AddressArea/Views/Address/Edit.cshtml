@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit Address";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 
 <div class="edit-container">
     <h4>Edit Address: @Model.Login</h4>
@@ -14,33 +14,32 @@
         @Html.AntiForgeryToken()
 
 
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.Street, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.City, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CountryID, "Country", htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.CountryID, "Country", new { @class = "edit-control-label" })
             @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "edit-form-control" })
             @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.PostalCode, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "edit-control-label" })
+            @Html.LabelFor(model => model.Description, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
@@ -50,17 +49,14 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-save" />
+            <input type="submit" value="Save" class="btn btn-save"/>
 
         </div>
     }
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-6">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
     </div>
-
-    <div class="row mt-2">
-        <div class="col-md-6">
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
-        </div>
-    </div>
-
-
-
+</div>

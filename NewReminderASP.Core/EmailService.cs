@@ -5,7 +5,7 @@ public class EmailService
 {
     public void SendConfirmationEmail(string toAddress, string confirmationUrl)
     {
-        using (MailMessage mail = new MailMessage())
+        using (var mail = new MailMessage())
         {
             mail.From = new MailAddress("Selmariel1985@yandex.by");
             mail.To.Add(toAddress);
@@ -13,9 +13,9 @@ public class EmailService
             mail.Body = $"Please confirm your account by clicking this link: {confirmationUrl}";
 
             // Configure Yandex SMTP server settings
-            using (SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 587)) 
+            using (var smtp = new SmtpClient("smtp.yandex.ru", 587))
             {
-                smtp.Credentials = new NetworkCredential("Selmariel1985", "llrjmcwsqtakgzim"); 
+                smtp.Credentials = new NetworkCredential("Selmariel1985", "llrjmcwsqtakgzim");
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
             }

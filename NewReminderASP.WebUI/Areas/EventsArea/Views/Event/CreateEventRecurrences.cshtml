@@ -3,7 +3,7 @@
     ViewBag.Title = "Create Event Recurrence";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 
 <div class="create-form">
     <h2>Add Event Recurrence</h2>
@@ -13,9 +13,8 @@
         @Html.AntiForgeryToken()
 
 
-
         <div class="form-group">
-            @Html.LabelFor(model => model.RecurrenceType, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RecurrenceType, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.RecurrenceType, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Your Recurrence Type" } })
                 @Html.ValidationMessageFor(model => model.RecurrenceType, "", new { @class = "text-danger" })
@@ -36,6 +35,3 @@
         @Html.ActionLink("Back to List", "GetEventRecurrences", null, new { @class = "btn btn-secondary" })
     </div>
 </div>
-
-
-

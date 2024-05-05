@@ -6,45 +6,45 @@
 
 
     <form action="@Url.Action("Index")" method="get">
-    <div class="filter-bar">
-        <label for="orderBy">Sort by:</label>
-        <select id="orderBy" name="orderBy">
-            <option value="ID">ID</option>
-            <option value="Login">Login</option>
-            <option value="PhoneNumber">PhoneNumber</option>
-            <option value="PhoneTypes">PhoneTypes</option>
-            <option value="CountryName">CountryName</option>
-        </select>
-        <label for="sortOrder">Order:</label>
-        <select id="sortOrder" name="sortOrder">
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
-        <input type="submit" value="Filter" class="btn" />
-    </div>
+        <div class="filter-bar">
+            <label for="orderBy">Sort by:</label>
+            <select id="orderBy" name="orderBy">
+                <option value="ID">ID</option>
+                <option value="Login">Login</option>
+                <option value="PhoneNumber">PhoneNumber</option>
+                <option value="PhoneTypes">PhoneTypes</option>
+                <option value="CountryName">CountryName</option>
+            </select>
+            <label for="sortOrder">Order:</label>
+            <select id="sortOrder" name="sortOrder">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+            <input type="submit" value="Filter" class="btn"/>
+        </div>
 
-    <table class="table-eco">
-        <tr>
-            <th>@Html.ActionLink("ID", "Index", new { orderBy = "ID", sortOrder = ViewBag.OrderBy == "ID" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
-            <th>@Html.ActionLink("Login", "Index", new { orderBy = "Login", sortOrder = ViewBag.OrderBy == "Login" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
-            <th>@Html.ActionLink("PhoneNumber", "Index", new { orderBy = "PhoneNumber", sortOrder = ViewBag.OrderBy == "PhoneNumber" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
-            <th>@Html.ActionLink("PhoneTypes", "Index", new { orderBy = "PhoneTypes", sortOrder = ViewBag.OrderBy == "PhoneTypes" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
-            <th>@Html.ActionLink("CountryName", "Index", new { orderBy = "CountryName", sortOrder = ViewBag.OrderBy == "CountryName" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
-                
-        </tr>
-        <tbody>
-        @foreach (var phones in Model)
-        {
+        <table class="table-eco">
             <tr>
-                <td>@phones.ID</td>
-                <td>@Html.ActionLink(!string.IsNullOrEmpty(phones.Login) ? phones.Login : "Default Name", "GetUserPhonesByUserId", "Phone", new { id = phones.UserID }, null)</td>
-                <td>@Html.ActionLink(phones.PhoneNumber, "Details", "Phone", new { id = phones.ID }, null)</td>
-                <td>@phones.PhoneTypes</td>
-                <td>@phones.CountryName</td>
+                <th>@Html.ActionLink("ID", "Index", new { orderBy = "ID", sortOrder = ViewBag.OrderBy == "ID" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Login", "Index", new { orderBy = "Login", sortOrder = ViewBag.OrderBy == "Login" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("PhoneNumber", "Index", new { orderBy = "PhoneNumber", sortOrder = ViewBag.OrderBy == "PhoneNumber" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("PhoneTypes", "Index", new { orderBy = "PhoneTypes", sortOrder = ViewBag.OrderBy == "PhoneTypes" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("CountryName", "Index", new { orderBy = "CountryName", sortOrder = ViewBag.OrderBy == "CountryName" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+
             </tr>
-        }
-        </tbody>
-    </table>
+            <tbody>
+            @foreach (var phones in Model)
+            {
+                <tr>
+                    <td>@phones.ID</td>
+                    <td>@Html.ActionLink(!string.IsNullOrEmpty(phones.Login) ? phones.Login : "Default Name", "GetUserPhonesByUserId", "Phone", new { id = phones.UserID }, null)</td>
+                    <td>@Html.ActionLink(phones.PhoneNumber, "Details", "Phone", new { id = phones.ID }, null)</td>
+                    <td>@phones.PhoneTypes</td>
+                    <td>@phones.CountryName</td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </form>
     <div class="pagination">
         @if (ViewBag.CurrentPage > 1)
@@ -52,9 +52,8 @@
             <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
         }
 
-   
 
-        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
         {
             <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
         }

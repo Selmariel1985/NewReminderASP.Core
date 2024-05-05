@@ -1,6 +1,6 @@
-﻿using NewReminderASP.Services.Dtos;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
+using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Services.Contract
 
@@ -12,15 +12,15 @@ namespace NewReminderASP.Services.Contract
         List<PersonalInfoDto> GetPersonalInfos();
 
         [OperationContract]
-        PersonalInfoDto GetPersonalInfo(string login);
+        PersonalInfoDto GetPersonalInfo(int id);
 
         [OperationContract]
         void UpdatePersonalInfo(PersonalInfoDto updatedPersonalInfo);
 
         [OperationContract]
-        void AddPersonalInfo(string userLogin, PersonalInfoDto personalInfo);
+        void AddPersonalInfo(PersonalInfoDto personalInfo);
 
         [OperationContract]
-        void DeletePersonalInfo(string login);
+        void DeletePersonalInfo(int id);
     }
 }

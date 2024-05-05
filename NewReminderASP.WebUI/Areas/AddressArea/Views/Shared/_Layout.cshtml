@@ -14,72 +14,115 @@
 </head>
 <body>
 
-    <div class="header-bar">
-        <div class="info">
-            <div class="user-info">
-                <i class="fas fa-user-circle"></i>
-                <span>User Login: @Context.User.Identity.Name</span>
-            </div>
-            <div class="logout-btn">
-                <a href="@Url.Action("SignOut", "Address")" class="btn btn-eco">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-            </div>
+<div class="header-bar">
+    <div class="info">
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span>User Login: @Context.User.Identity.Name</span>
+        </div>
+        <div class="logout-btn">
+            <a href="@Url.Action("SignOut", "Address")" class="btn btn-eco">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
         </div>
     </div>
-    <div class="header-bar" id="countdown"></div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-nav">
-                <li class="nav-item dropdown">
+</div>
+<div class="header-bar" id="countdown"></div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav">
+            <li class="nav-item dropdown">
+                @if (User.IsInRole("Admin"))
+                {
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Address Management</a>
-                    <div class="dropdown-menu">
+                }
+
+                else
+                {
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Address info</a>
+                }
+
+                <div class="dropdown-menu">
+                    @if (User.IsInRole("Admin"))
+                    {
                         <a href="@Url.Action("IndexCountry", "Country", new { area = "AddressArea" })" class="dropdown-item">Country</a>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
                         <a href="@Url.Action("CreateCountry", "Country", new { area = "AddressArea" })" class="dropdown-item">Create Country</a>
+                    }
 
-                        <a href="@Url.Action("Index", "Address", new { area = "AddressArea" })" class="dropdown-item">Address</a>
+                    <a href="@Url.Action("Index", "Address", new { area = "AddressArea" })" class="dropdown-item">Address</a>
 
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="@Url.Action("CreateAdmin", "Address", new { area = "AddressArea" })" class="dropdown-item">Create Address</a>
+                    }
+                    else
+                    {
                         <a href="@Url.Action("Create", "Address", new { area = "AddressArea" })" class="dropdown-item">Create Address</a>
+                    }
 
+                </div>
+            </li>
 
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown">
+            <li class="nav-item dropdown">
+                @if (User.IsInRole("Admin"))
+                {
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Other Management</a>
+                }
+                else
+                {
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Management</a>
+                }
+                <div class="dropdown-menu">
 
-                    <div class="dropdown-menu">
 
-
-                        <a href="@Url.Action("Index", "Event", new { area = "EventsArea" })" class="dropdown-item">Events</a>
+                    <a href="@Url.Action("Index", "Event", new { area = "EventsArea" })" class="dropdown-item">Events</a>
+                    @if (User.IsInRole("Admin"))
+                    {
                         <a href="@Url.Action("Index", "Info", new { area = "PersonInfoArea" })" class="dropdown-item">Person Info</a>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
                         <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })" class="dropdown-item">Phones</a>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="dropdown-item">Users</a>
+                    }
 
-                    </div>
-                </li>
+                    else
+                    {
+                        var userName = User.Identity.Name;
+                        <a href="@Url.Action("Details", "User", new { area = "AccountsArea", userName })" class="dropdown-item">User info</a>
+                    }
 
-            </div>
+                </div>
+            </li>
 
         </div>
-    </nav>
 
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer class="footer">
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-
-        <script src="~/scripts/bootstrap.bundle.min.js"></script>
     </div>
+</nav>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer class="footer">
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+
+    <script src="~/scripts/bootstrap.bundle.min.js"></script>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
         var inactivityTime = 0;
         var checkInterval = 1000;
         var timeoutSeconds = 60;
