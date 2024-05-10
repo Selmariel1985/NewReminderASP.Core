@@ -1,14 +1,11 @@
-﻿@model NewReminderASP.Domain.Entities.UserDetailsViewModel
+﻿﻿@model NewReminderASP.Domain.Entities.UserDetailsViewModel
 
 @{
     ViewBag.Title = "User Details";
 }
 
-<link href="~/styles.css" rel="stylesheet"/>
-
-
+<link href="~/styles.css" rel="stylesheet" />
 <div class="details-details">
-
 
     <h2>User Details: @Model.User.Login</h2>
     <h2>User ID: @Model.User.Id</h2>
@@ -87,27 +84,8 @@
     </div>
 
     <div class="btn-group" role="group" aria-label="User actions">
-        @if (User.IsInRole("Admin"))
-        {
-            @Html.ActionLink("Edit", "EditUserAndRoles", new { id = Model.User.Id }, new { @class = "btn" })
-        }
-        else
-        {
-            @Html.ActionLink("Edit", "Edit", new { id = Model.User.Id }, new { @class = "btn" })
-        }
+        @Html.ActionLink("Edit", "EditUserAndRoles", new { id = Model.User.Id }, new { @class = "btn" })
         @Html.ActionLink("Delete", "Delete", new { id = Model.User.Id }, new { @class = "btn" })
-        @if (User.IsInRole("Admin"))
-        {
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
-        }
-
-        @Html.ActionLink("Edit info", "Edit", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn" })
-
-        @Html.ActionLink("Edit address", "Index", new { area = "AddressArea", controller = "Address" }, new { @class = "btn" })
-
-        @Html.ActionLink("Edit phone", "Index", new { area = "ContactsArea", controller = "Phone" }, new { @class = "btn" })
-
-
-
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
     </div>
 </div>

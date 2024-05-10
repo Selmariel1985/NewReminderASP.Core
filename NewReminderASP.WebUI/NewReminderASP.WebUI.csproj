@@ -402,6 +402,7 @@
     <Content Include="Areas\AddressArea\Views\Address\CreateAdmin.cshtml" />
     <Content Include="Areas\ContactsArea\Views\Phone\CreateAdmin.cshtml" />
     <Content Include="Areas\PersonInfoArea\Views\Info\CreateAdmin.cshtml" />
+    <Content Include="Areas\AccountsArea\Views\User\DetailsAdmin.cshtml" />
     <None Include="packages.config" />
     <Content Include="Reminderapp.log" />
     <Content Include="Scripts\bootstrap.min.js.map" />

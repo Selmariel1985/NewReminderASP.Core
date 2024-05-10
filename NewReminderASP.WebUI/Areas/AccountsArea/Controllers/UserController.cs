@@ -56,6 +56,26 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(new Tuple<IEnumerable<User>, ClaimsPrincipal>(paginatedUsers, (ClaimsPrincipal)currentUser));
         }
 
+        public ActionResult DetailsAdmin(int id)
+        {
+            var user = _provider.GetUser(id);
+            if (user == null) return HttpNotFound();
+
+            var addresses = _addressProvider.GetAddressesByUserId(id);
+            var phone = _phoneProvider.GetUserPhonesByUserId(id);
+            var personalInfo = _personalInfoProvider.GetPersonalInfo(id);
+
+            var viewModel = new UserDetailsViewModel
+            {
+                User = user,
+                Addresses = addresses,
+                Phones = phone,
+                PersonalInformation = personalInfo
+            };
+
+            return View(viewModel);
+        }
+
 
         public ActionResult Details(string userName)
         {

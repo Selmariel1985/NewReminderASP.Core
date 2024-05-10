@@ -5,6 +5,12 @@
 }
 
 <link href="~/styles.css" rel="stylesheet"/>
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- jQuery UI library -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+
 <div class="edit-container">
     <h2>Edit Personal Information</h2>
     <h2>User: @Model.Login</h2>
@@ -39,7 +45,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Birthdate, new { @class = "edit-control-label" })
-            @Html.EditorFor(model => model.Birthdate, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.TextBoxFor(model => model.Birthdate, "{0:dd-MM-yyyy}", new { @class = "form-control datepicker", placeholder = "Select Date" })
             @Html.ValidationMessageFor(model => model.Birthdate, "", new { @class = "text-danger" })
         </div>
 
@@ -60,3 +66,13 @@
         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
     </div>
 </div>
+
+<script>
+    $.noConflict();
+    jQuery(document).ready(function ($) {
+        $('.datepicker').datepicker({
+            dateFormat: "dd-mm-yy"
+        });
+    });
+
+</script>

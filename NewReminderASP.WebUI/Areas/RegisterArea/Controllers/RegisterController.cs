@@ -60,7 +60,7 @@ namespace NewReminderASP.WebUI.Areas.RegisterArea.Controllers
                 if (!ModelState.IsValid) return View(model);
 
                 var token = GenerateToken();
-                _cache.Set(token, model.User, TimeSpan.FromMinutes(20));
+                _cache.Set(token, model.User, TimeSpan.FromMinutes(60));
 
                 var confirmationUrl = Url.Action("ConfirmEmail", "Register", new { token }, Request.Url.Scheme);
                 _emailService.SendConfirmationEmail(model.User.Email, confirmationUrl);
