@@ -69,7 +69,14 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             if (existingUserPhone != null && (User.IsInRole("Admin") || existingUserPhone.Login == User.Identity.Name))
             {
                 _provider.UpdateUserPhone(userPhone);
-                return RedirectToAction("Index");
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
+                }
             }
 
             return new HttpUnauthorizedResult();
@@ -123,7 +130,14 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             if (ModelState.IsValid)
             {
                 _provider.AddUserPhoneRegister(userPhone);
-                return RedirectToAction("Index");
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
+                }
             }
 
             userPhone.Users = _userProvider.GetUsers();
@@ -184,7 +198,14 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
                 return new HttpUnauthorizedResult();
 
             _provider.DeleteUserPhone(id);
-            return RedirectToAction("Index");
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
+            }
         }
 
         [Authorize(Roles = "Admin")]

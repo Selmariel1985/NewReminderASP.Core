@@ -23,15 +23,16 @@
         <div class="links-container">
             @if (User.IsInRole("Admin"))
             {
-                <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="center-link bigger-font">Home</a>
+                <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i>Home</a>
             }
             else
             {
-                <a href="@Url.Action("Index", "Event", new { area = "EventsArea" })" class="center-link bigger-font">Home</a>
+                <a href="@Url.Action("Index", "Event", new { area = "EventsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i>Home</a>
             }
-            <a href="~/Home/Contact" class="center-link bigger-font">Contact</a>
-            <a href="~/Home/About" class="center-link bigger-font">About</a>
+            <a href="~/Home/Contact" class="center-link bigger-font"><i class="fas fa-envelope"></i>Contact</a>
+            <a href="~/Home/About" class="center-link bigger-font"><i class="fas fa-info-circle"></i>About</a>
         </div>
+
         <div class="info user-info">
             <div class="user-info">
                 <i class="fas fa-user-circle"></i>
@@ -66,11 +67,7 @@
         }
         else
         {
-            <a href="@Url.Action("Index", "Address", new { area = "AddressArea" })" class="dropdown-item">Address</a>
-            <a href="@Url.Action("Create", "Address", new { area = "AddressArea" })" class="dropdown-item">Create Address</a>
-
-
-            <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })">Phones</a>
+            
         }
 
     </div>

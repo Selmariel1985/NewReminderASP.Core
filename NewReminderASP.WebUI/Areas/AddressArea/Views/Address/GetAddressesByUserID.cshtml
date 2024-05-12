@@ -30,6 +30,8 @@
                 <dt>Description:</dt>
                 <dd>@address.Description</dd>
             </dl>
+            <a href="@Url.Action("Edit", "Address", new { id = address.ID })" class="btn btn-details">Edit Address</a>
+            <a href="@Url.Action("Delete", "Address", new { id = address.ID })" class="btn btn-details">Delete Address</a>
         </div>
         <hr/>
     }

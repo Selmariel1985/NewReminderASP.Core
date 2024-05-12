@@ -22,14 +22,14 @@
         <div class="links-container">
             @if (User.IsInRole("Admin"))
             {
-                <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="center-link bigger-font">Home</a>
+                <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i>Home</a>
             }
             else
             {
-                <a href="@Url.Action("Index", "Event", new { area = "EventsArea" })" class="center-link bigger-font">Home</a>
+                <a href="@Url.Action("Index", "Event", new { area = "EventsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i>Home</a>
             }
-            <a href="~/Home/Contact" class="center-link bigger-font">Contact</a>
-            <a href="~/Home/About" class="center-link bigger-font">About</a>
+            <a href="~/Home/Contact" class="center-link bigger-font"><i class="fas fa-envelope"></i>Contact</a>
+            <a href="~/Home/About" class="center-link bigger-font"><i class="fas fa-info-circle"></i>About</a>
         </div>
 
         <div class="info user-info">
@@ -47,10 +47,12 @@
 
     
 
-    <div class="header-bar" id="countdown"></div> <!-- Countdown section -->
-
+    <div class="header-bar" id="countdown"></div> 
+    
     <div id="mySidebar" class="sidebar">
+
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            
         @if (User.IsInRole("Admin"))
         {
 
@@ -66,14 +68,14 @@
             <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })">Phones</a>
 
         }
+
         else
         {
-           
-            <a href="@Url.Action("Index", "Address", new { area = "AddressArea" })">Address</a>
-            <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })">Phones</a>
+
         }
 
     </div>
+
     <div id="main">
         <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
     </div>
@@ -89,6 +91,9 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+
+
+
 
         function openNav() {
             document.getElementById("mySidebar").style.width = "250px";
@@ -135,7 +140,7 @@
         }
 
         setInterval(checkInactivity, checkInterval);
-
+        document.addEventListener('DOMContentLoaded', startCountdown);
         document.addEventListener('click', resetTimer);
         document.addEventListener('mousemove', resetTimer);
         document.addEventListener('keypress', resetTimer);
@@ -159,7 +164,7 @@
             }, 1000);
         }
 
-        startCountdown();
+        
 
 
 

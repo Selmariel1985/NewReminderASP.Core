@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Web.Mvc;
 using log4net;
@@ -69,7 +70,15 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
                     (User.IsInRole("Admin") || existingPersonalInfos.Login == User.Identity.Name))
                 {
                     _provider.UpdatePersonalInfo(personalInfo);
-                    return RedirectToAction("Index");
+
+                    if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
+                    }
                 }
 
                 return new HttpUnauthorizedResult();
@@ -173,7 +182,15 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
                 return new HttpUnauthorizedResult();
 
             _provider.DeletePersonalInfo(id);
-            return RedirectToAction("Index");
+
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
+            }
         }
 
         //protected override void OnException(ExceptionContext filterContext)

@@ -95,7 +95,14 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
                 if (existingAddress != null && (User.IsInRole("Admin") || existingAddress.Login == User.Identity.Name))
                 {
                     _provider.UpdateAddress(address);
-                    return RedirectToAction("Index");
+                    if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
+                    }
                 }
 
                 return new HttpUnauthorizedResult();
@@ -178,7 +185,14 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             if (address == null || (!User.IsInRole("Admin") && address.Login != User.Identity.Name))
                 return new HttpUnauthorizedResult();
             _provider.DeleteAddress(id);
-            return RedirectToAction("Index");
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
+            }
         }
 
         //protected override void OnException(ExceptionContext filterContext)

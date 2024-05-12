@@ -4,47 +4,108 @@
     ViewBag.Title = "User Details";
 }
 
-<link href="~/styles.css" rel="stylesheet"/>
+<link href="~/styles.css" rel="stylesheet" />
 
 
 <div class="details-details">
-
-
     <h2>User Details: @Model.User.Login</h2>
     <h2>User ID: @Model.User.Id</h2>
-    <div>
-        <dl>
-            <dt>@Html.DisplayNameFor(model => model.User.Login)</dt>
-            <dd>@Html.DisplayFor(model => model.User.Login)</dd>
+   
+<div class="details-container">
+    <div class="Addresses-container">
+        <h2>Account Info</h2>
+        <div class="Addresses-details">
+            <dl>
+                <dt>@Html.DisplayNameFor(model => model.User.Login)</dt>
+                <dd>@Html.DisplayFor(model => model.User.Login)</dd>
 
-            <dt>Roles</dt>
-            <dd>
-                <ul class="roles-list">
-                    @foreach (var role in Model.User.UserRoles)
+
+                <dt>@Html.DisplayNameFor(model => model.User.Email)</dt>
+                <dd>@Html.DisplayFor(model => model.User.Email)</dd>
+
+                <dt>Roles</dt>
+                <dd>
+                    <ul class="roles-list">
+                        @foreach (var role in Model.User.UserRoles)
+                        {
+                            <li>@role.Role.Name</li>
+                        }
+                    </ul>
+                </dd>
+            </dl>
+
+
+
+
+                <div class="btn-group" role="group" aria-label="User actions">
+                    @if (User.IsInRole("Admin"))
                     {
-                        <li>@role.Role.Name</li>
+                        @Html.ActionLink("Edit", "EditUserAndRoles", new { id = Model.User.Id }, new { @class = "btn" })
                     }
-                </ul>
-            </dd>
+                    else
+                    {
+                        @Html.ActionLink("Edit Account", "Edit", new { id = Model.User.Id }, new { @class = "btn" })
+                    }
+                    @Html.ActionLink("Delete Account", "Delete", new { id = Model.User.Id }, new { @class = "btn" })
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
+                    }
 
-            <dt>@Html.DisplayNameFor(model => model.User.Email)</dt>
-            <dd>@Html.DisplayFor(model => model.User.Email)</dd>
 
-            <dt>@Html.DisplayNameFor(model => model.PersonalInformation.FirstName)</dt>
-            <dd>@Html.DisplayFor(model => model.PersonalInformation.FirstName)</dd>
-            <dt>@Html.DisplayNameFor(model => model.PersonalInformation.LastName)</dt>
-            <dd>@Html.DisplayFor(model => model.PersonalInformation.LastName)</dd>
-            <dt>@Html.DisplayNameFor(model => model.PersonalInformation.MiddleName)</dt>
-            <dd>@Html.DisplayFor(model => model.PersonalInformation.MiddleName)</dd>
-            <dt>@Html.DisplayNameFor(model => model.PersonalInformation.Birthdate)</dt>
-            <dd>@Html.DisplayFor(model => model.PersonalInformation.Birthdate)</dd>
-            <dt>@Html.DisplayNameFor(model => model.PersonalInformation.Gender)</dt>
-            <dd>@Html.DisplayFor(model => model.PersonalInformation.Gender)</dd>
+                </div>
+        </div>
+                </div>
+           
+            
+
+            
+                <div class="Addresses-container">
+                    <h2>User Info</h2>
+                    <div class="Addresses-details">
+
+                        <dl>
+                        <dt>@Html.DisplayNameFor(model => model.PersonalInformation.FirstName)</dt>
+                        <dd>@Html.DisplayFor(model => model.PersonalInformation.FirstName)</dd>
+
+                        <dt>@Html.DisplayNameFor(model => model.PersonalInformation.LastName)</dt>
+                        <dd>@Html.DisplayFor(model => model.PersonalInformation.LastName)</dd>
+
+                        <dt>@Html.DisplayNameFor(model => model.PersonalInformation.MiddleName)</dt>
+                        <dd>@Html.DisplayFor(model => model.PersonalInformation.MiddleName)</dd>
+
+                        <dt>@Html.DisplayNameFor(model => model.PersonalInformation.Birthdate)</dt>
+                        <dd>@Html.DisplayFor(model => model.PersonalInformation.Birthdate)</dd>
+
+                        <dt>@Html.DisplayNameFor(model => model.PersonalInformation.Gender)</dt>
+                        <dd>@Html.DisplayFor(model => model.PersonalInformation.Gender)</dd>
+                        </dl>
+
+                        <div class="btn-group" role="group" aria-label="User actions">
+                            @Html.ActionLink("Edit User info", "Edit", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-details" })
+                            @Html.ActionLink("Delete User info", "Delete", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-details" })
+                        </div>
+
+
+                    </div>
+                    </div>
+</div>
+            
+       
+   
+    
+    
+
+    <div class="details-container">
+
+        <div class="phones-container">
+            <h2>phones</h2>
+
+            <a href="@Url.Action("Create", "Phone", new { area = "ContactsArea" })" class="btn btn-details">Create new Phone</a>
 
             @for (var d = 0; d < Model.Phones.Count; d++)
             {
-                <div>
-
+                <div class="phone-details">
                     <h5>@Model.User.Login's phone @(d + 1)</h5>
                     <dl>
                         <dt>Phone Number:</dt>
@@ -55,15 +116,22 @@
 
                         <dt>Country:</dt>
                         <dd>@Model.Phones[d].CountryName</dd>
-
-
                     </dl>
+                    <div class="btn-group" role="group" aria-label="User actions">
+                    <a href="@Url.Action("Edit", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-details">Edit Phone</a>
+                    <a href="@Url.Action("Delete", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-details">Delete Phone</a>
+                    </div>
                 </div>
             }
-
+           
+        </div>
+        
+        <div class="Addresses-container">
+            <h2>Addresses</h2>
+            <a href="@Url.Action("Create", "Address", new { area = "AddressArea" })" class="btn btn-details">Create new Address</a>
             @for (var i = 0; i < Model.Addresses.Count; i++)
             {
-                <div>
+                <div class="Addresses-details">
                     <h5>@Model.User.Login's address @(i + 1)</h5>
                     <dl>
                         <dt>Street:</dt>
@@ -81,33 +149,18 @@
                         <dt>Description:</dt>
                         <dd>@Model.Addresses[i].Description</dd>
                     </dl>
+                    <div class="btn-group" role="group" aria-label="User actions">
+                        <a href="@Url.Action("Edit", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-details">Edit Phone</a>
+                        <a href="@Url.Action("Delete", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-details">Delete Phone</a>
+                    </div>
                 </div>
+
+                
             }
-        </dl>
+           
+        </div>
     </div>
 
-    <div class="btn-group" role="group" aria-label="User actions">
-        @if (User.IsInRole("Admin"))
-        {
-            @Html.ActionLink("Edit", "EditUserAndRoles", new { id = Model.User.Id }, new { @class = "btn" })
-        }
-        else
-        {
-            @Html.ActionLink("Edit", "Edit", new { id = Model.User.Id }, new { @class = "btn" })
-        }
-        @Html.ActionLink("Delete", "Delete", new { id = Model.User.Id }, new { @class = "btn" })
-        @if (User.IsInRole("Admin"))
-        {
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
-        }
 
-        @Html.ActionLink("Edit info", "Edit", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn" })
-
-        @Html.ActionLink("Edit address", "Index", new { area = "AddressArea", controller = "Address" }, new { @class = "btn" })
-
-        @Html.ActionLink("Edit phone", "Index", new { area = "ContactsArea", controller = "Phone" }, new { @class = "btn" })
-
-
-
-    </div>
 </div>
+    

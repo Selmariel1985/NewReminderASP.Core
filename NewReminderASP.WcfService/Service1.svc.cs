@@ -123,17 +123,17 @@ namespace NewReminderASP.WcfService
 
         public List<AddressDto> GetAddressesByUserId(int userId)
         {
-            var addresses = new List<AddressDto>(); // Create a list to store AddressDto objects
+            var addresses = new List<AddressDto>(); 
 
             using (var connection =
-                   new SqlConnection(connectionString)) // Replace "connectionString" with your actual connection string
+                   new SqlConnection(connectionString))
             {
                 using (var command =
                        new SqlCommand("GetAddressesByUserID",
-                           connection)) // Replace "GetAddressesByUserID" with the actual name of the stored procedure
+                           connection)) 
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add(new SqlParameter("@UserID", userId)); // Add parameter for UserID
+                    command.Parameters.Add(new SqlParameter("@UserID", userId)); 
 
                     connection.Open();
 
@@ -141,23 +141,24 @@ namespace NewReminderASP.WcfService
                     {
                         while (reader.Read())
                         {
-                            var address = new AddressDto // Create AddressDto object for each record
+                            var address = new AddressDto 
                             {
-                                Street = reader.GetString(0),
-                                City = reader.GetString(1),
-                                CountryName = reader.GetString(2), // Assuming CountryID is an integer
-                                PostalCode = reader.GetString(3),
-                                Description = reader.GetString(4),
-                                UserID = reader.GetInt32(5),
-                                Login = reader.GetString(6)
+                                ID = reader.GetInt32(0),
+                                Street = reader.GetString(1),
+                                City = reader.GetString(2),
+                                CountryName = reader.GetString(3), 
+                                PostalCode = reader.GetString(4),
+                                Description = reader.GetString(5),
+                                UserID = reader.GetInt32(6),
+                                Login = reader.GetString(7)
                             };
-                            addresses.Add(address); // Add AddressDto object to the list
+                            addresses.Add(address); 
                         }
                     }
                 }
             }
 
-            return addresses; // Return the list of AddressDto objects
+            return addresses;
         }
 
         public void UpdateAddress(AddressDto updatedAddress)

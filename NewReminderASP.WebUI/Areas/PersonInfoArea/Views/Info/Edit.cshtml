@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit Personal Information";
 }
 
-<link href="~/styles.css" rel="stylesheet"/>
+<link href="~/styles.css" rel="stylesheet" />
 <!-- jQuery library -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- jQuery UI library -->
@@ -18,7 +18,7 @@
     @using (Html.BeginForm("Edit", "Info", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        <hr/>
+        <hr />
 
 
         @Html.HiddenFor(model => model.Login)
@@ -56,23 +56,40 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-save"/>
+            <input type="submit" value="Save" class="btn btn-save" />
         </div>
     }
 </div>
 
-<div class="row mt-2">
-    <div class="col-md-6">
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
+@if (User.IsInRole("Admin"))
+{
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
+        </div>
     </div>
-</div>
 
-<script>
-    $.noConflict();
-    jQuery(document).ready(function ($) {
-        $('.datepicker').datepicker({
-            dateFormat: "dd-mm-yy"
-        });
-    });
+}
+else
+{
+   
+    
+        <div class="row mt-2">
+            <div class="col-md-6">
+                @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-details" })
+            </div>
+        </div>
+    }
+        
 
-</script>
+
+
+        <script>
+            $.noConflict();
+            jQuery(document).ready(function ($) {
+                $('.datepicker').datepicker({
+                    dateFormat: "dd-mm-yy"
+                });
+            });
+
+        </script>

@@ -73,6 +73,7 @@ namespace NewReminderASP.Data.Client
                         {
                             var address = new Address
                             {
+                                ID = addressDto.ID,
                                 Street = addressDto.Street,
                                 City = addressDto.City,
                                 CountryName = addressDto.CountryName,
