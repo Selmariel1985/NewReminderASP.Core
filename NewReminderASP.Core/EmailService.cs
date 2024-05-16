@@ -15,7 +15,7 @@ public class EmailService
             // Configure Yandex SMTP server settings
             using (var smtp = new SmtpClient("smtp.yandex.ru", 587))
             {
-                smtp.Credentials = new NetworkCredential("Selmariel1985", "llrjmcwsqtakgzim");
+                smtp.Credentials = new NetworkCredential("*******", "llrjmcwsqtakgzim");
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
             }
