@@ -46,6 +46,7 @@
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\EventDetail.cs" />
+    <Compile Include="Entities\EventDetailsViewModel.cs" />
     <Compile Include="Entities\EventRecurrence.cs" />
     <Compile Include="Entities\EventType.cs" />
     <Compile Include="Entities\PersonalInfo.cs" />

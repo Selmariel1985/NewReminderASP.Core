@@ -36,7 +36,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return RedirectToAction("Login", "Login", new { area = "LoginArea" }); // Перенаправление на страницу входа
         }
 
-
+        [Authorize]
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
             var users = _provider.GetUsers().AsQueryable();
@@ -55,7 +55,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
             return View(new Tuple<IEnumerable<User>, ClaimsPrincipal>(paginatedUsers, (ClaimsPrincipal)currentUser));
         }
-
+        [Authorize]
         public ActionResult DetailsAdmin(int id)
         {
             var user = _provider.GetUser(id);
@@ -76,7 +76,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(viewModel);
         }
 
-
+        [Authorize]
         public ActionResult Details(string userName)
         {
             var user = _provider.GetUserByLogin(userName);
@@ -201,7 +201,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             }
         }
 
-
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var user = _provider.GetUser(id);
@@ -211,7 +211,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(user);
         }
 
-
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(int id, User user)
         {
@@ -278,7 +278,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             }
         }
 
-
+        [Authorize]
         public ActionResult Delete(int id)
         {
             var user = _provider.GetUser(id);
@@ -287,7 +287,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(user);
         }
 
-
+        [Authorize]
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]

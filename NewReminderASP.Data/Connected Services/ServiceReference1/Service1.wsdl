@@ -242,6 +242,18 @@
   <wsdl:message name="IEventService_GetEvents_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetEventsResponse" />
   </wsdl:message>
+  <wsdl:message name="IEventService_GetEventsForUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsForUser" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventsForUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventsForID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsForID" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventsForID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsForIDResponse" />
+  </wsdl:message>
   <wsdl:message name="IEventService_GetEvent_InputMessage">
     <wsdl:part name="parameters" element="tns:GetEvent" />
   </wsdl:message>
@@ -592,6 +604,14 @@
     <wsdl:operation name="GetEvents">
       <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEvents" message="tns:IEventService_GetEvents_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventsResponse" message="tns:IEventService_GetEvents_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsForUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEventsForUser" message="tns:IEventService_GetEventsForUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventsForUserResponse" message="tns:IEventService_GetEventsForUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsForID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEventsForID" message="tns:IEventService_GetEventsForID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventsForIDResponse" message="tns:IEventService_GetEventsForID_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEvent" message="tns:IEventService_GetEvent_InputMessage" />
@@ -1078,6 +1098,24 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetEvents">
       <soap:operation soapAction="http://tempuri.org/IEventService/GetEvents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsForUser">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEventsForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsForID">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEventsForID" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

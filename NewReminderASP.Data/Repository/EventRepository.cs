@@ -20,6 +20,16 @@ namespace NewReminderASP.Data.Repository
             return _eventClient.GetEvents().ToList();
         }
 
+        public List<Event> GetEventsForUser(string userName)
+        {
+            return _eventClient.GetEventsForUser(userName).ToList();
+        }
+
+        public List<Event> GetEventsForID(int id)
+        {
+            return _eventClient.GetEventsForID(id).ToList();
+        }
+
         public Event GetEvent(int Id)
         {
             return _eventClient.GetEvent(Id);

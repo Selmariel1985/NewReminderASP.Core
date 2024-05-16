@@ -685,6 +685,18 @@ namespace NewReminderASP.Data.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEvents", ReplyAction="http://tempuri.org/IEventService/GetEventsResponse")]
         System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GetEventsAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventsForUser", ReplyAction="http://tempuri.org/IEventService/GetEventsForUserResponse")]
+        NewReminderASP.Services.Dtos.EventDto[] GetEventsForUser(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventsForUser", ReplyAction="http://tempuri.org/IEventService/GetEventsForUserResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GetEventsForUserAsync(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventsForID", ReplyAction="http://tempuri.org/IEventService/GetEventsForIDResponse")]
+        NewReminderASP.Services.Dtos.EventDto[] GetEventsForID(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEventsForID", ReplyAction="http://tempuri.org/IEventService/GetEventsForIDResponse")]
+        System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GetEventsForIDAsync(int id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/GetEvent", ReplyAction="http://tempuri.org/IEventService/GetEventResponse")]
         NewReminderASP.Services.Dtos.EventDto GetEvent(int Id);
         
@@ -833,6 +845,22 @@ namespace NewReminderASP.Data.ServiceReference1 {
         
         public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GetEventsAsync() {
             return base.Channel.GetEventsAsync();
+        }
+        
+        public NewReminderASP.Services.Dtos.EventDto[] GetEventsForUser(string login) {
+            return base.Channel.GetEventsForUser(login);
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GetEventsForUserAsync(string login) {
+            return base.Channel.GetEventsForUserAsync(login);
+        }
+        
+        public NewReminderASP.Services.Dtos.EventDto[] GetEventsForID(int id) {
+            return base.Channel.GetEventsForID(id);
+        }
+        
+        public System.Threading.Tasks.Task<NewReminderASP.Services.Dtos.EventDto[]> GetEventsForIDAsync(int id) {
+            return base.Channel.GetEventsForIDAsync(id);
         }
         
         public NewReminderASP.Services.Dtos.EventDto GetEvent(int Id) {

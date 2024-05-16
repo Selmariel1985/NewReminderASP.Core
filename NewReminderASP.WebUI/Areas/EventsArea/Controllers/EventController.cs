@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.PeerToPeer;
 using System.Reflection;
 using System.Web.Mvc;
 using log4net;
+using Microsoft.AspNet.Identity;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
 
@@ -25,7 +28,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
         {
             return SignOutAndRedirectToLogin("LoginArea");
         }
-
+        [Authorize]
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
             var events = _provider.GetEvents().AsQueryable();
@@ -46,6 +49,30 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
         }
 
 
+        [AllowAnonymous]
+        public ActionResult IndexAnon(string orderBy, string sortOrder, int page = 1)
+        {
+            var events = _provider.GetEvents().AsQueryable();
+            const int pageSize = 10;
+
+            var paginatEdevents = DynamicSortAndPaginate(events, orderBy, sortOrder, page, pageSize).ToList();
+
+
+            var totalEvents = events.Count();
+            var totalPages = (int)Math.Ceiling((double)totalEvents / pageSize);
+
+            ViewBag.OrderBy = orderBy;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(paginatEdevents);
+        }
+
+
+
+
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var model = _provider.GetEvent(id);
@@ -59,7 +86,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(model);
         }
 
-
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(Event events)
         {
@@ -69,7 +96,14 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
                 if (existingEvent != null && (User.IsInRole("Admin") || existingEvent.Login == User.Identity.Name))
                 {
                     _provider.UpdateEvent(events);
-                    return RedirectToAction("Index");
+                    if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name });
+                    }
                 }
 
                 return new HttpUnauthorizedResult();
@@ -81,7 +115,52 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(events);
         }
 
-        public ActionResult Details(int id)
+        [Authorize]
+        public ActionResult GetEventsByUserID(int id)
+        {
+
+
+            if (!User.IsInRole("Admin") && User.Identity.GetUserId() == id.ToString())
+                return new HttpUnauthorizedResult();
+
+
+            var userEvent = _provider.GetEventsForID(id).ToList();
+
+            if (userEvent == null || !userEvent.Any()) return HttpNotFound($"No event found for user ID: {id}");
+
+            return View(userEvent);
+        }
+        [Authorize]
+        public ActionResult Details(string userName)
+        {
+            var user = _userProvider.GetUserByLogin(userName);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            var userId = user.Id;
+            var userEvents = _provider.GetEventsForID(userId);
+
+            var viewModel = new EventDetailsViewModel
+            {
+                User = user,
+                Events = userEvents
+            };
+
+            // Проверка авторизации пользователя
+            if (User.IsInRole("Admin") || user.Login == User.Identity.Name)
+            {
+                return View(viewModel);
+            }
+
+            return new HttpUnauthorizedResult();
+        }
+
+
+        [Authorize]
+        public ActionResult EventDetails(int id)
         {
             var events = _provider.GetEvent(id);
 
@@ -94,7 +173,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return new HttpUnauthorizedResult();
         }
 
-
+        [Authorize]
         public ActionResult Create()
         {
             var model = new Event();
@@ -106,7 +185,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(model);
         }
 
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Event events)
@@ -114,7 +193,14 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             if (ModelState.IsValid)
             {
                 _provider.AddEvent(events);
-                return RedirectToAction("Index");
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name });
+                }
             }
 
 
@@ -159,7 +245,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(events);
         }
 
-
+        [Authorize]
         public ActionResult Delete(int id)
         {
             var events = _provider.GetEvent(id);
@@ -171,6 +257,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(events);
         }
 
+        [Authorize]
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -183,7 +270,14 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
                 return new HttpUnauthorizedResult();
 
             _provider.DeleteEvent(id);
-            return RedirectToAction("Index");
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name });
+            }
         }
 
         [Authorize(Roles = "Admin")]

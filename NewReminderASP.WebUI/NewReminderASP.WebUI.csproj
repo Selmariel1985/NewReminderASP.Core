@@ -357,7 +357,7 @@
     <Content Include="Areas\EventsArea\Views\Event\DeleteEventDetail.cshtml" />
     <Content Include="Areas\EventsArea\Views\Event\DeleteEventRecurrence.cshtml" />
     <Content Include="Areas\EventsArea\Views\Event\DeleteEventType.cshtml" />
-    <Content Include="Areas\EventsArea\Views\Event\Details.cshtml" />
+    <Content Include="Areas\EventsArea\Views\Event\EventDetails.cshtml" />
     <Content Include="Areas\EventsArea\Views\Event\DetailsEventDetails.cshtml" />
     <Content Include="Areas\EventsArea\Views\Event\DetailsEventRecurrences.cshtml" />
     <Content Include="Areas\EventsArea\Views\Event\DetailsEventTypes.cshtml" />
@@ -398,11 +398,13 @@
     <Content Include="Areas\RegisterArea\Views\Register\ConfirmationSuccess.cshtml" />
     <Content Include="Areas\RegisterArea\Views\Register\ConfirmationFailed.cshtml" />
     <Content Include="Areas\EventsArea\Views\Event\CreateAdminEvent.cshtml" />
-    <Content Include="Areas\LoginArea\Views\Login\EventAsAnonymous.cshtml" />
     <Content Include="Areas\AddressArea\Views\Address\CreateAdmin.cshtml" />
     <Content Include="Areas\ContactsArea\Views\Phone\CreateAdmin.cshtml" />
     <Content Include="Areas\PersonInfoArea\Views\Info\CreateAdmin.cshtml" />
     <Content Include="Areas\AccountsArea\Views\User\DetailsAdmin.cshtml" />
+    <Content Include="Areas\EventsArea\Views\Event\IndexAnon.cshtml" />
+    <Content Include="Areas\EventsArea\Views\Event\GetEventsByUserID.cshtml" />
+    <Content Include="Areas\EventsArea\Views\Event\Details.cshtml" />
     <None Include="packages.config" />
     <Content Include="Reminderapp.log" />
     <Content Include="Scripts\bootstrap.min.js.map" />

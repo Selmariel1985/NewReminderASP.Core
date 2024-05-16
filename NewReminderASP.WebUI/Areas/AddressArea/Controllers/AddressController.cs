@@ -29,7 +29,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return SignOutAndRedirectToLogin("LoginArea");
         }
 
-
+        [Authorize]
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
             var addresses = _provider.GetAddresses();
@@ -49,6 +49,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return View(paginatedAddresses);
         }
 
+        [Authorize]
         public ActionResult GetAddressesByUserID(int id)
         {
             if (!User.IsInRole("Admin") && User.Identity.GetUserId() == id.ToString())
@@ -62,7 +63,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return View(addresses);
         }
 
-
+        [Authorize]
         public ActionResult Details(int id)
         {
             var address = _provider.GetAddress(id);
@@ -73,6 +74,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return new HttpUnauthorizedResult();
         }
 
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var model = _provider.GetAddressByID(id);
@@ -84,7 +86,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return View(model);
         }
 
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Address address)
@@ -113,6 +115,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return View(address);
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             var model = new Address();
@@ -123,6 +126,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Address address)
@@ -130,7 +134,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             if (ModelState.IsValid)
             {
                 _provider.AddAddressRegister(address);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
             }
 
 
@@ -139,6 +143,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return View(address);
         }
 
+        [Authorize]
         public ActionResult CreateAdmin()
         {
             var model = new Address();
@@ -148,6 +153,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateAdmin(Address address)
@@ -164,6 +170,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return View(address);
         }
 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             var address = _provider.GetAddress(id);
@@ -173,7 +180,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             return View(address);
         }
 
-
+        [Authorize]
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]

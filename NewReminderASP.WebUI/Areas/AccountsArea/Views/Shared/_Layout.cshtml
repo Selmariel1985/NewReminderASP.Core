@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+  
     <meta name="description" content="Your website description here">
     <meta name="keywords" content="key1, key2, key3">
     @Styles.Render("~/Content/css")
@@ -14,9 +14,13 @@
 
 </head>
 <body>
-    @{
-        var userLogin = User.Identity.Name; 
-        var userLink = Url.Action("Details", "User", new { area = "AccountsArea", userName = userLogin }); 
+@{
+
+
+    var userLogin = User.Identity.Name;
+   
+    var userLink = Url.Action("Details", "User", new { area = "AccountsArea", userName = userLogin });
+    
     }
     <div class="header-bar">
         <div class="links-container">
@@ -26,7 +30,8 @@
             }
             else
             {
-                <a href="@Url.Action("Index", "Event", new { area = "EventsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i>Home</a>
+                <a href="@Url.Action("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name })" class="center-link bigger-font"><i class="fas fa-home"></i>Home</a>
+
             }
             <a href="~/Home/Contact" class="center-link bigger-font"><i class="fas fa-envelope"></i>Contact</a>
             <a href="~/Home/About" class="center-link bigger-font"><i class="fas fa-info-circle"></i>About</a>
@@ -52,7 +57,7 @@
     <div id="mySidebar" class="sidebar">
 
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-            
+
         @if (User.IsInRole("Admin"))
         {
 
@@ -71,7 +76,7 @@
 
         else
         {
-
+            
         }
 
     </div>

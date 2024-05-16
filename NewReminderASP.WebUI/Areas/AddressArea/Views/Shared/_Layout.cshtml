@@ -17,7 +17,9 @@
 <body>
     @{
         var userLogin = User.Identity.Name;
+        
         var userLink = Url.Action("Details", "User", new { area = "AccountsArea", userName = userLogin });
+        
     }
     <div class="header-bar">
         <div class="links-container">
@@ -27,7 +29,7 @@
             }
             else
             {
-                <a href="@Url.Action("Index", "Event", new { area = "EventsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i>Home</a>
+                <a href="@Url.Action("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name })" class="center-link bigger-font"><i class="fas fa-home"></i>Home</a>
             }
             <a href="~/Home/Contact" class="center-link bigger-font"><i class="fas fa-envelope"></i>Contact</a>
             <a href="~/Home/About" class="center-link bigger-font"><i class="fas fa-info-circle"></i>About</a>

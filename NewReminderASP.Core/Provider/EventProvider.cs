@@ -19,6 +19,16 @@ namespace NewReminderASP.Core.Provider
             return _eventRepository.GetEvents().ToList();
         }
 
+        public List<Event> GetEventsForUser(string userName)
+        {
+            return _eventRepository.GetEventsForUser(userName).ToList();
+        }
+
+        public List<Event> GetEventsForID(int id)
+        {
+            return _eventRepository.GetEventsForID(id).ToList();
+        }
+
         public Event GetEvent(int Id)
         {
             return _eventRepository.GetEvent(Id);

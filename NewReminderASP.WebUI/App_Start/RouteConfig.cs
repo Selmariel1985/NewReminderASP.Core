@@ -9,6 +9,15 @@ namespace NewReminderASP.WebUI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+           
+
+
 
             routes.MapRoute(
                 "LoginArea",
@@ -26,17 +35,12 @@ namespace NewReminderASP.WebUI
             );
 
 
-            // Route for other users
+
             routes.MapRoute(
-                "Default",
-                "{controller}/{action}/{id}",
-                new { controller = "Event", action = "Index", id = UrlParameter.Optional }
+                name: "EventDetails",
+                url: "EventsArea/Event/Details/{userName}",
+                defaults: new { controller = "Event", action = "Details" }
             );
-            //routes.MapRoute(
-            //    name: "EventAsAnonymous",
-            //    url: "Login/EventAsAnonymous",
-            //    defaults: new { controller = "Login", action = "EventAsAnonymous" }
-            //);
         }
     }
 }

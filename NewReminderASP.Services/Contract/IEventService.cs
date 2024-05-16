@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
+using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Services.Contract
@@ -9,6 +10,11 @@ namespace NewReminderASP.Services.Contract
     {
         [OperationContract]
         List<EventDto> GetEvents();
+        [OperationContract]
+        List<EventDto> GetEventsForUser(string login);
+
+        [OperationContract]
+        List<EventDto> GetEventsForID(int id);
 
         [OperationContract]
         EventDto GetEvent(int Id);

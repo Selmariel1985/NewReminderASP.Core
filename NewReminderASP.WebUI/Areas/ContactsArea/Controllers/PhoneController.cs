@@ -29,7 +29,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         {
             return SignOutAndRedirectToLogin("LoginArea");
         }
-
+        [Authorize]
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
             var userPhones = _provider.GetUserPhones().AsQueryable();
@@ -49,7 +49,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View(paginatedUserPhones);
         }
 
-
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var model = _provider.GetUserPhone(id);
@@ -61,7 +61,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View(model);
         }
 
-
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(UserPhone userPhone)
         {
@@ -86,6 +86,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View(userPhone);
         }
 
+        [Authorize]
         public ActionResult Details(int id)
         {
             var userPhone = _provider.GetUserPhone(id);
@@ -97,6 +98,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return new HttpUnauthorizedResult();
         }
 
+        [Authorize]
         public ActionResult GetUserPhonesByUserId(int id)
         {
             if (!User.IsInRole("Admin") && User.Identity.GetUserId() == id.ToString())
@@ -110,6 +112,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View(userPhone);
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             var model = new UserPhone();
@@ -122,7 +125,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View(model);
         }
 
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(UserPhone userPhone)
@@ -175,7 +178,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View(userPhone);
         }
 
-
+        [Authorize]
         public ActionResult Delete(int id)
         {
             var userPhone = _provider.GetUserPhone(id);
@@ -185,7 +188,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return View(userPhone);
         }
 
-
+        [Authorize]
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]

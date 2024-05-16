@@ -25,7 +25,7 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
         {
             return SignOutAndRedirectToLogin("LoginArea");
         }
-
+        [Authorize]
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
             var personalInfo = _provider.GetPersonalInfos().AsQueryable();
@@ -46,7 +46,7 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             return View(paginatedPersonalInfo);
         }
 
-
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var model = _provider.GetPersonalInfo(id);
@@ -58,7 +58,7 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             return View(model);
         }
 
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(PersonalInfo personalInfo)
@@ -88,7 +88,7 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             return View(personalInfo);
         }
 
-
+        [Authorize]
         public ActionResult Details(int id)
         {
             var personalInfo = _provider.GetPersonalInfo(id);
@@ -158,7 +158,7 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             return View(personalInfo);
         }
 
-
+        [Authorize]
         public ActionResult Delete(int id)
         {
             var personalInfo = _provider.GetPersonalInfo(id);
@@ -169,7 +169,7 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
 
             return View(personalInfo);
         }
-
+        [Authorize]
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]

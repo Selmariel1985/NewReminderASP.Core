@@ -345,6 +345,10 @@ namespace NewReminderASP.WcfService
 
         public List<EventDto> GetEvents()
         {
+
+
+
+
             var events = new List<EventDto>();
 
             using (var connection = new SqlConnection(connectionString))
@@ -376,6 +380,89 @@ namespace NewReminderASP.WcfService
 
             return events;
         }
+
+        public List<EventDto> GetEventsForUser(string login)
+        {
+
+
+            var events = new List<EventDto>();
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("GetEventsForUser", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add(new SqlParameter("@Login", login)); 
+
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var getEvent = new EventDto
+                            {
+                                ID = reader.GetInt32(0),
+                                EventType = reader.GetString(1),
+                                Title = reader.GetString(2),
+                                Date = reader.GetDateTime(3),    // Adjust if the data type differs
+                                Time = reader.GetTimeSpan(4),    // Adjust if the data type differs
+                                Recurrence = reader.GetString(5),
+                                Reminders = reader.GetString(6),
+                                UserID = reader.GetInt32(7),
+                                Login = reader.GetString(8)
+                            };
+                            events.Add(getEvent);
+                        }
+                    }
+                }
+            }
+
+            return events;
+        }
+
+
+        public List<EventDto> GetEventsForID(int id)
+        {
+            var events = new List<EventDto>();
+
+            using (var connection =
+                   new SqlConnection(connectionString))
+            {
+                using (var command =
+                       new SqlCommand("GetEventsForID",
+                           connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add(new SqlParameter("@UserID", id));
+
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var getEvent = new EventDto
+                            {
+                                ID = reader.GetInt32(0),
+                                EventType = reader.GetString(1),
+                                Title = reader.GetString(2),
+                                Date = reader.GetDateTime(3),
+                                Time = reader.GetTimeSpan(4),
+                                Recurrence = reader.GetString(5),
+                                Reminders = reader.GetString(6),
+                                UserID = reader.GetInt32(7),
+                                Login = reader.GetString(8)
+                            };
+                            events.Add(getEvent);
+                        }
+                    }
+                }
+            }
+
+            return events;
+        }
+
 
         public EventDto GetEvent(int Id)
         {

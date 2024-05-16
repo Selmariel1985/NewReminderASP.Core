@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Diagnostics.Eventing;
 using System.Linq;
+using System.Net.PeerToPeer;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Autofac;
 using log4net;
 using NewReminderASP.Core.Provider;
+using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
 {
+    [AllowAnonymous]
     [RouteArea("LoginArea")]
     [RoutePrefix("Login")]
     public class LoginController : Controller
@@ -17,20 +22,18 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
             LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly IUserProvider _provider;
+       
+
 
 
         public LoginController(IUserProvider provider)
         {
             _provider = provider;
+           
         }
 
 
-        //[AllowAnonymous]
-        //public ActionResult EventAsAnonymous()
-        //{
-        //    _logger.Info("Rendering EventAsAnonymous view");
-        //    return View("EventAsAnonymous");
-        //}
+        
 
 
         public ActionResult Login()
@@ -71,16 +74,23 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
                 System.Web.HttpContext.Current.Response.Cookies.Add(authCookie);
 
                 if (roleNames.Contains("Admin"))
+                {
                     return RedirectToAction("Index", "User", new { area = "AccountsArea" });
+                }
 
-                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                else if(roleNames.Contains("User"))
+                {
+                    return Redirect(Url.Action("Details", "Event", new { area = "EventsArea", userName = login }));
+                }
+
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 {
                     _logger.InfoFormat("User authenticated successfully. Redirecting to: {0}", returnUrl);
                     return Redirect(returnUrl);
                 }
+                
 
-                // Redirect to the "Event" controller for users with roles other than "Admin"
-                return RedirectToAction("Index", "Event", new { area = "EventsArea" });
+                return Redirect(Url.Action("Index", "Event", new { area = "EventsArea" }));
             }
 
             ModelState.AddModelError("", "Invalid login or password");

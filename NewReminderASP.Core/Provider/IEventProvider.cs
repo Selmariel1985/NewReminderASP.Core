@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
 using NewReminderASP.Domain.Entities;
+using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Core.Provider
 {
     public interface IEventProvider
     {
         List<Event> GetEvents();
+
+        List<Event> GetEventsForUser(string userName);
+
+       
+        List<Event> GetEventsForID(int id);
 
         Event GetEvent(int Id);
 

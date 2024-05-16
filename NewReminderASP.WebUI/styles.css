@@ -380,7 +380,7 @@ a:hover {
 
 .phone-details, .Addresses-details {
     padding: 20px;
-    border: 1px solid #ccc; /* Добавление границы для кубиков телефона и адреса */
+   
 }
 
 .edit-phone-button, .edit-Addresses-button {

@@ -1,34 +1,73 @@
-﻿@model NewReminderASP.Domain.Entities.Event
+﻿@model NewReminderASP.Domain.Entities.EventDetailsViewModel
+
 @{
     ViewBag.Title = "Event Details";
 }
 
-<link href="~/styles.css" rel="stylesheet"/>
+<link href="~/styles.css" rel="stylesheet" />
+
 
 <div class="details-details">
-    <h2>Event Details</h2>
-
-    <h2>User : @Model.Login</h2>
-    <hr/>
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.EventTypes)</dt>
-        <dd>@Html.DisplayFor(model => model.EventTypes)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Title)</dt>
-        <dd>@Html.DisplayFor(model => model.Title)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Date)</dt>
-        <dd>@Html.DisplayFor(model => model.Date)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Time)</dt>
-        <dd>@Html.DisplayFor(model => model.Time)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Recurrence)</dt>
-        <dd>@Html.DisplayFor(model => model.Recurrence)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Reminders)</dt>
-        <dd>@Html.DisplayFor(model => model.Reminders)</dd>
-    </dl>
+    <h2>User Details: @Model.User.Login</h2>
 
 
-    <div class="btn-group" role="group" aria-label="User actions">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn " })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn " })
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn " })
+    <div class="details-container">
+
+        <div class="phones-container">
+            
+
+            <a href="@Url.Action("Create", "Event", new { area = "EventsArea" })" class="btn btn-details">Create new Event</a>
+
+            @for (var d = 0; d < Model.Events.Count; d++)
+            {
+                <div class="phone-details">
+                    <h5>@Model.User.Login's event @(d + 1)</h5>
+                    <dl>
+                        <dt>Title:</dt>
+                        <dd>@Model.Events[d].Title</dd>
+
+                        <dt>Event Type:</dt>
+                        <dd>@Model.Events[d].EventTypes</dd>
+
+                        <dt>Date:</dt>
+                        <dd>@Model.Events[d].Date</dd>
+                        
+                        
+                        <dt>Time:</dt>
+                        <dd>@Model.Events[d].Time</dd>
+
+                        <dt>Recurrence:</dt>
+                        <dd>@Model.Events[d].Recurrence</dd>
+                        
+                        <dt>Reminders:</dt>
+                        <dd>@Model.Events[d].Reminders</dd>
+                    </dl>
+                    
+
+                    <div class="btn-group" role="group" aria-label="User actions">
+                        <a href="@Url.Action("Edit", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-details">Edit Event</a>
+                        <a href="@Url.Action("Delete", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-details">Delete Event</a>
+                    </div>
+                </div>
+            }
+
+        </div>
     </div>
 </div>
+
+
+
+               
+
+
+
+
+
+
+   
+
+     
+
+       
+
+    

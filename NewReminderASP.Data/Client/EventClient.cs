@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 using log4net;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
@@ -51,6 +52,120 @@ namespace NewReminderASP.Data.Client
                                 Recurrence = eventss.Recurrence,
                                 Reminders = eventss.Reminders
                             }).ToList();
+
+                    connection.Close();
+                }
+                catch (Exception e)
+                {
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
+                    throw;
+                }
+            }
+
+            return events;
+        }
+
+        public List<Event> GetEventsForUser(string userName)  // New method to get events for the user by username
+        {
+            var events = new List<Event>();
+            var currentLogin = HttpContext.Current.User.Identity.Name;
+            var isAdmin = HttpContext.Current.User.IsInRole("admin");
+
+            using (var connection = new EventServiceClient())
+            {
+                try
+                {
+                    connection.Open();
+                    var allEvents = connection.GetEventsForUser(userName);  // Calling the new method to get events for the user by username
+
+                    if (isAdmin)
+                    {
+                        events = allEvents.Select(e => new Event
+                        {
+                            ID = e.ID,
+                            EventTypes = e.EventType,
+                            Title = e.Title,
+                            Date = e.Date,
+                            Time = e.Time,
+                            Recurrence = e.Recurrence,
+                            Reminders = e.Reminders,
+                            UserID = e.UserID,
+                            Login = e.Login
+                        }).ToList();
+                    }
+                    else
+                    {
+                        events = allEvents.Where(e => e.Login == currentLogin)
+                            .Select(e => new Event
+                            {
+                                ID = e.ID,
+                                EventTypes = e.EventType,
+                                Title = e.Title,
+                                Date = e.Date,
+                                Time = e.Time,
+                                Recurrence = e.Recurrence,
+                                Reminders = e.Reminders,
+                                UserID = e.UserID,
+                                Login = e.Login
+                            }).ToList();
+                    }
+
+                    connection.Close();
+                }
+                catch (Exception e)
+                {
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e);
+                    throw;
+                }
+            }
+
+            return events;
+        }
+
+        public List<Event> GetEventsForID(int id)
+        {
+            var events = new List<Event>();
+            var currentUserLogin = HttpContext.Current.User.Identity.Name;
+            var isAdmin = HttpContext.Current.User.IsInRole("admin");
+
+            using (var connection = new EventServiceClient())
+            {
+                try
+                {
+                    connection.Open();
+                    var allEvents = connection.GetEventsForID(id);
+
+                    if (isAdmin)
+                        events = allEvents.Select(eventss => new Event
+                        {
+                            ID = eventss.ID,
+                            EventTypes = eventss.EventType,
+                            Title = eventss.Title,
+                            Date = eventss.Date,
+                            Time = eventss.Time,
+                            Recurrence = eventss.Recurrence,
+                            Reminders = eventss.Reminders,
+                            UserID = eventss.UserID,
+                           
+                        }).ToList();
+                    else
+                    {
+                        events = allEvents.Where(eventss => eventss.Login == currentUserLogin || eventss.UserID == id)
+                            .Select(eventss => new Event
+                            {
+                                ID = eventss.ID,
+                                EventTypes = eventss.EventType,
+                                Title = eventss.Title,
+                                Date = eventss.Date,
+                                Time = eventss.Time,
+                                Recurrence = eventss.Recurrence,
+                                Reminders = eventss.Reminders,
+                                UserID = eventss.UserID,
+                                Login = eventss.Login
+                            }).ToList();
+                    };
 
                     connection.Close();
                 }
