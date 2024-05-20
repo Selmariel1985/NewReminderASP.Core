@@ -6,7 +6,11 @@
 <link href="~/styles.css" rel="stylesheet"/>
 <div class="form-container">
     <h2>Role List</h2>
-    <
+    
+    <a href="@Url.Action("Create", "User", new { area = "AccountsArea" })" class="btn btn-details">Create User</a>
+    <a href="@Url.Action("CreateRole", "User", new { area = "AccountsArea" })" class="btn btn-details">Create new  Role</a>
+    <a href="@Url.Action("CreateUserRoleById", "User", new { area = "AccountsArea" })" class="btn btn-details">Create User Role</a>
+
     <form action="@Url.Action("Role")" method="get">
         <div class="filter-bar">
             <label for="orderBy">Sort by:</label>
@@ -31,9 +35,9 @@
             </tr>
             @foreach (var role in Model)
             {
-                <tr>
+                <tr onclick="redirectToDetails('@Url.Action("DetailsRole", "User", new { id = role.Id })')">
                     <td>@role.Id</td>
-                    <td>@Html.ActionLink(role.Name, "DetailsRole", new { id = role.Id })</td>
+                    <td>@role.Name</td>
                 </tr>
             }
         </table>
@@ -57,3 +61,8 @@
 
     </div>
 </div>
+<<script>
+    function redirectToDetails(url) {
+        window.location.href = url;
+    }
+</script>

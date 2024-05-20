@@ -3,6 +3,11 @@
 <link href="~/styles.css" rel="stylesheet"/>
 <div class="form-container">
     <h2>Phones</h2>
+    
+    <a href="@Url.Action("CreateAdmin", "Phone", new { area = "ContactsArea" })" class="btn btn-details">Create Phone</a>
+    <a href="@Url.Action("CreatePhoneType", "Phone", new { area = "ContactsArea" })" class="btn btn-details">Create PhoneType</a>
+    
+   
 
 
     <form action="@Url.Action("Index")" method="get">
@@ -35,10 +40,10 @@
             <tbody>
             @foreach (var phones in Model)
             {
-                <tr>
+                <tr onclick="redirectToDetails('@Url.Action("GetUserPhonesByUserId", "Phone", new { id = phones.UserID })')">
                     <td>@phones.ID</td>
-                    <td>@Html.ActionLink(!string.IsNullOrEmpty(phones.Login) ? phones.Login : "Default Name", "GetUserPhonesByUserId", "Phone", new { id = phones.UserID }, null)</td>
-                    <td>@Html.ActionLink(phones.PhoneNumber, "Details", "Phone", new { id = phones.ID }, null)</td>
+                    <td>@phones.Login</td>
+                    <td>@phones.PhoneNumber</td>
                     <td>@phones.PhoneTypes</td>
                     <td>@phones.CountryName</td>
                 </tr>
@@ -46,6 +51,11 @@
             </tbody>
         </table>
     </form>
+    
+   
+    
+    
+
     <div class="pagination">
         @if (ViewBag.CurrentPage > 1)
         {
@@ -65,3 +75,8 @@
 
     </div>
 </div>
+<script>
+    function redirectToDetails(url) {
+        window.location.href = url;
+    }
+</script>

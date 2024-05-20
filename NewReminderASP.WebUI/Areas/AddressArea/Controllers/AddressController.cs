@@ -77,13 +77,13 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
         [Authorize]
         public ActionResult Edit(int id)
         {
-            var model = _provider.GetAddressByID(id);
-            if (model == null || (!User.IsInRole("Admin") && model.Login != User.Identity.Name))
+            var address = _provider.GetAddress(id);
+            if (address == null || (!User.IsInRole("Admin") && address.Login != User.Identity.Name))
                 return new HttpUnauthorizedResult();
 
-            model.Countries = _countryProvider.GetCountries();
+            address.Countries = _countryProvider.GetCountries();
 
-            return View(model);
+            return View(address);
         }
 
         [Authorize]
@@ -99,7 +99,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
                     _provider.UpdateAddress(address);
                     if (User.IsInRole("Admin"))
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("DetailsAdmin", "User", new { area = "AccountsArea", id = existingAddress.UserID });
                     }
                     else
                     {
@@ -133,8 +133,16 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
         {
             if (ModelState.IsValid)
             {
-                _provider.AddAddressRegister(address);
-                return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
+                 _provider.AddAddressRegister(address);
+
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("DetailsAdmin", "User", new { area = "AccountsArea", id = address.UserID });
+                }
+                else
+                {
+                    return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
+                }
             }
 
 
@@ -194,7 +202,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
             _provider.DeleteAddress(id);
             if (User.IsInRole("Admin"))
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("DetailsAdmin", "User", new { area = "AccountsArea", id = address.UserID });
             }
             else
             {

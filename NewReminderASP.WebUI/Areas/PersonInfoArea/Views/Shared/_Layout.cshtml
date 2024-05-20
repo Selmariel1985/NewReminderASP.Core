@@ -25,14 +25,14 @@
         <div class="links-container">
             @if (User.IsInRole("Admin"))
             {
-                <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i>Home</a>
+                <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap">Home</span></a>
             }
             else
             {
-                <a href="@Url.Action("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name })" class="center-link bigger-font"><i class="fas fa-home"></i>Home</a>
+                <a href="@Url.Action("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap">Home</span></a>
             }
-            <a href="~/Home/Contact" class="center-link bigger-font"><i class="fas fa-envelope"></i>Contact</a>
-            <a href="~/Home/About" class="center-link bigger-font"><i class="fas fa-info-circle"></i>About</a>
+            <a href="~/Home/Contact" class="center-link bigger-font"><i class="fas fa-envelope"></i><span class="icon-title-gap">Contact</span></a>
+            <a href="~/Home/About" class="center-link bigger-font"><i class="fas fa-info-circle"></i><span class="icon-title-gap">About</span></a>
         </div>
 
         <div class="info user-info">
@@ -41,8 +41,8 @@
                 <span>User Login: <a href="@userLink">@userLogin</a></span>
             </div>
             <div class="logout-btn">
-                <a href="@Url.Action("SignOut", "Info")" class="btn btn-eco">
-                    <i class="fas fa-sign-out-alt"></i> Logout
+                <a href="@Url.Action("SignOut", "User")" class="btn btn-eco">
+                    <i class="fas fa-sign-out-alt"></i><span class="icon-title-gap">Logout</span>
                 </a>
             </div>
         </div>
@@ -54,16 +54,20 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         @if (User.IsInRole("Admin"))
         {
-            <a href="@Url.Action("Index", "Info", new { area = "PersonInfoArea" })" class="dropdown-item">PersonInfo</a>
-            <a href="@Url.Action("CreateAdmin", "Info", new { area = "PersonInfoArea" })" class="dropdown-item">Create PersonInfo</a>
+            <a href="@Url.Action("Role", "User", new { area = "AccountsArea" })">Roles</a>
             <a href="@Url.Action("Index", "Address", new { area = "AddressArea" })" class="dropdown-item">Address</a>
-            <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })" class="dropdown-item">Phones</a>
+            <a href="@Url.Action("IndexCountry", "Country", new { area = "AddressArea" })" class="dropdown-item">Country</a>
             <a href="@Url.Action("Index", "Event", new { area = "EventsArea" })" class="dropdown-item">Events</a>
-            <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="dropdown-item">Users</a>
+            <a href="@Url.Action("GetEventDetails", "Event", new { area = "EventsArea" })" class="dropdown-item">EventDetails</a>
+            <a href="@Url.Action("GetEventRecurrences", "Event", new { area = "EventsArea" })" class="dropdown-item">EventRecurrence</a>
+            <a href="@Url.Action("GetEventTypes", "Event", new { area = "EventsArea" })" class="dropdown-item">EventType</a>
+            <a href="@Url.Action("Index", "Info", new { area = "PersonInfoArea" })">Person Info</a>
+            <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })">Phones</a>
+            <a href="@Url.Action("GetPhoneType", "Phone", new { area = "ContactsArea" })" class="dropdown-item">PhoneType</a>
         }
         else
         {
-            
+
         }
 
     </div>

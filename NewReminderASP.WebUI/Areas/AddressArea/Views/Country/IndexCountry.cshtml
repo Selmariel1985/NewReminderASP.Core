@@ -9,6 +9,12 @@
 
     <h2>Countries</h2>
 
+    <a href="@Url.Action("CreateAdmin", "Address", new { area = "AddressArea" })" class="btn btn-details">Create Address</a>
+    <a href="@Url.Action("CreateCountry", "Country", new { area = "AddressArea" })" class="btn btn-details">Create Country</a>
+
+    
+    
+
     <form action="@Url.Action("IndexCountry")" method="get">
         <div class="filter-bar">
             <label for="orderBy">Sort by:</label>
@@ -24,7 +30,7 @@
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
             </select>
-            <input type="submit" value="Filter" class="btn"/>
+            <input type="submit" value="Filter" class="btn" />
         </div>
 
         <table class="table-eco">
@@ -37,11 +43,11 @@
             </tr>
             @foreach (var country in Model)
             {
-                <tr>
+                <tr onclick="redirectToDetails('@Url.Action("DetailsCountry", "Country", new { id = country.CountryID })')">
                     <td>@country.CountryID </td>
                     <td>@country.CountryCode</td>
                     <td>@country.PhoneCode</td>
-                    <td>@Html.ActionLink(!string.IsNullOrEmpty(country.Name) ? country.Name : "Default Name", "DetailsCountry", "Country", new { id = country.CountryID }, null)</td>
+                    <td>@country.Name</td>
                 </tr>
             }
         </table>
@@ -65,3 +71,8 @@
 
     </div>
 </div>
+<script>
+    function redirectToDetails(url) {
+        window.location.href = url;
+    }
+</script>

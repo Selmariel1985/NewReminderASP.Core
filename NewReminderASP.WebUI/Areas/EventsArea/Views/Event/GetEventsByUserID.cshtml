@@ -9,6 +9,7 @@
 <div class="details-details">
 
     <h2>Event List</h2>
+
     <hr />
     @foreach (var userEvent in Model)
     {
@@ -22,10 +23,10 @@
                 <dd>@userEvent.EventTypes</dd>
 
                 <dt>Date:</dt>
-                <dd>@userEvent.Date</dd>
+                <dd>@userEvent.Date.ToString("dd-MM-yyyy")</dd>
 
                 <dt>Time:</dt>
-                <dd>@userEvent.Time</dd>
+                <dd>@userEvent.Time.ToString("hh\\:mm")</dd>
 
                 <dt>Recurrence:</dt>
                 <dd>@userEvent.Recurrence</dd>

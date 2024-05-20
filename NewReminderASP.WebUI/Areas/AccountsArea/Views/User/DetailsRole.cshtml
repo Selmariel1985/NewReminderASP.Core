@@ -22,9 +22,9 @@
     </dl>
 
 
-    <div class="btn-group" role="group" aria-label="User actions">
-        @Html.ActionLink("Edit", "EditRole", new { id = Model.Id }, new { @class = "btn " })
-        @Html.ActionLink("Delete", "DeleteRole", new { id = Model.Id }, new { @class = "btn " })
-        @Html.ActionLink("Back to List", "Role", null, new { @class = "btn " })
-    </div>
+    
+        @Html.ActionLink("Edit", "EditRole", new { id = Model.Id }, new { @class = "btn btn-primary " })
+        @Html.ActionLink("Delete", "DeleteRole", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Back to List", "Role", null, new { @class = "btn btn-secondary " })
+    
 </div>

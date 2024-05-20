@@ -64,6 +64,6 @@
 
 <div class="row mt-2">
     <div class="col-md-6">
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-details" })
     </div>
 </div>

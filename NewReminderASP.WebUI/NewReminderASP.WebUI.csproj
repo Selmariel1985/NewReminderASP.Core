@@ -405,6 +405,9 @@
     <Content Include="Areas\EventsArea\Views\Event\IndexAnon.cshtml" />
     <Content Include="Areas\EventsArea\Views\Event\GetEventsByUserID.cshtml" />
     <Content Include="Areas\EventsArea\Views\Event\Details.cshtml" />
+    <Content Include="Areas\AccountsArea\Views\User\ConfirmationFailed.cshtml" />
+    <Content Include="Areas\AccountsArea\Views\User\ConfirmationSuccess.cshtml" />
+    <Content Include="Areas\AccountsArea\Views\User\EmailChangePending.cshtml" />
     <None Include="packages.config" />
     <Content Include="Reminderapp.log" />
     <Content Include="Scripts\bootstrap.min.js.map" />

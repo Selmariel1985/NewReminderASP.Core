@@ -7,9 +7,15 @@
 <link href="~/styles.css" rel="stylesheet" />
 <!-- jQuery library -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- jQuery UI library -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+<!-- Flatpickr CSS for Date picking -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Flatpickr JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<!-- Bootstrap Timepicker CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
+<!-- Bootstrap Timepicker JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
 
 <div class="edit-container">
     <h2>Edit Personal Information</h2>
@@ -44,14 +50,21 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Birthdate, new { @class = "edit-control-label" })
-            @Html.TextBoxFor(model => model.Birthdate, "{0:dd-MM-yyyy}", new { @class = "form-control datepicker", placeholder = "Select Date" })
-            @Html.ValidationMessageFor(model => model.Birthdate, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.Birthdate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Birthdate, new { @class = "form-control datepicker", placeholder = "Select Date" })
+                @Html.ValidationMessageFor(model => model.Birthdate, "", new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Gender, new { @class = "edit-control-label" })
-            @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Male", Value = "Male" },
+                new SelectListItem { Text = "Female", Value = "Female" },
+                new SelectListItem { Text = "Other", Value = "Other" }
+            }, "Select Gender", new { @class = "edit-form-control" })
             @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
         </div>
 
@@ -65,31 +78,39 @@
 {
     <div class="row mt-2">
         <div class="col-md-6">
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
+            @Html.ActionLink("Back", "DetailsAdmin", "User", new { id = Model.UserID, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-details" })
         </div>
     </div>
 
 }
 else
 {
-   
-    
-        <div class="row mt-2">
-            <div class="col-md-6">
-                @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-details" })
-            </div>
+
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-details" })
         </div>
-    }
-        
+    </div>
+}
 
 
 
-        <script>
-            $.noConflict();
-            jQuery(document).ready(function ($) {
-                $('.datepicker').datepicker({
-                    dateFormat: "dd-mm-yy"
-                });
-            });
 
-        </script>
+<script>
+    jQuery(document).ready(function ($) {
+        // Initialize the datepicker
+        $(".datepicker").flatpickr({
+            dateFormat: "d-m-Y",
+        });
+
+        // Initialize the timepicker
+        $(".timepicker").timepicker({
+            showMeridian: false,
+            minuteStep: 1,
+            defaultTime: false
+        });
+    });
+
+
+</script>

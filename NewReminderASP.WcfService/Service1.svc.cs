@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Contract;
 using NewReminderASP.Services.Dtos;
 
@@ -79,6 +80,7 @@ namespace NewReminderASP.WcfService
                             address.PostalCode = reader.GetString(4);
                             address.Description = reader.GetString(5);
                             address.Login = reader.GetString(6);
+                            address.UserID = reader.GetInt32(7);
                         }
                     }
                 }
@@ -113,6 +115,8 @@ namespace NewReminderASP.WcfService
                             address.PostalCode = reader.GetString(4);
                             address.Description = reader.GetString(5);
                             address.Login = reader.GetString(6);
+                            address.UserID = reader.GetInt32(7);
+
                         }
                     }
                 }
@@ -914,7 +918,7 @@ namespace NewReminderASP.WcfService
                 command.Parameters.AddWithValue("@UserID", updatedPersonalInfo.UserID);
                 command.Parameters.AddWithValue("@FirstName", updatedPersonalInfo.FirstName);
                 command.Parameters.AddWithValue("@LastName", updatedPersonalInfo.LastName);
-                command.Parameters.AddWithValue("@MiddleName", updatedPersonalInfo.MiddleName);
+                command.Parameters.AddWithValue("@MiddleName", updatedPersonalInfo?.MiddleName);
                 command.Parameters.AddWithValue("@Birthdate", updatedPersonalInfo.Birthdate);
                 command.Parameters.AddWithValue("@Gender", updatedPersonalInfo.Gender);
 
@@ -1042,6 +1046,7 @@ namespace NewReminderASP.WcfService
                         userPhone.PhoneNumber = reader.GetString(2);
                         userPhone.PhoneType = reader.GetString(3);
                         userPhone.CountryName = reader.GetString(4);
+                        userPhone.UserID = reader.GetInt32(5);
                     }
                 }
             }

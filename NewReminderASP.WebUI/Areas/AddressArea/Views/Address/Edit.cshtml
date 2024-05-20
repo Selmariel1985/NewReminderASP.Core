@@ -15,38 +15,40 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Street, new { @class = "edit-control-label" })
-            @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "edit-form-control" } })
-            @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+            @Html.LabelFor(address => address.Street, new { @class = "edit-control-label" })
+            @Html.EditorFor(address => address.Street, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(address => address.Street, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.City, new { @class = "edit-control-label" })
-            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "edit-form-control" } })
-            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            @Html.LabelFor(address => address.City, new { @class = "edit-control-label" })
+            @Html.EditorFor(address => address.City, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(address => address.City, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CountryID, "Country", new { @class = "edit-control-label" })
-            @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "edit-form-control" })
-            @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+            @Html.LabelFor(address => address.CountryID, "Country", new { @class = "edit-control-label" })
+            @Html.DropDownListFor(address => address.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "edit-form-control" })
+            @Html.ValidationMessageFor(address => address.CountryID, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PostalCode, new { @class = "edit-control-label" })
-            @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "edit-form-control" } })
-            @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+            @Html.LabelFor(address => address.PostalCode, new { @class = "edit-control-label" })
+            @Html.EditorFor(address => address.PostalCode, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(address => address.PostalCode, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, new { @class = "edit-control-label" })
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "edit-form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            @Html.LabelFor(address => address.Description, new { @class = "edit-control-label" })
+            @Html.EditorFor(address => address.Description, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(address => address.Description, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.HiddenFor(model => model.Login)
+            @Html.HiddenFor(address => address.Login)
         </div>
+        
+        
 
         <div class="form-group">
             <input type="submit" value="Save" class="btn btn-save"/>
@@ -60,7 +62,7 @@
 {
     <div class="row mt-2">
         <div class="col-md-6">
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn-back" })
+            @Html.ActionLink("Back", "DetailsAdmin", "User", new {id = Model.UserID, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-details" })
         </div>
     </div>
 

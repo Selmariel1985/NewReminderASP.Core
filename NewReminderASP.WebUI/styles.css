@@ -46,6 +46,11 @@ a:hover {
     text-align: center;
 }
 
+.icon-title-gap {
+    margin-left: 10px; /* Adjust the value as needed for the desired spacing */
+}
+
+
 .links-container {
     display: flex;
     align-items: center;
@@ -310,7 +315,7 @@ a:hover {
 
 .delete-container .dl-horizontal {
     text-align: center;
-    font-size: 1.5em;  Увеличим размер шрифта 
+    font-size: 1.5em;  
 }
 
     .delete-container .dl-horizontal dt,
@@ -529,6 +534,24 @@ a:hover {
     .table-eco td a {
         color: blue;
         text-decoration: none;
+    }
+
+.row-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.table-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+    .table-row:hover {
+        background-color: #f2f2f2;
+        cursor: pointer;
     }
 
 /*Pagination*/

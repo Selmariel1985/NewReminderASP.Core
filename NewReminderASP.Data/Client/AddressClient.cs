@@ -120,7 +120,8 @@ namespace NewReminderASP.Data.Client
                             CountryName = result.CountryName,
                             PostalCode = result.PostalCode,
                             Description = result.Description,
-                            Login = result.Login
+                            Login = result.Login,
+                            UserID = result.UserID
                         };
 
                     connection.Close();
@@ -159,7 +160,8 @@ namespace NewReminderASP.Data.Client
                             CountryID = result.CountryID,
                             PostalCode = result.PostalCode,
                             Description = result.Description,
-                            Login = result.Login
+                            Login = result.Login,
+                            UserID = result.UserID
                         };
 
                     connection.Close();
@@ -259,6 +261,8 @@ namespace NewReminderASP.Data.Client
                         Description = address.Description,
                         Login = address.Login
                     });
+
+                    address.UserID = address.UserID;
 
                     connection.Close();
                 }

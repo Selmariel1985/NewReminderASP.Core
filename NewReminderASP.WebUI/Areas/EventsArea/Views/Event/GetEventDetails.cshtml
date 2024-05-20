@@ -8,6 +8,11 @@
 <div class="form-container">
 
     <h2>Event Detail</h2>
+    
+    <a href="@Url.Action("CreateAdminEvent", "Event", new { area = "EventsArea" })" class="btn btn-details">Create Event</a>
+    <a href="@Url.Action("CreateEventDetails", "Event", new { area = "EventsArea" })" class="btn btn-details">Create  Detail Event</a>
+    <a href="@Url.Action("CreateEventRecurrences", "Event", new { area = "EventsArea" })" class="btn btn-details">Create Event Recurrences</a>
+    <a href="@Url.Action("CreateEventTypes", "Event", new { area = "EventsArea" })" class="btn btn-details">Create Event Types</a>
 
     <form action="@Url.Action("GetEventDetails")" method="get">
         <div class="filter-bar">
@@ -36,10 +41,10 @@
             </tr>
             @foreach (var eventDetail in Model)
             {
-                <tr>
+                <tr onclick="redirectToDetails('@Url.Action("DetailsEventDetails", "Event", new {id = eventDetail.EventID })')">
                     <td>@eventDetail.EventID</td>
                     <td>@eventDetail.Description</td>
-                    <td>@Html.ActionLink(!string.IsNullOrEmpty(eventDetail.Status) ? eventDetail.Status : "Default Name", "DetailsEventDetails", "Event", new { id = eventDetail.EventID }, null)</td>
+                    <td>@eventDetail.Status</td>
                 </tr>
             }
         </table>
@@ -64,3 +69,8 @@
     </div>
 
 </div>
+<script>
+    function redirectToDetails(url) {
+        window.location.href = url;
+    }
+</script>

@@ -21,6 +21,10 @@ namespace NewReminderASP.Domain.Entities
 
         [NotMapped] public string ConfirmPassword { get; set; }
 
+        [NotMapped] public string ConfirmEmail { get; set; }
+
+        
+
         [Required(ErrorMessage = "Please enter an Email")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         [StringLength(100, MinimumLength = 8, ErrorMessage = "The Email must be at least 8 characters long.")]

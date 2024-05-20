@@ -16,9 +16,9 @@
         <dt>@Html.DisplayNameFor(model => model.Title)</dt>
         <dd>@Html.DisplayFor(model => model.Title)</dd>
         <dt>@Html.DisplayNameFor(model => model.Date)</dt>
-        <dd>@Html.DisplayFor(model => model.Date)</dd>
+        <dd>@Html.DisplayFor(model => model.Date.ToString("dd-MM-yyyy"))</dd>
         <dt>@Html.DisplayNameFor(model => model.Time)</dt>
-        <dd>@Html.DisplayFor(model => model.Time)</dd>
+        <dd>@Html.DisplayFor(model => model.Time.ToString("hh\\:mm"))</dd>
         <dt>@Html.DisplayNameFor(model => model.Recurrence)</dt>
         <dd>@Html.DisplayFor(model => model.Recurrence)</dd>
         <dt>@Html.DisplayNameFor(model => model.Reminders)</dt>
@@ -26,9 +26,9 @@
     </dl>
 
 
-    <div class="btn-group" role="group" aria-label="User actions">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn " })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn " })
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn " })
-    </div>
+    
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary " })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-danger " })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary " })
+    
 </div>

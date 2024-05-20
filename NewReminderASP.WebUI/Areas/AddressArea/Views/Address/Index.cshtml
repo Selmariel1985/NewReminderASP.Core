@@ -9,6 +9,10 @@
 
     <h2>Addresses</h2>
 
+    <a href="@Url.Action("CreateAdmin", "Address", new { area = "AddressArea" })" class="btn btn-details">Create Address</a>
+    <a href="@Url.Action("CreateCountry", "Country", new { area = "AddressArea" })" class="btn btn-details">Create Country</a>
+
+
     <form action="@Url.Action("Index")" method="get">
         <div class="filter-bar">
             <label for="orderBy">Sort by:</label>
@@ -26,7 +30,7 @@
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
             </select>
-            <input type="submit" value="Filter" class="btn"/>
+            <input type="submit" value="Filter" class="btn" />
         </div>
 
         <table class="table-eco">
@@ -41,14 +45,14 @@
             </tr>
             @foreach (var address in Model)
             {
-                <tr>
+                <tr onclick="redirectToDetails('@Url.Action("GetAddressesByUserID", "Address", new { id = address.UserID })')">
                     <td>@address.ID</td>
                     <td>@address.Street</td>
                     <td>@address.City</td>
-                    <td>@Html.ActionLink(!string.IsNullOrEmpty(address.CountryName) ? address.CountryName : "Default Name", "Details", "Address", new { id = address.ID }, null)</td>
+                    <td>@address.CountryName</td>
                     <td>@address.PostalCode</td>
                     <td>@address.Description</td>
-                    <td>@Html.ActionLink(!string.IsNullOrEmpty(address.Login) ? address.Login : "Default Name", "GetAddressesByUserID", "Address", new { id = address.UserID }, null)</td>
+                    <td>@address.Login</td>
 
 
                 </tr>
@@ -74,3 +78,9 @@
 
     </div>
 </div>
+
+<script>
+    function redirectToDetails(url) {
+        window.location.href = url;
+    }
+</script>

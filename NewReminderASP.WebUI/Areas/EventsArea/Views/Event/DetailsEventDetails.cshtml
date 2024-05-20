@@ -23,9 +23,9 @@
     </dl>
 
 
-    <div class="btn-group" role="group" aria-label="User actions">
-        @Html.ActionLink("Edit", "EditEventDetails", new { id = Model.EventID }, new { @class = "btn " })
-        @Html.ActionLink("Delete", "DeleteEventDetail", new { id = Model.EventID }, new { @class = "btn " })
-        @Html.ActionLink("Back to List", "GetEventDetails", null, new { @class = "btn " })
-    </div>
+    
+        @Html.ActionLink("Edit", "EditEventDetails", new { id = Model.EventID }, new { @class = "btn btn-primary " })
+        @Html.ActionLink("Delete", "DeleteEventDetail", new { id = Model.EventID }, new { @class = "btn btn-danger " })
+        @Html.ActionLink("Back to List", "GetEventDetails", null, new { @class = "btn btn-secondary " })
+    
 </div>

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NewReminderASP.Domain.Entities
 {
+
     public class PersonalInfo
     {
         public int UserID { get; set; }
@@ -17,7 +18,7 @@ namespace NewReminderASP.Domain.Entities
         public string MiddleName { get; set; }
 
         [Required(ErrorMessage = "Please enter a Birthdate")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Birthdate { get; set; }
 
         [Required(ErrorMessage = "Please enter a Gender")]

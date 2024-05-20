@@ -71,7 +71,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
                 _provider.UpdateUserPhone(userPhone);
                 if (User.IsInRole("Admin"))
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("DetailsAdmin", "User", new { area = "AccountsArea", id = existingUserPhone.UserID });
                 }
                 else
                 {
@@ -81,8 +81,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
 
             return new HttpUnauthorizedResult();
 
-            userPhone.PhonesTypes = _provider.GetPhoneTypes();
-            userPhone.Countries = _countryProvider.GetCountries();
+
             return View(userPhone);
         }
 
@@ -120,6 +119,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             model.Users = _userProvider.GetUsers();
             model.Countries = _countryProvider.GetCountries();
             model.Login = User.Identity.Name;
+
 
 
             return View(model);
@@ -166,12 +166,13 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateAdmin(UserPhone userPhone)
         {
+          
             if (ModelState.IsValid)
             {
                 _provider.AddUserPhoneRegister(userPhone);
                 return RedirectToAction("Index");
             }
-
+            
             userPhone.Users = _userProvider.GetUsers();
             userPhone.Countries = _countryProvider.GetCountries();
             userPhone.PhonesTypes = _provider.GetPhoneTypes();
@@ -194,16 +195,16 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var events = _provider.GetUserPhone(id);
+            var userPhone = _provider.GetUserPhone(id);
 
 
-            if (events == null || (!User.IsInRole("Admin") && events.Login != User.Identity.Name))
+            if (userPhone == null || (!User.IsInRole("Admin") && userPhone.Login != User.Identity.Name))
                 return new HttpUnauthorizedResult();
 
             _provider.DeleteUserPhone(id);
             if (User.IsInRole("Admin"))
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("DetailsAdmin", "User", new { area = "AccountsArea", id = userPhone.UserID });
             }
             else
             {
@@ -299,17 +300,17 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return RedirectToAction("GetPhoneType");
         }
 
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            if (!filterContext.ExceptionHandled)
-            {
-                _logger.Error("An unhandled exception occurred", filterContext.Exception);
-                filterContext.Result = new ViewResult
-                {
-                    ViewName = "Error"
-                };
-                filterContext.ExceptionHandled = true;
-            }
-        }
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    if (!filterContext.ExceptionHandled)
+        //    {
+        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
+        //        filterContext.Result = new ViewResult
+        //        {
+        //            ViewName = "Error"
+        //        };
+        //        filterContext.ExceptionHandled = true;
+        //    }
+        //}
     }
 }

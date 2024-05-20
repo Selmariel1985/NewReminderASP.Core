@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Diagnostics.Eventing;
 using System.Linq;
-using System.Net.PeerToPeer;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using Autofac;
 using log4net;
 using NewReminderASP.Core.Provider;
-using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
 {
@@ -22,18 +18,12 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
             LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly IUserProvider _provider;
-       
-
 
 
         public LoginController(IUserProvider provider)
         {
             _provider = provider;
-           
         }
-
-
-        
 
 
         public ActionResult Login()
@@ -74,21 +64,17 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
                 System.Web.HttpContext.Current.Response.Cookies.Add(authCookie);
 
                 if (roleNames.Contains("Admin"))
-                {
                     return RedirectToAction("Index", "User", new { area = "AccountsArea" });
-                }
 
-                else if(roleNames.Contains("User"))
-                {
+                if (roleNames.Contains("User"))
                     return Redirect(Url.Action("Details", "Event", new { area = "EventsArea", userName = login }));
-                }
 
-                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 {
                     _logger.InfoFormat("User authenticated successfully. Redirecting to: {0}", returnUrl);
                     return Redirect(returnUrl);
                 }
-                
+
 
                 return Redirect(Url.Action("Index", "Event", new { area = "EventsArea" }));
             }

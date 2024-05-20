@@ -36,24 +36,20 @@
 
 
 
-
-                <div class="btn-group" role="group" aria-label="User actions">
+                
                     @if (User.IsInRole("Admin"))
                     {
-                        @Html.ActionLink("Edit", "EditUserAndRoles", new { id = Model.User.Id }, new { @class = "btn" })
+                        @Html.ActionLink("Edit", "EditUserAndRoles", new { id = Model.User.Id }, new { @class = "btn btn-primary" })
                     }
                     else
                     {
-                        @Html.ActionLink("Edit Account", "Edit", new { id = Model.User.Id }, new { @class = "btn" })
+                        @Html.ActionLink("Edit Account", "Edit", new { id = Model.User.Id }, new { @class = "btn btn-primary" })
                     }
-                    @Html.ActionLink("Delete Account", "Delete", new { id = Model.User.Id }, new { @class = "btn" })
-                    @if (User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
-                    }
+                    @Html.ActionLink("Delete Account", "Delete", new { id = Model.User.Id }, new { @class = "btn btn-danger" })
+                   
 
 
-                </div>
+              
         </div>
                 </div>
            
@@ -81,10 +77,10 @@
                         <dd>@Html.DisplayFor(model => model.PersonalInformation.Gender)</dd>
                         </dl>
 
-                        <div class="btn-group" role="group" aria-label="User actions">
-                            @Html.ActionLink("Edit User info", "Edit", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-details" })
-                            @Html.ActionLink("Delete User info", "Delete", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-details" })
-                        </div>
+                        
+                            @Html.ActionLink("Edit User info", "Edit", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Delete User info", "Delete", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-danger" })
+                    
 
 
                     </div>
@@ -117,10 +113,10 @@
                         <dt>Country:</dt>
                         <dd>@Model.Phones[d].CountryName</dd>
                     </dl>
-                    <div class="btn-group" role="group" aria-label="User actions">
-                    <a href="@Url.Action("Edit", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-details">Edit Phone</a>
-                    <a href="@Url.Action("Delete", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-details">Delete Phone</a>
-                    </div>
+                    
+                    <a href="@Url.Action("Edit", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-primary">Edit Phone</a>
+                    <a href="@Url.Action("Delete", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-danger">Delete Phone</a>
+                    
                 </div>
             }
            
@@ -149,10 +145,10 @@
                         <dt>Description:</dt>
                         <dd>@Model.Addresses[i].Description</dd>
                     </dl>
-                    <div class="btn-group" role="group" aria-label="User actions">
-                        <a href="@Url.Action("Edit", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-details">Edit Phone</a>
-                        <a href="@Url.Action("Delete", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-details">Delete Phone</a>
-                    </div>
+                    
+                        <a href="@Url.Action("Edit", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-primary">Edit Address</a>
+                        <a href="@Url.Action("Delete", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-danger">Delete Address</a>
+                    
                 </div>
 
                 
@@ -164,3 +160,7 @@
 
 </div>
     
+@if (User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+}

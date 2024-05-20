@@ -5,6 +5,10 @@
 <div class="form-container">
 
     <h2>Phones Type</h2>
+    
+    <a href="@Url.Action("CreateAdmin", "Phone", new { area = "ContactsArea" })" class="btn btn-details">Create Phone</a>
+    <a href="@Url.Action("CreatePhoneType", "Phone", new { area = "ContactsArea" })" class="btn btn-details">Create PhoneType</a>
+
     <form action="@Url.Action("GetPhoneType")" method="get">
         <div class="filter-bar">
             <label for="orderBy">Sort by:</label>
@@ -31,10 +35,10 @@
             <tbody>
             @foreach (var phonesTypes in Model)
             {
-                <tr>
+                <tr onclick="redirectToDetails('@Url.Action("DetailsPhoneType", "Phone", new {id = phonesTypes.ID})')">
                     <td>@phonesTypes.ID</td>
-                    <td>@Html.ActionLink(!string.IsNullOrEmpty(phonesTypes.TypeName) ? phonesTypes.TypeName : "Default Name", "DetailsPhoneType", "Phone", new { id = phonesTypes.ID }, null)</td>
-
+                    <td>@phonesTypes.TypeName</td>
+                    
                 </tr>
             }
             </tbody>
@@ -60,3 +64,9 @@
     </div>
 
 </div>
+
+<script>
+    function redirectToDetails(url) {
+        window.location.href = url;
+    }
+</script>

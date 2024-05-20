@@ -19,9 +19,9 @@
     </dl>
 
 
-    <div class="btn-group" role="group" aria-label="User actions">
-        @Html.ActionLink("Edit", "EditCountry", new { id = Model.CountryID }, new { @class = "btn " })
-        @Html.ActionLink("Delete", "DeleteCountry", new { id = Model.CountryID }, new { @class = "btn " })
-        @Html.ActionLink("Back to List", "IndexCountry", null, new { @class = "btn " })
-    </div>
+    
+        @Html.ActionLink("Edit", "EditCountry", new { id = Model.CountryID }, new { @class = "btn btn-primary " })
+        @Html.ActionLink("Delete", "DeleteCountry", new { id = Model.CountryID }, new { @class = "btn btn-danger " })
+        @Html.ActionLink("Back to List", "IndexCountry", null, new { @class = "btn btn-secondary " })
+    
 </div>

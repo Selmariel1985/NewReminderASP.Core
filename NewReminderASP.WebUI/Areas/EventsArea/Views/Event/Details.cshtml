@@ -30,11 +30,11 @@
                         <dd>@Model.Events[d].EventTypes</dd>
 
                         <dt>Date:</dt>
-                        <dd>@Model.Events[d].Date</dd>
+                        <dd>@Model.Events[d].Date.ToString("dd-MM-yyyy")</dd>
                         
                         
                         <dt>Time:</dt>
-                        <dd>@Model.Events[d].Time</dd>
+                        <dd>@Model.Events[d].Time.ToString("hh\\:mm")</dd>
 
                         <dt>Recurrence:</dt>
                         <dd>@Model.Events[d].Recurrence</dd>
@@ -44,12 +44,29 @@
                     </dl>
                     
 
-                    <div class="btn-group" role="group" aria-label="User actions">
-                        <a href="@Url.Action("Edit", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-details">Edit Event</a>
-                        <a href="@Url.Action("Delete", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-details">Delete Event</a>
+                    
+                        <a href="@Url.Action("Edit", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-primary">Edit Event</a>
+                        <a href="@Url.Action("Delete", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-danger">Delete Event</a>
+                    </div>
+                
+            }
+            
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        @Html.ActionLink("Back", "Index", "Event",  new { @class = "btn btn-secondary" })
                     </div>
                 </div>
+
             }
+            else
+            {
+   
+    
+                
+            }
+            
 
         </div>
     </div>

@@ -33,7 +33,7 @@
 {
     <div class="row mt-2">
         <div class="col-md-6">
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+            @Html.ActionLink("Back", "DetailsAdmin", "User", new { id = Model.UserID, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-danger" })
         </div>
     </div>
 

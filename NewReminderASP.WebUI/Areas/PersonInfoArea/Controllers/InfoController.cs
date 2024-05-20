@@ -73,7 +73,7 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
 
                     if (User.IsInRole("Admin"))
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("DetailsAdmin", "User", new { area = "AccountsArea", id = personalInfo.UserID });
                     }
                     else
                     {
@@ -185,7 +185,7 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
 
             if (User.IsInRole("Admin"))
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("DetailsAdmin", "User", new { area = "AccountsArea", id = personalInfo.UserID });
             }
             else
             {

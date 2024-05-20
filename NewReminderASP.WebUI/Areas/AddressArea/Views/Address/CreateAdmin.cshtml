@@ -8,7 +8,7 @@
 
 <div class="create-form">
     <h2>Add Address</h2>
-    @using (Html.BeginForm("Create", "Address", FormMethod.Post, new { @class = "form-horizontal" }))
+    @using (Html.BeginForm("CreateAdmin", "Address", FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
 

@@ -24,16 +24,30 @@ namespace NewReminderASP.Core.Provider
             return _addressRepository.GetAddressesByUserId(userId).ToList();
         }
 
+        /// <summar>y
+        /// Get address from user Id
+        /// </summary>
+        /// <param name="id">User i</param>
+        /// <returns>Address user</returns>
+        
+         
         public Address GetAddress(int id)
         {
             return _addressRepository.GetAddress(id);
         }
 
+
+        /// <summary>
+        /// GetAddressByID
+        /// </summary>
+        /// <param name="id">User</param>
+        /// <returns>List address user</returns>
         public Address GetAddressByID(int id)
         {
+           
             return _addressRepository.GetAddressByID(id);
         }
-
+        
         public void UpdateAddress(Address updatedAddress)
         {
             _addressRepository.UpdateAddress(updatedAddress);

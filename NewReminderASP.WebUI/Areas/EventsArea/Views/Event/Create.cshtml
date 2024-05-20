@@ -4,12 +4,18 @@
     ViewBag.Title = "Create Event";
 }
 
-<link href="~/styles.css" rel="stylesheet"/>
+<link href="~/styles.css" rel="stylesheet" />
 <!-- jQuery library -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- jQuery UI library -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+<!-- Flatpickr CSS for Date picking -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Flatpickr JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<!-- Bootstrap Timepicker CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
+<!-- Bootstrap Timepicker JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
 
 <div class="create-form">
     <h2>Add Event</h2>
@@ -38,22 +44,16 @@
             </div>
         </div>
 
-        <!-- Date Selection with Datepicker -->
         <div class="form-group">
-            @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Date, "{0:dd-MM-yyyy}", new { @class = "form-control datepicker", placeholder = "Select Date" })
-                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Date, new { @class = "edit-control-label" })
+            @Html.TextBoxFor(model => model.Date, new { @class = "form-control datepicker", placeholder = "Select Date" })
+            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
         </div>
 
-        <!-- Time Input -->
         <div class="form-group">
-            @Html.LabelFor(model => model.Time, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Time" } })
-                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Time, new { @class = "edit-control-label" })
+            @Html.TextBoxFor(model => model.Time, new { @class = "form-control timepicker", placeholder = "Select Time" })
+            @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
         </div>
 
         <!-- Recurrence Selection -->
@@ -84,22 +84,30 @@
 </div>
 
 
-   
 
-    <div class="row mt-2">
-        <div class="col-md-6">
-            @Html.ActionLink("Back", "Details", "Event", new { userName = User.Identity.Name, area = "EventsArea", controller = "User" }, new { @class = "btn btn-details" })
-        </div>
+
+<div class="row mt-2">
+    <div class="col-md-6">
+        @Html.ActionLink("Back", "Details", "Event", new { userName = User.Identity.Name, area = "EventsArea", controller = "User" }, new { @class = "btn btn-details" })
     </div>
+</div>
 }
 
 
 <script>
-    $.noConflict();
     jQuery(document).ready(function ($) {
-        $('.datepicker').datepicker({
-            dateFormat: "dd-mm-yy"
+        // Initialize the datepicker
+        $(".datepicker").flatpickr({
+            dateFormat: "d-m-Y",
+        });
+
+        // Initialize the timepicker
+        $(".timepicker").timepicker({
+            showMeridian: false,
+            minuteStep: 1,
+            defaultTime: false
         });
     });
-    
+
+
 </script>

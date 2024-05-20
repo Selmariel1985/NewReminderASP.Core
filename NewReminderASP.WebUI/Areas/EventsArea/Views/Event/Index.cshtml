@@ -7,11 +7,15 @@
 <link href="~/styles.css" rel="stylesheet"/>
 
 <div class="form-container">
+    
+    <a href="@Url.Action("CreateAdminEvent", "Event", new { area = "EventsArea" })" class="btn btn-details">Create Event</a>
+    <a href="@Url.Action("CreateEventDetails", "Event", new { area = "EventsArea" })" class="btn btn-details">Create  Detail Event</a>
+    <a href="@Url.Action("CreateEventRecurrences", "Event", new { area = "EventsArea" })" class="btn btn-details">Create Event Recurrences</a>
+    <a href="@Url.Action("CreateEventTypes", "Event", new { area = "EventsArea" })" class="btn btn-details">Create Event Types</a>
+   
 
 
-  
-
-
+   
     <form action="@Url.Action("Index")" method="get">
         <div class="filter-bar">
             <label for="orderBy">Sort by:</label>
@@ -48,16 +52,16 @@
             <tbody>
             @foreach (var events in Model)
             {
-                <tr>
+                <tr onclick="redirectToDetails('@Url.Action("Details", "Event", new { userName = events.Login })')">
                     <td>@events.ID</td>
                     <td>@events.Login</td>
                     <td>@events.EventTypes</td>
                     <td>@events.Title</td>
                     <td>@events.Date.ToString("yyyy-MM-dd")</td>
-                    <td>@events.Time</td>
+                    <td>@events.Time.ToString("hh\\:mm")</td>
                     <td>@events.Recurrence</td>
                     <td>
-                        @Html.ActionLink(!string.IsNullOrEmpty(events.Reminders) ? events.Reminders : "Default Name", "Details", "Event", new { userName = events.Login }, null)
+                        @events.Reminders
                     </td>
                 </tr>
             }
@@ -83,3 +87,8 @@
 
     </div>
 </div>
+<script>
+    function redirectToDetails(url) {
+        window.location.href = url;
+    }
+</script>

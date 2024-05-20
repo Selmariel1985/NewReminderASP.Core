@@ -13,16 +13,60 @@
 </head>
 <body>
 
-    <div class="header-bar">
+
+@{
+    var userLogin = User.Identity.Name;
+    
+    var userLink = Url.Action("Details", "User", new { area = "AccountsArea", userName = userLogin });
+    
+}
+
+<div class="header-bar">
     <div class="links-container">
-        <a href="@Url.Action("IndexAnon", "Event", new { area = "EventsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i> Demo</a>
-        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="~/Home/Contact" class="center-link bigger-font"><i class="fas fa-envelope"></i>Contact</a>
-        <a href="~/Home/About" class="center-link bigger-font"><i class="fas fa-info-circle"></i>About</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap">Home</span></a>
+            <div class="info user-info">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span>User Login: <a href="@userLink">@userLogin</a></span>
+                </div>
+                <div class="logout-btn">
+                    <a href="@Url.Action("SignOut", "Event")" class="btn btn-eco">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        }
+        else if (User.IsInRole("User"))
+        {
+            <a href="@Url.Action("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap">Home</span></a>
+            <div class="info user-info">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span>User Login: <a href="@userLink">@userLogin</a></span>
+                </div>
+                <div class="logout-btn">
+                    <a href="@Url.Action("SignOut", "Event")" class="btn btn-eco">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <a href="@Url.Action("IndexAnon", "Event", new { area = "EventsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap"> Demo</span></a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        }
+        <a href="~/Home/Contact" class="center-link bigger-font"><i class="fas fa-envelope"></i><span class="icon-title-gap">Contact</span></a>
+        <a href="~/Home/About" class="center-link bigger-font"><i class="fas fa-info-circle"></i><span class="icon-title-gap">About</span></a>
     </div>
+
+
+
     </div>
 <div class="container body-content">
     @RenderBody()

@@ -21,9 +21,9 @@
     </div>
 
 
-    <div class="btn-group" role="group" aria-label="User actions">
-        @Html.ActionLink("Edit", "EditPhoneType", new { id = Model.ID }, new { @class = "btn " })
-        @Html.ActionLink("Delete", "DeletePhoneType", new { id = Model.ID }, new { @class = "btn " })
-        @Html.ActionLink("Back to List", "GetPhoneType", null, new { @class = "btn " })
-    </div>
+   
+        @Html.ActionLink("Edit", "EditPhoneType", new { id = Model.ID }, new { @class = "btn btn-primary " })
+        @Html.ActionLink("Delete", "DeletePhoneType", new { id = Model.ID }, new { @class = "btn btn-danger " })
+        @Html.ActionLink("Back to List", "GetPhoneType", null, new { @class = "btn btn-secondary " })
+   
 </div>

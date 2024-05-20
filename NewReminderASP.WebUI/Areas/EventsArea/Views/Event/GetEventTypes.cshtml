@@ -8,6 +8,11 @@
 <div class="form-container">
 
     <h2>Event Type</h2>
+    
+    <a href="@Url.Action("CreateAdminEvent", "Event", new { area = "EventsArea" })" class="btn btn-details">Create Event</a>
+    <a href="@Url.Action("CreateEventDetails", "Event", new { area = "EventsArea" })" class="btn btn-details">Create  Detail Event</a>
+    <a href="@Url.Action("CreateEventRecurrences", "Event", new { area = "EventsArea" })" class="btn btn-details">Create Event Recurrences</a>
+    <a href="@Url.Action("CreateEventTypes", "Event", new { area = "EventsArea" })" class="btn btn-details">Create Event Types</a>
 
     <form action="@Url.Action("GetEventTypes")" method="get">
         <div class="filter-bar">
@@ -34,10 +39,10 @@
             </tr>
             @foreach (var eventType in Model)
             {
-                <tr>
+                <tr onclick="redirectToDetails('@Url.Action("DetailsEventTypes", "Event", new { id = eventType.ID })')">
 
                     <td>@eventType.ID</td>
-                    <td>@Html.ActionLink(!string.IsNullOrEmpty(eventType.TypeName) ? eventType.TypeName : "Default Name", "DetailsEventTypes", "Event", new { id = eventType.ID }, null)</td>
+                    <td>@eventType.TypeName</td>
                 </tr>
             }
 
@@ -62,3 +67,8 @@
 
     </div>
 </div>
+<script>
+    function redirectToDetails(url) {
+        window.location.href = url;
+    }
+</script>
