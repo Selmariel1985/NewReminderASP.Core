@@ -9,16 +9,16 @@
     <h2>Event Details</h2>
 
     <h2>User : @Model.Login</h2>
-    <hr/>
+    <hr />
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.EventTypes)</dt>
         <dd>@Html.DisplayFor(model => model.EventTypes)</dd>
         <dt>@Html.DisplayNameFor(model => model.Title)</dt>
         <dd>@Html.DisplayFor(model => model.Title)</dd>
         <dt>@Html.DisplayNameFor(model => model.Date)</dt>
-        <dd>@Html.DisplayFor(model => model.Date.ToString("dd-MM-yyyy"))</dd>
+        <dd>@Html.DisplayFor(model => model.Date)</dd>
         <dt>@Html.DisplayNameFor(model => model.Time)</dt>
-        <dd>@Html.DisplayFor(model => model.Time.ToString("hh\\:mm"))</dd>
+        <dd>@Html.DisplayFor(model => model.Time)</dd>
         <dt>@Html.DisplayNameFor(model => model.Recurrence)</dt>
         <dd>@Html.DisplayFor(model => model.Recurrence)</dd>
         <dt>@Html.DisplayNameFor(model => model.Reminders)</dt>
@@ -26,9 +26,24 @@
     </dl>
 
 
-    
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary " })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-danger " })
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary " })
-    
+
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-danger " })
 </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="row mt-2">
+            <div class="col-md-6">
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row-2">
+            <div class="col-md-6">
+                @Html.ActionLink("Back", "Details", "Event", new { userName = User.Identity.Name, area = "EventsArea", controller = "User" }, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    }
+    

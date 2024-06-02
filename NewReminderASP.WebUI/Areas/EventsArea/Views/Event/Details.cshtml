@@ -14,9 +14,9 @@
     <div class="details-container">
 
         <div class="phones-container">
-            
 
-            <a href="@Url.Action("Create", "Event", new { area = "EventsArea" })" class="btn btn-details">Create new Event</a>
+
+            <a href="@Url.Action("Create", "Event", new { area = "EventsArea" })" class="btn btn-primary">Create new Event</a>
 
             @for (var d = 0; d < Model.Events.Count; d++)
             {
@@ -31,26 +31,26 @@
 
                         <dt>Date:</dt>
                         <dd>@Model.Events[d].Date.ToString("dd-MM-yyyy")</dd>
-                        
-                        
+
+
                         <dt>Time:</dt>
                         <dd>@Model.Events[d].Time.ToString("hh\\:mm")</dd>
 
                         <dt>Recurrence:</dt>
                         <dd>@Model.Events[d].Recurrence</dd>
-                        
+
                         <dt>Reminders:</dt>
                         <dd>@Model.Events[d].Reminders</dd>
                     </dl>
-                    
 
-                    
-                        <a href="@Url.Action("Edit", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-primary">Edit Event</a>
-                        <a href="@Url.Action("Delete", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-danger">Delete Event</a>
-                    </div>
-                
+
+
+                    <a href="@Url.Action("Edit", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-primary">Edit Event</a>
+                    <a href="@Url.Action("Delete", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-danger">Delete Event</a>
+                </div>
+
             }
-            
+        </div>
             @if (User.IsInRole("Admin"))
             {
                 <div class="row mt-2">
@@ -70,7 +70,7 @@
 
         </div>
     </div>
-</div>
+
 
 
 

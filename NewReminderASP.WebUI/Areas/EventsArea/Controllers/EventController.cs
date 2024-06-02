@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.PeerToPeer;
 using System.Reflection;
@@ -28,6 +29,16 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
         {
             return SignOutAndRedirectToLogin("LoginArea");
         }
+
+        public ActionResult Calendar()
+        {
+            var events = _provider.GetEvents().Select(e => new EventViewModel(e)).ToList();
+            return View(events);
+        }
+
+
+
+
         [Authorize]
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
@@ -172,15 +183,26 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
                 return View(events);
             return new HttpUnauthorizedResult();
         }
-
         [Authorize]
-        public ActionResult Create()
+        public ActionResult Create(string selectedDate)
         {
             var model = new Event();
             model.Users = _userProvider.GetUsers();
             model.EventsTypes = _provider.GetEventTypes();
             model.EventRecurrences = _provider.GetEventRecurrences();
 
+            if (!string.IsNullOrEmpty(selectedDate))
+            {
+                // Convert the selectedDate string to a DateTime object
+                if (DateTime.TryParseExact(selectedDate, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+                {
+                    model.Date = date; // Assign the converted DateTime value to the Date property
+                }
+                else
+                {
+                    
+                }
+            }
 
             return View(model);
         }
@@ -211,6 +233,17 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 
             return View(events);
         }
+
+        [HttpPost]
+        public ActionResult SaveSelectedDate(string selectedDate)
+        {
+            // Логика сохранения выбранной даты на сервере
+            // Пример сохранения данных в базе данных или выполнения дополнительных операций
+
+            // Возвращение ответа клиенту после сохранения
+            return Json(new { success = true });
+        }
+
 
         [Authorize(Roles = "Admin")]
         public ActionResult CreateAdminEvent()
@@ -474,6 +507,14 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
 
             return View(paginatedEventDetail);
         }
+
+
+
+
+        
+
+       
+
 
 
         [Authorize(Roles = "Admin")]

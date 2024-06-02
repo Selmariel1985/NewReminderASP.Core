@@ -91,7 +91,7 @@
         <div class="phones-container">
             <h2>phones</h2>
 
-            <a href="@Url.Action("Create", "Phone", new { area = "ContactsArea" })" class="btn btn-details">Create new Phone</a>
+            <a href="@Url.Action("CreateAdmin", "Phone", new { area = "ContactsArea" })" class="btn btn-primary">Create new Phone</a>
 
             @for (var d = 0; d < Model.Phones.Count; d++)
             {
@@ -126,7 +126,7 @@
 
         <div class="Addresses-container">
             <h2>Addresses</h2>
-            <a href="@Url.Action("Create", "Address", new { area = "AddressArea" })" class="btn btn-details">Create new Address</a>
+            <a href="@Url.Action("CreateAdmin", "Address", new { area = "AddressArea" })" class="btn btn-primary">Create new Address</a>
             @for (var i = 0; i < Model.Addresses.Count; i++)
             {
                 <div class="Addresses-details">

@@ -19,16 +19,23 @@
             @Html.ValidationMessageFor(model => model.User.Login, "", new { @class = "text-danger" })
         </div>
 
+
         <div class="form-group">
             @Html.LabelFor(model => model.User.Email, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.User.ConfirmEmail, new { @class = "edit-control-label" })
+            @Html.TextBoxFor(model => model.User.ConfirmEmail, new { @class = "edit-form-control", placeholder = "Confirm Email" })
+            @Html.ValidationMessageFor(model => model.User.ConfirmEmail, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.User.Password, new { @class = "edit-control-label" })
             @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "edit-form-control" } })
             @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.User.ConfirmPassword, new { @class = "edit-control-label" })
+            @Html.PasswordFor(model => model.User.ConfirmPassword, new { @class = "edit-form-control" })
+            @Html.ValidationMessageFor(model => model.User.ConfirmPassword, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
@@ -57,7 +64,7 @@
 
 <div class="row mt-2">
     <div class="col-md-6">
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-back" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
     </div>
 </div>
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })

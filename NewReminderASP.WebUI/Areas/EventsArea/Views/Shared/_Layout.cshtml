@@ -10,6 +10,8 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="~/styles.css" rel="stylesheet">
+
+
     
 
 </head>
@@ -81,10 +83,12 @@
         <a href="@Url.Action("Index", "Info", new { area = "PersonInfoArea" })">Person Info</a>
         <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })">Phones</a>
         <a href="@Url.Action("GetPhoneType", "Phone", new { area = "ContactsArea" })" class="dropdown-item">PhoneType</a>
+
+        <a href="@Url.Action("Calendar", "Event", new { area = "EventsArea" })" class="dropdown-item">Calendar</a>
     }
     else
     {
-
+        <a href="@Url.Action("Calendar", "Event", new { area = "EventsArea" })" class="dropdown-item">Calendar</a>
 
     }
 

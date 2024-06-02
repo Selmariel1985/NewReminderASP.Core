@@ -44,6 +44,11 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return RedirectToAction("Login", "Login", new { area = "LoginArea" }); // Перенаправление на страницу входа
         }
 
+
+
+
+
+
         [Authorize]
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
@@ -180,24 +185,15 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditUserAndRoles(UserAndRolesModel model, int[] SelectedRoles)
         {
-
-            
-
             var roles = _provider.GetRoles();
             model.UserRole = model.UserRole ?? new UserRole();
             model.UserRole.Roles = roles;
-
-            if (!IsLoginUnique(model.User.Login))
-                ModelState.AddModelError("User.Login", "This login is already in use.");
-
-            if (!IsEmailUnique(model.User.Email))
-                ModelState.AddModelError("User.Email", "This email is already registered.");
 
             if (!ModelState.IsValid) return View(model);
 
             if (string.IsNullOrEmpty(model.User.Password))
             {
-                ModelState.AddModelError("User.Password", "Enter password");
+                ModelState.AddModelError("User.Password", "Введите пароль");
                 return View(model);
             }
 
@@ -213,15 +209,12 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             catch (Exception ex)
             {
                 _logger.Error("An error occurred in EditUserAndRoles()", ex);
-                ModelState.AddModelError("", "Error ");
+                ModelState.AddModelError("", "Произошла ошибка при обновлении пользователя и ролей.");
                 return View(model);
             }
         }
 
-        private string GenerateToken()
-        {
-            return Guid.NewGuid().ToString();
-        }
+
 
         private bool IsLoginUnique(string login)
         {
@@ -233,27 +226,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return _provider.GetUserByEmail(email) == null;
         }
 
-        [HttpGet]
-        public ActionResult ConfirmEmail(string token)
-        {
-            if (_cache.TryGetValue(token, out User cachedUser))
-                try
-                {
-                    cachedUser.IsActive = true;
-                    _provider.AddUser(cachedUser);
-                    _provider.AddUserRoleNormal(cachedUser.Login, "User");
-
-                    _cache.Remove(token);
-                    return View("ConfirmationSuccess");
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error("An error occurred during user confirmation", ex);
-                    return View("ConfirmationFailed");
-                }
-
-            return View("ConfirmationFailed");
-        }
+        
 
 
         [Authorize]
@@ -266,10 +239,9 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(user);
         }
 
-        
         [Authorize]
         [HttpPost]
-        public ActionResult Edit(int id, User user, string confirmPassword, string confirmEmail)
+        public ActionResult Edit(int id, User user)
         {
             try
             {
@@ -281,7 +253,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
                     {
                         if (user.Login != existingUser.Login && (!IsLoginUnique(user.Login)))
                         {
-                            ModelState.AddModelError("User.Login", "This username is already in use.");
+                            ModelState.AddModelError("Login", "This username is already in use.");
                             return View(user);
                         }
 
@@ -291,32 +263,27 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
                             return View(user);
                         }
 
-                        if (user.Password != confirmPassword)
+                        if (user.Password != user.ConfirmPassword)
                         {
                             ModelState.AddModelError("confirmPassword", "The password and confirmation password do not match.");
                             return View(user);
                         }
 
-                        if (user.Email != confirmEmail)
+                        if (user.Email != user.ConfirmEmail)
                         {
                             ModelState.AddModelError("confirmEmail", "The email and confirmation email do not match.");
                             return View(user);
                         }
 
-                        // Update the user with the provided user object
-                        _provider.UpdateUser(user);
 
-                        if (existingUser.Email != user.Email)
+                        if (user.Email != existingUser.Email && !string.IsNullOrEmpty(user.Email))
                         {
-                            // Send confirmation email for email change
-                            var token = GenerateToken();
-                            _cache.Set(token, user, TimeSpan.FromMinutes(60));
-
-                            var confirmationUrl = Url.Action("ConfirmEmail", "User", new { token }, Request.Url.Scheme);
-                            _emailService.SendConfirmationEmail(user.Email, confirmationUrl);
-                            return View("EmailChangePending");
+                            _provider.UpdateUser(user);
+                            _emailService.SendEmailChangeNotification(user.Email);
+                             return RedirectToAction("Login", "Login", new { area = "LoginArea" });
                         }
 
+                        _provider.UpdateUser(user);
                         return RedirectToAction("Login", "Login", new { area = "LoginArea" });
                     }
 
@@ -325,13 +292,13 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 _logger.Error("An error occurred in Edit()", ex);
                 return View("Error");
             }
 
             return View(user);
         }
+
 
 
         [Authorize(Roles = "Admin")]

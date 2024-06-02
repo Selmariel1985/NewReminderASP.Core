@@ -137,7 +137,7 @@ namespace NewReminderASP.WebUI.Areas.AddressArea.Controllers
 
                 if (User.IsInRole("Admin"))
                 {
-                    return RedirectToAction("DetailsAdmin", "User", new { area = "AccountsArea", id = address.UserID });
+                    return RedirectToAction("Index", "User", new { area = "AccountsArea"});
                 }
                 else
                 {

@@ -24,6 +24,6 @@
     @Html.AntiForgeryToken()
 <div class="form-actions">
     <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this phone type?');" />
-    @Html.ActionLink("Back to List", "GetPhoneType", new { @class = "btn btn-details" })
+    @Html.ActionLink("Back to List", "GetPhoneType", new { @class = "btn btn-secondary" })
 </div>
 }

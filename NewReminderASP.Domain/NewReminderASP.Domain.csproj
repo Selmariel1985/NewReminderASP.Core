@@ -49,6 +49,7 @@
     <Compile Include="Entities\EventDetailsViewModel.cs" />
     <Compile Include="Entities\EventRecurrence.cs" />
     <Compile Include="Entities\EventType.cs" />
+    <Compile Include="Entities\EventViewModel.cs" />
     <Compile Include="Entities\PersonalInfo.cs" />
     <Compile Include="Entities\PhoneType.cs" />
     <Compile Include="Entities\RegisterViewModel.cs" />
@@ -60,6 +61,8 @@
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

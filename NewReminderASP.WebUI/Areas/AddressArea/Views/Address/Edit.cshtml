@@ -62,7 +62,7 @@
 {
     <div class="row mt-2">
         <div class="col-md-6">
-            @Html.ActionLink("Back", "DetailsAdmin", "User", new {id = Model.UserID, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-details" })
+            @Html.ActionLink("Back", "DetailsAdmin", "User", new {id = Model.UserID, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-secondary" })
         </div>
     </div>
 
@@ -73,7 +73,7 @@ else
     
     <div class="row mt-2">
         <div class="col-md-6">
-            @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-details" })
+            @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-secondary" })
         </div>
     </div>
 }

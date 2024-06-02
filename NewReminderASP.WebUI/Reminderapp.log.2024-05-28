@@ -1,0 +1,424 @@
+2024-05-28 15:31:51,694 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 15:31:53,473 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 15:31:53,693 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 22:56:51,026 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 22:56:52,466 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 22:56:52,733 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:07:45,592 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:07:48,010 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:07:48,157 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:08:28,447 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:08:37,504 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:08:37,695 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:10:28,142 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:10:30,847 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:10:31,709 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:11:38,490 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:11:39,613 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:11:39,732 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:12:09,283 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:12:09,357 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:12:10,303 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:12:10,400 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:12:10,882 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:12:10,975 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:12:29,409 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:12:30,514 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:12:30,606 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:13:22,721 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:13:25,069 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:13:25,244 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:13:47,710 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.UpdateEvent(EventDto updatedEvent)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.UpdateEvent(EventDto updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 875
+   в NewReminderASP.Data.Client.EventClient.UpdateEvent(Event updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 231
+2024-05-28 23:14:11,243 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:14:12,445 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:14:12,544 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:15:10,750 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.UpdateEvent(EventDto updatedEvent)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.UpdateEvent(EventDto updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 875
+   в NewReminderASP.Data.Client.EventClient.UpdateEvent(Event updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 231
+2024-05-28 23:16:26,988 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:16:28,452 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:16:28,561 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:16:46,088 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:16:47,170 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:16:47,269 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:17:16,185 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.UpdateEvent(EventDto updatedEvent)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.UpdateEvent(EventDto updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 875
+   в NewReminderASP.Data.Client.EventClient.UpdateEvent(Event updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 231
+2024-05-28 23:17:58,160 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:18:00,525 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:18:00,664 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:18:01,116 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:18:01,210 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:18:20,211 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.UpdateEvent(EventDto updatedEvent)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.UpdateEvent(EventDto updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 875
+   в NewReminderASP.Data.Client.EventClient.UpdateEvent(Event updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 231
+2024-05-28 23:19:10,921 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.UpdateEvent(EventDto updatedEvent)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.UpdateEvent(EventDto updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 875
+   в NewReminderASP.Data.Client.EventClient.UpdateEvent(Event updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 231
+2024-05-28 23:20:02,029 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.UpdateEvent(EventDto updatedEvent)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.UpdateEvent(EventDto updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 875
+   в NewReminderASP.Data.Client.EventClient.UpdateEvent(Event updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 231
+2024-05-28 23:21:03,258 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:21:04,531 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:21:04,642 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:21:08,559 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.UpdateEvent(EventDto updatedEvent)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.UpdateEvent(EventDto updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 875
+   в NewReminderASP.Data.Client.EventClient.UpdateEvent(Event updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 231
+2024-05-28 23:22:04,674 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:22:05,469 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:22:05,582 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:22:20,815 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.AddEvent(EventDto events)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.AddEvent(EventDto events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 883
+   в NewReminderASP.Data.Client.EventClient.AddEvent(Event events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 264
+2024-05-28 23:24:22,998 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:24:34,504 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: work
+2024-05-28 23:24:34,688 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-05-28 23:25:09,277 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.AddEvent(EventDto events)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.AddEvent(EventDto events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 883
+   в NewReminderASP.Data.Client.EventClient.AddAdminEvent(Event events) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 296
+2024-05-28 23:25:44,384 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.UpdateEvent(EventDto updatedEvent)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.UpdateEvent(EventDto updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 875
+   в NewReminderASP.Data.Client.EventClient.UpdateEvent(Event updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 231
+2024-05-28 23:29:01,594 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:29:04,532 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: work
+2024-05-28 23:29:05,245 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-05-28 23:31:13,737 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:31:13,753 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:31:36,257 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: work
+2024-05-28 23:31:36,382 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-05-28 23:32:04,731 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IPersonalInfoService.AddPersonalInfo(PersonalInfoDto personalInfo)
+   в NewReminderASP.Data.ServiceReference1.PersonalInfoServiceClient.AddPersonalInfo(PersonalInfoDto personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 662
+   в NewReminderASP.Data.Client.PersonalInformationClient.AddPersonalInfo(PersonalInfo personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\PersonalInformationClient.cs:строка 153
+2024-05-28 23:34:24,090 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:34:25,692 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: work
+2024-05-28 23:34:25,806 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-05-28 23:34:40,461 ERROR ErrorLogger - An error occurred when updating or inserting personal info
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IPersonalInfoService.AddPersonalInfo(PersonalInfoDto personalInfo)
+   в NewReminderASP.Data.ServiceReference1.PersonalInfoServiceClient.AddPersonalInfo(PersonalInfoDto personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 662
+   в NewReminderASP.Data.Client.PersonalInformationClient.UpdatePersonalInfo(PersonalInfo updatedPersonalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\PersonalInformationClient.cs:строка 120
+2024-05-28 23:36:02,761 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:36:08,147 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: work
+2024-05-28 23:36:08,263 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-05-28 23:36:32,252 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IPersonalInfoService.AddPersonalInfo(PersonalInfoDto personalInfo)
+   в NewReminderASP.Data.ServiceReference1.PersonalInfoServiceClient.AddPersonalInfo(PersonalInfoDto personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 662
+   в NewReminderASP.Data.Client.PersonalInformationClient.AddPersonalInfo(PersonalInfo personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\PersonalInformationClient.cs:строка 153
+2024-05-28 23:37:14,248 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:37:16,958 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: work
+2024-05-28 23:37:17,694 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-05-28 23:38:00,265 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IPersonalInfoService.AddPersonalInfo(PersonalInfoDto personalInfo)
+   в NewReminderASP.Data.ServiceReference1.PersonalInfoServiceClient.AddPersonalInfo(PersonalInfoDto personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 662
+   в NewReminderASP.Data.Client.PersonalInformationClient.AddPersonalInfo(PersonalInfo personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\PersonalInformationClient.cs:строка 153
+2024-05-28 23:39:20,303 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:39:22,999 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: work
+2024-05-28 23:39:23,799 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-05-28 23:39:49,556 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.UpdateEvent(EventDto updatedEvent)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.UpdateEvent(EventDto updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 875
+   в NewReminderASP.Data.Client.EventClient.UpdateEvent(Event updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 231
+2024-05-28 23:39:50,104 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.UpdateEvent(EventDto updatedEvent)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.UpdateEvent(EventDto updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 875
+   в NewReminderASP.Data.Client.EventClient.UpdateEvent(Event updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 231
+2024-05-28 23:40:24,359 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IPersonalInfoService.AddPersonalInfo(PersonalInfoDto personalInfo)
+   в NewReminderASP.Data.ServiceReference1.PersonalInfoServiceClient.AddPersonalInfo(PersonalInfoDto personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 662
+   в NewReminderASP.Data.Client.PersonalInformationClient.AddPersonalInfo(PersonalInfo personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\PersonalInformationClient.cs:строка 153
+2024-05-28 23:42:44,983 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:42:51,802 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:42:52,487 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:43:03,386 ERROR ErrorLogger - An error occurred when updating or inserting personal info
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IPersonalInfoService.AddPersonalInfo(PersonalInfoDto personalInfo)
+   в NewReminderASP.Data.ServiceReference1.PersonalInfoServiceClient.AddPersonalInfo(PersonalInfoDto personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 662
+   в NewReminderASP.Data.Client.PersonalInformationClient.UpdatePersonalInfo(PersonalInfo updatedPersonalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\PersonalInformationClient.cs:строка 120
+2024-05-28 23:43:10,644 ERROR ErrorLogger - An error occurred when updating or inserting personal info
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IPersonalInfoService.AddPersonalInfo(PersonalInfoDto personalInfo)
+   в NewReminderASP.Data.ServiceReference1.PersonalInfoServiceClient.AddPersonalInfo(PersonalInfoDto personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 662
+   в NewReminderASP.Data.Client.PersonalInformationClient.UpdatePersonalInfo(PersonalInfo updatedPersonalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\PersonalInformationClient.cs:строка 120
+2024-05-28 23:44:06,949 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IEventService.UpdateEvent(EventDto updatedEvent)
+   в NewReminderASP.Data.ServiceReference1.EventServiceClient.UpdateEvent(EventDto updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 875
+   в NewReminderASP.Data.Client.EventClient.UpdateEvent(Event updatedEvent) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\EventClient.cs:строка 231
+2024-05-28 23:45:40,846 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:45:42,798 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:45:42,913 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User
+2024-05-28 23:45:58,569 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: work
+2024-05-28 23:45:58,674 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-05-28 23:47:32,724 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:47:32,743 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:47:41,134 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:47:42,673 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: work
+2024-05-28 23:47:42,793 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: Admin
+2024-05-28 23:48:09,426 ERROR ErrorLogger - An error occurred
+System.ServiceModel.FaultException: Сервер не смог обработать запрос в связи с внутренней ошибкой.  Для получения дополнительных сведений об ошибке либо включите IncludeExceptionDetailInFaults (с помощью атрибута ServiceBehaviorAttribute или через поведение < serviceDebug >) на сервере для того чтобы выслать информацию об исключении назад клиенту, или включить трассировку согласно инструкции Microsoft .NET Framework SDK и проверить записи журнала трассировки клиента.
+
+Server stack trace: 
+   в System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   в System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   в System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   в System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   в System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   в System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   в System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   в NewReminderASP.Data.ServiceReference1.IPersonalInfoService.AddPersonalInfo(PersonalInfoDto personalInfo)
+   в NewReminderASP.Data.ServiceReference1.PersonalInfoServiceClient.AddPersonalInfo(PersonalInfoDto personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Connected Services\ServiceReference1\Reference.cs:строка 662
+   в NewReminderASP.Data.Client.PersonalInformationClient.AddPersonalInfo(PersonalInfo personalInfo) в E:\CSharp\NewReminderASP.Core\NewReminderASP.Data\Client\PersonalInformationClient.cs:строка 153
+2024-05-28 23:50:44,409 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
+2024-05-28 23:50:49,941 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
+2024-05-28 23:50:50,054 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User

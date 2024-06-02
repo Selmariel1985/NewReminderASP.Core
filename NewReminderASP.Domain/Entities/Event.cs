@@ -18,8 +18,14 @@ namespace NewReminderASP.Domain.Entities
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
 
         public DateTime Date { get; set; }
+        public Event()
+        {
+            Date = DateTime.Now;
+            Time = DateTime.Now.TimeOfDay;
+        }
 
         public TimeSpan Time { get; set; }
+       
 
         public int RecurrenceID { get; set; }
 
@@ -35,5 +41,11 @@ namespace NewReminderASP.Domain.Entities
         public List<User> Users { get; set; }
         public List<EventType> EventsTypes { get; set; }
         public List<EventRecurrence> EventRecurrences { get; set; }
+
+
+
+        public string StartDate { get; set; }
+
+        
     }
 }

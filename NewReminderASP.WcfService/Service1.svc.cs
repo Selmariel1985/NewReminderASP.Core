@@ -199,7 +199,7 @@ namespace NewReminderASP.WcfService
                     command.Parameters.AddWithValue("@City", address.City);
                     command.Parameters.AddWithValue("@CountryName", address.CountryName);
                     command.Parameters.AddWithValue("@PostalCode", address.PostalCode);
-                    command.Parameters.AddWithValue("@Description", address.Description);
+                    command.Parameters.AddWithValue("@Description", address?.Description);
                     command.Parameters.AddWithValue("@Login", address.Login);
 
                     connection.Open();
@@ -221,7 +221,7 @@ namespace NewReminderASP.WcfService
                     command.Parameters.AddWithValue("@City", address.City);
                     command.Parameters.AddWithValue("@CountryID", address.CountryID);
                     command.Parameters.AddWithValue("@PostalCode", address.PostalCode);
-                    command.Parameters.AddWithValue("@Description", address.Description);
+                    command.Parameters.AddWithValue("@Description", address?.Description);
                     command.Parameters.AddWithValue("@Login", address.Login);
 
                     connection.Open();

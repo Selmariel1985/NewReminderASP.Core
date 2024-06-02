@@ -1,21 +1,23 @@
-﻿@model NewReminderASP.Domain.Entities.PersonalInfo
+﻿﻿@model NewReminderASP.Domain.Entities.PersonalInfo
 @{
     ViewBag.Title = "Create Info";
 }
 
 
 <link href="~/styles.css" rel="stylesheet" />
-<!-- jQuery library -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Flatpickr CSS for Date picking -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/themes/default.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/themes/default.date.css">
 
-<!-- Flatpickr JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<!-- Bootstrap Timepicker CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
-<!-- Bootstrap Timepicker JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
+<style>
+    .picker__select--month, .picker__select--year {
+        border: 1px solid #b7b7b7;
+        height: 3em;
+        padding: 0.5em;
+        margin-left: 0.25em;
+        margin-right: 0.25em;
+    }
+</style>
 
 <div class="create-form">
     <h2>Add Info</h2>
@@ -53,7 +55,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Birthdate, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Birthdate, new { @class = "form-control datepicker", placeholder = "Select Date" })
+                @Html.TextBoxFor(model => model.Birthdate, "{0:dd.MM.yyyy}", new { @class = "form-control datepicker", placeholder = "Select Date" })
                 @Html.ValidationMessageFor(model => model.Birthdate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -83,20 +85,21 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/picker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/picker.date.js"></script>
+
 <script>
     jQuery(document).ready(function ($) {
-        // Initialize the datepicker
-        $(".datepicker").flatpickr({
-            dateFormat: "d-m-Y",
+        // Initialize Pickadate for date selection
+        $(".datepicker").pickadate({
+            format: 'dd.mm.yyyy', // Date format
+            selectYears: true,    // Create a dropdown to control year
+            selectMonths: true,   // Create a dropdown to control month
+            selectYears: 100,     // Create dropdown for 100 years
         });
 
-        // Initialize the timepicker
-        $(".timepicker").timepicker({
-            showMeridian: false,
-            minuteStep: 1,
-            defaultTime: false
-        });
+
     });
-
-
 </script>

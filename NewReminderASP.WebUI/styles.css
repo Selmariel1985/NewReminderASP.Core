@@ -394,7 +394,7 @@ a:hover {
 }
 
 
-.btn-group .btn {
+/*.btn-group .btn {
     color: #ffffff;
     background-color: #20a8d8;
     border-color: #20a8d8;
@@ -417,7 +417,7 @@ a:hover {
     .btn-details:hover {
         background-color: #87C159;
         color: #fff;
-    }
+    }*/
 
     /*edit*/
 
@@ -473,19 +473,7 @@ a:hover {
         background-color: #87C159;
     }
 
-.btn-back {
-    color: white;
-    background-color: #6c757d;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-    .btn-back:hover {
-        color: white;
-        background-color: #87C159;
-    }
 
    /* index
     Таблица*/
@@ -624,7 +612,13 @@ a:hover {
 }
 
 
-
+.picker__select--month, .picker__select--year {
+    border: 1px solid #b7b7b7;
+    height: 3em;
+    padding: 0.5em;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+}
     
 
 

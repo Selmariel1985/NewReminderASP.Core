@@ -1,0 +1,128 @@
+﻿@using Newtonsoft.Json
+@model IEnumerable<NewReminderASP.Domain.Entities.EventViewModel>
+
+@{
+    ViewData["Title"] = "Calendar";
+    var eventsJson = JsonConvert.SerializeObject(Model.Select(e => new
+    {
+        id = e.ID.ToString(),
+        title = e.Title,
+        start = e.StartDate,
+        userID = e.UserID,
+        login = e.Login,
+        eventTypes = e.EventTypes
+    }));
+}
+
+<div id="calendar"></div>
+<div id="external-events">
+
+
+</div>
+
+<style>
+    .fc-event-title-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-Multiplier: 1;
+    }
+
+    .fc-event-title-text {
+        margin-right: 10px;
+    }
+
+    
+
+    .fc-event-action {
+        margin-right: 5px;
+        z-index: 2;
+    }
+
+    .fc-event-icons {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/main.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // External events setup
+    var containerEl = document.getElementById('external-events');
+    new FullCalendar.Draggable(containerEl, {
+        itemSelector: '.fc-event'
+    });
+
+    var calendarEl = document.getElementById('calendar');
+    var calendarEvents = JSON.parse('@Html.Raw(eventsJson)');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+      events: calendarEvents,
+    editable: true, // Enable dragging and resizing
+    droppable: true, // Allow events to be dropped
+dateClick: function (info) {
+    var selectedDate = info.dateStr; // Get the selected date from the calendar
+    var createUrl = '@Url.Action("Create", "Event", new { area = "EventsArea" })'; // Form the URL for creating a new event
+    createUrl = createUrl + '?selectedDate=' + selectedDate; // Add the selected date to the URL
+    window.location.href = createUrl; // Navigate to the event creation page with the selected date
+},
+
+        eventClick: function(info) {
+            var eventId = info.event.id;
+            var detailsUrl = '@Url.Action("EventDetails", "Event", new { area = "EventsArea", id = "__eventId__" })';
+            var editUrl = '@Url.Action("Edit", "Event", new { area = "EventsArea", id = "__eventId__" })';
+            var deleteUrl = '@Url.Action("Delete", "Event", new { area = "EventsArea", id = "__eventId__" })';
+
+            detailsUrl = detailsUrl.replace('__eventId__', eventId);
+            editUrl = editUrl.replace('__eventId__', eventId);
+            deleteUrl = deleteUrl.replace('__eventId__', eventId);
+
+            var eventTitle = info.event.title;
+            var eventButtons = '';
+
+           if (info.event.extendedProps.login === '@User.Identity.Name') {
+  eventButtons += '<div class="fc-event-icons">';
+  eventButtons += '<button class="fc-button fc-button-primary fc-event-action" data-action="details"><i class="fas fa-eye"></i></button>';
+  eventButtons += '<button class="fc-button fc-button-primary fc-event-action" data-action="edit"><i class="fas fa-pencil-alt"></i></button>';
+  eventButtons += '<button class="fc-button fc-button-primary fc-event-action" data-action="delete"><i class="fas fa-trash"></i></button>';
+  eventButtons += '</div>';
+}
+            info.el.querySelector('.fc-event-title').innerHTML = eventTitle + eventButtons;
+
+            $('.fc-event-action').on('click', function(e) {
+                var action = $(this).data('action');
+                switch (action) {
+                    case 'details':
+                        window.location.href = detailsUrl;
+                        break;
+                    case 'edit':
+                        window.location.href = editUrl;
+                        break;
+                    case 'delete':
+                        window.location.href = deleteUrl;
+                        break;
+                }
+                e.preventDefault();
+            });
+        }
+    });
+
+    calendar.render();
+});
+</script>
+
+

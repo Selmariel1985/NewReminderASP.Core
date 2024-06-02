@@ -4,7 +4,7 @@
     ViewBag.Title = "Create New Address"; // More descriptive title
 }
 
-<link href="~/styles.css" rel="stylesheet"/>
+<link href="~/styles.css" rel="stylesheet" />
 
 <div class="create-form">
     <h2>Add Address</h2>
@@ -62,8 +62,21 @@
     }
 </div>
 
-<div class="row mt-2">
-    <div class="col-md-6">
-        @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-details" })
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
     </div>
-</div>
+}
+else
+{
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+}
+

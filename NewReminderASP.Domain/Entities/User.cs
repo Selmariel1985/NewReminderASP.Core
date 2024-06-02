@@ -9,7 +9,8 @@ namespace NewReminderASP.Domain.Entities
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Please enter a login")]
+        [Required(ErrorMessage = "Please enter a username")]
+        [Display(Name = "Username")]
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Please enter a Password")]
@@ -18,9 +19,12 @@ namespace NewReminderASP.Domain.Entities
             ErrorMessage =
                 "The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")]
         public string Password { get; set; }
-
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirm password")]
         [NotMapped] public string ConfirmPassword { get; set; }
-
+        [EmailAddress(ErrorMessage = "Invalid email address")]
+        [Compare("Email", ErrorMessage = "The email and confirmation email do not match.")]
+        [Display(Name = "Confirm email")]
         [NotMapped] public string ConfirmEmail { get; set; }
 
         
