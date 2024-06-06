@@ -29,6 +29,7 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         {
             return SignOutAndRedirectToLogin("LoginArea");
         }
+
         [Authorize]
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
@@ -70,19 +71,16 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             {
                 _provider.UpdateUserPhone(userPhone);
                 if (User.IsInRole("Admin"))
-                {
-                    return RedirectToAction("DetailsAdmin", "User", new { area = "AccountsArea", id = existingUserPhone.UserID });
-                }
-                else
-                {
-                    return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
-                }
+                    return RedirectToAction("DetailsAdmin", "User",
+                        new { area = "AccountsArea", id = existingUserPhone.UserID });
+                return RedirectToAction("Details", "User",
+                    new { area = "AccountsArea", userName = User.Identity.Name });
             }
 
             return new HttpUnauthorizedResult();
 
 
-            return View(userPhone);
+          
         }
 
         [Authorize]
@@ -121,7 +119,6 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             model.Login = User.Identity.Name;
 
 
-
             return View(model);
         }
 
@@ -134,13 +131,9 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             {
                 _provider.AddUserPhoneRegister(userPhone);
                 if (User.IsInRole("Admin"))
-                {
                     return RedirectToAction("Index");
-                }
-                else
-                {
-                    return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
-                }
+                return RedirectToAction("Details", "User",
+                    new { area = "AccountsArea", userName = User.Identity.Name });
             }
 
             userPhone.Users = _userProvider.GetUsers();
@@ -166,13 +159,12 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateAdmin(UserPhone userPhone)
         {
-          
             if (ModelState.IsValid)
             {
                 _provider.AddUserPhoneRegister(userPhone);
                 return RedirectToAction("Index");
             }
-            
+
             userPhone.Users = _userProvider.GetUsers();
             userPhone.Countries = _countryProvider.GetCountries();
             userPhone.PhonesTypes = _provider.GetPhoneTypes();
@@ -203,13 +195,8 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
 
             _provider.DeleteUserPhone(id);
             if (User.IsInRole("Admin"))
-            {
                 return RedirectToAction("DetailsAdmin", "User", new { area = "AccountsArea", id = userPhone.UserID });
-            }
-            else
-            {
-                return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
-            }
+            return RedirectToAction("Details", "User", new { area = "AccountsArea", userName = User.Identity.Name });
         }
 
         [Authorize(Roles = "Admin")]
@@ -300,17 +287,17 @@ namespace NewReminderASP.WebUI.Areas.ContactsArea.Controllers
             return RedirectToAction("GetPhoneType");
         }
 
-        //protected override void OnException(ExceptionContext filterContext)
-        //{
-        //    if (!filterContext.ExceptionHandled)
-        //    {
-        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
-        //        filterContext.Result = new ViewResult
-        //        {
-        //            ViewName = "Error"
-        //        };
-        //        filterContext.ExceptionHandled = true;
-        //    }
-        //}
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
+        }
     }
 }

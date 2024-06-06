@@ -799,11 +799,11 @@ namespace NewReminderASP.Data.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/UpdateEventType", ReplyAction="http://tempuri.org/IEventService/UpdateEventTypeResponse")]
         System.Threading.Tasks.Task UpdateEventTypeAsync(NewReminderASP.Services.Dtos.EventTypeDto updatedEventType);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddPEventType", ReplyAction="http://tempuri.org/IEventService/AddPEventTypeResponse")]
-        void AddPEventType(NewReminderASP.Services.Dtos.EventTypeDto eventType);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddEventType", ReplyAction="http://tempuri.org/IEventService/AddEventTypeResponse")]
+        void AddEventType(NewReminderASP.Services.Dtos.EventTypeDto eventType);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddPEventType", ReplyAction="http://tempuri.org/IEventService/AddPEventTypeResponse")]
-        System.Threading.Tasks.Task AddPEventTypeAsync(NewReminderASP.Services.Dtos.EventTypeDto eventType);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/AddEventType", ReplyAction="http://tempuri.org/IEventService/AddEventTypeResponse")]
+        System.Threading.Tasks.Task AddEventTypeAsync(NewReminderASP.Services.Dtos.EventTypeDto eventType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEventService/DeleteEventType", ReplyAction="http://tempuri.org/IEventService/DeleteEventTypeResponse")]
         void DeleteEventType(int id);
@@ -999,12 +999,12 @@ namespace NewReminderASP.Data.ServiceReference1 {
             return base.Channel.UpdateEventTypeAsync(updatedEventType);
         }
         
-        public void AddPEventType(NewReminderASP.Services.Dtos.EventTypeDto eventType) {
-            base.Channel.AddPEventType(eventType);
+        public void AddEventType(NewReminderASP.Services.Dtos.EventTypeDto eventType) {
+            base.Channel.AddEventType(eventType);
         }
         
-        public System.Threading.Tasks.Task AddPEventTypeAsync(NewReminderASP.Services.Dtos.EventTypeDto eventType) {
-            return base.Channel.AddPEventTypeAsync(eventType);
+        public System.Threading.Tasks.Task AddEventTypeAsync(NewReminderASP.Services.Dtos.EventTypeDto eventType) {
+            return base.Channel.AddEventTypeAsync(eventType);
         }
         
         public void DeleteEventType(int id) {

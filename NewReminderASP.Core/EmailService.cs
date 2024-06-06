@@ -1,8 +1,16 @@
 ﻿using System.Net;
 using System.Net.Mail;
 
+/// <summary>
+/// Class responsible for sending email notifications.
+/// </summary>
 public class EmailService
 {
+    /// <summary>
+    /// Sends a confirmation email to the specified email address with a confirmation link.
+    /// </summary>
+    /// <param name="toAddress">The email address to send the confirmation email to.</param>
+    /// <param name="confirmationUrl">The URL link for confirming the account.</param>
     public void SendConfirmationEmail(string toAddress, string confirmationUrl)
     {
         using (var mail = new MailMessage())
@@ -21,6 +29,10 @@ public class EmailService
         }
     }
 
+    /// <summary>
+    /// Send an email notification about the change of email address to the specified user.
+    /// </summary>
+    /// <param name="userEmail">The email address of the user to notify about the email change.</param>
     public void SendEmailChangeNotification(string userEmail)
     {
         string subject = "Notification: Email Change";
@@ -29,6 +41,12 @@ public class EmailService
         SendEmail(userEmail, subject, body);
     }
 
+    /// <summary>
+    /// Send a generic email with the specified subject and body to the specified email address.
+    /// </summary>
+    /// <param name="to">The email address to send the email to.</param>
+    /// <param name="subject">The subject of the email.</param>
+    /// <param name="body">The body content of the email.</param>
     private void SendEmail(string to, string subject, string body)
     {
         using (var mail = new MailMessage())

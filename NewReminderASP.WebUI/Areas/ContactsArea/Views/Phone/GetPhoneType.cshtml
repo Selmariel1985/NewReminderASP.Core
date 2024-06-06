@@ -5,7 +5,7 @@
 <div class="form-container">
 
     <h2>Phones Type</h2>
-    
+
     <a href="@Url.Action("CreateAdmin", "Phone", new { area = "ContactsArea" })" class="btn btn-primary">Create Phone</a>
     <a href="@Url.Action("CreatePhoneType", "Phone", new { area = "ContactsArea" })" class="btn btn-primary">Create PhoneType</a>
 
@@ -35,10 +35,10 @@
             <tbody>
             @foreach (var phonesTypes in Model)
             {
-                <tr onclick="redirectToDetails('@Url.Action("DetailsPhoneType", "Phone", new {id = phonesTypes.ID})')">
+                <tr onclick="redirectToDetails('@Url.Action("DetailsPhoneType", "Phone", new { id = phonesTypes.ID })')">
                     <td>@phonesTypes.ID</td>
                     <td>@phonesTypes.TypeName</td>
-                    
+
                 </tr>
             }
             </tbody>

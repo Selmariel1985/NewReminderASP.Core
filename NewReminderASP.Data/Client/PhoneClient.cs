@@ -8,389 +8,462 @@ using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Data.Client
 {
-    public class PhoneClient : IPhoneClient
-    {
-        public List<UserPhone> GetUserPhones()
+   
+        /// <summary>
+        /// Client class for interacting with user phone service.
+        /// </summary>
+        public class PhoneClient : IPhoneClient
         {
-            var userPhones = new List<UserPhone>();
-            var currentUserLogin = HttpContext.Current.User.Identity.Name;
-            var isAdmin = HttpContext.Current.User.IsInRole("admin");
-
-            using (var connection = new PhoneServiceClient())
+            /// <summary>
+            /// Retrieves a list of user phones based on the user's role and login.
+            /// </summary>
+            /// <returns>A list of UserPhone objects</returns>
+            public List<UserPhone> GetUserPhones()
             {
-                try
+                var userPhones = new List<UserPhone>(); // Create a list to store UserPhone objects
+                var currentUserLogin = HttpContext.Current.User.Identity.Name; // Get current user's login
+                var isAdmin = HttpContext.Current.User.IsInRole("admin"); // Check if the current user is an admin
+
+                using (var connection = new PhoneServiceClient())
                 {
-                    connection.Open();
+                    try
+                    {
+                        connection.Open(); // Open connection to the phone service
+                        var result = connection.GetUserPhones(); // Retrieve user phones from the service
 
-                    var result = connection.GetUserPhones();
+                        if (result != null)
+                        {
+                            // Process the retrieved user phones based on the user's role
+                            foreach (var userPhoneDto in result)
+                            {
+                                if (isAdmin || userPhoneDto.Login == currentUserLogin)
+                                {
+                                    var userPhone = new UserPhone
+                                    {
+                                        ID = userPhoneDto.ID,
+                                        Login = userPhoneDto.Login,
+                                        PhoneNumber = userPhoneDto.PhoneNumber,
+                                        PhoneTypes = userPhoneDto.PhoneType,
+                                        CountryName = userPhoneDto.CountryName,
+                                        UserID = userPhoneDto.UserID
+                                    };
 
-                    if (result != null)
-                        foreach (var userPhoneDto in result)
-                            if (isAdmin || userPhoneDto.Login == currentUserLogin)
+                                    userPhones.Add(userPhone);
+                                }
+                            }
+                        }
+
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception e)
+                    {
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", e); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
+                }
+
+                return userPhones; // Return the list of UserPhone objects
+            }
+
+            /// <summary>
+            /// Retrieves a list of user phones based on the specified user ID.
+            /// </summary>
+            /// <param name="userId">The user ID to filter user phones by.</param>
+            /// <returns>A list of UserPhone objects filtered by the specified user ID.</returns>
+            public List<UserPhone> GetUserPhonesByUserId(int userId)
+            {
+                var userPhones = new List<UserPhone>(); // Create a list to store UserPhone objects
+
+                using (var connection = new PhoneServiceClient())
+                {
+                    try
+                    {
+                        connection.Open(); // Open connection to the phone service
+
+                        var result = connection.GetUserPhonesByUserId(userId); // Retrieve user phones by user ID
+
+                        if (result != null)
+                        {
+                            foreach (var userPhoneDto in result)
                             {
                                 var userPhone = new UserPhone
                                 {
                                     ID = userPhoneDto.ID,
                                     Login = userPhoneDto.Login,
+                                    UserID = userPhoneDto.UserID,
                                     PhoneNumber = userPhoneDto.PhoneNumber,
                                     PhoneTypes = userPhoneDto.PhoneType,
-                                    CountryName = userPhoneDto.CountryName,
-                                    UserID = userPhoneDto.UserID
+                                    CountryName = userPhoneDto.CountryName
                                 };
-
-                                userPhones.Add(userPhone);
+                                userPhones.Add(userPhone); // Add UserPhone object to the list
                             }
-
-                    connection.Close();
-                }
-                catch (Exception e)
-                {
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
-                }
-            }
-
-            return userPhones;
-        }
-
-        public List<UserPhone> GetUserPhonesByUserId(int userId)
-        {
-            var userPhones = new List<UserPhone>();
-
-            using (var connection = new PhoneServiceClient())
-            {
-                try
-                {
-                    connection.Open();
-
-                    var result = connection.GetUserPhonesByUserId(userId);
-
-                    if (result != null)
-                        foreach (var userPhoneDto in result)
-                        {
-                            var userPhone = new UserPhone
-                            {
-                                ID = userPhoneDto.ID,
-                                Login = userPhoneDto.Login,
-                                UserID = userPhoneDto.UserID,
-                                PhoneNumber = userPhoneDto.PhoneNumber,
-                                PhoneTypes = userPhoneDto.PhoneType,
-                                CountryName = userPhoneDto.CountryName
-                            };
-                            userPhones.Add(userPhone); // Add Address object to the list
                         }
 
-                    connection.Close();
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception ex)
+                    {
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", ex); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", ex);
-                    throw;
-                }
+
+                return userPhones; // Return the list of UserPhone objects
             }
 
-            return userPhones; // Return the list of Address objects
-        }
 
-
-        public UserPhone GetUserPhone(int id)
-        {
-            UserPhone userPhone = null;
-
-            using (var connection = new PhoneServiceClient())
+            /// <summary>
+            /// Retrieves a user phone by the specified ID.
+            /// </summary>
+            /// <param name="id">The ID of the user phone to retrieve.</param>
+            /// <returns>The UserPhone object corresponding to the specified ID, or null if not found.</returns>
+            public UserPhone GetUserPhone(int id)
             {
-                try
+                UserPhone userPhone = null; // Initialize the userPhone variable as null
+
+                using (var connection = new PhoneServiceClient())
                 {
-                    connection.Open();
+                    try
+                    {
+                        connection.Open(); // Open connection to the phone service
 
-                    var result = connection.GetUserPhone(id);
+                        var result = connection.GetUserPhone(id); // Retrieve user phone by ID
 
-                    if (result != null)
-                        userPhone = new UserPhone
+                        if (result != null)
                         {
-                            ID = result.ID,
-                            Login = result.Login,
-                            PhoneNumber = result.PhoneNumber,
-                            PhoneTypes = result.PhoneType,
-                            CountryName = result.CountryName,
-                            UserID = result.UserID
-                        };
+                            userPhone = new UserPhone
+                            {
+                                ID = result.ID,
+                                Login = result.Login,
+                                PhoneNumber = result.PhoneNumber,
+                                PhoneTypes = result.PhoneType,
+                                CountryName = result.CountryName,
+                                UserID = result.UserID
+                            };
+                        }
 
-                    connection.Close();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
-                }
-            }
-
-            return userPhone;
-        }
-
-        public void UpdateUserPhone(UserPhone updatedUserPhone)
-        {
-            using (var connection = new PhoneServiceClient())
-            {
-                try
-                {
-                    connection.Open();
-
-                    connection.UpdateUserPhone(new UserPhoneDto
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception e)
                     {
-                        ID = updatedUserPhone.ID,
-                        Login = updatedUserPhone.Login,
-                        PhoneNumber = updatedUserPhone.PhoneNumber,
-                        PhoneTypeID = updatedUserPhone.PhoneTypeID,
-                        CountryID = updatedUserPhone.CountryID
-                    });
+                        Console.WriteLine(e); // Output the exception to the console
 
-                    connection.Close();
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", e); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
 
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
-                }
+                return userPhone; // Return the UserPhone object
             }
-        }
 
-        public void AddUserPhone(UserPhone userPhone)
-        {
-            using (var connection = new PhoneServiceClient())
+            /// <summary>
+            /// Updates the information of a user phone in the database.
+            /// </summary>
+            /// <param name="updatedUserPhone">The UserPhone object containing the updated information.</param>
+            public void UpdateUserPhone(UserPhone updatedUserPhone)
             {
-                try
+                using (var connection = new PhoneServiceClient())
                 {
-                    connection.Open();
-
-                    connection.AddUserPhone(new UserPhoneDto
+                    try
                     {
-                        ID = userPhone.ID,
-                        Login = userPhone.Login,
-                        PhoneNumber = userPhone.PhoneNumber,
-                        PhoneType = userPhone.PhoneTypes,
-                        CountryName = userPhone.CountryName
-                    });
+                        connection.Open(); // Open connection to the phone service
 
-                    connection.Close();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
+                        // Create a UserPhoneDto object with updated information
+                        connection.UpdateUserPhone(new UserPhoneDto
+                        {
+                            ID = updatedUserPhone.ID,
+                            Login = updatedUserPhone.Login,
+                            PhoneNumber = updatedUserPhone.PhoneNumber,
+                            PhoneTypeID = updatedUserPhone.PhoneTypeID,
+                            CountryID = updatedUserPhone.CountryID
+                        });
 
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
-                }
-            }
-        }
-
-        public void AddUserPhoneRegister(UserPhone userPhone)
-        {
-            using (var connection = new PhoneServiceClient())
-            {
-                try
-                {
-                    connection.Open();
-
-                    connection.AddUserPhoneRegister(new UserPhoneDto
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception e)
                     {
-                        ID = userPhone.ID,
-                        Login = userPhone.Login,
-                        PhoneNumber = userPhone.PhoneNumber,
-                        PhoneTypeID = userPhone.PhoneTypeID,
-                        CountryID = userPhone.CountryID
-                    });
+                        Console.WriteLine(e); // Output the exception to the console
 
-                    connection.Close();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", e); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
                 }
             }
-        }
 
-        public void DeleteUserPhone(int id)
-        {
-            using (var connection = new PhoneServiceClient())
+            /// <summary>
+            /// Adds a new user phone to the database.
+            /// </summary>
+            /// <param name="userPhone">The UserPhone object containing the information of the new phone to add.</param>
+            public void AddUserPhone(UserPhone userPhone)
             {
-                try
+                using (var connection = new PhoneServiceClient())
                 {
-                    connection.Open();
+                    try
+                    {
+                        connection.Open(); // Open connection to the phone service
 
-                    connection.DeleteUserPhone(id);
+                        // Create a new UserPhoneDto object with user phone information
+                        connection.AddUserPhone(new UserPhoneDto
+                        {
+                            ID = userPhone.ID,
+                            Login = userPhone.Login,
+                            PhoneNumber = userPhone.PhoneNumber,
+                            PhoneType = userPhone.PhoneTypes,
+                            CountryName = userPhone.CountryName
+                        });
 
-                    connection.Close();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e); // Output the exception to the console
 
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", e); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
                 }
             }
-        }
 
-        public List<PhoneType> GetPhoneTypes()
-        {
-            var phoneTypes = new List<PhoneType>();
-
-            using (var connection = new PhoneServiceClient())
+            /// <summary>
+            /// Adds a new user phone registration to the database.
+            /// </summary>
+            /// <param name="userPhone">The UserPhone object containing the information of the new phone registration to add.</param>
+            public void AddUserPhoneRegister(UserPhone userPhone)
             {
-                try
+                using (var connection = new PhoneServiceClient())
                 {
-                    connection.Open();
+                    try
+                    {
+                        connection.Open(); // Open connection to the phone service
 
-                    var result = connection.GetPhoneTypes();
+                        // Create a new UserPhoneDto object with user phone registration information
+                        connection.AddUserPhoneRegister(new UserPhoneDto
+                        {
+                            ID = userPhone.ID,
+                            Login = userPhone.Login,
+                            PhoneNumber = userPhone.PhoneNumber,
+                            PhoneTypeID = userPhone.PhoneTypeID,
+                            CountryID = userPhone.CountryID
+                        });
 
-                    if (result != null)
-                        foreach (var phoneType in result)
-                            phoneTypes.Add(
-                                new PhoneType
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e); // Output the exception to the console
+
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", e); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
+                }
+            }
+
+            /// <summary>
+            /// Deletes a user phone from the database based on the specified ID.
+            /// </summary>
+            /// <param name="id">The ID of the user phone to delete.</param>
+            public void DeleteUserPhone(int id)
+            {
+                using (var connection = new PhoneServiceClient())
+                {
+                    try
+                    {
+                        connection.Open(); // Open connection to the phone service
+
+                        connection.DeleteUserPhone(id); // Delete user phone by ID
+
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e); // Output the exception to the console
+
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", e); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
+                }
+            }
+
+            /// <summary>
+            /// Retrieves a list of phone types.
+            /// </summary>
+            /// <returns>A list of PhoneType objects representing the phone types.</returns>
+            public List<PhoneType> GetPhoneTypes()
+            {
+                var phoneTypes = new List<PhoneType>(); // Initialize a list to store phone types
+
+                using (var connection = new PhoneServiceClient())
+                {
+                    try
+                    {
+                        connection.Open(); // Open connection to the phone service
+
+                        var result = connection.GetPhoneTypes(); // Retrieve phone types from the service
+
+                        if (result != null)
+                        {
+                            foreach (var phoneType in result)
+                            {
+                                // Create a new PhoneType object and add it to the list
+                                phoneTypes.Add(new PhoneType
                                 {
                                     ID = phoneType.ID,
                                     TypeName = phoneType.TypeName
                                 });
+                            }
+                        }
 
-                    connection.Close();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e); // Output the exception to the console
 
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", e); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
                 }
+
+                return phoneTypes; // Return the list of phone types
             }
 
-            return phoneTypes;
-        }
-
-        public PhoneType GetPhoneType(int id)
-        {
-            PhoneType phoneType = null;
-
-            using (var connection = new PhoneServiceClient())
+            /// <summary>
+            /// Retrieves a phone type by the specified ID.
+            /// </summary>
+            /// <param name="id">The ID of the phone type to retrieve.</param>
+            /// <returns>The PhoneType object corresponding to the specified ID, or null if not found.</returns>
+            public PhoneType GetPhoneType(int id)
             {
-                try
+                PhoneType phoneType = null; // Initialize the phoneType variable as null
+
+                using (var connection = new PhoneServiceClient())
                 {
-                    connection.Open();
+                    try
+                    {
+                        connection.Open(); // Open connection to the phone service
 
-                    var result = connection.GetPhoneType(id);
+                        var result = connection.GetPhoneType(id); // Retrieve phone type by ID
 
-                    if (result != null)
-                        phoneType = new PhoneType
+                        if (result != null)
                         {
-                            ID = result.ID,
-                            TypeName = result.TypeName
-                        };
+                            phoneType = new PhoneType
+                            {
+                                ID = result.ID,
+                                TypeName = result.TypeName
+                            };
+                        }
 
-                    connection.Close();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
-                }
-            }
-
-            return phoneType;
-        }
-
-        public void UpdatePhoneType(PhoneType updatedPhoneType)
-        {
-            using (var connection = new PhoneServiceClient())
-            {
-                try
-                {
-                    connection.Open();
-
-                    connection.UpdatePhoneType(new PhoneTypeDto
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception e)
                     {
-                        ID = updatedPhoneType.ID,
-                        TypeName = updatedPhoneType.TypeName
-                    });
+                        Console.WriteLine(e); // Output the exception to the console
 
-                    connection.Close();
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", e); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
 
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
-                }
+                return phoneType; // Return the PhoneType object
             }
-        }
 
-        public void AddPhoneType(PhoneType eventPhoneType)
-        {
-            using (var connection = new PhoneServiceClient())
+            /// <summary>
+            /// Updates the information of a phone type in the database.
+            /// </summary>
+            /// <param name="updatedPhoneType">The PhoneType object containing the updated information.</param>
+            public void UpdatePhoneType(PhoneType updatedPhoneType)
             {
-                try
+                using (var connection = new PhoneServiceClient())
                 {
-                    connection.Open();
-
-                    connection.AddPhoneType(new PhoneTypeDto
+                    try
                     {
-                        TypeName = eventPhoneType.TypeName
-                    });
+                        connection.Open(); // Open connection to the phone service
 
-                    connection.Close();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
+                        // Create a new PhoneTypeDto object with updated phone type information
+                        connection.UpdatePhoneType(new PhoneTypeDto
+                        {
+                            ID = updatedPhoneType.ID,
+                            TypeName = updatedPhoneType.TypeName
+                        });
 
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e); // Output the exception to the console
+
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", e); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
                 }
             }
-        }
 
-        public void DeletePhoneType(int id)
-        {
-            using (var connection = new PhoneServiceClient())
+            /// <summary>
+            /// Adds a new phone type to the database.
+            /// </summary>
+            /// <param name="newPhoneType">The PhoneType object containing the information of the new phone type to add.</param>
+            public void AddPhoneType(PhoneType newPhoneType)
             {
-                try
+                using (var connection = new PhoneServiceClient())
                 {
-                    connection.Open();
+                    try
+                    {
+                        connection.Open(); // Open connection to the phone service
 
-                    connection.DeletePhoneType(id);
+                        // Create a new PhoneTypeDto object with new phone type information
+                        connection.AddPhoneType(new PhoneTypeDto
+                        {
+                            TypeName = newPhoneType.TypeName
+                        });
 
-                    connection.Close();
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e); // Output the exception to the console
+
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", e); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
+            }
 
-                    var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
+            /// <summary>
+            /// Deletes a phone type from the database based on the specified ID.
+            /// </summary>
+            /// <param name="id">The ID of the phone type to delete.</param>
+            public void DeletePhoneType(int id)
+            {
+                using (var connection = new PhoneServiceClient())
+                {
+                    try
+                    {
+                        connection.Open(); // Open connection to the phone service
+
+                        connection.DeletePhoneType(id); // Delete phone type by ID
+
+                        connection.Close(); // Close connection to the service
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e); // Output the exception to the console
+
+                        var logger = LogManager.GetLogger("ErrorLogger");
+                        logger.Error("An error occurred", e); // Log the error
+                        throw; // Propagate the exception up the call stack
+                    }
                 }
             }
         }
-    }
 }

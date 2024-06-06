@@ -4,7 +4,7 @@
     ViewBag.Title = "Delete event";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 <div class="delete-container">
     <h2>Delete event</h2>
 
@@ -27,25 +27,21 @@
 
         </div>
     }
-    
-</div>
-    @if (User.IsInRole("Admin"))
-    {
-        
-            <div class="row mt-2">
-            <div class="col-md-6">
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
-            </div>
-            </div>
 
-    }
-    else
-    {
-   
-    
-        <div class="row mt-2">
-            <div class="col-md-6">
-                @Html.ActionLink("Back", "Details", "Event", new { userName = User.Identity.Name, area = "EventsArea", controller = "User" }, new { @class = "btn btn-secondary" })
-            </div>
+</div>
+@if (User.IsInRole("Admin"))
+{
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
         </div>
-    }
+    </div>
+}
+else
+{
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back", "Calendar", "Event", new { userName = User.Identity.Name, area = "EventsArea", controller = "User" }, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+}

@@ -42,7 +42,7 @@
         }
         else if (User.IsInRole("User"))
         {
-            <a href="@Url.Action("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap">Home</span></a>
+            <a href="@Url.Action("Calendar", "Event", new { area = "EventsArea", userName = User.Identity.Name })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap">Home</span></a>
             <div class="info user-info">
                 <div class="user-info">
                     <i class="fas fa-user-circle"></i>
@@ -84,7 +84,7 @@
         <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })">Phones</a>
         <a href="@Url.Action("GetPhoneType", "Phone", new { area = "ContactsArea" })" class="dropdown-item">PhoneType</a>
 
-        <a href="@Url.Action("Calendar", "Event", new { area = "EventsArea" })" class="dropdown-item">Calendar</a>
+        
     }
     else
     {

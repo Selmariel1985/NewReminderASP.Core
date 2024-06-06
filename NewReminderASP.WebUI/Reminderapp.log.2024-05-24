@@ -1,3 +1,0 @@
-2024-05-24 00:12:48,519 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Rendering AuthenticateUser view
-2024-05-24 00:12:57,116 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - Attempting user authentication for login: Test2
-2024-05-24 00:12:57,286 INFO NewReminderASP.WebUI.Areas.LoginArea.Controllers.LoginController - User authenticated successfully. Assigned roles: User

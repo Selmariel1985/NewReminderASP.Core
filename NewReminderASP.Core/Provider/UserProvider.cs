@@ -8,38 +8,59 @@ using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.Core.Provider
 {
+    /// <summary>
+    /// Provider class for user-related operations.
+    /// </summary>
     public class UserProvider : IUserProvider
     {
         private readonly IMemoryCache _cache;
         private readonly IUserRepository _userRepository;
 
+        /// <summary>
+        /// Constructor for UserProvider.
+        /// </summary>
+        /// <param name="userRepository">The repository for accessing user data</param>
+        /// <param name="cache">The memory cache for caching user data</param>
         public UserProvider(IUserRepository userRepository, IMemoryCache cache)
         {
             _userRepository = userRepository;
             _cache = cache;
         }
 
+        // User-related operations
+
+        /// <summary>
+        /// Get all users.
+        /// </summary>
         public List<User> GetUsers()
         {
             return _userRepository.GetUsers().ToList();
         }
 
+        /// <summary>
+        /// Get a user by ID.
+        /// </summary>
         public User GetUser(int id)
         {
             return _userRepository.GetUser(id);
         }
 
+        /// <summary>
+        /// Get a user by login with caching mechanism and logging.
+        /// </summary>
         public User GetUserByLogin(string login)
         {
             try
             {
                 var cacheKey = "user_" + login;
 
-                if (_cache.TryGetValue(cacheKey,
-                        out User cachedUser)) return cachedUser;
+                if (_cache.TryGetValue(cacheKey, out User cachedUser))
+                    return cachedUser;
 
                 var user = _userRepository.GetUserByLogin(login);
-                if (user != null) _cache.Set(cacheKey, user, TimeSpan.FromMinutes(1));
+
+                if (user != null)
+                    _cache.Set(cacheKey, user, TimeSpan.FromMinutes(10));
 
                 return user;
             }
@@ -51,130 +72,141 @@ namespace NewReminderASP.Core.Provider
             }
         }
 
-
+        /// <summary>
+        /// Get a user by email.
+        /// </summary>
         public User GetUserByEmail(string email)
         {
             return _userRepository.GetUserByEmail(email);
         }
 
+        /// <summary>
+        /// Update user information.
+        /// </summary>
         public void UpdateUser(User updatedUser)
         {
             _userRepository.UpdateUser(updatedUser);
         }
 
+        /// <summary>
+        /// Add a new user.
+        /// </summary>
         public void AddUser(User user)
         {
             _userRepository.AddUser(user);
         }
 
+        /// <summary>
+        /// Delete a user by ID.
+        /// </summary>
         public void DeleteUser(int id)
         {
             _userRepository.DeleteUser(id);
         }
 
+        /// <summary>
+        /// Get a user by password.
+        /// </summary>
         public User GetUserByPassword(string password)
         {
             return _userRepository.GetUserByPassword(password);
         }
 
+        /// <summary>
+        /// Get a user by login and password.
+        /// </summary>
         public User GetUserByPasswordAndLogin(string password, string login)
         {
             return _userRepository.GetUserByPasswordAndLogin(password, login);
         }
 
-
+        /// <summary>
+        /// Get all roles.
+        /// </summary>
         public List<Role> GetRoles()
         {
             return _userRepository.GetRoles().ToList();
         }
 
+        /// <summary>
+        /// Get a role by ID.
+        /// </summary>
         public Role GetRolesByID(int id)
         {
             return _userRepository.GetRolesByID(id);
         }
 
+        /// <summary>
+        /// Get user roles by user ID.
+        /// </summary>
         public UserRole GetUserRoles(int userId)
         {
             return _userRepository.GetUserRoles(userId);
         }
 
+        /// <summary>
+        /// Get all user roles.
+        /// </summary>
         public List<UserRole> GetUsersRoles()
         {
             return _userRepository.GetUsersRoles().ToList();
         }
 
-
+        /// <summary>
+        /// Add a new role.
+        /// </summary>
         public void AddRole(Role role)
         {
             _userRepository.AddRole(role);
         }
 
+        /// <summary>
+        /// Add a user role.
+        /// </summary>
         public void AddUserRole(UserRole userRole)
         {
             _userRepository.AddUserRole(userRole);
         }
 
+        /// <summary>
+        /// Update a role.
+        /// </summary>
         public void UpdateRole(Role updatedRole)
         {
             _userRepository.UpdateRole(updatedRole);
         }
 
+        /// <summary>
+        /// Remove a role by ID.
+        /// </summary>
         public void RemoveRole(int id)
         {
             _userRepository.RemoveRole(id);
         }
 
-
+        /// <summary>
+        /// Assign roles to a user.
+        /// </summary>
         public void AssignRolesToUser(User user, List<string> roles)
         {
             _userRepository.AssignRolesToUser(user, roles);
         }
 
+        /// <summary>
+        /// Add a user role in a normal way.
+        /// </summary>
         public void AddUserRoleNormal(string userLogin, string roleName)
         {
             _userRepository.AddUserRoleNormal(userLogin, roleName);
         }
 
+        /// <summary>
+        /// Update user roles by user ID and role IDs.
+        /// </summary>
         public void UpdateUserRoles(int userId, string roleIds)
         {
             _userRepository.UpdateUserRoles(userId, roleIds);
         }
 
-        //    public void GenerateConfirmationToken(User user)
-        //    {
-        //        user.ConfirmationToken = GenerateUniqueToken();
-        //        _userRepository.UpdateUser(user);
-        //    }
-
-
-        //    public void SendConfirmationEmail(User user, string confirmationLink)
-        //    {
-        //        // Implement the logic to send a confirmation email to the user
-        //        // This can involve using SMTP, an email API, or a service like SendGrid
-        //    }
-
-
-        //    private string GenerateUniqueToken()
-        //    {
-        //        // Implement a logic to generate a unique token
-        //        return Guid.NewGuid().ToString(); // Example of generating a unique token using GUID
-        //    }
-
-
-        //public bool VerifyConfirmationToken(string token)
-        //    {
-        //        // Assume the validToken variable contains the allowed confirmation token
-        //        string validToken = "abc123";  // Replace with the actual valid token or retrieve it from the data store
-
-        //        // Verify the validity of the confirmation token
-        //        if (token == validToken)
-        //        {
-        //            return true;  // Valid token
-        //        }
-        //        else
-        //        {
-        //            return false;  // Invalid token
-        //        }
-        //    }
     }
 }

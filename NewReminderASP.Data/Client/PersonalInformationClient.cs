@@ -8,25 +8,35 @@ using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Data.Client
 {
+    /// <summary>
+    /// Client class for interacting with personal information service.
+    /// </summary>
     public class PersonalInformationClient : IPersonalInformationClient
     {
+        /// <summary>
+        /// Retrieves a list of personal information based on the user's role and login.
+        /// </summary>
+        /// <returns>A list of PersonalInfo objects</returns>
         public List<PersonalInfo> GetPersonalInfos()
         {
-            var personalInfos = new List<PersonalInfo>();
-            var currentUserLogin = HttpContext.Current.User.Identity.Name;
-            var isAdmin = HttpContext.Current.User.IsInRole("admin");
+            var personalInfos = new List<PersonalInfo>(); // Create a list to store PersonalInfo objects
+            var currentUserLogin = HttpContext.Current.User.Identity.Name; // Get current user's login
+            var isAdmin = HttpContext.Current.User.IsInRole("admin"); // Check if the current user is an admin
 
             using (var connection = new PersonalInfoServiceClient())
             {
                 try
                 {
-                    connection.Open();
-
-                    var result = connection.GetPersonalInfos();
+                    connection.Open(); // Open connection to the service
+                    var result = connection.GetPersonalInfos(); // Retrieve personal information from the service
 
                     if (result != null)
+                    {
+                        // Process the retrieved personal information based on the user's role
                         foreach (var personalInfo in result)
+                        {
                             if (isAdmin || personalInfo.Login == currentUserLogin)
+                            {
                                 personalInfos.Add(new PersonalInfo
                                 {
                                     Login = personalInfo.Login,
@@ -37,34 +47,43 @@ namespace NewReminderASP.Data.Client
                                     Gender = personalInfo.Gender,
                                     UserID = personalInfo.UserID
                                 });
+                            }
+                        }
+                    }
 
-                    connection.Close();
+                    connection.Close(); // Close connection to the service
                 }
                 catch (Exception e)
                 {
                     var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
+                    logger.Error("An error occurred", e); // Log the error
+                    throw; // Propagate the exception up the call stack
                 }
             }
 
-            return personalInfos;
+            return personalInfos; // Return the list of PersonalInfo objects
         }
 
 
+        /// <summary>
+        /// Retrieves personal information by the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the personal information to retrieve</param>
+        /// <returns>The PersonalInfo object corresponding to the specified ID, or null if not found</returns>
         public PersonalInfo GetPersonalInfo(int id)
         {
-            PersonalInfo personalInfo = null;
+            PersonalInfo personalInfo = null; // Initialize the personalInfo variable as null
 
             using (var connection = new PersonalInfoServiceClient())
             {
                 try
                 {
-                    connection.Open();
+                    connection.Open(); // Open connection to the service
 
-                    var result = connection.GetPersonalInfo(id);
+                    var result = connection.GetPersonalInfo(id); // Retrieve personal information by ID
 
                     if (result != null)
+                    {
                         personalInfo = new PersonalInfo
                         {
                             UserID = result.UserID,
@@ -75,31 +94,39 @@ namespace NewReminderASP.Data.Client
                             Birthdate = result.Birthdate,
                             Gender = result.Gender
                         };
+                    }
 
-                    connection.Close();
+                    connection.Close(); // Close connection to the service
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e); // Output the exception to the console
 
                     var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
+                    logger.Error("An error occurred", e); // Log the error
+                    throw; // Propagate the exception up the call stack
                 }
             }
 
-            return personalInfo;
+            return personalInfo; // Return the PersonalInfo object
         }
 
+
+
+        /// <summary>
+        /// Updates the personal information. If the information for the provided user ID exists, it is updated.
+        /// If not, new personal information is added.
+        /// </summary>
+        /// <param name="updatedPersonalInfo">The updated personal information</param>
         public void UpdatePersonalInfo(PersonalInfo updatedPersonalInfo)
         {
             using (var connection = new PersonalInfoServiceClient())
             {
                 try
                 {
-                    connection.Open();
+                    connection.Open(); // Open connection to the personal information service
 
-                    // Попытка обновления существующей информации
+                    // Attempt to update existing information
                     connection.UpdatePersonalInfo(new PersonalInfoDto
                     {
                         UserID = updatedPersonalInfo.UserID,
@@ -110,13 +137,13 @@ namespace NewReminderASP.Data.Client
                         Gender = updatedPersonalInfo.Gender
                     });
 
-                    connection.Close();
+                    connection.Close(); // Close connection
                 }
-                catch // Перехватываем любое исключение
+                catch // Catch any exception
                 {
                     try
                     {
-                        // Если обновление не удалось, выполняем вставку новой информации
+                        // If the update fails, perform an insert of new information
                         connection.AddPersonalInfo(new PersonalInfoDto
                         {
                             UserID = updatedPersonalInfo.UserID,
@@ -127,29 +154,36 @@ namespace NewReminderASP.Data.Client
                             Gender = updatedPersonalInfo.Gender
                         });
 
-                        connection.Close();
+                        connection.Close(); // Close connection
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex); // Output the exception to the console
 
                         var logger = LogManager.GetLogger("ErrorLogger");
-                        logger.Error("An error occurred when updating or inserting personal info", ex);
-                        throw;
+                        logger.Error("An error occurred when updating or inserting personal info", ex); // Log the error
+                        throw; // Propagate the exception
                     }
                 }
             }
         }
 
 
+
+
+        /// <summary>
+        /// Adds a new personal information entry.
+        /// </summary>
+        /// <param name="personalInfo">The personal information to be added</param>
         public void AddPersonalInfo(PersonalInfo personalInfo)
         {
             using (var connection = new PersonalInfoServiceClient())
             {
                 try
                 {
-                    connection.Open();
+                    connection.Open(); // Open connection to the personal information service
 
+                    // Add the new personal information
                     connection.AddPersonalInfo(new PersonalInfoDto
                     {
                         UserID = personalInfo.UserID,
@@ -160,40 +194,47 @@ namespace NewReminderASP.Data.Client
                         Gender = personalInfo.Gender
                     });
 
-                    connection.Close();
+                    connection.Close(); // Close connection
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e); // Output the exception to the console
 
                     var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
+                    logger.Error("An error occurred", e); // Log the error
+                    throw; // Propagate the exception
                 }
             }
         }
 
+
+        /// <summary>
+        /// Deletes the personal information for the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the personal information to be deleted</param>
         public void DeletePersonalInfo(int id)
         {
             using (var connection = new PersonalInfoServiceClient())
             {
                 try
                 {
-                    connection.Open();
+                    connection.Open(); // Open connection to the personal information service
 
+                    // Delete the personal information by ID
                     connection.DeletePersonalInfo(id);
 
-                    connection.Close();
+                    connection.Close(); // Close connection
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e); // Output the exception to the console
 
                     var logger = LogManager.GetLogger("ErrorLogger");
-                    logger.Error("An error occurred", e);
-                    throw;
+                    logger.Error("An error occurred", e); // Log the error
+                    throw; // Propagate the exception
                 }
             }
         }
+
     }
 }

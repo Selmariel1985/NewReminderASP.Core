@@ -9,7 +9,7 @@
 <div class="details-details">
 
     <h2>Phone List</h2>
-    <hr/>
+    <hr />
     @foreach (var userPhone in Model)
     {
         <div>
@@ -24,14 +24,15 @@
                 <dt>Country:</dt>
                 <dd>@userPhone.CountryName</dd>
             </dl>
-            <a href="@Url.Action("Edit", "Phone", new { id = userPhone.ID })" class="btn btn-details">Edit Phone</a>
-            <a href="@Url.Action("Delete", "Phone", new { id = userPhone.ID })" class="btn btn-details">Delete Phone</a>
+            <a href="@Url.Action("Edit", "Phone", new { id = userPhone.ID })" class="btn btn-primary">Edit Phone</a>
+            <a href="@Url.Action("Delete", "Phone", new { id = userPhone.ID })" class="btn btn-danger">Delete Phone</a>
         </div>
-        <hr/>
+        <hr />
     }
-    <div class="row mt-2">
-        <div class="col-md-6">
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
-        </div>
+    
+        
     </div>
+
+<div class="col-md-6">
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
 </div>

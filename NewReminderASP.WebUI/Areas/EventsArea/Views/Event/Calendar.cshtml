@@ -13,12 +13,26 @@
         eventTypes = e.EventTypes
     }));
 }
+<div>
+    <label for="goto-date">Go to date:</label>
+    <input type="date" id="goto-date">
+    <button id="goto-date-btn">Go</button>
+</div>
+
+<div>
+    <label for="search-title">Search event:</label>
+    <input type="text" id="search-title" placeholder="Event title">
+    <button id="search-title-btn">Search</button>
+</div>
+
+<div id="results-list"></div>
 
 <div id="calendar"></div>
+
 <div id="external-events">
 
-
 </div>
+
 
 <style>
     .fc-event-title-wrap {
@@ -26,14 +40,13 @@
         align-items: center;
         justify-content: center;
         position: relative;
-        z-Multiplier: 1;
     }
 
     .fc-event-title-text {
         margin-right: 10px;
     }
 
-    
+
 
     .fc-event-action {
         margin-right: 5px;
@@ -55,7 +68,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // External events setup
     var containerEl = document.getElementById('external-events');
     new FullCalendar.Draggable(containerEl, {
         itemSelector: '.fc-event'
@@ -71,17 +83,16 @@ document.addEventListener('DOMContentLoaded', function () {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-      events: calendarEvents,
-    editable: true, // Enable dragging and resizing
-    droppable: true, // Allow events to be dropped
-dateClick: function (info) {
-    var selectedDate = info.dateStr; // Get the selected date from the calendar
-    var createUrl = '@Url.Action("Create", "Event", new { area = "EventsArea" })'; // Form the URL for creating a new event
-    createUrl = createUrl + '?selectedDate=' + selectedDate; // Add the selected date to the URL
-    window.location.href = createUrl; // Navigate to the event creation page with the selected date
-},
-
-        eventClick: function(info) {
+        events: calendarEvents,
+        editable: true,
+        droppable: true,
+        dateClick: function (info) {
+            var selectedDate = info.dateStr;
+            var createUrl = '@Url.Action("Create", "Event", new { area = "EventsArea" })';
+            createUrl = createUrl + '?selectedDate=' + selectedDate;
+            window.location.href = createUrl;
+        },
+        eventClick: function (info) {
             var eventId = info.event.id;
             var detailsUrl = '@Url.Action("EventDetails", "Event", new { area = "EventsArea", id = "__eventId__" })';
             var editUrl = '@Url.Action("Edit", "Event", new { area = "EventsArea", id = "__eventId__" })';
@@ -94,16 +105,16 @@ dateClick: function (info) {
             var eventTitle = info.event.title;
             var eventButtons = '';
 
-           if (info.event.extendedProps.login === '@User.Identity.Name') {
-  eventButtons += '<div class="fc-event-icons">';
-  eventButtons += '<button class="fc-button fc-button-primary fc-event-action" data-action="details"><i class="fas fa-eye"></i></button>';
-  eventButtons += '<button class="fc-button fc-button-primary fc-event-action" data-action="edit"><i class="fas fa-pencil-alt"></i></button>';
-  eventButtons += '<button class="fc-button fc-button-primary fc-event-action" data-action="delete"><i class="fas fa-trash"></i></button>';
-  eventButtons += '</div>';
-}
+            if (info.event.extendedProps.login === '@User.Identity.Name') {
+                eventButtons += '<div class="fc-event-icons">';
+                eventButtons += '<button class="fc-button fc-button-primary fc-event-action" data-action="details"><i class="fas fa-eye"></i></button>';
+                eventButtons += '<button class="fc-button fc-button-primary fc-event-action" data-action="edit"><i class="fas fa-pencil-alt"></i></button>';
+                eventButtons += '<button class="fc-button fc-button-primary fc-event-action" data-action="delete"><i class="fas fa-trash"></i></button>';
+                eventButtons += '</div>';
+            }
             info.el.querySelector('.fc-event-title').innerHTML = eventTitle + eventButtons;
 
-            $('.fc-event-action').on('click', function(e) {
+            $('.fc-event-action').on('click', function (e) {
                 var action = $(this).data('action');
                 switch (action) {
                     case 'details':
@@ -122,7 +133,101 @@ dateClick: function (info) {
     });
 
     calendar.render();
+
+    // Jump to date functionality
+    document.getElementById('goto-date-btn').addEventListener('click', function () {
+        var dateValue = document.getElementById('goto-date').value;
+        if (dateValue) {
+            calendar.gotoDate(dateValue);
+        }
+    });
+
+  document.getElementById('search-title-btn').addEventListener('click', function () {
+    var searchValue = document.getElementById('search-title').value.toLowerCase();
+    var events = calendar.getEvents();
+
+    var resultsListEl = document.getElementById('results-list');
+    resultsListEl.innerHTML = '';
+
+    events.forEach(event => {
+        event.setProp('display', 'auto');
+        event.setProp('backgroundColor', '');
+    });
+
+    var matchingEvents = events.filter(event => event.title.toLowerCase().includes(searchValue));
+    if (matchingEvents.length > 0) {
+        matchingEvents.forEach(matchingEvent => {
+            var listItem = document.createElement('li');
+            listItem.innerHTML = `${matchingEvent.title} (${matchingEvent.start.toISOString().substring(0, 10)}) <button class="view-event-btn" data-eventid="${matchingEvent.id}">View</button> <button class="edit-event-btn" data-eventid="${matchingEvent.id}">Edit</button> <button class="delete-event-btn" data-eventid="${matchingEvent.id}">Delete</button>`;
+            resultsListEl.appendChild(listItem);
+
+            resultsListEl.querySelectorAll('.view-event-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    var eventId = this.getAttribute('data-eventid');
+                    viewEvent(eventId);
+                });
+            });
+
+            resultsListEl.querySelectorAll('.edit-event-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    var eventId = this.getAttribute('data-eventid');
+                    editEvent(eventId);
+                });
+            });
+
+            resultsListEl.querySelectorAll('.delete-event-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    var eventId = this.getAttribute('data-eventid');
+                    deleteEvent(eventId);
+                });
+            });
+
+            matchingEvent.setProp('backgroundColor', '#ff9f89');
+        });
+
+        var firstMatchingEvent = matchingEvents[0];
+        calendar.gotoDate(firstMatchingEvent.start);
+        setTimeout(() => {
+            matchingEvents.forEach(matchingEvent => {
+                matchingEvent.setProp('backgroundColor', '');
+            });
+        }, 2000);
+    } else {
+        resultsListEl.innerHTML = '<li>No matching events found.</li>';
+    }
+});
+
+function viewEvent(eventId) {
+    var detailsUrl = '@Url.Action("EventDetails", "Event", new { area = "EventsArea", id = "__eventId__" })'.replace('__eventId__', eventId);
+    window.location.href = detailsUrl;
+}
+
+function editEvent(eventId) {
+    var editUrl = '@Url.Action("Edit", "Event", new { area = "EventsArea", id = "__eventId__" })'.replace('__eventId__', eventId);
+    window.location.href = editUrl;
+}
+
+function deleteEvent(eventId) {
+    var deleteUrl = '@Url.Action("Delete", "Event", new { area = "EventsArea", id = "__eventId__" })'.replace('__eventId__', eventId);
+    window.location.href = deleteUrl;
+}
+
+$('.fc-event-action').on('click', function (e) {
+    var action = $(this).data('action');
+    var eventId = $(this).closest('.fc-event').data('event').id;
+    switch (action) {
+        case 'details':
+            viewEvent(eventId);
+            break;
+        case 'edit':
+            editEvent(eventId);
+            break;
+        case 'delete':
+            deleteEvent(eventId);
+            break;
+    }
+    e.preventDefault();
+});
+
 });
 </script>
-
-

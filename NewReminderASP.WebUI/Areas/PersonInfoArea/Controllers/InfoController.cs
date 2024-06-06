@@ -193,17 +193,17 @@ namespace NewReminderASP.WebUI.Areas.PersonInfoArea.Controllers
             }
         }
 
-        //protected override void OnException(ExceptionContext filterContext)
-        //{
-        //    if (!filterContext.ExceptionHandled)
-        //    {
-        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
-        //        filterContext.Result = new ViewResult
-        //        {
-        //            ViewName = "Error"
-        //        };
-        //        filterContext.ExceptionHandled = true;
-        //    }
-        //}
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
+        }
     }
 }

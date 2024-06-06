@@ -4,43 +4,158 @@ using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.Data.Repository
 {
+    /// <summary>
+    /// Interface for accessing and managing event-related data.
+    /// </summary>
     public interface IEventRepository
     {
-        List<Event> GetEvents();
+        #region Event Methods
 
-        List<Event> GetEventsForUser(string userName);
+            /// <summary>
+            /// Get all events.
+            /// </summary>
+            List<Event> GetEvents();
 
-        List<Event> GetEventsForID(int id);
+            /// <summary>
+            /// Get events for a specific user.
+            /// </summary>
+            /// <param name="userName">The username of the user</param>
+            List<Event> GetEventsForUser(string userName);
 
-        Event GetEvent(int Id);
+            /// <summary>
+            /// Get events with a specific ID.
+            /// </summary>
+            /// <param name="id">The ID of the event</param>
+            List<Event> GetEventsForID(int id);
 
-        void UpdateEvent(Event updatedEvent);
-        void AddEvent(Event events);
-        void AddAdminEvent(Event events);
-        void DeleteEvent(int id);
+            /// <summary>
+            /// Get a specific event by ID.
+            /// </summary>
+            /// <param name="id">The ID of the event</param>
+            Event GetEvent(int id);
 
+            /// <summary>
+            /// Update an existing event.
+            /// </summary>
+            /// <param name="updatedEvent">The updated event object</param>
+            void UpdateEvent(Event updatedEvent);
+
+            /// <summary>
+            /// Add a new event.
+            /// </summary>
+            /// <param name="events">The event to be added</param>
+            void AddEvent(Event events);
+
+            /// <summary>
+            /// Add a new event with admin privileges.
+            /// </summary>
+            /// <param name="events">The event to be added</param>
+            void AddAdminEvent(Event events);
+
+            /// <summary>
+            /// Delete an event by ID.
+            /// </summary>
+            /// <param name="id">The ID of the event to delete</param>
+            void DeleteEvent(int id);
+
+        #endregion
+
+        #region Event Detail Methods
+
+        /// <summary>
+        /// Get all event details.
+        /// </summary>
         List<EventDetail> GetEventDetails();
 
+        /// <summary>
+        /// Get event detail by ID.
+        /// </summary>
+        /// <param name="eventId">The ID of the event</param>
         EventDetail GetEventDetail(int eventId);
 
+        /// <summary>
+        /// Update an existing event detail.
+        /// </summary>
+        /// <param name="updatedEventDetail">The updated event detail object</param>
         void UpdateEventDetail(EventDetail updatedEventDetail);
+
+        /// <summary>
+        /// Add a new event detail.
+        /// </summary>
+        /// <param name="eventDetail">The event detail to be added</param>
         void AddEventDetail(EventDetail eventDetail);
+
+        /// <summary>
+        /// Delete an event detail by ID.
+        /// </summary>
+        /// <param name="eventId">The ID of the event</param>
         void DeleteEventDetail(int eventId);
 
+        #endregion
+
+        #region Event Recurrence Methods
+
+        /// <summary>
+        /// Get all event recurrences.
+        /// </summary>
         List<EventRecurrence> GetEventRecurrences();
 
-        EventRecurrence GetEventRecurrence(int Id);
+        /// <summary>
+        /// Get event recurrence by ID.
+        /// </summary>
+        /// <param name="id">The ID of the event recurrence</param>
+        EventRecurrence GetEventRecurrence(int id);
 
+        /// <summary>
+        /// Update an existing event recurrence.
+        /// </summary>
+        /// <param name="updatedEventRecurrence">The updated event recurrence object</param>
         void UpdateEventRecurrence(EventRecurrence updatedEventRecurrence);
-        void AddEventRecurrence(EventRecurrence eventRecurrence);
-        void DeleteEventRecurrence(int id);
 
+        /// <summary>
+        /// Add a new event recurrence.
+        /// </summary>
+        /// <param name="eventRecurrence">The event recurrence to be added</param>
+        void AddEventRecurrence(EventRecurrence eventRecurrence);
+
+        /// <summary>
+        /// Delete an event recurrence by ID.
+        /// </summary>
+        /// <param name="id">The ID of the event recurrence to delete</param>
+        void DeleteEventRecurrence(int id);
+        #endregion
+
+        #region Event Type Methods
+
+        /// <summary>
+        /// Get all event types.
+        /// </summary>
         List<EventType> GetEventTypes();
 
-        EventType GetEventType(int Id);
+        /// <summary>
+        /// Get event type by ID.
+        /// </summary>
+        /// <param name="id">The ID of the event type</param>
+        EventType GetEventType(int id);
 
+        /// <summary>
+        /// Update an existing event type.
+        /// </summary>
+        /// <param name="updatedEventType">The updated event type object</param>
         void UpdateEventType(EventType updatedEventType);
-        void AddPEventType(EventType eventType);
+
+        /// <summary>
+        /// Add a new event type.
+        /// </summary>
+        /// <param name="eventType">The event type to be added</param>
+        void AddEventType(EventType eventType);
+
+        /// <summary>
+        /// Delete an event type by ID.
+        /// </summary>
+        /// <param name="id">The ID of the event type to delete</param>
         void DeleteEventType(int id);
+
+        #endregion
     }
 }

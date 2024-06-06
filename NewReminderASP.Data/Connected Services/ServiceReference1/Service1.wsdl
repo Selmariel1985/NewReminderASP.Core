@@ -356,11 +356,11 @@
   <wsdl:message name="IEventService_UpdateEventType_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateEventTypeResponse" />
   </wsdl:message>
-  <wsdl:message name="IEventService_AddPEventType_InputMessage">
-    <wsdl:part name="parameters" element="tns:AddPEventType" />
+  <wsdl:message name="IEventService_AddEventType_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddEventType" />
   </wsdl:message>
-  <wsdl:message name="IEventService_AddPEventType_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddPEventTypeResponse" />
+  <wsdl:message name="IEventService_AddEventType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddEventTypeResponse" />
   </wsdl:message>
   <wsdl:message name="IEventService_DeleteEventType_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteEventType" />
@@ -681,9 +681,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IEventService/UpdateEventType" message="tns:IEventService_UpdateEventType_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEventService/UpdateEventTypeResponse" message="tns:IEventService_UpdateEventType_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="AddPEventType">
-      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/AddPEventType" message="tns:IEventService_AddPEventType_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/AddPEventTypeResponse" message="tns:IEventService_AddPEventType_OutputMessage" />
+    <wsdl:operation name="AddEventType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/AddEventType" message="tns:IEventService_AddEventType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/AddEventTypeResponse" message="tns:IEventService_AddEventType_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteEventType">
       <wsdl:input wsaw:Action="http://tempuri.org/IEventService/DeleteEventType" message="tns:IEventService_DeleteEventType_InputMessage" />
@@ -1276,8 +1276,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AddPEventType">
-      <soap:operation soapAction="http://tempuri.org/IEventService/AddPEventType" style="document" />
+    <wsdl:operation name="AddEventType">
+      <soap:operation soapAction="http://tempuri.org/IEventService/AddEventType" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

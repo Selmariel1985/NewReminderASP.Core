@@ -8,9 +8,9 @@
 <div class="form-container">
 
     <h2>Event Detail</h2>
-    
+
     <a href="@Url.Action("CreateAdminEvent", "Event", new { area = "EventsArea" })" class="btn btn-primary">Create Event</a>
-    <a href="@Url.Action("CreateEventDetails", "Event", new { area = "EventsArea" })" class="btn btn-btn btn-primary">Create  Detail Event</a>
+    <a href="@Url.Action("CreateEventDetails", "Event", new { area = "EventsArea" })" class="btn btn-btn btn-primary">Create Detail Event</a>
     <a href="@Url.Action("CreateEventRecurrences", "Event", new { area = "EventsArea" })" class="btn btn-primary">Create Event Recurrences</a>
     <a href="@Url.Action("CreateEventTypes", "Event", new { area = "EventsArea" })" class="btn btn-primary">Create Event Types</a>
 
@@ -41,7 +41,7 @@
             </tr>
             @foreach (var eventDetail in Model)
             {
-                <tr onclick="redirectToDetails('@Url.Action("DetailsEventDetails", "Event", new {id = eventDetail.EventID })')">
+                <tr onclick="redirectToDetails('@Url.Action("DetailsEventDetails", "Event", new { id = eventDetail.EventID })')">
                     <td>@eventDetail.EventID</td>
                     <td>@eventDetail.Description</td>
                     <td>@eventDetail.Status</td>

@@ -4,94 +4,86 @@
     ViewBag.Title = "User Details";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 
 
 <div class="details-details">
     <h2>User Details: @Model.User.Login</h2>
     <h2>User ID: @Model.User.Id</h2>
-   
-<div class="details-container">
-    <div class="Addresses-container">
-        <h2>Account Info</h2>
-        <div class="Addresses-details">
-            <dl>
-                <dt>@Html.DisplayNameFor(model => model.User.Login)</dt>
-                <dd>@Html.DisplayFor(model => model.User.Login)</dd>
+
+    <div class="details-container">
+        <div class="Addresses-container">
+            <h2>Account Info</h2>
+            <div class="Addresses-details">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.User.Login)</dt>
+                    <dd>@Html.DisplayFor(model => model.User.Login)</dd>
 
 
-                <dt>@Html.DisplayNameFor(model => model.User.Email)</dt>
-                <dd>@Html.DisplayFor(model => model.User.Email)</dd>
-
-                
-                <dt>Roles</dt>
-                <dd>
-                    <ul class="roles-list">
-                        @foreach (var role in Model.User.UserRoles)
-                        {
-                            <li>@role.Role.Name</li>
-                        }
-                    </ul>
-                </dd>
-            </dl>
+                    <dt>@Html.DisplayNameFor(model => model.User.Email)</dt>
+                    <dd>@Html.DisplayFor(model => model.User.Email)</dd>
 
 
-
-                
-                    @if (User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Edit", "EditUserAndRoles", new { id = Model.User.Id }, new { @class = "btn btn-primary" })
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Edit Account", "Edit", new { id = Model.User.Id }, new { @class = "btn btn-primary" })
-                    }
-                    @Html.ActionLink("Delete Account", "Delete", new { id = Model.User.Id }, new { @class = "btn btn-danger" })
-                   
+                    <dt>Roles</dt>
+                    <dd>
+                        <ul class="roles-list">
+                            @foreach (var role in Model.User.UserRoles)
+                            {
+                                <li>@role.Role.Name</li>
+                            }
+                        </ul>
+                    </dd>
+                </dl>
 
 
-              
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "EditUserAndRoles", new { id = Model.User.Id }, new { @class = "btn btn-primary" })
+                }
+                else
+                {
+                    @Html.ActionLink("Edit Account", "Edit", new { id = Model.User.Id }, new { @class = "btn btn-primary" })
+                }
+                @Html.ActionLink("Delete Account", "Delete", new { id = Model.User.Id }, new { @class = "btn btn-danger" })
+
+
+
+
+            </div>
         </div>
-                </div>
-           
-            
-
-            
-                <div class="Addresses-container">
-                    <h2>User Info</h2>
-                    <div class="Addresses-details">
-
-                        <dl>
-                        <dt>@Html.DisplayNameFor(model => model.PersonalInformation.FirstName)</dt>
-                        <dd>@Html.DisplayFor(model => model.PersonalInformation.FirstName)</dd>
-
-                        <dt>@Html.DisplayNameFor(model => model.PersonalInformation.LastName)</dt>
-                        <dd>@Html.DisplayFor(model => model.PersonalInformation.LastName)</dd>
-
-                        <dt>@Html.DisplayNameFor(model => model.PersonalInformation.MiddleName)</dt>
-                        <dd>@Html.DisplayFor(model => model.PersonalInformation.MiddleName)</dd>
-
-                        <dt>@Html.DisplayNameFor(model => model.PersonalInformation.Birthdate)</dt>
-                        <dd>@Html.DisplayFor(model => model.PersonalInformation.Birthdate)</dd>
-
-                        <dt>@Html.DisplayNameFor(model => model.PersonalInformation.Gender)</dt>
-                        <dd>@Html.DisplayFor(model => model.PersonalInformation.Gender)</dd>
-                        </dl>
-
-                        
-                            @Html.ActionLink("Edit User info", "Edit", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-primary" })
-                            @Html.ActionLink("Delete User info", "Delete", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-danger" })
-                    
 
 
-                    </div>
-                    </div>
-</div>
-            
-       
-   
-    
-    
+        <div class="Addresses-container">
+            <h2>User Info</h2>
+            <div class="Addresses-details">
+
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.PersonalInformation.FirstName)</dt>
+                    <dd>@Html.DisplayFor(model => model.PersonalInformation.FirstName)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.PersonalInformation.LastName)</dt>
+                    <dd>@Html.DisplayFor(model => model.PersonalInformation.LastName)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.PersonalInformation.MiddleName)</dt>
+                    <dd>@Html.DisplayFor(model => model.PersonalInformation.MiddleName)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.PersonalInformation.Birthdate)</dt>
+                    <dd>@Html.DisplayFor(model => model.PersonalInformation.Birthdate)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.PersonalInformation.Gender)</dt>
+                    <dd>@Html.DisplayFor(model => model.PersonalInformation.Gender)</dd>
+                </dl>
+
+
+                @Html.ActionLink("Edit User info", "Edit", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete User info", "Delete", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-danger" })
+
+
+
+            </div>
+        </div>
+    </div>
+
 
     <div class="details-container">
 
@@ -114,15 +106,15 @@
                         <dt>Country:</dt>
                         <dd>@Model.Phones[d].CountryName</dd>
                     </dl>
-                    
+
                     <a href="@Url.Action("Edit", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-primary">Edit Phone</a>
                     <a href="@Url.Action("Delete", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-danger">Delete Phone</a>
-                    
+
                 </div>
             }
-           
+
         </div>
-        
+
         <div class="Addresses-container">
             <h2>Addresses</h2>
             <a href="@Url.Action("Create", "Address", new { area = "AddressArea" })" class="btn btn-primary">Create new Address</a>
@@ -146,21 +138,19 @@
                         <dt>Description:</dt>
                         <dd>@Model.Addresses[i].Description</dd>
                     </dl>
-                    
-                        <a href="@Url.Action("Edit", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-primary">Edit Address</a>
-                        <a href="@Url.Action("Delete", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-danger">Delete Address</a>
-                    
-                </div>
 
-                
+                    <a href="@Url.Action("Edit", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-primary">Edit Address</a>
+                    <a href="@Url.Action("Delete", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-danger">Delete Address</a>
+
+                </div>
             }
-           
+
         </div>
     </div>
 
 
 </div>
-    
+
 @if (User.IsInRole("Admin"))
 {
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })

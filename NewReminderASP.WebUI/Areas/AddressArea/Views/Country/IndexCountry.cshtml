@@ -12,8 +12,6 @@
     <a href="@Url.Action("CreateAdmin", "Address", new { area = "AddressArea" })" class="btn btn-primary">Create Address</a>
     <a href="@Url.Action("CreateCountry", "Country", new { area = "AddressArea" })" class="btn btn-primary">Create Country</a>
 
-    
-    
 
     <form action="@Url.Action("IndexCountry")" method="get">
         <div class="filter-bar">
@@ -30,7 +28,7 @@
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
             </select>
-            <input type="submit" value="Filter" class="btn" />
+            <input type="submit" value="Filter" class="btn"/>
         </div>
 
         <table class="table-eco">

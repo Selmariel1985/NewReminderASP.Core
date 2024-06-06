@@ -12,69 +12,65 @@
     <link href="~/styles.css" rel="stylesheet">
 </head>
 <body>
-
-
-@{
-    var userLogin = User.Identity.Name;
-    
-    var userLink = Url.Action("Details", "User", new { area = "AccountsArea", userName = userLogin });
-    
-}
-
-<div class="header-bar">
-    <div class="links-container">
-        @if (User.IsInRole("Admin"))
-        {
-            <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap">Home</span></a>
-            <div class="info user-info">
-                <div class="user-info">
-                    <i class="fas fa-user-circle"></i>
-                    <span>User Login: <a href="@userLink">@userLogin</a></span>
+    @{
+        // Get current user login information
+        var userLogin = User.Identity.Name;
+        var userLink = Url.Action("Details", "User", new { area = "AccountsArea", userName = userLogin });
+    }
+    <div class="header-bar">
+        <div class="links-container">
+            @if (User.IsInRole("Admin"))
+            {
+                // Display links for Admin role
+                <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap">Home</span></a>
+                <div class="info user-info">
+                    <div class="user-info">
+                        <i class="fas fa-user-circle"></i>
+                        <span>User Login: <a href="@userLink">@userLogin</a></span>
+                    </div>
+                    <div class="logout-btn">
+                        <a href="@Url.Action("SignOut", "Event")" class="btn btn-eco">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
                 </div>
-                <div class="logout-btn">
-                    <a href="@Url.Action("SignOut", "Event")" class="btn btn-eco">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </a>
+            }
+            else if (User.IsInRole("User"))
+            {
+                // Display links for User role
+                <a href="@Url.Action("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap">Home</span></a>
+                <div class="info user-info">
+                    <div class="user-info">
+                        <i class="fas fa-user-circle"></i>
+                        <span>User Login: <a href="@userLink">@userLogin</a></span>
+                    </div>
+                    <div class="logout-btn">
+                        <a href="@Url.Action("SignOut", "Event")" class="btn btn-eco">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
                 </div>
-            </div>
-        }
-        else if (User.IsInRole("User"))
-        {
-            <a href="@Url.Action("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap">Home</span></a>
-            <div class="info user-info">
-                <div class="user-info">
-                    <i class="fas fa-user-circle"></i>
-                    <span>User Login: <a href="@userLink">@userLogin</a></span>
-                </div>
-                <div class="logout-btn">
-                    <a href="@Url.Action("SignOut", "Event")" class="btn btn-eco">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </a>
-                </div>
-            </div>
-        }
-        else
-        {
-            <a href="@Url.Action("IndexAnon", "Event", new { area = "EventsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap"> Demo</span></a>
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        }
-        <a href="~/Home/Contact" class="center-link bigger-font"><i class="fas fa-envelope"></i><span class="icon-title-gap">Contact</span></a>
-        <a href="~/Home/About" class="center-link bigger-font"><i class="fas fa-info-circle"></i><span class="icon-title-gap">About</span></a>
+            }
+            else
+            {
+                // Display links for anonymous users
+                <a href="@Url.Action("IndexAnon", "Event", new { area = "EventsArea" })" class="center-link bigger-font"><i class="fas fa-home"></i><span class="icon-title-gap"> Demo</span></a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            }
+            <a href="~/Home/Contact" class="center-link bigger-font"><i class="fas fa-envelope"></i><span class="icon-title-gap">Contact</span></a>
+            <a href="~/Home/About" class="center-link bigger-font"><i class="fas fa-info-circle"></i><span class="icon-title-gap">About</span></a>
+        </div>
     </div>
-
-
-
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="footer">
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+        <script src="~/scripts/bootstrap.bundle.min.js"></script>
     </div>
-<div class="container body-content">
-    @RenderBody()
-    <hr />
-    <footer class="footer">
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
-    <script src="~/scripts/bootstrap.bundle.min.js"></script>
-</div>
 </body>
 </html>

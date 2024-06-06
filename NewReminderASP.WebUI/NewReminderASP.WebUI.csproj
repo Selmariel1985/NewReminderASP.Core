@@ -243,7 +243,6 @@
     <Compile Include="Areas\RegisterArea\Controllers\RegisterController.cs" />
     <Compile Include="Areas\AccountsArea\Controllers\UserController.cs" />
     <Compile Include="Areas\AddressArea\AddressAreaAreaRegistration.cs" />
-    <Compile Include="DisableAuthenticationPageCachingAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

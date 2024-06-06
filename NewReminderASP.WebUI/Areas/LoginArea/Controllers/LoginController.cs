@@ -67,7 +67,7 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
                     return RedirectToAction("Index", "User", new { area = "AccountsArea" });
 
                 if (roleNames.Contains("User"))
-                    return Redirect(Url.Action("Details", "Event", new { area = "EventsArea", userName = login }));
+                    return Redirect(Url.Action("Calendar", "Event", new { area = "EventsArea", userName = login }));
 
                 if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 {
@@ -85,16 +85,18 @@ namespace NewReminderASP.WebUI.Areas.LoginArea.Controllers
         }
 
 
-        //protected override void OnException(ExceptionContext filterContext)
-        //{
-        //    if (!filterContext.ExceptionHandled)
-        //    {
-        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
-        //        filterContext.Result = new ViewResult
-        //        {
-        //            ViewName = "Error"
-        //        };
-        //        filterContext.ExceptionHandled = true;
-        //    }
-    }
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
+        }
+        }
+
 }

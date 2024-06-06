@@ -5,18 +5,14 @@
     //var roles = Model.Item2.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
 }
 
-<link href="~/styles.css" rel="stylesheet" />
-
-
+<link href="~/styles.css" rel="stylesheet"/>
 
 
 <div class="form-container">
     <h2>User List</h2>
-    
-    <a href="@Url.Action("Create", "User", new { area = "AccountsArea" })" class="btn btn-primary">Create User</a>
-    <a href="@Url.Action("CreateRole", "User", new { area = "AccountsArea" })" class="btn btn-primary">Create new  Role</a>
-   
 
+    <a href="@Url.Action("Create", "User", new { area = "AccountsArea" })" class="btn btn-primary">Create User</a>
+    <a href="@Url.Action("CreateRole", "User", new { area = "AccountsArea" })" class="btn btn-primary">Create new Role</a>
 
 
     <form action="@Url.Action("Index")" method="get">
@@ -33,7 +29,7 @@
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
             </select>
-            <input type="submit" value="Filter" class="btn" />
+            <input type="submit" value="Filter" class="btn"/>
         </div>
         <table class="table-eco">
             <tr>

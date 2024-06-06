@@ -3,31 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
-using System.Web.Caching;
 using System.Web.Mvc;
 using System.Web.Security;
-using Autofac;
 using log4net;
 using Microsoft.Extensions.Caching.Memory;
 using NewReminderASP.Core.Provider;
 using NewReminderASP.Domain.Entities;
 
 namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
-{
+{   // Define the UserController class inheriting from BaseController
     [RouteArea("AccountsArea")]
     [RoutePrefix("User")]
     public class UserController : BaseController
     {
         private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IAddressProvider _addressProvider;
+        private readonly IMemoryCache _cache;
+        private readonly EmailService _emailService;
         private readonly IPersonalInformationProvider _personalInfoProvider;
         private readonly IPhoneProvider _phoneProvider;
         private readonly IUserProvider _provider;
-        private readonly EmailService _emailService;
-        private readonly IMemoryCache _cache;
+
+        // Constructor to initialize dependencies using dependency injection
 
         public UserController(IUserProvider userProvider, IAddressProvider addressProvider,
-            IPhoneProvider phoneProvider, IPersonalInformationProvider personalInfoProvider, IMemoryCache cache, EmailService emailService)
+            IPhoneProvider phoneProvider, IPersonalInformationProvider personalInfoProvider, IMemoryCache cache,
+            EmailService emailService)
         {
             _provider = userProvider;
             _addressProvider = addressProvider;
@@ -37,18 +38,14 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             _emailService = emailService;
         }
 
-      
+        // Clear authentication and redirect to login page
         public ActionResult SignOut()
         {
-            FormsAuthentication.SignOut(); // Очистить аутентификацию
-            return RedirectToAction("Login", "Login", new { area = "LoginArea" }); // Перенаправление на страницу входа
+            FormsAuthentication.SignOut(); 
+            return RedirectToAction("Login", "Login", new { area = "LoginArea" }); 
         }
 
-
-
-
-
-
+        // Display a list of users with pagination and sorting
         [Authorize]
         public ActionResult Index(string orderBy, string sortOrder, int page = 1)
         {
@@ -68,6 +65,9 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
             return View(new Tuple<IEnumerable<User>, ClaimsPrincipal>(paginatedUsers, (ClaimsPrincipal)currentUser));
         }
+
+        // Display detailed user information for admin role
+
         [Authorize]
         public ActionResult DetailsAdmin(int id)
         {
@@ -88,6 +88,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
             return View(viewModel);
         }
+
+        // Display detailed user information for authorized users
 
         [Authorize]
         public ActionResult Details(string userName)
@@ -114,6 +116,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return new HttpUnauthorizedResult();
         }
 
+        // Edit user roles for admin role
+
         [Authorize(Roles = "Admin")]
         public ActionResult EditUserRole(int id)
         {
@@ -131,6 +135,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
             return View(userRoleModel);
         }
+
+        // Process user role editing
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -156,6 +162,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(userRole);
         }
 
+        // The following code handles editing user roles based on the user's ID
+
         [Authorize(Roles = "Admin")]
         public ActionResult EditUserAndRoles(int id)
         {
@@ -179,6 +187,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
             return RedirectToAction("Index");
         }
+
+        // Process the edited user roles data
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -214,20 +224,21 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             }
         }
 
-
+        // Check if a login is unique
 
         private bool IsLoginUnique(string login)
         {
             return _provider.GetUserByLogin(login) == null;
         }
 
+        // Check if an email is unique
+
         private bool IsEmailUnique(string email)
         {
             return _provider.GetUserByEmail(email) == null;
         }
 
-        
-
+        // Edit user details based on the user's ID
 
         [Authorize]
         public ActionResult Edit(int id)
@@ -238,6 +249,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
                 return new HttpUnauthorizedResult();
             return View(user);
         }
+
+        // Process the edited user data
 
         [Authorize]
         [HttpPost]
@@ -251,13 +264,13 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
                     if (existingUser != null && (User.IsInRole("Admin") || existingUser.Login == User.Identity.Name))
                     {
-                        if (user.Login != existingUser.Login && (!IsLoginUnique(user.Login)))
+                        if (user.Login != existingUser.Login && !IsLoginUnique(user.Login))
                         {
                             ModelState.AddModelError("Login", "This username is already in use.");
                             return View(user);
                         }
 
-                        if (user.Email != existingUser.Email && (!IsEmailUnique(user.Email)))
+                        if (user.Email != existingUser.Email && !IsEmailUnique(user.Email))
                         {
                             ModelState.AddModelError("User.Email", "This email is already registered.");
                             return View(user);
@@ -265,7 +278,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
                         if (user.Password != user.ConfirmPassword)
                         {
-                            ModelState.AddModelError("confirmPassword", "The password and confirmation password do not match.");
+                            ModelState.AddModelError("confirmPassword",
+                                "The password and confirmation password do not match.");
                             return View(user);
                         }
 
@@ -280,7 +294,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
                         {
                             _provider.UpdateUser(user);
                             _emailService.SendEmailChangeNotification(user.Email);
-                             return RedirectToAction("Login", "Login", new { area = "LoginArea" });
+                            return RedirectToAction("Login", "Login", new { area = "LoginArea" });
                         }
 
                         _provider.UpdateUser(user);
@@ -299,13 +313,15 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(user);
         }
 
-
+        // Allow admin to create a new user
 
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
+
+        // Process the creation of a new user
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -320,7 +336,6 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
                 if (!IsEmailUnique(user.Email))
                     ModelState.AddModelError("User.Email", "This email is already registered.");
 
-               
 
                 if (ModelState.IsValid)
                 {
@@ -345,6 +360,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             }
         }
 
+        // Allow authorized users to view and delete a user
+
         [Authorize]
         public ActionResult Delete(int id)
         {
@@ -353,6 +370,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
                 return new HttpUnauthorizedResult();
             return View(user);
         }
+
+        // Process the deletion of a user
 
         [Authorize]
         [HttpPost]
@@ -369,6 +388,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             _provider.DeleteUser(id);
             return RedirectToAction("Index");
         }
+
+        // Display a paginated list of roles
 
         [Authorize(Roles = "Admin")]
         public ActionResult Role(string orderBy, string sortOrder, int page = 1)
@@ -390,6 +411,7 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(paginatedRole);
         }
 
+        // Display details of a specific role
 
         [Authorize(Roles = "Admin")]
         public ActionResult DetailsRole(int id)
@@ -399,11 +421,15 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(role);
         }
 
+        // Allow admin to create a new role
+
         [Authorize(Roles = "Admin")]
         public ActionResult CreateRole()
         {
             return View();
         }
+
+        // Process the creation of a new role
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -419,6 +445,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(role);
         }
 
+        // Allow admin to edit a role
+
         [Authorize(Roles = "Admin")]
         public ActionResult EditRole(int id)
         {
@@ -426,6 +454,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             if (role == null) return HttpNotFound();
             return View(role);
         }
+
+        // Process the editing of a role
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -451,6 +481,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(role);
         }
 
+        // Allow admin to delete a role
+
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteRole(int id)
         {
@@ -458,6 +490,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             if (role == null) return HttpNotFound();
             return View(role);
         }
+
+        // Process the deletion of a role
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -468,6 +502,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             _provider.RemoveRole(id);
             return RedirectToAction("Index");
         }
+
+        // Display a paginated list of user roles
 
         [Authorize(Roles = "Admin")]
         public ActionResult UserRole(string orderBy, string sortOrder, int page = 1)
@@ -489,6 +525,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(paginatedUserRole);
         }
 
+        // Allow admin to assign roles to specific users
+
         [Authorize(Roles = "Admin")]
         public ActionResult CreateUserRoleById()
         {
@@ -499,6 +537,8 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             };
             return View(model);
         }
+
+        // Process the assignment of roles to specific users
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -517,11 +557,15 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             return View(userRole);
         }
 
+        // Allow admin to create user roles
+
         [Authorize(Roles = "Admin")]
         public ActionResult CreateUserRole()
         {
             return View();
         }
+
+            // Process the creation of user roles
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -541,17 +585,19 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
         }
 
 
-        //protected override void OnException(ExceptionContext filterContext)
-        //{
-        //    if (!filterContext.ExceptionHandled)
-        //    {
-        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
-        //        filterContext.Result = new ViewResult
-        //        {
-        //            ViewName = "Error"
-        //        };
-        //        filterContext.ExceptionHandled = true;
-        //    }
-        //}
+        // Handle unhandled exceptions
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
+        }
     }
 }

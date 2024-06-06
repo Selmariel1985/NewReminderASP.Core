@@ -6,10 +6,10 @@
 <link href="~/styles.css" rel="stylesheet"/>
 <div class="form-container">
     <h2>Role List</h2>
-    
+
     <a href="@Url.Action("Create", "User", new { area = "AccountsArea" })" class="btn btn-primary">Create User</a>
-    <a href="@Url.Action("CreateRole", "User", new { area = "AccountsArea" })" class="btn btn-primary">Create new  Role</a>
-   
+    <a href="@Url.Action("CreateRole", "User", new { area = "AccountsArea" })" class="btn btn-primary">Create new Role</a>
+
 
     <form action="@Url.Action("Role")" method="get">
         <div class="filter-bar">

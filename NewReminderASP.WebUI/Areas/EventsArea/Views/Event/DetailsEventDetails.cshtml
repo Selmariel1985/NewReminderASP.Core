@@ -23,9 +23,9 @@
     </dl>
 
 
-    
-        @Html.ActionLink("Edit", "EditEventDetails", new { id = Model.EventID }, new { @class = "btn btn-primary " })
-        @Html.ActionLink("Delete", "DeleteEventDetail", new { id = Model.EventID }, new { @class = "btn btn-danger " })
-        @Html.ActionLink("Back to List", "GetEventDetails", null, new { @class = "btn btn-secondary " })
-    
+    @Html.ActionLink("Edit", "EditEventDetails", new { id = Model.EventID }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Delete", "DeleteEventDetail", new { id = Model.EventID }, new { @class = "btn btn-danger " })
+  
+
 </div>
+@Html.ActionLink("Back to List", "GetEventDetails", null, new { @class = "btn btn-secondary " })

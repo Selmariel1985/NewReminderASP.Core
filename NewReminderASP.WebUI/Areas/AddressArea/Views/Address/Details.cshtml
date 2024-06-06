@@ -4,7 +4,7 @@
     ViewBag.Title = "Address Details";
 }
 
-<link href="~/styles.css" rel="stylesheet"/>
+<link href="~/styles.css" rel="stylesheet" />
 
 
 <div class="details-details">
@@ -12,7 +12,7 @@
 
     <div>
         <h2>Address: @Model.Login</h2>
-        <hr/>
+        <hr />
         <dl>
             <dt>@Html.DisplayNameFor(model => model.Street)</dt>
             <dd>@Html.DisplayFor(model => model.Street)</dd>
@@ -31,9 +31,10 @@
         </dl>
     </div>
 
-    
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary " })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-danger " })
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary  " })
-    
+
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-danger " })
+
+
 </div>
+@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary  " })

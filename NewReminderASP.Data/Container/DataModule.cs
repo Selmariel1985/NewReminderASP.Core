@@ -4,8 +4,15 @@ using NewReminderASP.Data.Repository;
 
 namespace NewReminderASP.Data.Container
 {
+    /// <summary>
+    /// Module for configuring dependency injection for data-related components.
+    /// </summary>
     public class DataModule : Module
     {
+        /// <summary>
+        /// Loads the configuration of data-related dependencies into the Autofac container.
+        /// </summary>
+        /// <param name="builder">The container builder to register dependencies with.</param>
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<UserClient>().As<IUserClient>();

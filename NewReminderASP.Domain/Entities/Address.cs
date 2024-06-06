@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NewReminderASP.Domain.Entities
 {
+    /// <summary>
+    /// Represents an address entity.
+    /// </summary>
     public class Address
     {
         public int ID { get; set; }
@@ -20,7 +23,6 @@ namespace NewReminderASP.Domain.Entities
         public string Description { get; set; }
 
         public string CountryName { get; set; }
-
 
         public int UserID { get; set; }
         public string Login { get; set; }

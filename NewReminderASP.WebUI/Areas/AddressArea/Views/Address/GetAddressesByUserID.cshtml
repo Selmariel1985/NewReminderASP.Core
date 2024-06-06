@@ -32,8 +32,9 @@
             </dl>
             <a href="@Url.Action("Edit", "Address", new { id = address.ID })" class="btn btn-primary">Edit Address</a>
             <a href="@Url.Action("Delete", "Address", new { id = address.ID })" class="btn btn-danger">Delete Address</a>
-            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-details" })
+          
         </div>
         <hr/>
     }
 </div>
+@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })

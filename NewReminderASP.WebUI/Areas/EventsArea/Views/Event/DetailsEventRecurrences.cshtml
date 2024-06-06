@@ -19,9 +19,9 @@
     </dl>
 
 
-    
-        @Html.ActionLink("Edit", "EditEventRecurrences", new { id = Model.ID }, new { @class = "btn btn-primary " })
-        @Html.ActionLink("Delete", "DeleteEventRecurrence", new { id = Model.ID }, new { @class = "btn btn-danger " })
-        @Html.ActionLink("Back to List", "GetEventRecurrences", null, new { @class = "btn btn-secondary " })
-    
+    @Html.ActionLink("Edit", "EditEventRecurrences", new { id = Model.ID }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Delete", "DeleteEventRecurrence", new { id = Model.ID }, new { @class = "btn btn-danger " })
+   
+
 </div>
+@Html.ActionLink("Back to List", "GetEventRecurrences", null, new { @class = "btn btn-secondary " })

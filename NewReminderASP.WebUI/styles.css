@@ -1,5 +1,5 @@
 ﻿/*Layout*/
-/*Общие*/
+
 
 html, body {
     height: 100%;
@@ -8,24 +8,23 @@ html, body {
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
-    color: #333; /* Цвет текста по умолчанию */
-    line-height: 1.6; /* Интерлиньяж для лучшей читаемости */
+    color: #333; 
+    line-height: 1.6; 
    
-    margin: 0; /* Убираем внешние отступы */
-    padding: 0; /* Убираем внутренние отступы */
+    margin: 0; 
+    padding: 0; 
 }
 
-/* Заголовки */
 h1 {
-    color: #333; /* Черный цвет основных заголовков */
-    font-size: 2rem; /* Размер основного заголовка */
-    margin-bottom: 20px; /* Отступ снизу для заголовков */
+    color: #333; 
+    font-size: 2rem; 
+    margin-bottom: 20px; 
 }
 
 h2 {
     color: #3498db;
-    font-size: 1.5rem; /* Размер второстепенного заголовка */
-    margin-bottom: 15px; /* Отступ снизу для второстепенных заголовков */
+    font-size: 1.5rem;
+    margin-bottom: 15px; 
 }
 a:hover {
     color: #87C159;
@@ -47,7 +46,7 @@ a:hover {
 }
 
 .icon-title-gap {
-    margin-left: 10px; /* Adjust the value as needed for the desired spacing */
+    margin-left: 10px;
 }
 
 
@@ -55,7 +54,7 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px; /* Отступ между элементами */
+    gap: 20px; 
 }
 
     .links-container a:hover {
@@ -81,15 +80,15 @@ a:hover {
     top: 10px;
     right: 20px;
     display: flex;
-    flex-direction: column; /* Размещение элементов в столбец */
-    align-items: flex-end; /* Выравнивание элементов по правому краю */
+    flex-direction: column; 
+    align-items: flex-end; 
 }
 
 .user-info {
     color: #87C159;
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 10px; /* Добавление отступа снизу */
+    margin-bottom: 10px; 
 }
 
     .user-info i {
@@ -371,8 +370,8 @@ a:hover {
 
 .details-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Гибкий макет колонок */
-    grid-gap: 20px; /* Отступ между элементами */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    grid-gap: 20px; 
 }
 
 .Addresses-container, .phones-container {
@@ -389,8 +388,8 @@ a:hover {
 }
 
 .edit-phone-button, .edit-Addresses-button {
-    grid-column: 1 / -1; /* Отображение кнопок на всех колонках в строке */
-    text-align: center; /* Центрирование кнопок */
+    grid-column: 1 / -1; 
+    text-align: center; 
 }
 
 
@@ -476,7 +475,7 @@ a:hover {
 
 
    /* index
-    Таблица*/
+    Table*/
 .table-eco {
     width: 100%;
     border-collapse: collapse;
@@ -606,7 +605,7 @@ a:hover {
     background-color: #f2f2f2;
 }
 
-/* Example 2: Styling form group */
+
 .form-group {
     margin-bottom: 20px;
 }

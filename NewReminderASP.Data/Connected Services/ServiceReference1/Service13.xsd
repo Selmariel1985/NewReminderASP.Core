@@ -738,14 +738,14 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddPEventType">
+  <xs:element name="AddEventType">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" minOccurs="0" name="eventType" nillable="true" type="q50:EventTypeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddPEventTypeResponse">
+  <xs:element name="AddEventTypeResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

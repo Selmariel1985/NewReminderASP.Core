@@ -35,15 +35,13 @@
                 </dl>
 
 
-                
-
-                    @Html.ActionLink("Edit Account", "EditUserAndRoles", new { id = Model.User.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Delete Account", "Delete", new { id = Model.User.Id }, new { @class = "btn btn-danger" })
-                   
+                @Html.ActionLink("Edit Account", "EditUserAndRoles", new { id = Model.User.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete Account", "Delete", new { id = Model.User.Id }, new { @class = "btn btn-danger" })
 
 
 
-               
+
+
             </div>
         </div>
 
@@ -70,17 +68,10 @@
                 </dl>
 
 
-                
-
-                    @Html.ActionLink("Edit User info", "Edit", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Delete User info", "Delete", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-danger" })
-                   
-
-
+                @Html.ActionLink("Edit User info", "Edit", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete User info", "Delete", new { id = Model.PersonalInformation.UserID, area = "PersonInfoArea", controller = "Info" }, new { @class = "btn btn-danger" })
 
                 
-
-
             </div>
         </div>
     </div>
@@ -109,18 +100,13 @@
                     </dl>
 
 
-                    
-
-                        <a href="@Url.Action("Edit", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-primary">Edit Phone</a>
-                        <a href="@Url.Action("Delete", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-danger">Delete Phone</a>
-
-
-                    
+                    <a href="@Url.Action("Edit", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-primary">Edit Phone</a>
+                    <a href="@Url.Action("Delete", "Phone", new { area = "ContactsArea", id = Model.Phones[d].ID })" class="btn btn-danger">Delete Phone</a>
 
 
                 </div>
             }
-            
+
 
         </div>
 
@@ -148,23 +134,19 @@
                         <dd>@Model.Addresses[i].Description</dd>
                     </dl>
 
-                    
-                        <a href="@Url.Action("Edit", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-primary">Edit Address</a>
-                        <a href="@Url.Action("Delete", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-danger">Delete Address</a>
-                   
+
+                    <a href="@Url.Action("Edit", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-primary">Edit Address</a>
+                    <a href="@Url.Action("Delete", "Address", new { area = "AddressArea", id = Model.Addresses[i].ID })" class="btn btn-danger">Delete Address</a>
 
 
                 </div>
             }
-           
 
-
-            
 
         </div>
     </div>
-    
 
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary " })
-   
+
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary " })
+
 </div>

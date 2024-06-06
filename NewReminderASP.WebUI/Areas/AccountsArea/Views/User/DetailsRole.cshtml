@@ -4,14 +4,14 @@
     ViewBag.Title = "Role Detail";
 }
 
-<link href="~/styles.css" rel="stylesheet"/>
+<link href="~/styles.css" rel="stylesheet" />
 
 
 <div class="details-details">
 
 
     <h2>Role Detail:</h2>
-    <hr/>
+    <hr />
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Id)</dt>
         <dd>@Html.DisplayFor(model => model.Id)</dd>
@@ -22,9 +22,10 @@
     </dl>
 
 
-    
-        @Html.ActionLink("Edit", "EditRole", new { id = Model.Id }, new { @class = "btn btn-primary " })
-        @Html.ActionLink("Delete", "DeleteRole", new { id = Model.Id }, new { @class = "btn btn-danger" })
-        @Html.ActionLink("Back to List", "Role", null, new { @class = "btn btn-secondary " })
-    
+    @Html.ActionLink("Edit", "EditRole", new { id = Model.Id }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Delete", "DeleteRole", new { id = Model.Id }, new { @class = "btn btn-danger" })
+
+
 </div>
+
+@Html.ActionLink("Back to List", "Role", null, new { @class = "btn btn-secondary " })

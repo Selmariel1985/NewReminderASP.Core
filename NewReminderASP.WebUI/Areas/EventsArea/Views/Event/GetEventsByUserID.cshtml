@@ -3,14 +3,14 @@
     ViewBag.Title = "Event List";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 
 
 <div class="details-details">
 
     <h2>Event List</h2>
 
-    <hr />
+    <hr/>
     @foreach (var userEvent in Model)
     {
         <div>
@@ -33,17 +33,14 @@
 
                 <dt>Reminders:</dt>
                 <dd>@userEvent.Reminders</dd>
-                
+
 
             </dl>
-            
-            
-            
-            
+
 
             @*<a href="@Url.Action("Edit", "Event", new { id = userEvent.ID })" class="btn btn-details">Edit Event</a>
             <a href="@Url.Action("Delete", "Event", new { id = userEvent.ID })" class="btn btn-details">Delete Event</a>*@
         </div>
-        <hr />
+        <hr/>
     }
 </div>

@@ -4,7 +4,7 @@
     ViewBag.Title = "Event Details";
 }
 
-<link href="~/styles.css" rel="stylesheet" />
+<link href="~/styles.css" rel="stylesheet"/>
 
 
 <div class="details-details">
@@ -16,7 +16,7 @@
         <div class="phones-container">
 
 
-            <a href="@Url.Action("Create", "Event", new { area = "EventsArea" })" class="btn btn-primary">Create new Event</a>
+            <a href="@Url.Action("CreateAdminEvent", "Event", new { area = "EventsArea" })" class="btn btn-primary">Create new Event</a>
 
             @for (var d = 0; d < Model.Events.Count; d++)
             {
@@ -44,47 +44,22 @@
                     </dl>
 
 
-
                     <a href="@Url.Action("Edit", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-primary">Edit Event</a>
                     <a href="@Url.Action("Delete", "Event", new { area = "EventsArea", id = Model.Events[d].ID })" class="btn btn-danger">Delete Event</a>
                 </div>
-
             }
         </div>
-            @if (User.IsInRole("Admin"))
-            {
-                <div class="row mt-2">
-                    <div class="col-md-6">
-                        @Html.ActionLink("Back", "Index", "Event",  new { @class = "btn btn-secondary" })
-                    </div>
-                </div>
-
-            }
-            else
-            {
-   
-    
-                
-            }
-            
-
-        </div>
-    </div>
-
-
-
-
-               
-
-
-
-
-
-
-   
-
-     
-
        
 
+
+    </div>
     
+</div>
+@if (User.IsInRole("Admin"))
+{
+    <div >
+        <div >
+            @Html.ActionLink("Back", "Index", "Event", new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+}

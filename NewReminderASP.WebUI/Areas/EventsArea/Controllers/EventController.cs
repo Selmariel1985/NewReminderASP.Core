@@ -29,7 +29,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
         {
             return SignOutAndRedirectToLogin("LoginArea");
         }
-
+        [Authorize(Roles = "User")]
         public ActionResult Calendar()
         {
             var events = _provider.GetEvents().Select(e => new EventViewModel(e)).ToList();
@@ -113,7 +113,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name });
+                        return RedirectToAction("Calendar", "Event", new { area = "EventsArea", userName = User.Identity.Name });
                     }
                 }
 
@@ -221,7 +221,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name });
+                    return RedirectToAction("Calendar", "Event", new { area = "EventsArea", userName = User.Identity.Name });
                 }
             }
 
@@ -234,15 +234,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             return View(events);
         }
 
-        [HttpPost]
-        public ActionResult SaveSelectedDate(string selectedDate)
-        {
-            // Логика сохранения выбранной даты на сервере
-            // Пример сохранения данных в базе данных или выполнения дополнительных операций
-
-            // Возвращение ответа клиенту после сохранения
-            return Json(new { success = true });
-        }
+       
 
 
         [Authorize(Roles = "Admin")]
@@ -309,7 +301,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             }
             else
             {
-                return RedirectToAction("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name });
+                return RedirectToAction("Calendar", "Event", new { area = "EventsArea", userName = User.Identity.Name });
             }
         }
 
@@ -376,7 +368,7 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
         {
             if (ModelState.IsValid)
             {
-                _provider.AddPEventType(eventsTypes);
+                _provider.AddEventType(eventsTypes);
                 return RedirectToAction("GetEventTypes");
             }
 
@@ -596,17 +588,17 @@ namespace NewReminderASP.WebUI.Areas.EventsArea.Controllers
             _provider.DeleteEventDetail(id);
             return RedirectToAction("GetEventDetails");
         }
-        //protected override void OnException(ExceptionContext filterContext)
-        //{
-        //    if (!filterContext.ExceptionHandled)
-        //    {
-        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
-        //        filterContext.Result = new ViewResult
-        //        {
-        //            ViewName = "Error"
-        //        };
-        //        filterContext.ExceptionHandled = true;
-        //    }
-        //}
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (!filterContext.ExceptionHandled)
+            {
+                _logger.Error("An unhandled exception occurred", filterContext.Exception);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "Error"
+                };
+                filterContext.ExceptionHandled = true;
+            }
+        }
     }
 }
