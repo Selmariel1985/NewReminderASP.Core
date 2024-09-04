@@ -10,14 +10,14 @@ using NewReminderASP.Services.Dtos;
 namespace NewReminderASP.Data.Client
 {
     /// <summary>
-    /// Client class for interacting with the event service.
+    ///     Client class for interacting with the event service.
     /// </summary>
     public class EventClient : IEventClient
     {
         private readonly string currentUserLogin = HttpContext.Current.User.Identity.Name;
 
         /// <summary>
-        /// Retrieves a list of events based on the user's role and login.
+        ///     Retrieves a list of events based on the user's role and login.
         /// </summary>
         /// <returns>A list of Event objects</returns>
         public List<Event> GetEvents()
@@ -34,7 +34,6 @@ namespace NewReminderASP.Data.Client
                     var allEvents = connection.GetEvents(); // Retrieve all events from the service
 
                     if (isAdmin)
-                    {
                         // If the user is an admin, retrieve all events
                         events = allEvents.Select(eventss => new Event
                         {
@@ -47,9 +46,7 @@ namespace NewReminderASP.Data.Client
                             Recurrence = eventss.Recurrence,
                             Reminders = eventss.Reminders
                         }).ToList();
-                    }
                     else
-                    {
                         // If the user is not an admin, retrieve events for the current user
                         events = allEvents.Where(eventss => eventss.Login == currentUserLogin)
                             .Select(eventss => new Event
@@ -63,7 +60,6 @@ namespace NewReminderASP.Data.Client
                                 Recurrence = eventss.Recurrence,
                                 Reminders = eventss.Reminders
                             }).ToList();
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -79,7 +75,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Retrieves a list of events for the specified user based on the username.
+        ///     Retrieves a list of events for the specified user based on the username.
         /// </summary>
         /// <param name="userName">The username of the user to retrieve events for</param>
         /// <returns>A list of Event objects for the specified user</returns>
@@ -94,10 +90,10 @@ namespace NewReminderASP.Data.Client
                 try
                 {
                     connection.Open(); // Open connection to the service
-                    var allEvents = connection.GetEventsForUser(userName); // Retrieve events for the specified user by username
+                    var allEvents =
+                        connection.GetEventsForUser(userName); // Retrieve events for the specified user by username
 
                     if (isAdmin)
-                    {
                         // If the user is an admin, retrieve all events for the specified user
                         events = allEvents.Select(e => new Event
                         {
@@ -111,9 +107,7 @@ namespace NewReminderASP.Data.Client
                             UserID = e.UserID,
                             Login = e.Login
                         }).ToList();
-                    }
                     else
-                    {
                         // If the user is not an admin, retrieve events for the specified user based on the current user's login
                         events = allEvents.Where(e => e.Login == currentLogin)
                             .Select(e => new Event
@@ -128,7 +122,6 @@ namespace NewReminderASP.Data.Client
                                 UserID = e.UserID,
                                 Login = e.Login
                             }).ToList();
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -144,7 +137,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Retrieves a list of events based on the ID and the user's role and login.
+        ///     Retrieves a list of events based on the ID and the user's role and login.
         /// </summary>
         /// <param name="id">The ID of the event</param>
         /// <returns>A list of Event objects</returns>
@@ -162,7 +155,6 @@ namespace NewReminderASP.Data.Client
                     var allEvents = connection.GetEventsForID(id); // Retrieve events for the specified ID
 
                     if (isAdmin)
-                    {
                         // If the user is an admin, retrieve all events for the specified ID
                         events = allEvents.Select(eventss => new Event
                         {
@@ -175,9 +167,7 @@ namespace NewReminderASP.Data.Client
                             Reminders = eventss.Reminders,
                             UserID = eventss.UserID
                         }).ToList();
-                    }
                     else
-                    {
                         // If the user is not an admin, retrieve events based on the current user's login or for the specified ID
                         events = allEvents.Where(eventss => eventss.Login == currentUserLogin || eventss.UserID == id)
                             .Select(eventss => new Event
@@ -192,7 +182,6 @@ namespace NewReminderASP.Data.Client
                                 UserID = eventss.UserID,
                                 Login = eventss.Login
                             }).ToList();
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -208,7 +197,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Retrieves a single event based on the ID.
+        ///     Retrieves a single event based on the ID.
         /// </summary>
         /// <param name="Id">The ID of the event to retrieve</param>
         /// <returns>An Event object if found, otherwise null</returns>
@@ -225,7 +214,6 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEvent(Id); // Retrieve the event with the specified ID
 
                     if (result != null) // Check if a result is returned
-                    {
                         events = new Event // If a result is returned, create a new Event object
                         {
                             ID = result.ID,
@@ -237,7 +225,6 @@ namespace NewReminderASP.Data.Client
                             Recurrence = result.Recurrence,
                             Reminders = result.Reminders
                         };
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -255,7 +242,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Updates an existing event with the provided updated event data.
+        ///     Updates an existing event with the provided updated event data.
         /// </summary>
         /// <param name="updatedEvent">The updated event object</param>
         public void UpdateEvent(Event updatedEvent)
@@ -266,17 +253,18 @@ namespace NewReminderASP.Data.Client
                 {
                     connection.Open(); // Open connection to the service
 
-                    connection.UpdateEvent(new EventDto // Call the UpdateEvent method of the service with the updated event data
-                    {
-                        ID = updatedEvent.ID,
-                        Login = updatedEvent.Login,
-                        EventType = updatedEvent.EventTypes,
-                        Title = updatedEvent.Title,
-                        Date = updatedEvent.Date,
-                        Time = updatedEvent.Time,
-                        Recurrence = updatedEvent.Recurrence,
-                        Reminders = updatedEvent.Reminders
-                    });
+                    connection.UpdateEvent(
+                        new EventDto // Call the UpdateEvent method of the service with the updated event data
+                        {
+                            ID = updatedEvent.ID,
+                            Login = updatedEvent.Login,
+                            EventType = updatedEvent.EventTypes,
+                            Title = updatedEvent.Title,
+                            Date = updatedEvent.Date,
+                            Time = updatedEvent.Time,
+                            Recurrence = updatedEvent.Recurrence,
+                            Reminders = updatedEvent.Reminders
+                        });
 
                     connection.Close(); // Close connection to the service
                 }
@@ -292,7 +280,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Adds a new event using the provided event data.
+        ///     Adds a new event using the provided event data.
         /// </summary>
         /// <param name="events">The event to be added</param>
         public void AddEvent(Event events)
@@ -328,7 +316,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Adds a new event by an admin user using the provided event data.
+        ///     Adds a new event by an admin user using the provided event data.
         /// </summary>
         /// <param name="events">The event to be added by an admin user</param>
         public void AddAdminEvent(Event events)
@@ -364,7 +352,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Deletes an event based on the provided event ID.
+        ///     Deletes an event based on the provided event ID.
         /// </summary>
         /// <param name="id">The ID of the event to be deleted</param>
         public void DeleteEvent(int id)
@@ -375,7 +363,8 @@ namespace NewReminderASP.Data.Client
                 {
                     connection.Open(); // Open connection to the service
 
-                    connection.DeleteEvent(id); // Call the DeleteEvent method of the service with the specified event ID
+                    connection.DeleteEvent(
+                        id); // Call the DeleteEvent method of the service with the specified event ID
 
                     connection.Close(); // Close connection to the service
                 }
@@ -391,7 +380,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Retrieves a list of event details containing EventID, Description, and Status.
+        ///     Retrieves a list of event details containing EventID, Description, and Status.
         /// </summary>
         /// <returns>A list of EventDetail objects</returns>
         public List<EventDetail> GetEventDetails()
@@ -407,17 +396,13 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEventDetails(); // Retrieve event details from the service
 
                     if (result != null)
-                    {
                         foreach (var eventDetail in result) // Iterate through the retrieved event details
-                        {
                             eventDetails.Add(new EventDetail // Create new EventDetail objects and add them to the list
                             {
                                 EventID = eventDetail.EventID,
                                 Description = eventDetail.Description,
                                 Status = eventDetail.Status
                             });
-                        }
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -436,7 +421,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Retrieves details of a specific event based on the event ID.
+        ///     Retrieves details of a specific event based on the event ID.
         /// </summary>
         /// <param name="eventId">The ID of the event to retrieve details for</param>
         /// <returns>An EventDetail object if found, otherwise null</returns>
@@ -453,14 +438,12 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEventDetail(eventId); // Retrieve the event detail with the specified ID
 
                     if (result != null) // Check if a result is returned
-                    {
                         eventDetail = new EventDetail // If a result is returned, create a new EventDetail object
                         {
                             EventID = result.EventID,
                             Description = result.Description,
                             Status = result.Status
                         };
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -479,7 +462,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Updates the details of an event with the provided updated event detail.
+        ///     Updates the details of an event with the provided updated event detail.
         /// </summary>
         /// <param name="updatedEventDetail">The updated details of the event</param>
         public void UpdateEventDetail(EventDetail updatedEventDetail)
@@ -512,7 +495,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Adds a new event detail using the provided event detail object.
+        ///     Adds a new event detail using the provided event detail object.
         /// </summary>
         /// <param name="eventDetail">The event detail to be added</param>
         public void AddEventDetail(EventDetail eventDetail)
@@ -544,7 +527,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Deletes an event detail based on the provided event ID.
+        ///     Deletes an event detail based on the provided event ID.
         /// </summary>
         /// <param name="eventId">The ID of the event detail to be deleted</param>
         public void DeleteEventDetail(int eventId)
@@ -572,7 +555,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Retrieves a list of event recurrences containing ID and RecurrenceType.
+        ///     Retrieves a list of event recurrences containing ID and RecurrenceType.
         /// </summary>
         /// <returns>A list of EventRecurrence objects</returns>
         public List<EventRecurrence> GetEventRecurrences()
@@ -588,16 +571,13 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEventRecurrences(); // Retrieve event recurrences from the service
 
                     if (result != null)
-                    {
                         foreach (var eventRecurrence in result) // Iterate through the retrieved event recurrences
-                        {
-                            eventRecurrences.Add(new EventRecurrence // Create new EventRecurrence objects and add them to the list
-                            {
-                                ID = eventRecurrence.ID,
-                                RecurrenceType = eventRecurrence.RecurrenceType
-                            });
-                        }
-                    }
+                            eventRecurrences.Add(
+                                new EventRecurrence // Create new EventRecurrence objects and add them to the list
+                                {
+                                    ID = eventRecurrence.ID,
+                                    RecurrenceType = eventRecurrence.RecurrenceType
+                                });
 
                     connection.Close(); // Close connection to the service
                 }
@@ -616,7 +596,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Retrieves a specific event recurrence based on the provided ID.
+        ///     Retrieves a specific event recurrence based on the provided ID.
         /// </summary>
         /// <param name="Id">The ID of the event recurrence to retrieve</param>
         /// <returns>The EventRecurrence object if found, otherwise null</returns>
@@ -630,16 +610,16 @@ namespace NewReminderASP.Data.Client
                 {
                     connection.Open(); // Open connection to the service
 
-                    var result = connection.GetEventRecurrence(Id); // Retrieve the event recurrence with the specified ID
+                    var result =
+                        connection.GetEventRecurrence(Id); // Retrieve the event recurrence with the specified ID
 
                     if (result != null) // Check if a result is returned
-                    {
-                        eventRecurrence = new EventRecurrence // If a result is returned, create a new EventRecurrence object
-                        {
-                            ID = result.ID,
-                            RecurrenceType = result.RecurrenceType
-                        };
-                    }
+                        eventRecurrence =
+                            new EventRecurrence // If a result is returned, create a new EventRecurrence object
+                            {
+                                ID = result.ID,
+                                RecurrenceType = result.RecurrenceType
+                            };
 
                     connection.Close(); // Close connection to the service
                 }
@@ -658,7 +638,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Updates the details of an event recurrence with the provided updated event recurrence.
+        ///     Updates the details of an event recurrence with the provided updated event recurrence.
         /// </summary>
         /// <param name="updatedEventRecurrence">The updated event recurrence details</param>
         public void UpdateEventRecurrence(EventRecurrence updatedEventRecurrence)
@@ -690,7 +670,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Adds a new event using the provided event recurrence object.
+        ///     Adds a new event using the provided event recurrence object.
         /// </summary>
         /// <param name="eventRecurrence">The event recurrence to be added</param>
         public void AddEventRecurrence(EventRecurrence eventRecurrence)
@@ -722,7 +702,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Deletes an event recurrence based on the provided ID.
+        ///     Deletes an event recurrence based on the provided ID.
         /// </summary>
         /// <param name="id">The ID of the event recurrence to be deleted</param>
         public void DeleteEventRecurrence(int id)
@@ -749,7 +729,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Retrieves a list of event types containing ID and TypeName.
+        ///     Retrieves a list of event types containing ID and TypeName.
         /// </summary>
         /// <returns>A list of EventType objects</returns>
         public List<EventType> GetEventTypes()
@@ -765,16 +745,12 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEventTypes(); // Retrieve event types from the service
 
                     if (result != null)
-                    {
                         foreach (var eventType in result) // Iterate through the retrieved event types
-                        {
                             eventTypes.Add(new EventType // Create new EventType objects and add them to the list
                             {
                                 ID = eventType.ID,
                                 TypeName = eventType.TypeName
                             });
-                        }
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -793,7 +769,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Retrieves a specific event type based on the provided ID.
+        ///     Retrieves a specific event type based on the provided ID.
         /// </summary>
         /// <param name="Id">The ID of the event type to retrieve</param>
         /// <returns>The EventType object if found, otherwise null</returns>
@@ -810,13 +786,11 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetEventType(Id); // Retrieve the event type with the specified ID
 
                     if (result != null) // Check if a result is returned
-                    {
                         eventType = new EventType // If a result is returned, create a new EventType object
                         {
                             ID = result.ID,
                             TypeName = result.TypeName
                         };
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -835,7 +809,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Updates the details of an event type with the provided updated event type information.
+        ///     Updates the details of an event type with the provided updated event type information.
         /// </summary>
         /// <param name="updatedEventType">The updated event type details</param>
         public void UpdateEventType(EventType updatedEventType)
@@ -867,7 +841,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Adds a new event type using the provided event type information.
+        ///     Adds a new event type using the provided event type information.
         /// </summary>
         /// <param name="eventType">The event type to be added</param>
         public void AddEventType(EventType eventType)
@@ -898,9 +872,8 @@ namespace NewReminderASP.Data.Client
         }
 
 
-
         /// <summary>
-        /// Deletes an event type based on the provided ID.
+        ///     Deletes an event type based on the provided ID.
         /// </summary>
         /// <param name="id">The ID of the event type to be deleted</param>
         public void DeleteEventType(int id)
@@ -925,6 +898,5 @@ namespace NewReminderASP.Data.Client
                 }
             }
         }
-
     }
 }

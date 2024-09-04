@@ -9,14 +9,14 @@ using NewReminderASP.Services.Dtos;
 namespace NewReminderASP.Data.Client
 {
     /// <summary>
-    /// Client class for interacting with personal information service.
+    ///     Client class for interacting with personal information service.
     /// </summary>
     public class PersonalInformationClient : IPersonalInformationClient
     {
         /// <summary>
-        /// Retrieves a list of personal information based on the user's role and login.
+        ///     Retrieves a list of personal information based on the user's role and login.
         /// </summary>
-        /// <returns>A list of PersonalInfo objects</returns>
+        /// <returns></returns>
         public List<PersonalInfo> GetPersonalInfos()
         {
             var personalInfos = new List<PersonalInfo>(); // Create a list to store PersonalInfo objects
@@ -31,12 +31,9 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetPersonalInfos(); // Retrieve personal information from the service
 
                     if (result != null)
-                    {
                         // Process the retrieved personal information based on the user's role
                         foreach (var personalInfo in result)
-                        {
                             if (isAdmin || personalInfo.Login == currentUserLogin)
-                            {
                                 personalInfos.Add(new PersonalInfo
                                 {
                                     Login = personalInfo.Login,
@@ -47,9 +44,6 @@ namespace NewReminderASP.Data.Client
                                     Gender = personalInfo.Gender,
                                     UserID = personalInfo.UserID
                                 });
-                            }
-                        }
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -66,9 +60,9 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Retrieves personal information by the specified ID.
+        ///     Retrieves personal information by the specified ID.
         /// </summary>
-        /// <param name="id">The ID of the personal information to retrieve</param>
+        /// <param name="id"></param>
         /// <returns>The PersonalInfo object corresponding to the specified ID, or null if not found</returns>
         public PersonalInfo GetPersonalInfo(int id)
         {
@@ -83,7 +77,6 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetPersonalInfo(id); // Retrieve personal information by ID
 
                     if (result != null)
-                    {
                         personalInfo = new PersonalInfo
                         {
                             UserID = result.UserID,
@@ -94,7 +87,6 @@ namespace NewReminderASP.Data.Client
                             Birthdate = result.Birthdate,
                             Gender = result.Gender
                         };
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -112,12 +104,11 @@ namespace NewReminderASP.Data.Client
         }
 
 
-
         /// <summary>
-        /// Updates the personal information. If the information for the provided user ID exists, it is updated.
-        /// If not, new personal information is added.
+        ///     Updates the personal information. If the information for the provided user ID exists, it is updated.
+        ///     If not, new personal information is added.
         /// </summary>
-        /// <param name="updatedPersonalInfo">The updated personal information</param>
+        /// <param name="updatedPersonalInfo"></param>
         public void UpdatePersonalInfo(PersonalInfo updatedPersonalInfo)
         {
             using (var connection = new PersonalInfoServiceClient())
@@ -169,12 +160,10 @@ namespace NewReminderASP.Data.Client
         }
 
 
-
-
         /// <summary>
-        /// Adds a new personal information entry.
+        ///     Adds a new personal information entry.
         /// </summary>
-        /// <param name="personalInfo">The personal information to be added</param>
+        /// <param name="personalInfo"></param>
         public void AddPersonalInfo(PersonalInfo personalInfo)
         {
             using (var connection = new PersonalInfoServiceClient())
@@ -209,9 +198,9 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Deletes the personal information for the specified ID.
+        ///     Deletes the personal information for the specified ID.
         /// </summary>
-        /// <param name="id">The ID of the personal information to be deleted</param>
+        /// <param name="id"></param>
         public void DeletePersonalInfo(int id)
         {
             using (var connection = new PersonalInfoServiceClient())
@@ -235,6 +224,5 @@ namespace NewReminderASP.Data.Client
                 }
             }
         }
-
     }
 }

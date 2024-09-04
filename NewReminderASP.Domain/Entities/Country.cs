@@ -3,7 +3,7 @@
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Represents a country entity.
+    ///     Represents a country entity.
     /// </summary>
     public class Country
     {

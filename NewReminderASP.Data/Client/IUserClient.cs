@@ -4,7 +4,7 @@ using NewReminderASP.Domain.Entities;
 namespace NewReminderASP.Data.Client
 {
     /// <summary>
-    /// Interface for interacting with user-related data.
+    ///     Interface for interacting with user-related data.
     /// </summary>
     public interface IUserClient
     {

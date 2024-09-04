@@ -3,7 +3,7 @@
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Model representing a user along with their assigned roles.
+    ///     Model representing a user along with their assigned roles.
     /// </summary>
     public class UserAndRolesModel
     {

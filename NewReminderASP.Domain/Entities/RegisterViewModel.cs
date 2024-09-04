@@ -1,7 +1,7 @@
 ﻿namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// View model used for registering a new user.
+    ///     View model used for registering a new user.
     /// </summary>
     public class RegisterViewModel
     {

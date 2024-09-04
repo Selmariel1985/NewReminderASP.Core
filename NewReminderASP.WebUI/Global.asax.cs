@@ -14,12 +14,12 @@ using NewReminderASP.Dependencies.Container;
 namespace NewReminderASP.WebUI
 {
     /// <summary>
-    /// Entry point for the MVC application and handling of application-level events.
+    ///     Entry point for the MVC application and handling of application-level events.
     /// </summary>
     public class MvcApplication : HttpApplication
     {
         /// <summary>
-        /// Handles the application start event and sets up the Autofac container and MVC configurations.
+        ///     Handles the application start event and sets up the Autofac container and MVC configurations.
         /// </summary>
         protected void Application_Start()
         {
@@ -38,8 +38,10 @@ namespace NewReminderASP.WebUI
         }
 
         /// <summary>
-        /// Handles post-authenticate request event and performs user authentication based on FormsAuthentication ticket.
+        ///     Handles post-authenticate request event and performs user authentication based on FormsAuthentication ticket.
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {
             try
@@ -55,6 +57,7 @@ namespace NewReminderASP.WebUI
                         HttpContext.Current.User = new GenericPrincipal(new FormsIdentity(ticket), roles);
                     }
                 }
+
                 // Skip authorization for a specific path
                 if (HttpContext.Current.Request.Path.Contains("/RegisterArea/Register/Register"))
                     HttpContext.Current.SkipAuthorization = true;
@@ -72,16 +75,20 @@ namespace NewReminderASP.WebUI
         }
 
         /// <summary>
-        /// Handles the session start event and initializes the 'LastActivity' session variable with the current time.
+        ///     Handles the session start event and initializes the 'LastActivity' session variable with the current time.
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Session_Start(object sender, EventArgs e)
         {
             Session["LastActivity"] = DateTime.UtcNow;
         }
 
         /// <summary>
-        /// Handles the acquire request state event and manages session timeout based on last activity time.
+        ///     Handles the acquire request state event and manages session timeout based on last activity time.
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Application_AcquireRequestState(object sender, EventArgs e)
         {
             if (HttpContext.Current.Session != null)

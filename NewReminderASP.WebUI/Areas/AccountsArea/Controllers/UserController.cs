@@ -38,7 +38,10 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
             _emailService = emailService;
         }
 
-        // Clear authentication and redirect to login page
+        /// <summary>
+        ///   Clear authentication and redirect to login page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut(); 
@@ -587,17 +590,19 @@ namespace NewReminderASP.WebUI.Areas.AccountsArea.Controllers
 
         // Handle unhandled exceptions
 
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            if (!filterContext.ExceptionHandled)
-            {
-                _logger.Error("An unhandled exception occurred", filterContext.Exception);
-                filterContext.Result = new ViewResult
-                {
-                    ViewName = "Error"
-                };
-                filterContext.ExceptionHandled = true;
-            }
-        }
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    if (!filterContext.ExceptionHandled)
+        //    {
+        //        _logger.Error("An unhandled exception occurred", filterContext.Exception);
+        //        filterContext.Result = new ViewResult
+        //        {
+        //            ViewName = "Error"
+        //        };
+        //        filterContext.ExceptionHandled = true;
+        //    }
+        //}
     }
 }
+
+

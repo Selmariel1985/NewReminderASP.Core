@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web; // Import for accessing HttpContext
+using System.Web;
 using log4net;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
+// Import for accessing HttpContext
 
 namespace NewReminderASP.Data.Client
 {
     /// <summary>
-    /// Client class for interacting with the address service.
+    ///     Client class for interacting with the address service.
     /// </summary>
     public class AddressClient : IAddressClient
 
     {
-
         /// <summary>
-        /// Method to get a list of addresses based on the user's role and login.
+        ///     Method to get a list of addresses based on the user's role and login.
         /// </summary>
         public List<Address> GetAddresses()
         {
@@ -33,12 +33,9 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetAddresses(); // Get a list of addresses from the service
 
                     if (result != null)
-                    {
                         foreach (var addressDto in result)
-                        {
                             // Check for admin role or matching login
                             if (isAdmin || addressDto.Login == currentUserLogin)
-                            {
                                 addresses.Add(new Address
                                 {
                                     ID = addressDto.ID,
@@ -50,9 +47,6 @@ namespace NewReminderASP.Data.Client
                                     Login = addressDto.Login,
                                     UserID = addressDto.UserID
                                 });
-                            }
-                        }
-                    }
 
                     connection.Close(); // Close the connection to the service
                 }
@@ -68,10 +62,8 @@ namespace NewReminderASP.Data.Client
         }
 
 
-
-
         /// <summary>
-        /// Method to retrieve addresses based on a specific user ID.
+        ///     Method to retrieve addresses based on a specific user ID.
         /// </summary>
         /// <param name="userId">The user ID to filter addresses by.</param>
         /// <returns>A list of addresses filtered by the specified user ID.</returns>
@@ -88,7 +80,6 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetAddressesByUserId(userId); // Retrieve addresses by user ID
 
                     if (result != null)
-                    {
                         foreach (var addressDto in result)
                         {
                             var address = new Address
@@ -104,7 +95,6 @@ namespace NewReminderASP.Data.Client
                             };
                             addresses.Add(address); // Add Address object to the list
                         }
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -120,7 +110,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Method to retrieve an address by its ID.
+        ///     Method to retrieve an address by its ID.
         /// </summary>
         /// <param name="id">The ID of the address to retrieve.</param>
         /// <returns>The address corresponding to the specified ID, or null if not found.</returns>
@@ -137,7 +127,6 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetAddress(id); // Retrieve the address by its ID
 
                     if (result != null)
-                    {
                         address = new Address
                         {
                             ID = result.ID,
@@ -149,7 +138,6 @@ namespace NewReminderASP.Data.Client
                             Login = result.Login,
                             UserID = result.UserID
                         };
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -165,7 +153,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Retrieves an address by its ID from the address service.
+        ///     Retrieves an address by its ID from the address service.
         /// </summary>
         /// <param name="id">The ID of the address to retrieve.</param>
         /// <returns>The address object corresponding to the specified ID, or null if not found.</returns>
@@ -182,7 +170,6 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetAddressByID(id); // Retrieve the address by its ID
 
                     if (result != null)
-                    {
                         // Create a new Address object with data from the result
                         address = new Address
                         {
@@ -195,7 +182,6 @@ namespace NewReminderASP.Data.Client
                             Login = result.Login,
                             UserID = result.UserID
                         };
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -212,7 +198,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Updates the specified address in the address service.
+        ///     Updates the specified address in the address service.
         /// </summary>
         /// <param name="updateAddress">The address object containing the updated information.</param>
         public void UpdateAddress(Address updateAddress)
@@ -247,7 +233,7 @@ namespace NewReminderASP.Data.Client
 
 
         /// <summary>
-        /// Adds a new address to the address service.
+        ///     Adds a new address to the address service.
         /// </summary>
         /// <param name="address">The address object to be added.</param>
         public void AddAddress(Address address)
@@ -280,7 +266,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Adds a new address registration to the address service.
+        ///     Adds a new address registration to the address service.
         /// </summary>
         /// <param name="address">The address object to be registered.</param>
         public void AddAddressRegister(Address address)
@@ -317,7 +303,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Deletes the address with the specified ID from the address service.
+        ///     Deletes the address with the specified ID from the address service.
         /// </summary>
         /// <param name="id">The ID of the address to be deleted</param>
         public void DeleteAddress(int id)

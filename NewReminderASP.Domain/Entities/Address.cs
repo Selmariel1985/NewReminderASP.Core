@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Represents an address entity.
+    ///     Represents an address entity.
     /// </summary>
     public class Address
     {

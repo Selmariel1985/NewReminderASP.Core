@@ -3,7 +3,7 @@
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Represents a type of phone.
+    ///     Represents a type of phone.
     /// </summary>
     public class PhoneType
     {

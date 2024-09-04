@@ -3,7 +3,7 @@
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Represents a user role within the system.
+    ///     Represents a user role within the system.
     /// </summary>
     public class Role
     {

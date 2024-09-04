@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Represents a user's role in the system.
+    ///     Represents a user's role in the system.
     /// </summary>
     public class UserRole
     {

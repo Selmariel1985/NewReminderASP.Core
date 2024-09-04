@@ -3,7 +3,7 @@
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Represents a type of recurrence for an event.
+    ///     Represents a type of recurrence for an event.
     /// </summary>
     public class EventRecurrence
     {

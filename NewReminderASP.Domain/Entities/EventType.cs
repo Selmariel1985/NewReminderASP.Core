@@ -3,7 +3,7 @@
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Represents a type of event.
+    ///     Represents a type of event.
     /// </summary>
     public class EventType
     {

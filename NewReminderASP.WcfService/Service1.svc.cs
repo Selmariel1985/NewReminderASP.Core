@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Contract;
 using NewReminderASP.Services.Dtos;
 
 namespace NewReminderASP.WcfService
 {
     /// <summary>
-    /// This class implements various service interfaces for user-related operations.
+    ///     This class implements various service interfaces for user-related operations.
     /// </summary>
-    public class Service1 : IUserService, ICountryService, IAddressService, IPersonalInfoService, IEventService, IPhoneService
+    public class Service1 : IUserService, ICountryService, IAddressService, IPersonalInfoService, IEventService,
+        IPhoneService
     {
         /// <summary>
-        /// Connection string for the database.
+        ///     Connection string for the database.
         /// </summary>
-        private readonly string connectionString = "Data Source=DESKTOP-HAJP4KN\\SQLEXPRESS;Initial Catalog=ReminderEF;Persist Security Info=True;User ID=supergrisha;Password=supergrisha;";
+        private readonly string connectionString =
+            "Data Source=DESKTOP-HAJP4KN\\SQLEXPRESS;Initial Catalog=ReminderEF;Persist Security Info=True;User ID=supergrisha;Password=supergrisha;";
 
         /// <summary>
-        /// This method retrieves a list of addresses from the database.
+        ///     This method retrieves a list of addresses from the database.
         /// </summary>
+        /// <returns></returns>
         public List<AddressDto> GetAddresses()
         {
             var addresses = new List<AddressDto>();
@@ -61,9 +63,10 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// This method retrieves a specific address by its ID from the database.
+        ///     /// This method retrieves a specific address by its ID from the database.
         /// </summary>
         /// <param name="id">The ID of the address to retrieve.</param>
+        /// <returns></returns>
         public AddressDto GetAddress(int id)
         {
             // Create a new AddressDto object to store the retrieved address
@@ -104,9 +107,10 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// This method retrieves a specific address by its ID from the database.
+        ///     This method retrieves a specific address by its ID from the database.
         /// </summary>
         /// <param name="id">The ID of the address to retrieve.</param>
+        /// <returns></returns>
         public AddressDto GetAddressByID(int id)
         {
             // Create a new AddressDto object to store the retrieved address
@@ -147,7 +151,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a list of addresses associated with a specific user ID from the database.
+        ///     Retrieves a list of addresses associated with a specific user ID from the database.
         /// </summary>
         /// <param name="userId">The ID of the user whose addresses are to be retrieved.</param>
         /// <returns>A list of AddressDto objects associated with the specified user ID.</returns>
@@ -194,7 +198,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Updates an address in the database with the provided updated address information.
+        ///     Updates an address in the database with the provided updated address information.
         /// </summary>
         /// <param name="updatedAddress">The updated address information to be saved in the database.</param>
         public void UpdateAddress(AddressDto updatedAddress)
@@ -225,7 +229,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Adds a new address to the database.
+        ///     Adds a new address to the database.
         /// </summary>
         /// <param name="address">The address information to be added to the database.</param>
         public void AddAddress(AddressDto address)
@@ -255,7 +259,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Adds a new address to the database using the "AddAddressRegister" stored procedure.
+        ///     Adds a new address to the database using the "AddAddressRegister" stored procedure.
         /// </summary>
         /// <param name="address">The address information to be added to the database.</param>
         public void AddAddressRegister(AddressDto address)
@@ -285,7 +289,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Deletes an address from the database by its ID.
+        ///     Deletes an address from the database by its ID.
         /// </summary>
         /// <param name="id">The ID of the address to be deleted.</param>
         public void DeleteAddress(int id)
@@ -309,7 +313,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a list of countries from the database.
+        ///     Retrieves a list of countries from the database.
         /// </summary>
         /// <returns>A list of CountryDto objects representing the countries.</returns>
         public List<CountryDto> GetCountries()
@@ -348,7 +352,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a specific country by its ID from the database.
+        ///     Retrieves a specific country by its ID from the database.
         /// </summary>
         /// <param name="id">The ID of the country to retrieve.</param>
         /// <returns>The CountryDto object representing the country with the specified ID.</returns>
@@ -388,7 +392,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Updates country information in the database.
+        ///     Updates country information in the database.
         /// </summary>
         /// <param name="updateCountry">The CountryDto object containing the updated country information.</param>
         public void UpdateCountry(CountryDto updateCountry)
@@ -415,7 +419,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Adds a new country to the database.
+        ///     Adds a new country to the database.
         /// </summary>
         /// <param name="country">The CountryDto object containing the country information to be added.</param>
         public void AddCountry(CountryDto country)
@@ -441,7 +445,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Deletes a country from the database by its ID.
+        ///     Deletes a country from the database by its ID.
         /// </summary>
         /// <param name="id">The ID of the country to be deleted.</param>
         public void DeleteCountry(int id)
@@ -465,7 +469,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a list of events from the database.
+        ///     Retrieves a list of events from the database.
         /// </summary>
         /// <returns>A list of EventDto objects representing the events.</returns>
         public List<EventDto> GetEvents()
@@ -509,7 +513,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a list of events associated with a specific user by their login from the database.
+        ///     Retrieves a list of events associated with a specific user by their login from the database.
         /// </summary>
         /// <param name="login">The login of the user for whom events are to be retrieved.</param>
         /// <returns>A list of EventDto objects associated with the specified user login.</returns>
@@ -556,9 +560,8 @@ namespace NewReminderASP.WcfService
         }
 
 
-
         /// <summary>
-        /// Retrieves a list of events associated with a specific user by their ID from the database.
+        ///     Retrieves a list of events associated with a specific user by their ID from the database.
         /// </summary>
         /// <param name="id">The ID of the user for whom events are to be retrieved.</param>
         /// <returns>A list of EventDto objects associated with the specified user ID.</returns>
@@ -605,9 +608,8 @@ namespace NewReminderASP.WcfService
         }
 
 
-
         /// <summary>
-        /// Retrieves a specific event by its ID from the database.
+        ///     Retrieves a specific event by its ID from the database.
         /// </summary>
         /// <param name="Id">The ID of the event to retrieve.</param>
         /// <returns>The EventDto object representing the event with the specified ID.</returns>
@@ -651,7 +653,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Updates the details of an event in the database.
+        ///     Updates the details of an event in the database.
         /// </summary>
         /// <param name="updatedEvent">The EventDto object containing the updated details of the event.</param>
         public void UpdateEvent(EventDto updatedEvent)
@@ -682,7 +684,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Adds a new event to the database.
+        ///     Adds a new event to the database.
         /// </summary>
         /// <param name="events">The EventDto object representing the event to be added.</param>
         public void AddEvent(EventDto events)
@@ -712,7 +714,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Deletes an event from the database based on the provided event ID.
+        ///     Deletes an event from the database based on the provided event ID.
         /// </summary>
         /// <param name="id">The ID of the event to be deleted.</param>
         public void DeleteEvent(int id)
@@ -736,7 +738,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a list of event details from the database.
+        ///     Retrieves a list of event details from the database.
         /// </summary>
         /// <returns>A list of EventDetailDto objects containing event details.</returns>
         public List<EventDetailDto> GetEventDetails()
@@ -775,7 +777,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a specific event detail by its ID from the database.
+        ///     Retrieves a specific event detail by its ID from the database.
         /// </summary>
         /// <param name="eventId">The ID of the event detail to retrieve.</param>
         /// <returns>The EventDetailDto object representing the event detail with the specified ID.</returns>
@@ -814,7 +816,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Updates the details of an event in the database.
+        ///     Updates the details of an event in the database.
         /// </summary>
         /// <param name="updatedEventDetail">The EventDetailDto object containing the updated event details.</param>
         public void UpdateEventDetail(EventDetailDto updatedEventDetail)
@@ -840,7 +842,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Adds a new event detail to the database.
+        ///     Adds a new event detail to the database.
         /// </summary>
         /// <param name="eventDetail">The EventDetailDto object representing the event detail to be added.</param>
         public void AddEventDetail(EventDetailDto eventDetail)
@@ -868,7 +870,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Deletes an event detail from the database based on the provided event ID.
+        ///     Deletes an event detail from the database based on the provided event ID.
         /// </summary>
         /// <param name="eventId">The ID of the event to delete its detail.</param>
         public void DeleteEventDetail(int eventId)
@@ -894,7 +896,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a list of event recurrences from the database.
+        ///     Retrieves a list of event recurrences from the database.
         /// </summary>
         /// <returns>A list of EventRecurrenceDto objects containing event recurrence details.</returns>
         public List<EventRecurrenceDto> GetEventRecurrences()
@@ -932,7 +934,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a specific event recurrence by its ID from the database.
+        ///     Retrieves a specific event recurrence by its ID from the database.
         /// </summary>
         /// <param name="Id">The ID of the event recurrence to retrieve.</param>
         /// <returns>The EventRecurrenceDto object representing the event recurrence with the specified ID.</returns>
@@ -970,7 +972,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Updates the details of an event recurrence in the database.
+        ///     Updates the details of an event recurrence in the database.
         /// </summary>
         /// <param name="updatedEventRecurrence">The EventRecurrenceDto object containing the updated event recurrence details.</param>
         public void UpdateEventRecurrence(EventRecurrenceDto updatedEventRecurrence)
@@ -997,7 +999,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Adds a new event recurrence to the database.
+        ///     Adds a new event recurrence to the database.
         /// </summary>
         /// <param name="eventRecurrence">The EventRecurrenceDto object representing the event recurrence to be added.</param>
         public void AddEventRecurrence(EventRecurrenceDto eventRecurrence)
@@ -1023,7 +1025,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Deletes an event recurrence from the database based on the provided ID.
+        ///     Deletes an event recurrence from the database based on the provided ID.
         /// </summary>
         /// <param name="id">The ID of the event recurrence to delete.</param>
         public void DeleteEventRecurrence(int id)
@@ -1049,7 +1051,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a list of event types from the database.
+        ///     Retrieves a list of event types from the database.
         /// </summary>
         /// <returns>A list of EventTypeDto objects containing event type details.</returns>
         public List<EventTypeDto> GetEventTypes()
@@ -1087,7 +1089,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a specific event type by its ID from the database.
+        ///     Retrieves a specific event type by its ID from the database.
         /// </summary>
         /// <param name="Id">The ID of the event type to retrieve.</param>
         /// <returns>The EventTypeDto object representing the event type with the specified ID.</returns>
@@ -1124,7 +1126,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Updates an existing event type in the database.
+        ///     Updates an existing event type in the database.
         /// </summary>
         /// <param name="updatedEventType">The EventTypeDto object containing the updated event type details.</param>
         public void UpdateEventType(EventTypeDto updatedEventType)
@@ -1151,7 +1153,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Adds a new event type to the database.
+        ///     Adds a new event type to the database.
         /// </summary>
         /// <param name="eventType">The EventTypeDto object representing the event type to be added.</param>
         public void AddEventType(EventTypeDto eventType)
@@ -1177,9 +1179,8 @@ namespace NewReminderASP.WcfService
         }
 
 
-
         /// <summary>
-        /// Deletes an event type from the database based on the provided ID.
+        ///     Deletes an event type from the database based on the provided ID.
         /// </summary>
         /// <param name="id">The ID of the event type to be deleted.</param>
         public void DeleteEventType(int id)
@@ -1205,7 +1206,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a list of personal information records from the database.
+        ///     Retrieves a list of personal information records from the database.
         /// </summary>
         /// <returns>A list of PersonalInfoDto objects containing personal information details.</returns>
         public List<PersonalInfoDto> GetPersonalInfos()
@@ -1248,7 +1249,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves personal information for a given user ID from the database.
+        ///     Retrieves personal information for a given user ID from the database.
         /// </summary>
         /// <param name="id">The ID of the user for whom personal information is to be retrieved.</param>
         /// <returns>The PersonalInfoDto object containing personal information of the user.</returns>
@@ -1274,7 +1275,6 @@ namespace NewReminderASP.WcfService
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
-                        {
                             // Populate PersonalInfoDto object with data from the database
                             personalInfo = new PersonalInfoDto
                             {
@@ -1286,7 +1286,6 @@ namespace NewReminderASP.WcfService
                                 Birthdate = reader.GetDateTime(5),
                                 Gender = reader.GetString(6)
                             };
-                        }
                     }
                 }
             }
@@ -1295,9 +1294,8 @@ namespace NewReminderASP.WcfService
         }
 
 
-
         /// <summary>
-        /// Updates the personal information of a user in the database.
+        ///     Updates the personal information of a user in the database.
         /// </summary>
         /// <param name="updatedPersonalInfo">The PersonalInfoDto object containing the updated personal information.</param>
         public void UpdatePersonalInfo(PersonalInfoDto updatedPersonalInfo)
@@ -1328,7 +1326,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Adds personal information of a user to the database.
+        ///     Adds personal information of a user to the database.
         /// </summary>
         /// <param name="personalInfo">The PersonalInfoDto object containing the personal information to be added.</param>
         public void AddPersonalInfo(PersonalInfoDto personalInfo)
@@ -1358,9 +1356,8 @@ namespace NewReminderASP.WcfService
         }
 
 
-
         /// <summary>
-        /// Deletes the personal information of a user from the database based on the provided UserID.
+        ///     Deletes the personal information of a user from the database based on the provided UserID.
         /// </summary>
         /// <param name="id">The UserID of the user whose personal information is to be deleted.</param>
         public void DeletePersonalInfo(int id)
@@ -1386,7 +1383,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a list of user phones from the database.
+        ///     Retrieves a list of user phones from the database.
         /// </summary>
         /// <returns>A list of UserPhoneDto objects containing user phone details.</returns>
         public List<UserPhoneDto> GetUserPhones()
@@ -1428,7 +1425,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a list of user phones for a specific user from the database.
+        ///     Retrieves a list of user phones for a specific user from the database.
         /// </summary>
         /// <param name="userId">The ID of the user for whom the phones are to be retrieved.</param>
         /// <returns>A list of UserPhoneDto objects containing user phone details.</returns>
@@ -1473,9 +1470,8 @@ namespace NewReminderASP.WcfService
         }
 
 
-
         /// <summary>
-        /// Retrieves a specific user phone details based on the provided ID from the database.
+        ///     Retrieves a specific user phone details based on the provided ID from the database.
         /// </summary>
         /// <param name="id">The ID of the user phone to retrieve.</param>
         /// <returns>The UserPhoneDto object containing details of the user phone.</returns>
@@ -1517,7 +1513,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Updates the user phone details in the database.
+        ///     Updates the user phone details in the database.
         /// </summary>
         /// <param name="updatedUserPhone">The UserPhoneDto object containing the updated user phone details.</param>
         public void UpdateUserPhone(UserPhoneDto updatedUserPhone)
@@ -1545,7 +1541,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Adds a new user phone to the database.
+        ///     Adds a new user phone to the database.
         /// </summary>
         /// <param name="userPhone">The UserPhoneDto object containing the user phone details to be added.</param>
         public void AddUserPhone(UserPhoneDto userPhone)
@@ -1573,7 +1569,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Adds a new user phone registration to the database.
+        ///     Adds a new user phone registration to the database.
         /// </summary>
         /// <param name="userPhone">The UserPhoneDto object containing the user phone registration details to be added.</param>
         public void AddUserPhoneRegister(UserPhoneDto userPhone)
@@ -1601,7 +1597,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Deletes a user phone from the database based on the provided ID.
+        ///     Deletes a user phone from the database based on the provided ID.
         /// </summary>
         /// <param name="id">The ID of the user phone to be deleted.</param>
         public void DeleteUserPhone(int id)
@@ -1626,7 +1622,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a list of phone types from the database.
+        ///     Retrieves a list of phone types from the database.
         /// </summary>
         /// <returns>A list of PhoneTypeDto objects containing phone type details.</returns>
         public List<PhoneTypeDto> GetPhoneTypes()
@@ -1665,7 +1661,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a specific phone type based on the provided ID from the database.
+        ///     Retrieves a specific phone type based on the provided ID from the database.
         /// </summary>
         /// <param name="id">The ID of the phone type to retrieve.</param>
         /// <returns>The PhoneTypeDto object containing details of the phone type.</returns>
@@ -1704,7 +1700,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Updates an existing phone type in the database.
+        ///     Updates an existing phone type in the database.
         /// </summary>
         /// <param name="updatedPhoneType">The PhoneTypeDto object containing the updated phone type details.</param>
         public void UpdatePhoneType(PhoneTypeDto updatedPhoneType)
@@ -1729,7 +1725,7 @@ namespace NewReminderASP.WcfService
         }
 
         /// <summary>
-        /// Adds a new phone type to the database.
+        ///     Adds a new phone type to the database.
         /// </summary>
         /// <param name="eventPhoneType">The PhoneTypeDto object containing the details of the new phone type to be added.</param>
         public void AddPhoneType(PhoneTypeDto eventPhoneType)
@@ -1754,7 +1750,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Deletes a phone type from the database based on the provided ID.
+        ///     Deletes a phone type from the database based on the provided ID.
         /// </summary>
         /// <param name="id">The ID of the phone type to delete.</param>
         public void DeletePhoneType(int id)
@@ -1776,7 +1772,7 @@ namespace NewReminderASP.WcfService
         }
 
         /// <summary>
-        /// Assigns roles to a user in the database.
+        ///     Assigns roles to a user in the database.
         /// </summary>
         /// <param name="user">The UserDto object representing the user to assign roles.</param>
         /// <param name="roles">A list of role names to assign to the user.</param>
@@ -1808,7 +1804,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a user object based on the provided login from the database.
+        ///     Retrieves a user object based on the provided login from the database.
         /// </summary>
         /// <param name="login">The login of the user to retrieve.</param>
         /// <returns>The UserDto object containing details of the user.</returns>
@@ -1829,7 +1825,6 @@ namespace NewReminderASP.WcfService
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
-                        {
                             if (user == null)
                             {
                                 // Create a new UserDto and populate its properties with data from the database
@@ -1850,7 +1845,6 @@ namespace NewReminderASP.WcfService
                                 // Add roles to the existing user
                                 user.Roles.Add(reader.IsDBNull(3) ? string.Empty : reader.GetString(3));
                             }
-                        }
                     }
                 }
             }
@@ -1860,7 +1854,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a user object based on the provided email from the database.
+        ///     Retrieves a user object based on the provided email from the database.
         /// </summary>
         /// <param name="email">The email of the user to retrieve.</param>
         /// <returns>The UserDto object containing details of the user.</returns>
@@ -1881,7 +1875,6 @@ namespace NewReminderASP.WcfService
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
-                        {
                             // Populate the UserDto with data from the database
                             user = new UserDto
                             {
@@ -1890,7 +1883,6 @@ namespace NewReminderASP.WcfService
                                 Email = reader.GetString(2),
                                 Password = reader.GetString(3)
                             };
-                        }
                     }
                 }
             }
@@ -1900,7 +1892,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Adds a new user to the database.
+        ///     Adds a new user to the database.
         /// </summary>
         /// <param name="user">The UserDto object containing the user details to be added.</param>
         public void AddUser(UserDto user)
@@ -1925,7 +1917,7 @@ namespace NewReminderASP.WcfService
         }
 
         /// <summary>
-        /// Updates an existing user in the database.
+        ///     Updates an existing user in the database.
         /// </summary>
         /// <param name="updateUser">The UserDto object containing the updated user details.</param>
         public void UpdateUser(UserDto updateUser)
@@ -1949,9 +1941,8 @@ namespace NewReminderASP.WcfService
         }
 
 
-
         /// <summary>
-        /// Deletes a user from the database based on the provided user ID.
+        ///     Deletes a user from the database based on the provided user ID.
         /// </summary>
         /// <param name="id">The ID of the user to be deleted.</param>
         public void DeleteUser(int id)
@@ -1972,7 +1963,7 @@ namespace NewReminderASP.WcfService
         }
 
         /// <summary>
-        /// Retrieves a user object based on the provided password from the database.
+        ///     Retrieves a user object based on the provided password from the database.
         /// </summary>
         /// <param name="password">The password of the user to retrieve.</param>
         /// <returns>The UserDto object containing details of the user.</returns>
@@ -1993,7 +1984,6 @@ namespace NewReminderASP.WcfService
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
-                        {
                             // Populate the UserDto with data from the database
                             user = new UserDto
                             {
@@ -2001,7 +1991,6 @@ namespace NewReminderASP.WcfService
                                 Password = reader.GetString(1),
                                 Email = reader.GetString(2)
                             };
-                        }
                     }
                 }
             }
@@ -2010,9 +1999,8 @@ namespace NewReminderASP.WcfService
         }
 
 
-
         /// <summary>
-        /// Adds a new role to the database.
+        ///     Adds a new role to the database.
         /// </summary>
         /// <param name="role">The RoleDto object representing the role to be added.</param>
         public void AddRole(RoleDto role)
@@ -2035,7 +2023,7 @@ namespace NewReminderASP.WcfService
         }
 
         /// <summary>
-        /// Updates an existing role in the database.
+        ///     Updates an existing role in the database.
         /// </summary>
         /// <param name="updatedRole">The RoleDto object representing the updated role.</param>
         public void UpdateRole(RoleDto updatedRole)
@@ -2060,7 +2048,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Removes a role from the database based on the provided role ID.
+        ///     Removes a role from the database based on the provided role ID.
         /// </summary>
         /// <param name="id">The ID of the role to be removed.</param>
         public void RemoveRole(int id)
@@ -2081,7 +2069,7 @@ namespace NewReminderASP.WcfService
         }
 
         /// <summary>
-        /// Retrieves all roles from the database.
+        ///     Retrieves all roles from the database.
         /// </summary>
         /// <returns>An array of RoleDto objects representing all roles in the database.</returns>
         public RoleDto[] GetRoles()
@@ -2118,7 +2106,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a role from the database based on the provided role ID.
+        ///     Retrieves a role from the database based on the provided role ID.
         /// </summary>
         /// <param name="id">The ID of the role to retrieve.</param>
         /// <returns>The RoleDto object representing the role with the provided ID.</returns>
@@ -2139,14 +2127,12 @@ namespace NewReminderASP.WcfService
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
-                        {
                             // Populate the RoleDto with data from the database
                             role = new RoleDto
                             {
                                 Id = reader.GetInt32(0),
                                 Name = reader.GetString(1)
                             };
-                        }
                     }
                 }
             }
@@ -2155,7 +2141,7 @@ namespace NewReminderASP.WcfService
         }
 
         /// <summary>
-        /// Adds a user role to the database.
+        ///     Adds a user role to the database.
         /// </summary>
         /// <param name="userRole">The UserRoleDto object representing the user role to be added.</param>
         public void AddUserRole(UserRoleDto userRole)
@@ -2178,7 +2164,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Updates the roles associated with a user in the database.
+        ///     Updates the roles associated with a user in the database.
         /// </summary>
         /// <param name="userId">The ID of the user whose roles are to be updated.</param>
         /// <param name="roleIds">A string representing the updated role IDs for the user.</param>
@@ -2203,7 +2189,7 @@ namespace NewReminderASP.WcfService
         }
 
         /// <summary>
-        /// Adds a role to a user in the database.
+        ///     Adds a role to a user in the database.
         /// </summary>
         /// <param name="userLogin">The login of the user to whom the role will be added.</param>
         /// <param name="roleName">The name of the role to be added to the user.</param>
@@ -2228,9 +2214,8 @@ namespace NewReminderASP.WcfService
         }
 
 
-
         /// <summary>
-        /// Retrieves all user roles from the database.
+        ///     Retrieves all user roles from the database.
         /// </summary>
         /// <returns>An array of UserRoleDto objects representing all user roles in the database.</returns>
         public UserRoleDto[] GetUsersRoles()
@@ -2266,7 +2251,7 @@ namespace NewReminderASP.WcfService
         }
 
         /// <summary>
-        /// Retrieves user roles from the database based on the provided user ID.
+        ///     Retrieves user roles from the database based on the provided user ID.
         /// </summary>
         /// <param name="userId">The ID of the user whose roles are to be retrieved.</param>
         /// <returns>The UserRoleDto object representing the roles of the user with the provided ID.</returns>
@@ -2287,14 +2272,12 @@ namespace NewReminderASP.WcfService
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
-                        {
                             // Populate the UserRoleDto with data from the database
                             userRoles = new UserRoleDto
                             {
                                 UserId = reader.GetInt32(0),
                                 RoleId = reader.GetInt32(1)
                             };
-                        }
                     }
                 }
             }
@@ -2304,7 +2287,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a user with associated roles from the database.
+        ///     Retrieves a user with associated roles from the database.
         /// </summary>
         /// <param name="userId">The ID of the user to retrieve.</param>
         /// <returns>The UserDto object representing the user with the provided ID.</returns>
@@ -2336,10 +2319,8 @@ namespace NewReminderASP.WcfService
                             };
 
                             while (reader.Read())
-                            {
                                 // Add all associated roles to the user
                                 user.Roles.Add(reader.GetString(4));
-                            }
                         }
                     }
                 }
@@ -2350,7 +2331,7 @@ namespace NewReminderASP.WcfService
 
 
         /// <summary>
-        /// Retrieves a user based on the provided password and login from the database.
+        ///     Retrieves a user based on the provided password and login from the database.
         /// </summary>
         /// <param name="password">The password of the user to retrieve.</param>
         /// <param name="login">The login of the user to retrieve.</param>
@@ -2373,7 +2354,6 @@ namespace NewReminderASP.WcfService
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
-                        {
                             user = new UserDto
                             {
                                 Id = reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
@@ -2381,7 +2361,6 @@ namespace NewReminderASP.WcfService
                                 Email = reader.IsDBNull(2) ? string.Empty : reader.GetString(2),
                                 Roles = new List<string> { reader.IsDBNull(3) ? string.Empty : reader.GetString(3) }
                             };
-                        }
                     }
                 }
             }
@@ -2390,9 +2369,8 @@ namespace NewReminderASP.WcfService
         }
 
 
-
         /// <summary>
-        /// Retrieves all users along with their associated roles from the database.
+        ///     Retrieves all users along with their associated roles from the database.
         /// </summary>
         /// <returns>A list of UserDto objects representing all users and their roles in the database.</returns>
         public List<UserDto> GetUsers()
@@ -2441,6 +2419,5 @@ namespace NewReminderASP.WcfService
 
             return users;
         }
-
     }
 }

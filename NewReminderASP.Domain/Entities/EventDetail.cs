@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Represents details of an event.
+    ///     Represents details of an event.
     /// </summary>
     public class EventDetail
     {
@@ -17,6 +17,8 @@ namespace NewReminderASP.Domain.Entities
         public string Status { get; set; }
 
         public virtual Event Event { get; set; } // Navigation property to link to the associated Event
-        public List<Event> EventsId { get; set; } // List property to hold associated events (consider renaming for clarity)
+
+        public List<Event>
+            EventsId { get; set; } // List property to hold associated events (consider renaming for clarity)
     }
 }

@@ -3,7 +3,7 @@
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Model representing user details along with associated addresses, phones, personal information, and events.
+    ///     Model representing user details along with associated addresses, phones, personal information, and events.
     /// </summary>
     public class UserDetailsViewModel
     {

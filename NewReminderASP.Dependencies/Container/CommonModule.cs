@@ -6,12 +6,12 @@ using NewReminderASP.Data.Container;
 namespace NewReminderASP.Dependencies.Container
 {
     /// <summary>
-    /// Module for configuring common dependencies used across the application.
+    ///     Module for configuring common dependencies used across the application.
     /// </summary>
     public class CommonModule : Module
     {
         /// <summary>
-        /// Loads the configuration of common dependencies into the Autofac container.
+        ///     Loads the configuration of common dependencies into the Autofac container.
         /// </summary>
         /// <param name="builder">The container builder to register dependencies with.</param>
         protected override void Load(ContainerBuilder builder)

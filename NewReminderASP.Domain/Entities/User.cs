@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Represents a user in the system.
+    ///     Represents a user in the system.
     /// </summary>
     public class User
     {
@@ -18,7 +18,8 @@ namespace NewReminderASP.Domain.Entities
         [Required(ErrorMessage = "Please enter a Password")]
         [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$",
-            ErrorMessage = "The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")]
+            ErrorMessage =
+                "The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")]
         public string Password { get; set; }
 
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]

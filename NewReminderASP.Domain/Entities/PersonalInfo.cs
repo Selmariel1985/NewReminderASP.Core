@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Represents personal information of a user.
+    ///     Represents personal information of a user.
     /// </summary>
     public class PersonalInfo
     {

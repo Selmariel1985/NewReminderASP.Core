@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// Represents a user's phone details.
+    ///     Represents a user's phone details.
     /// </summary>
     public class UserPhone
     {

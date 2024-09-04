@@ -8,13 +8,12 @@ using NewReminderASP.Services.Dtos;
 namespace NewReminderASP.Data.Client
 {
     /// <summary>
-    /// Client class for interacting with the country service.
+    ///     Client class for interacting with the country service.
     /// </summary>
     public class CountryClient : ICountryClient
     {
-
         /// <summary>
-        /// Retrieve a list of countries from the country service.
+        ///     Retrieve a list of countries from the country service.
         /// </summary>
         /// <returns>A list of Country objects</returns>
         public List<Country> GetCountries()
@@ -30,10 +29,8 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetCountries();
 
                     if (result != null)
-                    {
                         // Transform each CountryDto object to Country object and add to the list
                         foreach (var countryDto in result)
-                        {
                             countries.Add(new Country
                             {
                                 CountryID = countryDto.CountryID,
@@ -41,8 +38,6 @@ namespace NewReminderASP.Data.Client
                                 PhoneCode = countryDto.PhoneCode,
                                 Name = countryDto.Name
                             });
-                        }
-                    }
 
                     connection.Close(); // Close the connection to the service
                 }
@@ -60,10 +55,8 @@ namespace NewReminderASP.Data.Client
         }
 
 
-
-
         /// <summary>
-        /// Retrieves a specific country by its ID from the country service.
+        ///     Retrieves a specific country by its ID from the country service.
         /// </summary>
         /// <param name="id">The ID of the country to retrieve</param>
         /// <returns>The Country object corresponding to the specified ID, or null if not found</returns>
@@ -80,7 +73,6 @@ namespace NewReminderASP.Data.Client
                     var result = connection.GetCountry(id); // Retrieve the country by its ID
 
                     if (result != null)
-                    {
                         // Create a new Country object with data from the result
                         country = new Country
                         {
@@ -89,7 +81,6 @@ namespace NewReminderASP.Data.Client
                             PhoneCode = result.PhoneCode,
                             Name = result.Name
                         };
-                    }
 
                     connection.Close(); // Close connection to the service
                 }
@@ -107,7 +98,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Updates a country in the country service.
+        ///     Updates a country in the country service.
         /// </summary>
         /// <param name="updateCountry">The country object to be updated</param>
         public void UpdateCountry(Country updateCountry)
@@ -141,7 +132,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Adds a new country to the country service.
+        ///     Adds a new country to the country service.
         /// </summary>
         /// <param name="country">The country object to be added</param>
         public void AddCountry(Country country)
@@ -174,7 +165,7 @@ namespace NewReminderASP.Data.Client
         }
 
         /// <summary>
-        /// Deletes a country from the country service using the specified ID.
+        ///     Deletes a country from the country service using the specified ID.
         /// </summary>
         /// <param name="id">The ID of the country to delete</param>
         public void DeleteCountry(int id)

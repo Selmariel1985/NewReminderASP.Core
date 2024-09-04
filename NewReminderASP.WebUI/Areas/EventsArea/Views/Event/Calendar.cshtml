@@ -13,28 +13,188 @@
         eventTypes = e.EventTypes
     }));
 }
-<div>
-    <label for="goto-date">Go to date:</label>
-    <input type="date" id="goto-date">
-    <button id="goto-date-btn">Go</button>
+<div class="calendar-controls">
+    <div class="control-group">
+        <label for="goto-date">Go to date:</label>
+        <input type="date" id="goto-date" class="control-input">
+        <button id="goto-date-btn" class="control-button">Go</button>
+    </div>
+
+    <div class="control-group">
+        <label for="search-title">Search event:</label>
+        <input type="text" id="search-title" placeholder="Event title" class="control-input">
+        <button id="search-title-btn" class="control-button">Search</button>
+    </div>
 </div>
 
-<div>
-    <label for="search-title">Search event:</label>
-    <input type="text" id="search-title" placeholder="Event title">
-    <button id="search-title-btn">Search</button>
+<div id="results-list" class="results-list">
+    <ul></ul>
 </div>
-
-<div id="results-list"></div>
 
 <div id="calendar"></div>
 
-<div id="external-events">
+<div id="external-events"></div>
 
-</div>
+
 
 
 <style>
+    :root {
+        --primary-color: #4CAF50;
+        --secondary-color: #FF8A00;
+        --background-color: #f2f2f2;
+        --text-color: #333;
+        --border-radius: 8px;
+    }
+
+    body {
+        background-color: var(--background-color);
+        color: var(--text-color);
+        font-family: 'Roboto', sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .calendar-controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: var(--primary-color);
+        color: #fff;
+        border-radius: var(--border-radius);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 800px;
+    }
+
+    .control-group {
+        display: flex;
+        flex: 1 1 45%;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+        .control-group label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+    .control-input {
+        padding: 10px;
+        border: none;
+        border-radius: var(--border-radius);
+        margin-right: 10px;
+        flex: 1;
+        outline: none;
+    }
+
+    .control-button {
+        padding: 10px 20px;
+        background-color: var(--secondary-color);
+        border: none;
+        border-radius: var(--border-radius);
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .control-button:hover {
+            background-color: #e67300; /* Slightly darker secondary color */
+            transform: scale(1.05); /* Slightly increase size */
+        }
+
+    .results-list {
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: var(--border-radius);
+        margin: 20px auto;
+        max-width: 800px;
+        overflow-y: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+        .results-list ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: contents;
+        }
+
+        .results-list li {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+            .results-list li:last-child {
+                border: none;
+            }
+
+            .results-list li:hover {
+                background-color: #e0e7ff;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+        .results-list .buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .results-list button {
+            margin-left: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: #fff;
+            border-radius: var(--border-radius);
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+            .results-list button:hover {
+                background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+                transform: scale(1.05);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .results-list button .icon {
+                margin-right: 5px;
+            }
+
+    .calendar-container, .external-events {
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: var(--border-radius);
+        margin: 20px auto;
+        max-width: 800px;
+    }
+
+    .control-group {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .control-input {
+        width: calc(100% - 90px); /* Adjust according to label and button size */
+    }
+
+    .control-button {
+        width: 80px;
+        margin-top: 10px;
+    }
+
     .fc-event-title-wrap {
         display: flex;
         align-items: center;
@@ -45,8 +205,6 @@
     .fc-event-title-text {
         margin-right: 10px;
     }
-
-
 
     .fc-event-action {
         margin-right: 5px;
@@ -61,6 +219,9 @@
         display: flex;
         align-items: center;
     }
+
+
+
 </style>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/main.min.css">
@@ -142,12 +303,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-  document.getElementById('search-title-btn').addEventListener('click', function () {
+ document.getElementById('search-title-btn').addEventListener('click', function () {
     var searchValue = document.getElementById('search-title').value.toLowerCase();
     var events = calendar.getEvents();
 
     var resultsListEl = document.getElementById('results-list');
-    resultsListEl.innerHTML = '';
+    resultsListEl.innerHTML = '<ul></ul>';
+    var resultsListUl = resultsListEl.querySelector('ul');
 
     events.forEach(event => {
         event.setProp('display', 'auto');
@@ -158,44 +320,53 @@ document.addEventListener('DOMContentLoaded', function () {
     if (matchingEvents.length > 0) {
         matchingEvents.forEach(matchingEvent => {
             var listItem = document.createElement('li');
-            listItem.innerHTML = `${matchingEvent.title} (${matchingEvent.start.toISOString().substring(0, 10)}) <button class="view-event-btn" data-eventid="${matchingEvent.id}">View</button> <button class="edit-event-btn" data-eventid="${matchingEvent.id}">Edit</button> <button class="delete-event-btn" data-eventid="${matchingEvent.id}">Delete</button>`;
-            resultsListEl.appendChild(listItem);
+            listItem.innerHTML = `
+                ${matchingEvent.title} (${matchingEvent.start.toISOString().substring(0, 10)})
+                <div class="buttons">
+                    <button class="view-event-btn" data-eventid="${matchingEvent.id}"><i class="fas fa-eye icon"></i>View</button>
+                    <button class="edit-event-btn" data-eventid="${matchingEvent.id}"><i class="fas fa-edit icon"></i>Edit</button>
+                    <button class="delete-event-btn" data-eventid="${matchingEvent.id}"><i class="fas fa-trash icon"></i>Delete</button>
+                </div>
+            `;
+            resultsListUl.appendChild(listItem);
 
-            resultsListEl.querySelectorAll('.view-event-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    var eventId = this.getAttribute('data-eventid');
-                    viewEvent(eventId);
-                });
-            });
-
-            resultsListEl.querySelectorAll('.edit-event-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    var eventId = this.getAttribute('data-eventid');
-                    editEvent(eventId);
-                });
-            });
-
-            resultsListEl.querySelectorAll('.delete-event-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    var eventId = this.getAttribute('data-eventid');
-                    deleteEvent(eventId);
-                });
-            });
-
+            addEventListeners(resultsListUl);
             matchingEvent.setProp('backgroundColor', '#ff9f89');
         });
 
-        var firstMatchingEvent = matchingEvents[0];
-        calendar.gotoDate(firstMatchingEvent.start);
+        calendar.gotoDate(matchingEvents[0].start);
         setTimeout(() => {
             matchingEvents.forEach(matchingEvent => {
                 matchingEvent.setProp('backgroundColor', '');
             });
         }, 2000);
     } else {
-        resultsListEl.innerHTML = '<li>No matching events found.</li>';
+        resultsListUl.innerHTML = '<li>No matching events found.</li>';
     }
 });
+
+function addEventListeners(parent) {
+    parent.querySelectorAll('.view-event-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            var eventId = this.getAttribute('data-eventid');
+            viewEvent(eventId);
+        });
+    });
+
+     parent.querySelectorAll('.edit-event-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            var eventId = this.getAttribute('data-eventid');
+            editEvent(eventId);
+        });
+    });
+
+    parent.querySelectorAll('.delete-event-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            var eventId = this.getAttribute('data-eventid');
+            deleteEvent(eventId);
+        });
+    });
+}
 
 function viewEvent(eventId) {
     var detailsUrl = '@Url.Action("EventDetails", "Event", new { area = "EventsArea", id = "__eventId__" })'.replace('__eventId__', eventId);

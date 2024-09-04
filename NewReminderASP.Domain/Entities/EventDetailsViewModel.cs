@@ -3,7 +3,7 @@
 namespace NewReminderASP.Domain.Entities
 {
     /// <summary>
-    /// ViewModel representing details of an event along with associated users.
+    ///     ViewModel representing details of an event along with associated users.
     /// </summary>
     public class EventDetailsViewModel
     {
