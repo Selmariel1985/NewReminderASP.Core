@@ -46,16 +46,23 @@
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\EventDetail.cs" />
+    <Compile Include="Entities\EventDetailsViewModel.cs" />
     <Compile Include="Entities\EventRecurrence.cs" />
     <Compile Include="Entities\EventType.cs" />
+    <Compile Include="Entities\EventViewModel.cs" />
     <Compile Include="Entities\PersonalInfo.cs" />
     <Compile Include="Entities\PhoneType.cs" />
+    <Compile Include="Entities\RegisterViewModel.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserAndRolesModel.cs" />
+    <Compile Include="Entities\UserDetailsViewModel.cs" />
     <Compile Include="Entities\UserPhone.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

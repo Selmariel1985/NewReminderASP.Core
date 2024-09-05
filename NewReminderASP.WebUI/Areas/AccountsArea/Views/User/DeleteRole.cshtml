@@ -1,0 +1,33 @@
+﻿@model NewReminderASP.Domain.Entities.Role
+@{
+    ViewBag.Title = "Delete Role";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+<div class="delete-container">
+    <h2>Delete Role</h2>
+    <p>Are you sure you want to delete this Role?</p>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm("DeleteRole", "User", new { id = Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions">
+            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this role?');"/>
+        </div>
+    }
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-6">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>

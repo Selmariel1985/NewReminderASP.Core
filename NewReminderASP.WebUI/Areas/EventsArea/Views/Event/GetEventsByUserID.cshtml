@@ -1,0 +1,46 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.Event>
+@{
+    ViewBag.Title = "Event List";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+
+
+<div class="details-details">
+
+    <h2>Event List</h2>
+
+    <hr/>
+    @foreach (var userEvent in Model)
+    {
+        <div>
+            <h3>@userEvent.Login Event</h3>
+            <dl>
+                <dt>Event Title:</dt>
+                <dd>@userEvent.Title</dd>
+
+                <dt>Event Type:</dt>
+                <dd>@userEvent.EventTypes</dd>
+
+                <dt>Date:</dt>
+                <dd>@userEvent.Date.ToString("dd-MM-yyyy")</dd>
+
+                <dt>Time:</dt>
+                <dd>@userEvent.Time.ToString("hh\\:mm")</dd>
+
+                <dt>Recurrence:</dt>
+                <dd>@userEvent.Recurrence</dd>
+
+                <dt>Reminders:</dt>
+                <dd>@userEvent.Reminders</dd>
+
+
+            </dl>
+
+
+            @*<a href="@Url.Action("Edit", "Event", new { id = userEvent.ID })" class="btn btn-details">Edit Event</a>
+            <a href="@Url.Action("Delete", "Event", new { id = userEvent.ID })" class="btn btn-details">Delete Event</a>*@
+        </div>
+        <hr/>
+    }
+</div>

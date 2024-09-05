@@ -1,0 +1,86 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.Address>
+
+@{
+    ViewBag.Title = "Addresses";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+<div class="form-container">
+
+    <h2>Addresses</h2>
+
+    <a href="@Url.Action("CreateAdmin", "Address", new { area = "AddressArea" })" class="btn btn-primary">Create Address</a>
+    <a href="@Url.Action("CreateCountry", "Country", new { area = "AddressArea" })" class="btn btn-primary">Create Country</a>
+
+
+    <form action="@Url.Action("Index")" method="get">
+        <div class="filter-bar">
+            <label for="orderBy">Sort by:</label>
+            <select id="orderBy" name="orderBy">
+                <option value="Id">ID</option>
+                <option value="Street">Street</option>
+                <option value="City">City</option>
+                <option value="CountryName">CountryName</option>
+                <option value="PostalCode">PostalCode</option>
+                <option value="Description">Description</option>
+                <option value="Login">Login</option>
+            </select>
+            <label for="sortOrder">Order:</label>
+            <select id="sortOrder" name="sortOrder">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+            <input type="submit" value="Filter" class="btn"/>
+        </div>
+
+        <table class="table-eco">
+            <tr>
+                <th>@Html.ActionLink("ID", "Index", new { orderBy = "ID", sortOrder = ViewBag.OrderBy == "ID" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Street", "Index", new { orderBy = "Street", sortOrder = ViewBag.OrderBy == "Street" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("City", "Index", new { orderBy = "City", sortOrder = ViewBag.OrderBy == "City" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("CountryName", "Index", new { orderBy = "CountryName", sortOrder = ViewBag.OrderBy == "CountryName" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("PostalCode", "Index", new { orderBy = "PostalCode", sortOrder = ViewBag.OrderBy == "PostalCode" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Description", "Index", new { orderBy = "Description", sortOrder = ViewBag.OrderBy == "Description" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Login", "Index", new { orderBy = "Login", sortOrder = ViewBag.OrderBy == "Login" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+            </tr>
+            @foreach (var address in Model)
+            {
+                <tr onclick="redirectToDetails('@Url.Action("GetAddressesByUserID", "Address", new { id = address.UserID })')">
+                    <td>@address.ID</td>
+                    <td>@address.Street</td>
+                    <td>@address.City</td>
+                    <td>@address.CountryName</td>
+                    <td>@address.PostalCode</td>
+                    <td>@address.Description</td>
+                    <td>@address.Login</td>
+
+
+                </tr>
+            }
+        </table>
+    </form>
+    <div class="pagination">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
+        }
+
+
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage + 1 })" class="btn btn-eco">Next</a>
+        }
+
+    </div>
+</div>
+
+<script>
+    function redirectToDetails(url) {
+        window.location.href = url;
+    }
+</script>

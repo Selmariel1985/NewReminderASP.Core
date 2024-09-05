@@ -1,0 +1,27 @@
+﻿@model NewReminderASP.Domain.Entities.Country
+
+@{
+    ViewBag.Title = "Country Details";
+}
+
+<link href="~/styles.css" rel="stylesheet" />
+<div class="details-details">
+
+
+    <h2>Country: @Model.Name</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.CountryCode)</dt>
+        <dd>@Html.DisplayFor(model => model.CountryCode)</dd>
+        <dt>@Html.DisplayNameFor(model => model.PhoneCode)</dt>
+        <dd>@Html.DisplayFor(model => model.PhoneCode)</dd>
+
+    </dl>
+
+
+    @Html.ActionLink("Edit", "EditCountry", new { id = Model.CountryID }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Delete", "DeleteCountry", new { id = Model.CountryID }, new { @class = "btn btn-danger " })
+
+
+</div> 
+@Html.ActionLink("Back to List", "IndexCountry", null, new { @class = "btn btn-secondary " })

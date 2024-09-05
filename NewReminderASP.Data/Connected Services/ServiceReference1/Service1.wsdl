@@ -2,10 +2,10 @@
 <wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:64859/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:64859/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:64859/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" />
-      <xsd:import schemaLocation="http://localhost:64859/Service1.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:1080/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:1080/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:1080/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" />
+      <xsd:import schemaLocation="http://localhost:1080/Service1.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUserService_GetUsers_InputMessage">
@@ -86,6 +86,12 @@
   <wsdl:message name="IUserService_AddUserRole_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddUserRoleResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_UpdateRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRole" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRoleResponse" />
+  </wsdl:message>
   <wsdl:message name="IUserService_RemoveRole_InputMessage">
     <wsdl:part name="parameters" element="tns:RemoveRole" />
   </wsdl:message>
@@ -109,6 +115,12 @@
   </wsdl:message>
   <wsdl:message name="IUserService_AssignRolesToUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:AssignRolesToUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUserRoles_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserRoles" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateUserRoles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserRolesResponse" />
   </wsdl:message>
   <wsdl:message name="IUserService_AddUserRoleNormal_InputMessage">
     <wsdl:part name="parameters" element="tns:AddUserRoleNormal" />
@@ -158,6 +170,18 @@
   <wsdl:message name="IAddressService_GetAddress_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAddressResponse" />
   </wsdl:message>
+  <wsdl:message name="IAddressService_GetAddressByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressByID" />
+  </wsdl:message>
+  <wsdl:message name="IAddressService_GetAddressByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAddressService_GetAddressesByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressesByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IAddressService_GetAddressesByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressesByUserIdResponse" />
+  </wsdl:message>
   <wsdl:message name="IAddressService_UpdateAddress_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateAddress" />
   </wsdl:message>
@@ -169,6 +193,12 @@
   </wsdl:message>
   <wsdl:message name="IAddressService_AddAddress_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAddressService_AddAddressRegister_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAddressRegister" />
+  </wsdl:message>
+  <wsdl:message name="IAddressService_AddAddressRegister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAddressRegisterResponse" />
   </wsdl:message>
   <wsdl:message name="IAddressService_DeleteAddress_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteAddress" />
@@ -205,6 +235,210 @@
   </wsdl:message>
   <wsdl:message name="IPersonalInfoService_DeletePersonalInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeletePersonalInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEvents_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEvents" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEvents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventsForUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsForUser" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventsForUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventsForID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsForID" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventsForID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsForIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEvent" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_UpdateEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEvent" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_UpdateEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_AddEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddEvent" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_AddEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_DeleteEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEvent" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_DeleteEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventDetails" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventDetail" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_UpdateEventDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEventDetail" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_UpdateEventDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEventDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_AddEventDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddEventDetail" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_AddEventDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddEventDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_DeleteEventDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEventDetail" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_DeleteEventDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEventDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventRecurrences_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventRecurrences" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventRecurrences_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventRecurrencesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventRecurrence_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventRecurrence" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventRecurrence_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventRecurrenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_UpdateEventRecurrence_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEventRecurrence" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_UpdateEventRecurrence_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEventRecurrenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_AddEventRecurrence_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddEventRecurrence" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_AddEventRecurrence_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddEventRecurrenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_DeleteEventRecurrence_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEventRecurrence" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_DeleteEventRecurrence_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEventRecurrenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventTypes" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventType" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_GetEventType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_UpdateEventType_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEventType" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_UpdateEventType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEventTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_AddEventType_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddEventType" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_AddEventType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddEventTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_DeleteEventType_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEventType" />
+  </wsdl:message>
+  <wsdl:message name="IEventService_DeleteEventType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEventTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetUserPhones_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPhones" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetUserPhones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPhonesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetUserPhonesByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPhonesByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetUserPhonesByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPhonesByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetUserPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPhone" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetUserPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_UpdateUserPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserPhone" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_UpdateUserPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_AddUserPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserPhone" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_AddUserPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_AddUserPhoneRegister_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserPhoneRegister" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_AddUserPhoneRegister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserPhoneRegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_DeleteUserPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserPhone" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_DeleteUserPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetPhoneTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhoneTypes" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetPhoneTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhoneTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetPhoneType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhoneType" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_GetPhoneType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhoneTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_UpdatePhoneType_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePhoneType" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_UpdatePhoneType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePhoneTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_AddPhoneType_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPhoneType" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_AddPhoneType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPhoneTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_DeletePhoneType_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePhoneType" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneService_DeletePhoneType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePhoneTypeResponse" />
   </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="GetUsers">
@@ -259,6 +493,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddUserRole" message="tns:IUserService_AddUserRole_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AddUserRoleResponse" message="tns:IUserService_AddUserRole_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateRole" message="tns:IUserService_UpdateRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateRoleResponse" message="tns:IUserService_UpdateRole_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="RemoveRole">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/RemoveRole" message="tns:IUserService_RemoveRole_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/RemoveRoleResponse" message="tns:IUserService_RemoveRole_OutputMessage" />
@@ -274,6 +512,10 @@
     <wsdl:operation name="AssignRolesToUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AssignRolesToUser" message="tns:IUserService_AssignRolesToUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AssignRolesToUserResponse" message="tns:IUserService_AssignRolesToUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserRoles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateUserRoles" message="tns:IUserService_UpdateUserRoles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateUserRolesResponse" message="tns:IUserService_UpdateUserRoles_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddUserRoleNormal">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddUserRoleNormal" message="tns:IUserService_AddUserRoleNormal_InputMessage" />
@@ -311,6 +553,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAddressService/GetAddress" message="tns:IAddressService_GetAddress_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAddressService/GetAddressResponse" message="tns:IAddressService_GetAddress_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetAddressByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAddressService/GetAddressByID" message="tns:IAddressService_GetAddressByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAddressService/GetAddressByIDResponse" message="tns:IAddressService_GetAddressByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressesByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAddressService/GetAddressesByUserId" message="tns:IAddressService_GetAddressesByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAddressService/GetAddressesByUserIdResponse" message="tns:IAddressService_GetAddressesByUserId_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="UpdateAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/IAddressService/UpdateAddress" message="tns:IAddressService_UpdateAddress_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAddressService/UpdateAddressResponse" message="tns:IAddressService_UpdateAddress_OutputMessage" />
@@ -318,6 +568,10 @@
     <wsdl:operation name="AddAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/IAddressService/AddAddress" message="tns:IAddressService_AddAddress_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAddressService/AddAddressResponse" message="tns:IAddressService_AddAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAddressRegister">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAddressService/AddAddressRegister" message="tns:IAddressService_AddAddressRegister_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAddressService/AddAddressRegisterResponse" message="tns:IAddressService_AddAddressRegister_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/IAddressService/DeleteAddress" message="tns:IAddressService_DeleteAddress_InputMessage" />
@@ -344,6 +598,146 @@
     <wsdl:operation name="DeletePersonalInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalInfoService/DeletePersonalInfo" message="tns:IPersonalInfoService_DeletePersonalInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalInfoService/DeletePersonalInfoResponse" message="tns:IPersonalInfoService_DeletePersonalInfo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IEventService">
+    <wsdl:operation name="GetEvents">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEvents" message="tns:IEventService_GetEvents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventsResponse" message="tns:IEventService_GetEvents_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsForUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEventsForUser" message="tns:IEventService_GetEventsForUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventsForUserResponse" message="tns:IEventService_GetEventsForUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsForID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEventsForID" message="tns:IEventService_GetEventsForID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventsForIDResponse" message="tns:IEventService_GetEventsForID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEvent" message="tns:IEventService_GetEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventResponse" message="tns:IEventService_GetEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/UpdateEvent" message="tns:IEventService_UpdateEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/UpdateEventResponse" message="tns:IEventService_UpdateEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/AddEvent" message="tns:IEventService_AddEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/AddEventResponse" message="tns:IEventService_AddEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/DeleteEvent" message="tns:IEventService_DeleteEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/DeleteEventResponse" message="tns:IEventService_DeleteEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEventDetails" message="tns:IEventService_GetEventDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventDetailsResponse" message="tns:IEventService_GetEventDetails_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventDetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEventDetail" message="tns:IEventService_GetEventDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventDetailResponse" message="tns:IEventService_GetEventDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventDetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/UpdateEventDetail" message="tns:IEventService_UpdateEventDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/UpdateEventDetailResponse" message="tns:IEventService_UpdateEventDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddEventDetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/AddEventDetail" message="tns:IEventService_AddEventDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/AddEventDetailResponse" message="tns:IEventService_AddEventDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEventDetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/DeleteEventDetail" message="tns:IEventService_DeleteEventDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/DeleteEventDetailResponse" message="tns:IEventService_DeleteEventDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventRecurrences">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEventRecurrences" message="tns:IEventService_GetEventRecurrences_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventRecurrencesResponse" message="tns:IEventService_GetEventRecurrences_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventRecurrence">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEventRecurrence" message="tns:IEventService_GetEventRecurrence_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventRecurrenceResponse" message="tns:IEventService_GetEventRecurrence_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventRecurrence">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/UpdateEventRecurrence" message="tns:IEventService_UpdateEventRecurrence_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/UpdateEventRecurrenceResponse" message="tns:IEventService_UpdateEventRecurrence_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddEventRecurrence">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/AddEventRecurrence" message="tns:IEventService_AddEventRecurrence_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/AddEventRecurrenceResponse" message="tns:IEventService_AddEventRecurrence_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEventRecurrence">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/DeleteEventRecurrence" message="tns:IEventService_DeleteEventRecurrence_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/DeleteEventRecurrenceResponse" message="tns:IEventService_DeleteEventRecurrence_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEventTypes" message="tns:IEventService_GetEventTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventTypesResponse" message="tns:IEventService_GetEventTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/GetEventType" message="tns:IEventService_GetEventType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/GetEventTypeResponse" message="tns:IEventService_GetEventType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/UpdateEventType" message="tns:IEventService_UpdateEventType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/UpdateEventTypeResponse" message="tns:IEventService_UpdateEventType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddEventType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/AddEventType" message="tns:IEventService_AddEventType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/AddEventTypeResponse" message="tns:IEventService_AddEventType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEventType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventService/DeleteEventType" message="tns:IEventService_DeleteEventType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventService/DeleteEventTypeResponse" message="tns:IEventService_DeleteEventType_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IPhoneService">
+    <wsdl:operation name="GetUserPhones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/GetUserPhones" message="tns:IPhoneService_GetUserPhones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/GetUserPhonesResponse" message="tns:IPhoneService_GetUserPhones_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPhonesByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/GetUserPhonesByUserId" message="tns:IPhoneService_GetUserPhonesByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/GetUserPhonesByUserIdResponse" message="tns:IPhoneService_GetUserPhonesByUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/GetUserPhone" message="tns:IPhoneService_GetUserPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/GetUserPhoneResponse" message="tns:IPhoneService_GetUserPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/UpdateUserPhone" message="tns:IPhoneService_UpdateUserPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/UpdateUserPhoneResponse" message="tns:IPhoneService_UpdateUserPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/AddUserPhone" message="tns:IPhoneService_AddUserPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/AddUserPhoneResponse" message="tns:IPhoneService_AddUserPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserPhoneRegister">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/AddUserPhoneRegister" message="tns:IPhoneService_AddUserPhoneRegister_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/AddUserPhoneRegisterResponse" message="tns:IPhoneService_AddUserPhoneRegister_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/DeleteUserPhone" message="tns:IPhoneService_DeleteUserPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/DeleteUserPhoneResponse" message="tns:IPhoneService_DeleteUserPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoneTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/GetPhoneTypes" message="tns:IPhoneService_GetPhoneTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/GetPhoneTypesResponse" message="tns:IPhoneService_GetPhoneTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoneType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/GetPhoneType" message="tns:IPhoneService_GetPhoneType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/GetPhoneTypeResponse" message="tns:IPhoneService_GetPhoneType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePhoneType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/UpdatePhoneType" message="tns:IPhoneService_UpdatePhoneType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/UpdatePhoneTypeResponse" message="tns:IPhoneService_UpdatePhoneType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPhoneType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/AddPhoneType" message="tns:IPhoneService_AddPhoneType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/AddPhoneTypeResponse" message="tns:IPhoneService_AddPhoneType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePhoneType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPhoneService/DeletePhoneType" message="tns:IPhoneService_DeletePhoneType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPhoneService/DeletePhoneTypeResponse" message="tns:IPhoneService_DeletePhoneType_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserService" type="tns:IUserService">
@@ -465,6 +859,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateRole">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="RemoveRole">
       <soap:operation soapAction="http://tempuri.org/IUserService/RemoveRole" style="document" />
       <wsdl:input>
@@ -494,6 +897,15 @@
     </wsdl:operation>
     <wsdl:operation name="AssignRolesToUser">
       <soap:operation soapAction="http://tempuri.org/IUserService/AssignRolesToUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserRoles">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateUserRoles" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -579,6 +991,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAddressByID">
+      <soap:operation soapAction="http://tempuri.org/IAddressService/GetAddressByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressesByUserId">
+      <soap:operation soapAction="http://tempuri.org/IAddressService/GetAddressesByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UpdateAddress">
       <soap:operation soapAction="http://tempuri.org/IAddressService/UpdateAddress" style="document" />
       <wsdl:input>
@@ -590,6 +1020,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddAddress">
       <soap:operation soapAction="http://tempuri.org/IAddressService/AddAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAddressRegister">
+      <soap:operation soapAction="http://tempuri.org/IAddressService/AddAddressRegister" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -655,18 +1094,336 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IEventService" type="tns:IEventService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEvents">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEvents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsForUser">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEventsForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsForID">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEventsForID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEvent">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEvent">
+      <soap:operation soapAction="http://tempuri.org/IEventService/UpdateEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddEvent">
+      <soap:operation soapAction="http://tempuri.org/IEventService/AddEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEvent">
+      <soap:operation soapAction="http://tempuri.org/IEventService/DeleteEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventDetails">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEventDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventDetail">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEventDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventDetail">
+      <soap:operation soapAction="http://tempuri.org/IEventService/UpdateEventDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddEventDetail">
+      <soap:operation soapAction="http://tempuri.org/IEventService/AddEventDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEventDetail">
+      <soap:operation soapAction="http://tempuri.org/IEventService/DeleteEventDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventRecurrences">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEventRecurrences" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventRecurrence">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEventRecurrence" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventRecurrence">
+      <soap:operation soapAction="http://tempuri.org/IEventService/UpdateEventRecurrence" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddEventRecurrence">
+      <soap:operation soapAction="http://tempuri.org/IEventService/AddEventRecurrence" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEventRecurrence">
+      <soap:operation soapAction="http://tempuri.org/IEventService/DeleteEventRecurrence" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventTypes">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEventTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventType">
+      <soap:operation soapAction="http://tempuri.org/IEventService/GetEventType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventType">
+      <soap:operation soapAction="http://tempuri.org/IEventService/UpdateEventType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddEventType">
+      <soap:operation soapAction="http://tempuri.org/IEventService/AddEventType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEventType">
+      <soap:operation soapAction="http://tempuri.org/IEventService/DeleteEventType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IPhoneService" type="tns:IPhoneService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUserPhones">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/GetUserPhones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPhonesByUserId">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/GetUserPhonesByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPhone">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/GetUserPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPhone">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/UpdateUserPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserPhone">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/AddUserPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserPhoneRegister">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/AddUserPhoneRegister" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserPhone">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/DeleteUserPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoneTypes">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/GetPhoneTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoneType">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/GetPhoneType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePhoneType">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/UpdatePhoneType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPhoneType">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/AddPhoneType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePhoneType">
+      <soap:operation soapAction="http://tempuri.org/IPhoneService/DeletePhoneType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="Service1">
     <wsdl:port name="BasicHttpBinding_IUserService" binding="tns:BasicHttpBinding_IUserService">
-      <soap:address location="http://localhost:64859/Service1.svc" />
+      <soap:address location="http://localhost:1080/Service1.svc" />
     </wsdl:port>
     <wsdl:port name="BasicHttpBinding_ICountryService" binding="tns:BasicHttpBinding_ICountryService">
-      <soap:address location="http://localhost:64859/Service1.svc" />
+      <soap:address location="http://localhost:1080/Service1.svc" />
     </wsdl:port>
     <wsdl:port name="BasicHttpBinding_IAddressService" binding="tns:BasicHttpBinding_IAddressService">
-      <soap:address location="http://localhost:64859/Service1.svc" />
+      <soap:address location="http://localhost:1080/Service1.svc" />
     </wsdl:port>
     <wsdl:port name="BasicHttpBinding_IPersonalInfoService" binding="tns:BasicHttpBinding_IPersonalInfoService">
-      <soap:address location="http://localhost:64859/Service1.svc" />
+      <soap:address location="http://localhost:1080/Service1.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IEventService" binding="tns:BasicHttpBinding_IEventService">
+      <soap:address location="http://localhost:1080/Service1.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IPhoneService" binding="tns:BasicHttpBinding_IPhoneService">
+      <soap:address location="http://localhost:1080/Service1.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

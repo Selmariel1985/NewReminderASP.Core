@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Email Change Notification Sent";
+}
+
+<h2>Email Change Notification Sent</h2>
+
+<p>Your email change request has been processed successfully. An email notification has been sent to your new email address. Please check your inbox for further instructions.</p>
+
+
+<p>
+    <a href="@Url.Action("Details", "User", new { area = "AccountsArea", controller = "User", userName = User.Identity.Name })">Back to Home</a>
+</p>

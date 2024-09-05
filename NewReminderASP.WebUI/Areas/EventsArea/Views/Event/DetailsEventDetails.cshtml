@@ -1,0 +1,31 @@
+﻿@model NewReminderASP.Domain.Entities.EventDetail
+
+@{
+    ViewBag.Title = "Event Detail";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+
+
+<div class="details-details">
+
+
+    <h2>Event Detail:</h2>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.EventID)</dt>
+        <dd>@Html.DisplayFor(model => model.EventID)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Description)</dt>
+        <dd>@Html.DisplayFor(model => model.Description)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Status)</dt>
+        <dd>@Html.DisplayFor(model => model.Status)</dd>
+
+    </dl>
+
+
+    @Html.ActionLink("Edit", "EditEventDetails", new { id = Model.EventID }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Delete", "DeleteEventDetail", new { id = Model.EventID }, new { @class = "btn btn-danger " })
+  
+
+</div>
+@Html.ActionLink("Back to List", "GetEventDetails", null, new { @class = "btn btn-secondary " })

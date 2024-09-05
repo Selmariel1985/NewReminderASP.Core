@@ -1,0 +1,76 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.Country>
+
+@{
+    ViewBag.Title = "Countries";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+<div class="form-container">
+
+    <h2>Countries</h2>
+
+    <a href="@Url.Action("CreateAdmin", "Address", new { area = "AddressArea" })" class="btn btn-primary">Create Address</a>
+    <a href="@Url.Action("CreateCountry", "Country", new { area = "AddressArea" })" class="btn btn-primary">Create Country</a>
+
+
+    <form action="@Url.Action("IndexCountry")" method="get">
+        <div class="filter-bar">
+            <label for="orderBy">Sort by:</label>
+            <select id="orderBy" name="orderBy">
+                <option value="CountryID">CountryID</option>
+                <option value="CountryCode">CountryCode</option>
+                <option value="PhoneCode">PhoneCode</option>
+                <option value="Name">Name</option>
+
+            </select>
+            <label for="sortOrder">Order:</label>
+            <select id="sortOrder" name="sortOrder">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+            <input type="submit" value="Filter" class="btn"/>
+        </div>
+
+        <table class="table-eco">
+            <tr>
+                <th>@Html.ActionLink("CountryID", "IndexCountry", new { orderBy = "CountryID", sortOrder = ViewBag.OrderBy == "CountryID" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("CountryCode", "IndexCountry", new { orderBy = "CountryCode", sortOrder = ViewBag.OrderBy == "CountryCode" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("PhoneCode", "IndexCountry", new { orderBy = "PhoneCode", sortOrder = ViewBag.OrderBy == "PhoneCode" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Name", "IndexCountry", new { orderBy = "Name", sortOrder = ViewBag.OrderBy == "Name" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+
+            </tr>
+            @foreach (var country in Model)
+            {
+                <tr onclick="redirectToDetails('@Url.Action("DetailsCountry", "Country", new { id = country.CountryID })')">
+                    <td>@country.CountryID </td>
+                    <td>@country.CountryCode</td>
+                    <td>@country.PhoneCode</td>
+                    <td>@country.Name</td>
+                </tr>
+            }
+        </table>
+    </form>
+    <div class="pagination">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="@Url.Action("IndexCountry", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
+        }
+
+
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="@Url.Action("IndexCountry", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("IndexCountry", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage + 1 })" class="btn btn-eco">Next</a>
+        }
+
+    </div>
+</div>
+<script>
+    function redirectToDetails(url) {
+        window.location.href = url;
+    }
+</script>

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.Event>
+
+@{
+    ViewBag.Title = "Event";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+
+<div class="form-container">
+
+
+    <h2>Event Details</h2>
+
+    <div class="action-buttons" style="text-align: center; margin-top: 20px; font-size: 20px; font-family: 'Arial', sans-serif;">
+        @Html.ActionLink("Join Now", "Login", "Login", new { area = "LoginArea" }, new { @class = "btn btn-primary" }) or
+        @Html.ActionLink("Registration", "Register", "Register", new { area = "RegisterArea" }, new { @class = "btn btn-success" }) to interact with the events.
+    </div>
+
+
+    <form action="@Url.Action("Index")" method="get">
+        <div class="filter-bar">
+            <label for="orderBy">Sort by:</label>
+            <select id="orderBy" name="orderBy">
+                <option value="ID">ID</option>
+                <option value="Login">Login</option>
+                <option value="EventTypes">EventTypes</option>
+                <option value="Title">Title</option>
+                <option value="Date">Date</option>
+                <option value="Time">Time</option>
+                <option value="Recurrence">Recurrence</option>
+                <option value="Reminders">Reminders</option>
+            </select>
+            <label for="sortOrder">Order:</label>
+            <select id="sortOrder" name="sortOrder">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+            <input type="submit" value="Filter" class="btn"/>
+        </div>
+
+        <table class="table-eco">
+            <tr>
+                <th>@Html.ActionLink("ID", "Index", new { orderBy = "ID", sortOrder = ViewBag.OrderBy == "ID" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Login", "Index", new { orderBy = "Login", sortOrder = ViewBag.OrderBy == "Login" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("EventTypes", "Index", new { orderBy = "EventTypes", sortOrder = ViewBag.OrderBy == "EventTypes" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Title", "Index", new { orderBy = "Title", sortOrder = ViewBag.OrderBy == "Title" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Date", "Index", new { orderBy = "Date", sortOrder = ViewBag.OrderBy == "Date" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Time", "Index", new { orderBy = "Time", sortOrder = ViewBag.OrderBy == "Time" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Recurrence", "Index", new { orderBy = "Recurrence", sortOrder = ViewBag.OrderBy == "Recurrence" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("Reminders", "Index", new { orderBy = "Reminders", sortOrder = ViewBag.OrderBy == "Reminders" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+
+            </tr>
+            <tbody>
+            @foreach (var events in Model)
+            {
+                <tr>
+                    <td>@events.ID</td>
+                    <td>@events.Login</td>
+                    <td>@events.EventTypes</td>
+                    <td>@events.Title</td>
+                    <td>@events.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@events.Time</td>
+                    <td>@events.Recurrence</td>
+                    <td>
+                        @Html.ActionLink(!string.IsNullOrEmpty(events.Reminders) ? events.Reminders : "Default Name", "Details", "Event", new { id = events.ID }, null)
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </form>
+    <div class="pagination">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
+        }
+
+
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("Index", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage + 1 })" class="btn btn-eco">Next</a>
+        }
+
+    </div>
+</div>

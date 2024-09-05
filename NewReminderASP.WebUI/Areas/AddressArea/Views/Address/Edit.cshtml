@@ -1,0 +1,75 @@
+﻿﻿@model NewReminderASP.Domain.Entities.Address
+
+@{
+    ViewBag.Title = "Edit Address";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+
+<div class="edit-container">
+    <h4>Edit Address: @Model.Login</h4>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="form-group">
+            @Html.LabelFor(address => address.Street, new { @class = "edit-control-label" })
+            @Html.EditorFor(address => address.Street, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(address => address.Street, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(address => address.City, new { @class = "edit-control-label" })
+            @Html.EditorFor(address => address.City, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(address => address.City, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(address => address.CountryID, "Country", new { @class = "edit-control-label" })
+            @Html.DropDownListFor(address => address.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "edit-form-control" })
+            @Html.ValidationMessageFor(address => address.CountryID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(address => address.PostalCode, new { @class = "edit-control-label" })
+            @Html.EditorFor(address => address.PostalCode, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(address => address.PostalCode, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(address => address.Description, new { @class = "edit-control-label" })
+            @Html.EditorFor(address => address.Description, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(address => address.Description, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.HiddenFor(address => address.Login)
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-save"/>
+
+        </div>
+    }
+</div>
+
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back", "DetailsAdmin", "User", new { id = Model.UserID, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+}
+else
+{
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+}

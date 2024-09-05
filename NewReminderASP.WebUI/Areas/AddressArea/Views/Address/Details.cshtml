@@ -1,0 +1,40 @@
+﻿@model NewReminderASP.Domain.Entities.Address
+
+@{
+    ViewBag.Title = "Address Details";
+}
+
+<link href="~/styles.css" rel="stylesheet" />
+
+
+<div class="details-details">
+
+
+    <div>
+        <h2>Address: @Model.Login</h2>
+        <hr />
+        <dl>
+            <dt>@Html.DisplayNameFor(model => model.Street)</dt>
+            <dd>@Html.DisplayFor(model => model.Street)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.City)</dt>
+            <dd>@Html.DisplayFor(model => model.City)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.CountryName)</dt>
+            <dd>@Html.DisplayFor(model => model.CountryName)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.PostalCode)</dt>
+            <dd>@Html.DisplayFor(model => model.PostalCode)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Description)</dt>
+            <dd>@Html.DisplayFor(model => model.Description)</dd>
+        </dl>
+    </div>
+
+
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-danger " })
+
+
+</div>
+@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary  " })

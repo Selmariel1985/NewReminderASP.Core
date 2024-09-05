@@ -1,41 +1,37 @@
-﻿using NewReminderASP.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewReminderASP.Services.Dtos
 {
+    /// <summary>
+    /// Data transfer object for event details.
+    /// </summary>
     [DataContract]
     public class EventDto
     {
-        [DataMember]
-        public int ID { get; set; }
-        [DataMember]
+        [DataMember] public int ID { get; set; } // Event ID
 
-        public int UserID { get; set; }
+        [DataMember] public int UserID { get; set; } // ID of the associated user
+
+        [DataMember] public int EventTypeID { get; set; } // ID of the event type
+
+        [DataMember] public string Title { get; set; } // Title of the event
+
         [DataMember]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime Date { get; set; } // Date of the event
 
-        public int EventTypeID { get; set; }
-        [DataMember]
+        [DataMember] public TimeSpan Time { get; set; } // Time of the event
 
-        public string Title { get; set; }
-        [DataMember]
+        [DataMember] public int RecurrenceID { get; set; } // ID of the event recurrence
 
-        public DateTime Date { get; set; }
-        [DataMember]
+        [DataMember] public string Reminders { get; set; } // Reminders for the event
 
-        public TimeSpan Time { get; set; }
-        [DataMember]
+        [DataMember] public string Login { get; set; } // User's login (username)
 
-        public int RecurrenceID { get; set; }
-        [DataMember]
+        [DataMember] public string EventType { get; set; } // Type of the event
 
-        public string Reminders { get; set; }
-        
-
-        
+        [DataMember] public string Recurrence { get; set; } // Recurrence information
     }
 }

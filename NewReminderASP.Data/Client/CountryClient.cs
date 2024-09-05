@@ -1,148 +1,193 @@
 ﻿using System;
 using System.Collections.Generic;
-using NewReminderASP.Data.Client;
+using log4net;
 using NewReminderASP.Data.ServiceReference1;
 using NewReminderASP.Domain.Entities;
 using NewReminderASP.Services.Dtos;
 
-public class CountryClient : ICountryClient
+namespace NewReminderASP.Data.Client
 {
-    public List<Country> GetCountries()
+    /// <summary>
+    ///     Client class for interacting with the country service.
+    /// </summary>
+    public class CountryClient : ICountryClient
     {
-        var contries = new List<Country>();
-
-        using (var connection = new CountryServiceClient())
+        /// <summary>
+        ///     Retrieve a list of countries from the country service.
+        /// </summary>
+        /// <returns>A list of Country objects</returns>
+        public List<Country> GetCountries()
         {
-            try
+            var countries = new List<Country>(); // Create a list to store Country objects
+
+            using (var connection = new CountryServiceClient())
             {
-                connection.Open();
+                try
+                {
+                    connection.Open(); // Open a connection to the service
 
-                var result = connection.GetCountries();
+                    var result = connection.GetCountries();
 
-                if (result != null)
-                    foreach (var countryDto in result)
-                        contries.Add(
-                            new Country
+                    if (result != null)
+                        // Transform each CountryDto object to Country object and add to the list
+                        foreach (var countryDto in result)
+                            countries.Add(new Country
                             {
-                                ID = countryDto.ID,
+                                CountryID = countryDto.CountryID,
                                 CountryCode = countryDto.CountryCode,
                                 PhoneCode = countryDto.PhoneCode,
                                 Name = countryDto.Name
                             });
 
-                connection.Close();
+                    connection.Close(); // Close the connection to the service
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e); // Output the exception to the console
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e); // Log the error
+                    throw; // Propagate the exception up the call stack
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+
+            return countries; // Return the list of Country objects
         }
 
-        return contries;
-    }
 
-
-    public Country GetCountry(int id)
-    {
-        Country country = null;
-
-        using (var connection = new CountryServiceClient())
+        /// <summary>
+        ///     Retrieves a specific country by its ID from the country service.
+        /// </summary>
+        /// <param name="id">The ID of the country to retrieve</param>
+        /// <returns>The Country object corresponding to the specified ID, or null if not found</returns>
+        public Country GetCountry(int id)
         {
-            try
+            Country country = null; // Initialize the country variable as null
+
+            using (var connection = new CountryServiceClient())
             {
-                connection.Open();
+                try
+                {
+                    connection.Open(); // Open connection to the service
 
-                var result = connection.GetCountry(id);
+                    var result = connection.GetCountry(id); // Retrieve the country by its ID
 
-                if (result != null)
-                    country = new Country
+                    if (result != null)
+                        // Create a new Country object with data from the result
+                        country = new Country
+                        {
+                            CountryID = result.CountryID,
+                            CountryCode = result.CountryCode,
+                            PhoneCode = result.PhoneCode,
+                            Name = result.Name
+                        };
+
+                    connection.Close(); // Close connection to the service
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e); // Output the exception to the console
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e); // Log the error
+                    throw; // Propagate the exception up the call stack
+                }
+            }
+
+            return country; // Return the Country object
+        }
+
+        /// <summary>
+        ///     Updates a country in the country service.
+        /// </summary>
+        /// <param name="updateCountry">The country object to be updated</param>
+        public void UpdateCountry(Country updateCountry)
+        {
+            using (var connection = new CountryServiceClient())
+            {
+                try
+                {
+                    connection.Open(); // Open connection to the service
+
+                    // Update the country using the provided data
+                    connection.UpdateCountry(new CountryDto
                     {
-                        ID = result.ID,
-                        CountryCode = result.CountryCode,
-                        PhoneCode = result.PhoneCode,
-                        Name = result.Name
-                    };
+                        CountryID = updateCountry.CountryID,
+                        CountryCode = updateCountry.CountryCode,
+                        PhoneCode = updateCountry.PhoneCode,
+                        Name = updateCountry.Name
+                    });
 
-                connection.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-
-        return country;
-    }
-
-    public void UpdateCountry(Country updateCountry)
-    {
-        using (var connection = new CountryServiceClient())
-        {
-            try
-            {
-                connection.Open();
-
-                connection.UpdateCountry(new CountryDto
+                    connection.Close(); // Close connection to the service
+                }
+                catch (Exception e)
                 {
-                    ID = updateCountry.ID,
-                    CountryCode = updateCountry.CountryCode,
-                    PhoneCode = updateCountry.PhoneCode,
-                    Name = updateCountry.Name
-                });
+                    Console.WriteLine(e); // Output the exception to the console
 
-                connection.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e); // Log the error
+                    throw; // Propagate the exception up the call stack
+                }
             }
         }
-    }
 
-    public void AddCountry(Country country)
-    {
-        using (var connection = new CountryServiceClient())
+        /// <summary>
+        ///     Adds a new country to the country service.
+        /// </summary>
+        /// <param name="country">The country object to be added</param>
+        public void AddCountry(Country country)
         {
-            try
+            using (var connection = new CountryServiceClient())
             {
-                connection.Open();
-
-                connection.AddCountry(new CountryDto
+                try
                 {
-                    CountryCode = country.CountryCode,
-                    PhoneCode = country.PhoneCode,
-                    Name = country.Name
-                });
+                    connection.Open(); // Open connection to the service
 
-                connection.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
+                    // Add the new country using the provided data
+                    connection.AddCountry(new CountryDto
+                    {
+                        CountryCode = country.CountryCode,
+                        PhoneCode = country.PhoneCode,
+                        Name = country.Name
+                    });
+
+                    connection.Close(); // Close connection to the service
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e); // Output the exception to the console
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e); // Log the error
+                    throw; // Propagate the exception up the call stack
+                }
             }
         }
-    }
 
-    public void DeleteCountry(int id)
-    {
-        using (var connection = new CountryServiceClient())
+        /// <summary>
+        ///     Deletes a country from the country service using the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the country to delete</param>
+        public void DeleteCountry(int id)
         {
-            try
+            using (var connection = new CountryServiceClient())
             {
-                connection.Open();
+                try
+                {
+                    connection.Open(); // Open connection to the service
 
-                connection.DeleteCountry(id);
+                    connection.DeleteCountry(id); // Delete the country with the given ID
 
-                connection.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
+                    connection.Close(); // Close connection to the service
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e); // Output the exception to the console
+
+                    var logger = LogManager.GetLogger("ErrorLogger");
+                    logger.Error("An error occurred", e); // Log the error
+                    throw; // Propagate the exception up the call stack
+                }
             }
         }
     }

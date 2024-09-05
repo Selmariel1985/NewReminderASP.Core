@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:64859/Service1.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NewReminderASP.Services.Dtos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:1080/Service1.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:1080/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="ArrayOfUserDto">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="UserDto" nillable="true" type="tns:UserDto" />
@@ -33,6 +34,7 @@
   <xs:complexType name="UserRoleDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="RoleId" type="xs:int" />
+      <xs:element minOccurs="0" name="RoleIds" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Roles" nillable="true" type="tns:ArrayOfRoleDto" />
       <xs:element minOccurs="0" name="UserId" type="xs:int" />
     </xs:sequence>
@@ -53,7 +55,7 @@
   <xs:complexType name="CountryDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="CountryCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="CountryID" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneCode" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -69,10 +71,13 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CountryID" type="xs:int" />
+      <xs:element minOccurs="0" name="CountryName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AddressDto" nillable="true" type="tns:AddressDto" />
@@ -88,9 +93,104 @@
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="MiddleName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserID" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PersonalInfoDto" nillable="true" type="tns:PersonalInfoDto" />
+  <xs:complexType name="ArrayOfEventDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EventDto" nillable="true" type="tns:EventDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEventDto" nillable="true" type="tns:ArrayOfEventDto" />
+  <xs:complexType name="EventDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EventType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EventTypeID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Recurrence" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RecurrenceID" type="xs:int" />
+      <xs:element minOccurs="0" name="Reminders" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Time" type="ser:duration" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EventDto" nillable="true" type="tns:EventDto" />
+  <xs:complexType name="ArrayOfEventDetailDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EventDetailDto" nillable="true" type="tns:EventDetailDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEventDetailDto" nillable="true" type="tns:ArrayOfEventDetailDto" />
+  <xs:complexType name="EventDetailDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EventID" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EventDetailDto" nillable="true" type="tns:EventDetailDto" />
+  <xs:complexType name="ArrayOfEventRecurrenceDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EventRecurrenceDto" nillable="true" type="tns:EventRecurrenceDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEventRecurrenceDto" nillable="true" type="tns:ArrayOfEventRecurrenceDto" />
+  <xs:complexType name="EventRecurrenceDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="RecurrenceType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EventRecurrenceDto" nillable="true" type="tns:EventRecurrenceDto" />
+  <xs:complexType name="ArrayOfEventTypeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EventTypeDto" nillable="true" type="tns:EventTypeDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEventTypeDto" nillable="true" type="tns:ArrayOfEventTypeDto" />
+  <xs:complexType name="EventTypeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="TypeName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EventTypeDto" nillable="true" type="tns:EventTypeDto" />
+  <xs:complexType name="ArrayOfUserPhoneDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserPhoneDto" nillable="true" type="tns:UserPhoneDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserPhoneDto" nillable="true" type="tns:ArrayOfUserPhoneDto" />
+  <xs:complexType name="UserPhoneDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CountryID" type="xs:int" />
+      <xs:element minOccurs="0" name="CountryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneTypeID" type="xs:int" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserPhoneDto" nillable="true" type="tns:UserPhoneDto" />
+  <xs:complexType name="ArrayOfPhoneTypeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PhoneTypeDto" nillable="true" type="tns:PhoneTypeDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPhoneTypeDto" nillable="true" type="tns:ArrayOfPhoneTypeDto" />
+  <xs:complexType name="PhoneTypeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="TypeName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PhoneTypeDto" nillable="true" type="tns:PhoneTypeDto" />
 </xs:schema>

@@ -48,6 +48,7 @@
     <Compile Include="Contract\ICountryService.cs" />
     <Compile Include="Contract\IEventService.cs" />
     <Compile Include="Contract\IPersonalInfoService.cs" />
+    <Compile Include="Contract\IPhoneService.cs" />
     <Compile Include="Contract\IUserService.cs" />
     <Compile Include="Dtos\AddressDto.cs" />
     <Compile Include="Dtos\CountryDto.cs" />
@@ -68,6 +69,9 @@
       <Project>{45D1B89F-9AD9-4573-8D04-889D4F27E65A}</Project>
       <Name>NewReminderASP.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

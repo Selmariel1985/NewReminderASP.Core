@@ -1,0 +1,74 @@
+﻿@model IEnumerable<NewReminderASP.Domain.Entities.EventType>
+
+@{
+    ViewBag.Title = "Event Type";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+<div class="form-container">
+
+    <h2>Event Type</h2>
+
+    <a href="@Url.Action("CreateAdminEvent", "Event", new { area = "EventsArea" })" class="btn btn-primary">Create Event</a>
+    <a href="@Url.Action("CreateEventDetails", "Event", new { area = "EventsArea" })" class="btn btn-btn btn-primary">Create Detail Event</a>
+    <a href="@Url.Action("CreateEventRecurrences", "Event", new { area = "EventsArea" })" class="btn btn-primary">Create Event Recurrences</a>
+    <a href="@Url.Action("CreateEventTypes", "Event", new { area = "EventsArea" })" class="btn btn-primary">Create Event Types</a>
+
+    <form action="@Url.Action("GetEventTypes")" method="get">
+        <div class="filter-bar">
+            <label for="orderBy">Sort by:</label>
+            <select id="orderBy" name="orderBy">
+                <option value="ID">ID</option>
+                <option value="TypeName">TypeName</option>
+
+            </select>
+            <label for="sortOrder">Order:</label>
+            <select id="sortOrder" name="sortOrder">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+            <input type="submit" value="Filter" class="btn"/>
+        </div>
+
+        <table class="table-eco">
+            <tr>
+                <th>@Html.ActionLink("ID", "GetEventTypes", new { orderBy = "ID", sortOrder = ViewBag.OrderBy == "ID" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+                <th>@Html.ActionLink("TypeName", "GetEventTypes", new { orderBy = "TypeName", sortOrder = ViewBag.OrderBy == "TypeName" && ViewBag.SortOrder == "asc" ? "desc" : "asc" })</th>
+
+
+            </tr>
+            @foreach (var eventType in Model)
+            {
+                <tr onclick="redirectToDetails('@Url.Action("DetailsEventTypes", "Event", new { id = eventType.ID })')">
+
+                    <td>@eventType.ID</td>
+                    <td>@eventType.TypeName</td>
+                </tr>
+            }
+
+        </table>
+    </form>
+    <div class="pagination">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="@Url.Action("GetEventTypes", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage - 1 })" class="btn btn-eco">Previous</a>
+        }
+
+
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="@Url.Action("GetEventTypes", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("GetEventTypes", new { orderBy = ViewBag.OrderBy, sortOrder = ViewBag.SortOrder, page = ViewBag.CurrentPage + 1 })" class="btn btn-eco">Next</a>
+        }
+
+    </div>
+</div>
+<script>
+    function redirectToDetails(url) {
+        window.location.href = url;
+    }
+</script>

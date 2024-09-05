@@ -1,0 +1,27 @@
+﻿@model NewReminderASP.Domain.Entities.EventRecurrence
+
+@{
+    ViewBag.Title = "Event Recurrence";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+
+<div class="details-details">
+    <h2>Event Recurrence</h2>
+
+
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.RecurrenceType)</dt>
+        <dd>@Html.DisplayFor(model => model.RecurrenceType)</dd>
+
+
+    </dl>
+
+
+    @Html.ActionLink("Edit", "EditEventRecurrences", new { id = Model.ID }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Delete", "DeleteEventRecurrence", new { id = Model.ID }, new { @class = "btn btn-danger " })
+   
+
+</div>
+@Html.ActionLink("Back to List", "GetEventRecurrences", null, new { @class = "btn btn-secondary " })

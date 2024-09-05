@@ -1,0 +1,35 @@
+﻿@model NewReminderASP.Domain.Entities.UserPhone
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+
+<div class="details-details">
+    <h2>User Phone Details</h2>
+
+    <div>
+
+        <hr/>
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Login)</dt>
+            <dd>@Html.DisplayFor(model => model.Login)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.PhoneNumber)</dt>
+            <dd>@Html.DisplayFor(model => model.PhoneNumber)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.PhoneTypes)</dt>
+            <dd>@Html.DisplayFor(model => model.PhoneTypes)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.CountryName)</dt>
+            <dd>@Html.DisplayFor(model => model.CountryName)</dd>
+        </dl>
+    </div>
+
+
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-danger " })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary " })
+
+</div>

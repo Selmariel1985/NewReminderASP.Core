@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta name="description" content="Your website description here">
+    <meta name="keywords" content="key1, key2, key3">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="~/styles.css" rel="stylesheet">
+
+
+</head>
+<body>
+@{
+    var userLogin = User.Identity.Name;
+
+    var userLink = Url.Action("Details", "User", new { area = "AccountsArea", userName = userLogin });
+}
+<div class="header-bar">
+    <div class="links-container">
+        @if (User.IsInRole("Admin"))
+        {
+            <a href="@Url.Action("Index", "User", new { area = "AccountsArea" })" class="center-link bigger-font">
+                <i class="fas fa-home"></i><span class="icon-title-gap">Home</span>
+            </a>
+        }
+        else
+        {
+            <a href="@Url.Action("Details", "Event", new { area = "EventsArea", userName = User.Identity.Name })" class="center-link bigger-font">
+                <i class="fas fa-home"></i><span class="icon-title-gap">Home</span>
+            </a>
+        }
+        <a href="~/Home/Contact" class="center-link bigger-font">
+            <i class="fas fa-envelope"></i><span class="icon-title-gap">Contact</span>
+        </a>
+        <a href="~/Home/About" class="center-link bigger-font">
+            <i class="fas fa-info-circle"></i><span class="icon-title-gap">About</span>
+        </a>
+    </div>
+
+    <div class="info user-info">
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span>User Login: <a href="@userLink">@userLogin</a></span>
+        </div>
+        <div class="logout-btn">
+            <a href="@Url.Action("SignOut", "User")" class="btn btn-eco">
+                <i class="fas fa-sign-out-alt"></i><span class="icon-title-gap">Logout</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="header-bar" id="countdown"></div>
+
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a href="@Url.Action("Role", "User", new { area = "AccountsArea" })">Roles</a>
+        <a href="@Url.Action("Index", "Address", new { area = "AddressArea" })" class="dropdown-item">Address</a>
+        <a href="@Url.Action("IndexCountry", "Country", new { area = "AddressArea" })" class="dropdown-item">Country</a>
+        <a href="@Url.Action("Index", "Event", new { area = "EventsArea" })" class="dropdown-item">Events</a>
+        <a href="@Url.Action("GetEventDetails", "Event", new { area = "EventsArea" })" class="dropdown-item">EventDetails</a>
+        <a href="@Url.Action("GetEventRecurrences", "Event", new { area = "EventsArea" })" class="dropdown-item">EventRecurrence</a>
+        <a href="@Url.Action("GetEventTypes", "Event", new { area = "EventsArea" })" class="dropdown-item">EventType</a>
+        <a href="@Url.Action("Index", "Info", new { area = "PersonInfoArea" })">Person Info</a>
+        <a href="@Url.Action("Index", "Phone", new { area = "ContactsArea" })">Phones</a>
+        <a href="@Url.Action("GetPhoneType", "Phone", new { area = "ContactsArea" })" class="dropdown-item">PhoneType</a>
+    }
+
+</div>
+<div id="main">
+    <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
+</div>
+
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer class="footer">
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+
+    <script src="~/scripts/bootstrap.bundle.min.js"></script>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+
+
+
+        // Click outside to close dropdown
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropdown-toggle')) {
+                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        var inactivityTime = 0;
+        var checkInterval = 1000;
+        var timeoutSeconds = 60;
+        var countdownInterval;
+
+        function resetTimer() {
+            inactivityTime = 0;
+            clearInterval(countdownInterval); // Сбросить интервал обратного отсчета при сбросе таймера
+            startCountdown(); // Перезапустить обратный отсчет после сброса таймера
+        }
+
+        function checkInactivity() {
+            inactivityTime += checkInterval;
+            if (inactivityTime >= timeoutSeconds * 1000) {
+                clearInterval(countdownInterval);
+                signOutAndRedirectToLogin('AccountsArea');
+            }
+        }
+
+        setInterval(checkInactivity, checkInterval);
+
+        document.addEventListener('click', resetTimer);
+        document.addEventListener('mousemove', resetTimer);
+        document.addEventListener('keypress', resetTimer);
+
+        function startCountdown() {
+            var seconds = timeoutSeconds;
+            var countdownElement = document.getElementById('countdown');
+
+            countdownElement.innerText = 'Time left: ' + seconds + ' seconds'; // Обновить отображение обратного отсчета в начале
+
+            countdownInterval = setInterval(function () {
+                seconds--;
+                countdownElement.innerText = 'Time left: ' + seconds + ' seconds'; // Обновить отображение обратного отсчета
+
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.innerText = 'Time is up!';
+                } else if (seconds <= 15) {
+                    countdownElement.style.color = 'red'; // Изменить цвет текста в красный при 15 секундах
+                }
+            }, 1000);
+        }
+
+        startCountdown();
+
+
+
+        function signOutAndRedirectToLogin(area) {
+            $.ajax({
+                url: '/AccountsArea/User/SignOut',
+                type: 'POST',
+                data: { area: area },
+                success: function (response) {
+                    // Обработка успешного выхода
+                    window.location.href = '/LoginArea/Login/Login?ReturnUrl=%2f';
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

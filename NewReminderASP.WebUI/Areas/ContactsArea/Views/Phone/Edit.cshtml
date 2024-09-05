@@ -1,0 +1,55 @@
+﻿@model NewReminderASP.Domain.Entities.UserPhone
+
+@{
+    ViewBag.Title = "Edit User Phone";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+<div class="edit-container">
+    <h4>Phone User: @Model.Login</h4>
+
+    @using (Html.BeginForm())
+    {
+        <hr/>
+        @Html.HiddenFor(model => model.Login)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneTypeID, "PhoneType", new { @class = "edit-control-label" })
+            @Html.DropDownListFor(model => model.PhoneTypeID, new SelectList(Model.PhonesTypes, "ID", "TypeName"), "Select Phone Type", new { @class = "edit-form-control", required = "required" })
+            @Html.ValidationMessageFor(model => model.PhoneTypeID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountryID, "Country", new { @class = "edit-control-label" })
+            @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "edit-form-control", required = "required" })
+            @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-save"/>
+        </div>
+    }
+</div>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back", "DetailsAdmin", "User", new { id = Model.UserID, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+}
+else
+{
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+}

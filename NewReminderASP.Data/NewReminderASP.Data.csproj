@@ -34,6 +34,9 @@
     <Reference Include="Autofac, Version=7.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.7.1.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -47,6 +50,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -66,6 +70,7 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -80,9 +85,11 @@
     <Compile Include="Client\IAddressClient.cs" />
     <Compile Include="Client\ICountryClient.cs" />
     <Compile Include="Client\IEventClient.cs" />
+    <Compile Include="Client\IPhoneClient.cs" />
     <Compile Include="Client\IPersonalInformationClient.cs" />
     <Compile Include="Client\IUserClient.cs" />
     <Compile Include="Client\PersonalInformationClient.cs" />
+    <Compile Include="Client\PhoneClient.cs" />
     <Compile Include="Client\UserClient.cs" />
     <Compile Include="Connected Services\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -98,8 +105,10 @@
     <Compile Include="Repository\ICountryRepository.cs" />
     <Compile Include="Repository\IEventRepository.cs" />
     <Compile Include="Repository\IPersonalInformationRepository.cs" />
+    <Compile Include="Repository\IPhoneRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\PersonalInformationRepository.cs" />
+    <Compile Include="Repository\PhoneRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,9 +143,15 @@
     <None Include="Properties\DataSources\NewReminderASP.Domain.Entities.User.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.AddressDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.CountryDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.EventDetailDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.EventDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.EventRecurrenceDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.EventTypeDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.PersonalInfoDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.PhoneTypeDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.RoleDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.UserDto.datasource" />
+    <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.UserPhoneDto.datasource" />
     <None Include="Properties\DataSources\NewReminderASP.Services.Dtos.UserRoleDto.datasource" />
   </ItemGroup>
   <ItemGroup>

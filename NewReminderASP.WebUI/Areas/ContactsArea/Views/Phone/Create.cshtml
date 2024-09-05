@@ -1,0 +1,58 @@
+﻿@model NewReminderASP.Domain.Entities.UserPhone
+@{
+    ViewBag.Title = "Create User Phone";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+<div class="create-form">
+    <h2>Add Phone</h2>
+
+    @using (Html.BeginForm("Create", "Phone", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <h4>Crete Phone</h4>
+
+
+        @Html.HiddenFor(model => model.Login)
+        @Html.HiddenFor(model => model.Login)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Your Phone Number" } })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneTypeID, "PhoneType", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PhoneTypeID, new SelectList(Model.PhonesTypes, "ID", "TypeName"), "Select Phone Type", new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.PhoneTypeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountryID, "Country", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.Countries, "CountryID", "Name"), "Select Country", new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">Create Phone</button>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div class="row mt-2">
+    <div class="col-md-6">
+        @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn btn-secondary" })
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@model NewReminderASP.Domain.Entities.PhoneType
+
+@{
+    ViewBag.Title = "Details PhoneType";
+}
+
+<link href="~/styles.css" rel="stylesheet" />
+
+<div class="details-details">
+    <h2>User Phone Type Details</h2>
+
+    <div>
+        <h2>Phone Type : @Model.ID</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.TypeName)</dt>
+            <dd>@Html.DisplayFor(model => model.TypeName)</dd>
+
+
+        </dl>
+    </div>
+
+
+    @Html.ActionLink("Edit", "EditPhoneType", new { id = Model.ID }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Delete", "DeletePhoneType", new { id = Model.ID }, new { @class = "btn btn-danger " })
+
+
+</div>  
+@Html.ActionLink("Back to List", "GetPhoneType", null, new { @class = "btn btn-secondary " })

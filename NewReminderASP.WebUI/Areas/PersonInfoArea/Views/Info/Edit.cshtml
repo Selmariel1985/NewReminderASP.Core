@@ -1,0 +1,117 @@
+﻿﻿@model NewReminderASP.Domain.Entities.PersonalInfo
+
+@{
+    ViewBag.Title = "Edit Personal Information";
+}
+
+<link href="~/styles.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/themes/default.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/themes/default.date.css">
+
+<style>
+    .picker__select--month, .picker__select--year {
+        border: 1px solid #b7b7b7;
+        height: 3em;
+        padding: 0.5em;
+        margin-left: 0.25em;
+        margin-right: 0.25em;
+    }
+</style>
+
+<div class="edit-container">
+    <h2>Edit Personal Information</h2>
+    <h2>User: @Model.Login</h2>
+
+    @using (Html.BeginForm("Edit", "Info", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+
+
+        @Html.HiddenFor(model => model.Login)
+
+        @Html.HiddenFor(model => model.UserID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MiddleName, new { @class = "edit-control-label" })
+            @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "edit-form-control" } })
+            @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Birthdate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Birthdate, "{0:dd.MM.yyyy}", new { @class = "form-control datepicker", placeholder = "Select Date" })
+                @Html.ValidationMessageFor(model => model.Birthdate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, new { @class = "edit-control-label" })
+            @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Male", Value = "Male" },
+                new SelectListItem { Text = "Female", Value = "Female" },
+                new SelectListItem { Text = "Other", Value = "Other" }
+            }, "Select Gender", new { @class = "edit-form-control" })
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-save" />
+        </div>
+    }
+</div>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back", "DetailsAdmin", "User", new { id = Model.UserID, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+
+}
+else
+{
+
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back", "Details", "User", new { userName = User.Identity.Name, area = "AccountsArea", controller = "User" }, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+}
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/picker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/picker.date.js"></script>
+
+<script>
+    jQuery(document).ready(function ($) {
+        // Initialize Pickadate for date selection
+        $(".datepicker").pickadate({
+            format: 'dd.mm.yyyy', // Date format
+            selectYears: true,    // Create a dropdown to control year
+            selectMonths: true,   // Create a dropdown to control month
+            selectYears: 100,     // Create dropdown for 100 years
+        });
+
+        
+    });
+</script>

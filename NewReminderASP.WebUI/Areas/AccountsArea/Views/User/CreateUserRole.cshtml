@@ -1,0 +1,43 @@
+﻿@model NewReminderASP.Domain.Entities.UserRole
+
+@{
+    ViewBag.Title = "Create User Role";
+}
+
+<link href="~/styles.css" rel="stylesheet"/>
+
+<div class="create-form">
+    <h2>Add User Role</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm("CreateUserRole", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserLogin, "User Login:", new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.UserLogin, new { @class = "form-control", placeholder = "Enter user login" })
+                    @Html.ValidationMessageFor(model => model.UserLogin, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RoleName, "Role Name:", new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.RoleName, new { @class = "form-control", placeholder = "Enter role name" })
+                    @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <div class="submit-button-container">
+                        <input type="submit" value="Save" class="btn btn-primary"/>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-6">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</div>
