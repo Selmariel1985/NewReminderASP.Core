@@ -51,7 +51,7 @@
             @foreach (var events in Model)
             {
                 <tr onclick="redirectToDetails('@Url.Action("Details", "Event", new { userName = events.Login })')">
-                    <td>@events.ID</td>
+                    <td>{events.ID}</td>
                     <td>@events.Login</td>
                     <td>@events.EventTypes</td>
                     <td>@events.Title</td>

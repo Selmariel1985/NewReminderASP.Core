@@ -439,6 +439,7 @@
     <Content Include="Scripts\locale\nl-be.js" />
     <Content Include="Scripts\locale\nl.js" />
     <Content Include="Scripts\locale\nn.js" />
+    <Content Include="Scripts\locale\panelandtimer.js" />
     <Content Include="Scripts\locale\pl.js" />
     <Content Include="Scripts\locale\pt-br.js" />
     <Content Include="Scripts\locale\pt.js" />
