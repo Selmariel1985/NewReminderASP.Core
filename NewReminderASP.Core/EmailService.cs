@@ -20,7 +20,7 @@ public class EmailService
             mail.Subject = "Confirmation Email";
             mail.Body = $"Please confirm your account by clicking this link: {confirmationUrl}";
 
-            using (var smtp = new SmtpClient("))
+            using (var smtp = new SmtpClient("", 587))
             {
                 smtp.Credentials = new NetworkCredential("");
                 smtp.EnableSsl = true;
